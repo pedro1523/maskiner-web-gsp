@@ -53,4 +53,12 @@
     <servlet-name>dwr-invoker</servlet-name>
     <url-pattern>/dwr/*</url-pattern>
   </servlet-mapping>
+  
+  <context-param>
+    <description> archivo de recursos de JSTL </description>
+    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+    <param-value>com.maskiner.smc.recursos.MessageResources</param-value>
+  </context-param>
+  
+  
 </web-app>
