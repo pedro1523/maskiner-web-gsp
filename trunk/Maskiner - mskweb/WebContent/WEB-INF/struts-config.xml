@@ -452,14 +452,6 @@
     
     	<action path="/a_homepage" forward="d_inicio" />
     	
-     	<action 
-    			path="/a_logueo"
-    			type="com.maskiner.smc.seguridad.action.LogueoAction"
-    			parameter="login" >
-    		<forward name="exito" path="d_inicio"/>
-    		<forward name="fracaso" path="/login.jsp"/>
-    	</action>
-
     	<action 
     			path="/a_cerrarsesion"
     			type="com.maskiner.smc.seguridad.action.LogueoAction"

@@ -35,6 +35,14 @@
 
     -->
     
+       <action name="a_logueo"
+    			class="com.maskiner.smc.seguridad.action.LogueoAction"
+    			method="login" >
+    		<result name="exito">d_inicio</result>
+    		<result name="fracaso">/login.jsp</result>
+    	</action>
+    
+    
     </package>
 
     <!-- Add packages here -->
