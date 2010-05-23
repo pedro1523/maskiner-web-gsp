@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+  <definition name="d_inicio" template="/pages/guicomun/plantilla.jsp">
+    	<description>Define la estructura de la página de inicio</description>
+    	<put-attribute name="titulo_pagina" value="pages.guicomun.inicio.titulopagina" /> <!-- key del archivo de recursos -->
+		<put-attribute name="cabecera" value="/pages/guicomun/cabecera.jsp" />
+    	<put-attribute name="menu" value="/pages/guicomun/menulateral.jsp" />
+    	<put-attribute name="contenido" value="/pages/guicomun/inicio.jsp" />
+    	<put-attribute name="pie" value="/pages/guicomun/pie.jsp" />
+  </definition>
+  
+  <!-- definiciones para Registrar Incidentes --> 
+  <definition name="d_registrarIncidente_Nuevo" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.gestionarincidentes.registrarIncidente_Nuevo.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/gestionarincidentes/registroIncidentes_Nuevo.jsp" />
+  </definition>
+  
+    <definition name="d_registrarIncidente_Confirmacion" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.gestionarincidentes.registrarIncidente_Confirmacion.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/gestionarincidentes/registroIncidentes_Nuevo_confirmacion.jsp" />
+    </definition>
+    
+    <definition name="d_buscarCliente" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.gestionarincidentes.buscarCliente.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/maestroclientes/buscarCliente.jsp" />
+    </definition>
+    
+    <!-- definiciones para Generar O/T Inspeccion --> 
+    <definition name="d_generarOT_inspeccion_principal" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.programartrabajo.generarOT_inspeccion.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/programartrabajo/ordenTrabajoInspeccionPrincipal.jsp" />
+    </definition>
+    
+    
+    <definition name="d_generarOT_inspeccion_asignar" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.programartrabajo.generarOT_inspeccion_asignar.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/programartrabajo/ordenTrabajoInspeccionAsignar.jsp" />
+    </definition>
+   
+    <!-- definiciones para Generar O/T -->
+    
+        
+    <definition name="d_generarOT_p1" extends="d_inicio" >
+    	<description>Define la página generar O/T paso 1</description>
+    	<put-attribute name="titulo_pagina" value="pages.programartrabajo.generarot_p1.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/programartrabajo/generarOrdenDeTrabajo_paso1.jsp" />
+    </definition>
+    
+    <definition name="d_generarOT_p2" extends="d_inicio" >
+    	<description>Define la página generar O/T paso 2</description>
+    	<put-attribute name="titulo_pagina" value="pages.programartrabajo.generarot_p2.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/programartrabajo/generarOrdenDeTrabajo_paso2.jsp" />
+    </definition>
+    
+    <definition name="d_generarOT_p3" extends="d_inicio" >
+    	<description>Define la página generar O/T paso 3</description>
+    	<put-attribute name="titulo_pagina" value="pages.programartrabajo.generarot_p3.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/programartrabajo/generarOrdenDeTrabajo_paso3.jsp" />
+    </definition>
+    
+    <definition name="d_generarOT_p4" extends="d_inicio" >
+    	<description>Define la página generar O/T paso 4</description>
+    	<put-attribute name="titulo_pagina" value="pages.programartrabajo.generarot_p4.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/programartrabajo/generarOrdenDeTrabajo_paso4.jsp" />
+    </definition>
+    
+    
+     <!-- definiciones para Registrar Informe de Liquidacion --> 
+    
+    <definition name="d_registrarIL_busqueda" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.liquidartrabajo.registrarIL_busqueda.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/liquidartrabajo/registrarInformeDeLiquidacion_busqueda.jsp" />
+    </definition>
+    
+    
+    <definition name="d_registrarIL" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.liquidartrabajo.registrarIL.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/liquidartrabajo/registrarInformeDeLiquidacion.jsp" />
+    </definition>
+    
+    <definition name="d_registrarIL_confirmacion" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.liquidartrabajo.registrarIL_confirmacion.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/liquidartrabajo/registrarInformeDeLiquidacion_confirmacion.jsp" />
+    </definition>   
+    
+     <!-- definiciones para Aprobar Prefactura -->
+    
+     <definition name="d_prefactura_buscar" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.facturacion.prefactura_buscar.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/facturacion/buscarPrefacturaParaAprobar.jsp" />
+    </definition>   
+    
+       
+    <definition name="d_prefactura_aprobada" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.facturacion.prefactura_aprobada.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/facturacion/aprobar_prefactura_confirmacion_aprobada.jsp" />
+    </definition>  
+    
+     <definition name="d_prefactura_rechazada" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.facturacion.prefactura_rechazada.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/facturacion/buscarPrefacAprobParaGenerarFactura.jsp" />
+    </definition>  
+    
+    
+    <!-- definiciones para Factura -->
+     
+    <definition name="d_factura_buscar" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.facturacion.factura_buscar.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/facturacion/buscarPrefacAprobParaGenerarFactura.jsp" />
+    </definition>  
+    
+    <definition name="d_factura_generar" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.facturacion.factura_generar.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/facturacion/generarFactura.jsp" />
+    </definition> 
+    
+    
+    <!-- definiciones para Mantener Clientes -->
+    
+    <definition name="d_mantener_cliente" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.maestroClientes.mantener_cliente.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/maestroclientes/mantenerClientes.jsp" />
+    </definition> 
+        
+     <definition name="d_nuevo_cliente" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.maestroClientes.nuevo_cliente.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/maestroClientes/nuevoCliente.jsp" />
+    </definition> 
+    
+     <definition name="d_nuevo_cliente_confirmacion" extends="d_inicio" >
+    	<description></description>
+    	<put-attribute name="titulo_pagina" value="pages.maestroClientes.nuevo_cliente_confirmacion.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/maestroClientes/nuevoCliente_confirmacion.jsp" />
+    </definition> 
+    
+    <!-- DEFINICIONES DE CLAUDIO -->
+    
+    	<!-- definiciones para Buscar Incidente -->
+	    <definition name="d_buscar_incidente" extends="d_inicio" >
+	    	<description></description>
+	    	<put-attribute name="titulo_pagina" value="pages.gestionarincidentes.buscar_incidente.titulopagina" /> <!-- key del archivo de recursos -->
+	     	<put-attribute name="contenido" value="/pages/gestionarincidentes/buscarIncidente.jsp" />
+	    </definition> 
+    		
+    
+    <!-- FIN DEFINICIONES DE CLAUDIO -->
+    
+  
+ <!-- CHRISTIAN -->
+    	<!-- definiciones para BUSCAR TECNICO -->
+    		<definition name="d_buscarTecnico" extends="d_inicio" >
+		    	<description></description>
+		    	<put-attribute name="titulo_pagina" value="pages.programartrabajo.verTecnico.titulopagina" /> <!-- key del archivo de recursos -->
+		     	<put-attribute name="contenido" value="/pages/programartrabajo/verTecnico.jsp" />
+		    </definition>
+		<!-- definiciones para BUSCAR PAQUETE -->
+    		<definition name="d_buscarPaquete" extends="d_inicio" >
+		    	<description></description>
+		    	<put-attribute name="titulo_pagina" value="pages.gestionarexpertise.buscarPaquete.titulopagina" /> <!-- key del archivo de recursos -->
+		     	<put-attribute name="contenido" value="/pages/gestionarexpertise/buscarPaqueteServicio.jsp" />
+		    </definition>
+		 	<definition name="d_mostrarPrefactura" extends="d_inicio" >
+		    	<description></description>
+		    	<put-attribute name="titulo_pagina" value="pages.gestionarexpertise.buscarPaquete.titulopagina" /> <!-- key del archivo de recursos -->
+		     	<put-attribute name="contenido" value="/pages/facturacion/aprobar_prefactura.jsp" />
+		    </definition>
+		    <definition name="d_prefactura_aprobada_confirmacion" extends="d_inicio" >
+		    	<description></description>
+		    	<put-attribute name="titulo_pagina" value="pages.gestionarexpertise.buscarPaquete.titulopagina" /> <!-- key del archivo de recursos -->
+		     	<put-attribute name="contenido" value="/pages/facturacion/aprobar_prefactura_confirmacion_aprobada.jsp" />
+		    </definition>
+		     <definition name="d_generarfactura" extends="d_inicio" >
+		    	<description></description>
+		    	<put-attribute name="titulo_pagina" value="pages.gestionarexpertise.buscarPaquete.titulopagina" /> <!-- key del archivo de recursos -->
+		     	<put-attribute name="contenido" value="/pages/facturacion/generarFactura.jsp" />
+		    </definition>  
+		    	    
+    
+    <!-- fin CHRISTIAN -->
+
+    
+
+	
+
+		 	<definition name="d_buscarMateriales" extends="d_inicio" >
+		    	<description></description>
+		    	<put-attribute name="titulo_pagina" value="pages.logistica.buscarMateriales.titulopagina" /> <!-- key del archivo de recursos -->
+		     	<put-attribute name="contenido" value="/pages/logistica/buscarMateriales.jsp" />
+		    </definition>
+    
+    
+    <!-- DANIEL REPORTES -->
+     	<definition name="d_repGastMaq" extends="d_inicio" >
+    		<description></description>
+    		<put-attribute name="titulo_pagina" value="pages.reportes.repGasMaq.titulopagina" /> <!-- key del archivo de recursos -->
+     		<put-attribute name="contenido" value="/pages/reportes/reporteGastosMaquinaria.jsp" />
+   		 </definition> 
+   		 
+   		 
+   		 <definition name="d_repUtiMaq" extends="d_inicio" >
+    		<description></description>
+    		<put-attribute name="titulo_pagina" value="pages.reportes.repUtiMaq.titulopagina" /> <!-- key del archivo de recursos -->
+     		<put-attribute name="contenido" value="/pages/reportes/reporteUtilizacionMaquinaria.jsp" />
+   		 </definition> 
+   		 
+   		 
+   		 <definition name="d_repFreInc" extends="d_inicio" >
+    		<description></description>
+    		<put-attribute name="titulo_pagina" value="pages.reportes.repFreInc.titulopagina" /> <!-- key del archivo de recursos -->
+     		<put-attribute name="contenido" value="/pages/reportes/reporteFrecuenciaIncidentes.jsp" />
+   		 </definition> 
+     
+		<definition name="d_repHisMaq" extends="d_inicio" >
+    		<description></description>
+    		<put-attribute name="titulo_pagina" value="pages.guicomun.menulateral.reporteHistorialMaquinarias" /> <!-- key del archivo de recursos -->
+     		<put-attribute name="contenido" value="/pages/reportes/reporteHistorialMaquinaria.jsp" />
+   		 </definition>      
+   		 
+   		 <definition name="d_repTecOT" extends="d_inicio" >
+    		<description></description>
+    		<put-attribute name="titulo_pagina" value="pages.guicomun.menulateral.reporteTecnicosOT" /> <!-- key del archivo de recursos -->
+     		<put-attribute name="contenido" value="/pages/reportes/reporteTecnicosOT.jsp" />
+   		 </definition>  
+     
+   		 <definition name="d_buscarOT" extends="d_inicio" >
+    		<description></description>
+    		<put-attribute name="titulo_pagina" value="pages.reportes.buscarOT.titulopagina" /> <!-- key del archivo de recursos -->
+     		<put-attribute name="contenido" value="/pages/reportes/buscarOT.jsp" />
+   		 </definition>  
+   		 
+     
+     <!-- fin DANIEL -->
+    <!-- INICIO JUANK -->
+    	<!-- definiciones para MANTENER PAQUETE -->
+    		<definition name="d_mantener_paquete" extends="d_inicio" >
+		    	<description></description>
+		    	<put-attribute name="titulo_pagina" value="pages.gestionarexpertise.mantenerPaquete.titulopagina" /> <!-- key del archivo de recursos -->
+		     	<put-attribute name="contenido" value="/pages/gestionarexpertise/mantenerPaqueteServicio.jsp" />
+		    </definition>
+    <!-- definiciones para NUEVO PAQUETE -->
+    <definition name="d_nuevoPaquete" extends="d_inicio">
+    <description></description>
+  	    <put-attribute name="titulo_pagina" value="pages.gestionarexpertise.nuevoPaquete.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/gestionarexpertise/nuevoPaqueteServicio.jsp" />
+    </definition>
+<!-- definiciones para MODIFICAR PAQUETE -->
+<definition name="d_modificarPaquete" extends="d_inicio">
+    <description></description>
+  	    <put-attribute name="titulo_pagina" value="pages.gestionarexpertise.modificarPaquete.titulopagina" /> <!-- key del archivo de recursos -->
+     	<put-attribute name="contenido" value="/pages/gestionarexpertise/modificarPaqueteServicio.jsp" />
+    </definition>
+    
+ <!-- definiciones para INGRESAR PAQUETE -->
+  
+</tiles-definitions>
