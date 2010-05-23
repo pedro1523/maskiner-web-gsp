@@ -1,0 +1,33 @@
+@CHARSET "ISO-8859-1";
+
+/***************************************************************************************/
+/************ ESTILOS DE ELEMENTOS CON ID, TALES COMO CONTROLES, CAJAS DE TEXTO*********/
+/************ PUEDEN SOBREESCRIBIR ELEMENTOS EXISTENTES EN designStyles.css SI**********/
+/************ FUERA NECESARIO. CADA PÁGINA DEBERÁ TENER UN ARCHIVO contentStyles.css****/
+/************ DIFERENTE QUE TENGA SUS PROPIOS ELEMENTOS CON ID ESTABLECIDOS ************/
+/***************************************************************************************/	
+
+#div_tecnicos{
+	width:49.5%;
+	float:left;
+	/*background-color: red;*/
+	
+}
+#div_asignacion{
+	width:49.5%;
+	float:right;
+	/*background-color: green;*/
+}
+
+.gridview td, .gridview th{
+	padding: 1px;
+}
+
+.letrapequena{
+	font-size: 0.90em
+}
+
+.listaTecnicos{
+	list-style: disc inside;
+	margin: 2px 0 2px 4px;
+}
