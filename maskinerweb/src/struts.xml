@@ -20,6 +20,10 @@
     		<result name="exito" type="tiles">d_inicio</result>
     		<result name="fracaso">/login.jsp</result>
     	</action>
+    	
+    	<action name="a_cargarGenerarOT">
+    		<result type="tiles">d_generarOT_p1</result>
+    	</action>
 
 
     </package>
