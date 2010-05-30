@@ -25,6 +25,13 @@
     		<result type="tiles">d_generarOT_p1</result>
     	</action>
 
+     	<action 
+    			name="a_cargarBuscarIncidente"
+    			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
+    			method="cargarBuscarIncidentes" >
+    		<result name="exito1" type="tiles">d_buscar_incidente</result>
+    		<result name="exito2" type="tiles">d_generarOT_p1</result>
+    	</action>
 
     </package>
 
