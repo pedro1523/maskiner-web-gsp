@@ -12,7 +12,7 @@
 <c:url var="cssdiseño" value="/styles/loginStyles.css" />
 
 <link href="${cssdiseño}" rel="stylesheet" type="text/css" />
-
+ 
 <title><s:text name="login.titulopagina"/></title>
 </head>
 <body onload="document.forms[0].txtUsuario.focus()" >
