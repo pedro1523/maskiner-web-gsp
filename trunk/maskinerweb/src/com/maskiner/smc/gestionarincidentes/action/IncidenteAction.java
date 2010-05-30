@@ -65,7 +65,7 @@ public class IncidenteAction extends ActionSupport implements ServletRequestAwar
 		if(detalle.size()==0){
 						
 			request.setAttribute("mensajeerror1", "Primero debe agregar una incidencia");
-			return mapping.findForward("fracaso");
+			return "fracaso";
 		}else{
 		
 		RegistroIncidentesBean regIncidente = new RegistroIncidentesBean();
