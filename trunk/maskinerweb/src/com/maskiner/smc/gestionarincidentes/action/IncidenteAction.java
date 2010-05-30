@@ -69,7 +69,7 @@ public class IncidenteAction extends ActionSupport implements ServletRequestAwar
 		}else{
 		
 		RegistroIncidentesBean regIncidente = new RegistroIncidentesBean();
-
+		//Aqui se harán Cambios KLM
 		regIncidente.setStrCodigoCliente((String) sesion.getAttribute("CodigoCliente"));
 		regIncidente.setStrCodigoRegistrador(usu.getCodigoUsuario());
 		regIncidente.setStrSucursal((String) sesion.getAttribute("codSucursal"));
