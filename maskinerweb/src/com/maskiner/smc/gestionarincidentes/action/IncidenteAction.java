@@ -3,17 +3,14 @@ package com.maskiner.smc.gestionarincidentes.action;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.Session;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.actions.MappingDispatchAction;
+import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.maskiner.smc.gestionarincidentes.bean.DetalleRegistroIncidenteBean;
 import com.maskiner.smc.gestionarincidentes.bean.RegistroIncidentesBean;
@@ -26,48 +23,47 @@ import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasBusinessDel
 import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasI;
 import com.maskiner.smc.mylib.FormatoFecha;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 
-public class IncidenteAction extends MappingDispatchAction {
+public class IncidenteAction extends ActionSupport implements ServletRequestAware {
+	
+	private HttpServletRequest request;
 
-	public ActionForward cargarNuevoIncidente(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String cargarNuevoIncidente() throws Exception {
 
-		HttpSession sesion = request.getSession();
+		Map<String, Object> sesion = ActionContext.getContext().getSession();
 
-		IncidenteServiceI servicio2 = IncidenteBusinessDelegate
-				.getIncidenteService();
+		IncidenteServiceI servicio2 = IncidenteBusinessDelegate.getIncidenteService();
 
-		ArrayList<TablaDeTablasBean> arr2 = servicio2.listarTipoDeAverias();
-
-		sesion.setAttribute("averias", arr2);
-		
+		ArrayList<TablaDeTablasBean> arr2;
+		arr2 = servicio2.listarTipoDeAverias();
+		sesion.put("averias", arr2);
+			
 		//limpia las variables
-		sesion.setAttribute("CodigoCliente",null);
-		sesion.setAttribute("codSucursal",null);
-		sesion.setAttribute("Detalle",null);
-		sesion.setAttribute("id",null);
-		sesion.setAttribute("maquinarias",null);
-		sesion.setAttribute("id",null);
-		sesion.setAttribute("cliente",null);
+		sesion.remove("CodigoCliente");
+		sesion.remove("codSucursal");
+		sesion.remove("Detalle");
+		sesion.remove("id");
+		sesion.remove("maquinarias");
+		sesion.remove("id");
+		sesion.remove("cliente");
 		
-		return mapping.findForward("exito");
-
+		return "exito";
 	}
 
-	public ActionForward registrarIncidente(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String registrarIncidente() throws Exception {
 
+		Map<String, Object> sesion = ActionContext.getContext().getSession();
 		
-		HttpSession sesion = request.getSession();
-		UsuarioBean usu = (UsuarioBean) sesion.getAttribute("usuariologueado");
+		UsuarioBean usu = (UsuarioBean) sesion.get("usuariologueado");
 		ArrayList<DetalleRegistroIncidenteBean> detalle = 
-			(ArrayList<DetalleRegistroIncidenteBean>) sesion.getAttribute("Detalle");
+			(ArrayList<DetalleRegistroIncidenteBean>) sesion.get("Detalle");
 		
 		if (detalle==null)detalle= new ArrayList<DetalleRegistroIncidenteBean>();
 		
 		if(detalle.size()==0){
+						
 			request.setAttribute("mensajeerror1", "Primero debe agregar una incidencia");
 			return mapping.findForward("fracaso");
 		}else{
@@ -359,6 +355,11 @@ public class IncidenteAction extends MappingDispatchAction {
 			request.getSession().setAttribute("b_cliente", cliente);
 			return mapping.findForward("exito2");
 		}
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest req) {
+		this.request=req;
 	}
 
 	/* FIN METODOS CLAUDIO */
