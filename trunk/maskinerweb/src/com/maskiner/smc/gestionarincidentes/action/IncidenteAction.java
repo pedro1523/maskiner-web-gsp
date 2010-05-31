@@ -6,12 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts2.interceptor.ServletRequestAware;
-
 import com.maskiner.smc.gestionarincidentes.bean.DetalleRegistroIncidenteBean;
 import com.maskiner.smc.gestionarincidentes.bean.RegistroIncidentesBean;
 import com.maskiner.smc.gestionarincidentes.service.IncidenteBusinessDelegate;
@@ -24,12 +18,9 @@ import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasI;
 import com.maskiner.smc.mylib.FormatoFecha;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 
-public class IncidenteAction extends ActionSupport implements ServletRequestAware {
+public class IncidenteAction {
 	
-	private HttpServletRequest request;
-
 	public String cargarNuevoIncidente() throws Exception {
 
 		Map<String, Object> sesion = ActionContext.getContext().getSession();
@@ -52,6 +43,7 @@ public class IncidenteAction extends ActionSupport implements ServletRequestAwar
 		return "exito";
 	}
 
+	@SuppressWarnings("unchecked")
 	public String registrarIncidente() throws Exception {
 
 		Map<String, Object> sesion = ActionContext.getContext().getSession();
@@ -63,33 +55,31 @@ public class IncidenteAction extends ActionSupport implements ServletRequestAwar
 		if (detalle==null)detalle= new ArrayList<DetalleRegistroIncidenteBean>();
 		
 		if(detalle.size()==0){
-						
-			request.setAttribute("mensajeerror1", "Primero debe agregar una incidencia");
+			
+			ActionContext.getContext().getValueStack().set("mensajeerror1", "Primero debe agregar una incidencia");
+			
 			return "fracaso";
 		}else{
 		
 		RegistroIncidentesBean regIncidente = new RegistroIncidentesBean();
 		//Aqui se harán Cambios KLM
-		regIncidente.setStrCodigoCliente((String) sesion.getAttribute("CodigoCliente"));
+		regIncidente.setStrCodigoCliente((String) sesion.get("CodigoCliente"));
 		regIncidente.setStrCodigoRegistrador(usu.getCodigoUsuario());
-		regIncidente.setStrSucursal((String) sesion.getAttribute("codSucursal"));
+		regIncidente.setStrSucursal((String) sesion.get("codSucursal"));
 		regIncidente.setIntEstadoIncidente(1);
-
-
 
 		IncidenteServiceI servicio = IncidenteBusinessDelegate.getIncidenteService();
 
-		sesion.setAttribute("id", servicio.RegistrarIncidenteYDetalle(regIncidente, detalle));
+		sesion.put("id", servicio.RegistrarIncidenteYDetalle(regIncidente, detalle));
 
-		return mapping.findForward("exito");
+		return "exito";
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public ActionForward AgregarALista(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-
+	public String AgregarALista() throws Exception {
+		
+		/*
 		HttpSession sesion = request.getSession();
 		ArrayList<DetalleRegistroIncidenteBean> Detalles = new ArrayList<DetalleRegistroIncidenteBean>();
 		if (sesion.getAttribute("Detalle") == null) {
@@ -107,13 +97,13 @@ public class IncidenteAction extends ActionSupport implements ServletRequestAwar
 		
 		if (request.getParameter("chk")==null){
 			request.setAttribute("mensajeerror", "Primero debe seleccionar alguna maquinaria");
-			return mapping.findForward("fracaso");
+			return "fracaso";
 		}else if(request.getParameter("cboNatAveria").equals("-1")){
 			request.setAttribute("mensajeerror", "Debe seleccionar una maturaleza de avería");
-			return mapping.findForward("fracaso");
+			return "fracaso";
 		}else if(request.getParameter("Descripcion").equals("")){
 				request.setAttribute("mensajeerror", "Debe ingresar la descripción de la avería");
-				return mapping.findForward("fracaso");
+				return "fracaso";
 		}else{
 		
 		
@@ -123,19 +113,18 @@ public class IncidenteAction extends ActionSupport implements ServletRequestAwar
 		Detalles.add(detalle);
 		
 		sesion.setAttribute("Detalle", Detalles);
-		return mapping.findForward("exito");
+		return "exito";
 		}
+		*/	
+		return null;
 	}
 
-	public ActionForward quitarIncidenteDeLista(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
+	public String quitarIncidenteDeLista() throws Exception {
+		/*
 		HttpSession sesion = request.getSession();
 		ArrayList<DetalleRegistroIncidenteBean> Detalles = new ArrayList<DetalleRegistroIncidenteBean>();
 
-		Detalles = (ArrayList<DetalleRegistroIncidenteBean>) sesion
-				.getAttribute("Detalle");
+		Detalles = (ArrayList<DetalleRegistroIncidenteBean>) sesion.getAttribute("Detalle");
 
 		int fila = new Integer(request.getParameter("numFila").toString());
 
@@ -146,13 +135,13 @@ public class IncidenteAction extends ActionSupport implements ServletRequestAwar
 		}
 
 		sesion.setAttribute("Detalle", Detalles);
-		return mapping.findForward("exito");
+		return "exito";
+		*/
+		return null;
 	}
 
-	public ActionForward buscarMaquinarias(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
+	public String buscarMaquinarias() throws Exception {
+		/*
 		HttpSession sesion = request.getSession();
 		String codCliente = request.getParameter("CodCliente");
 		String codSucursal = request.getParameter("Sucursal");
@@ -167,43 +156,42 @@ public class IncidenteAction extends ActionSupport implements ServletRequestAwar
 		sesion.setAttribute("codSucursal", codSucursal);
 		sesion.setAttribute("CodigoCliente", request.getParameter("CodCliente"));
 
-		return mapping.findForward("exito");
+		return "exito";
+		*/
+		return null;
 	}
 
-	public ActionForward buscarIncidenteLiquidacion(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String buscarIncidenteLiquidacion() throws Exception {
+		/*
 		HttpSession sesion = request.getSession();
 		sesion.setAttribute("incidente", null);
 		sesion.setAttribute("maquinarias", null);
 		sesion.setAttribute("Detalle",null);
-		return mapping.findForward("exito");
+		return "exito";
+		*/
+		return null;
 	}
 
-	public ActionForward devolver(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-
+	public String devolver() throws Exception {
+		/*
 		HttpSession sesion = request.getSession();
-
-		IncidenteServiceI servicio = IncidenteBusinessDelegate
-				.getIncidenteService();
-
+		IncidenteServiceI servicio = IncidenteBusinessDelegate.getIncidenteService();
 		ArrayList<TablaDeTablasBean> arr = servicio.listarTipoDeAverias();
-
 		sesion.setAttribute("averias", arr);
-
-		return mapping.findForward("exito");
+		return "exito";
+		*/
+		return null;
 	}
 
 	/* METODOS DE CLAUDIO */
 
-	public ActionForward cargarBuscarIncidentes(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String cargarBuscarIncidentes() throws Exception {
 		String exito = "";
 		// recuperar el valor ingresado por el usuario en codIncidente
-		String codIncidente = request.getParameter("numIncidente").trim();
+		Map<String, Object> request = ActionContext.getContext().getParameters();
+		Map<String, Object> sesion = ActionContext.getContext().getSession();	
+		
+		String codIncidente = ((String)request.get("numIncidente")).trim();
 
 		if (codIncidente.equals("")) {
 			exito = "exito1";
@@ -226,24 +214,24 @@ public class IncidenteAction extends ActionSupport implements ServletRequestAwar
 						.obtenerIncidente(codIncidente);
 				if (incidente == null) {
 					exito = "exito1";
-					mapping.findForward("exito1");
 				} else {
 					exito = "exito2";
-					request.getSession().setAttribute("b_incidente", incidente);
+					sesion.put("b_incidente", incidente);
 				}
 
 			}
 		}
-		return mapping.findForward(exito);
+		return exito;
 	}
 
-	public ActionForward buscarIncidentes(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		String strFormOrigen = request.getParameter("formOrigen");
-		String strEmpresa = request.getParameter("nombreEmpresa").trim();
-		String strFechaIncid = request.getParameter("fechaIncidente").trim();
-		String strIncidente = request.getParameter("incidente").trim();
+	public String buscarIncidentes() throws Exception {
+		
+		Map<String, Object> request = ActionContext.getContext().getParameters();
+		
+		String strFormOrigen = (String) request.get("formOrigen");
+		String strEmpresa = ((String) request.get("nombreEmpresa")).trim();
+		String strFechaIncid = ((String) request.get("fechaIncidente")).trim();
+		String strIncidente = ((String) request.get("incidente")).trim();
 		
 		if(strFormOrigen.equals("RegistrarLiquidacion")){
 						
@@ -258,8 +246,8 @@ public class IncidenteAction extends ActionSupport implements ServletRequestAwar
 			IncidenteServiceI isServicio = IncidenteBusinessDelegate.getIncidenteService();
 			
 			List<RegistroIncidentesBean> lstArr = isServicio.buscarIncidentesParaLiquidacion(strEmpresa, dtFechaIncid, strIncidente);
-			request.setAttribute("formOrigen", strFormOrigen);
-			request.setAttribute("arr_incidentes", lstArr);
+			request.put("formOrigen", strFormOrigen);
+			request.put("arr_incidentes", lstArr);
 		}
 		else{
 			Date dtFechaIncid = null;
@@ -273,34 +261,32 @@ public class IncidenteAction extends ActionSupport implements ServletRequestAwar
 			IncidenteServiceI isServicio = IncidenteBusinessDelegate.getIncidenteService();
 			
 			List<RegistroIncidentesBean> lstArr = isServicio.buscarIncidentes(strEmpresa, dtFechaIncid, strIncidente);
-			request.setAttribute("formOrigen", strFormOrigen);
-			request.setAttribute("arr_incidentes", lstArr);
+			request.put("formOrigen", strFormOrigen);
+			request.put("arr_incidentes", lstArr);
 		}
-		return mapping.findForward("exito");
+		return "exito";
 	}
 
-	public ActionForward irAPaginaOrigen(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String irAPaginaOrigen() throws Exception {
+		
+		Map<String, Object> request = ActionContext.getContext().getParameters();
 
-		String strPaginaOrigen = request.getParameter("formOrigen");
+		String strPaginaOrigen = (String) request.get("formOrigen");
 
 		if (strPaginaOrigen.equals("generarOTInspec")) {
-			return mapping.findForward("exito1");
+			return "exito1";
 		} else {
-			return mapping.findForward("exito2");
+			return "exito2";
 		}
 	}
 
-	public ActionForward buscarIncidentesDevolverResultado(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
+	public String buscarIncidentesDevolverResultado() throws Exception {
+		/*
 		HttpSession sesion = request.getSession();
 		
 		String paginaOrigen = request.getParameter("formOrigen");
 		String numIncidente = request.getParameter("numIncidente");
-
+		*/
 		/*
 		 * obtiene el bean BeanRegistroIncidentes seleccionado
 		 * 
@@ -314,7 +300,7 @@ public class IncidenteAction extends ActionSupport implements ServletRequestAwar
 		 * request.getSession().setAttribute("b_cliente", cliente);
 		 * ==========================================
 		 */
-
+		/*
 		if (paginaOrigen.equals("generarOTInspec")) {
 			// obtiene el bean BeanRegistroIncidentes seleccionado
 			
@@ -330,7 +316,7 @@ public class IncidenteAction extends ActionSupport implements ServletRequestAwar
 			request.getSession().setAttribute("b_incidente", reg);
 			
 
-			return mapping.findForward("exito1");
+			return "exito1";
 		}else if(paginaOrigen.equals("RegistrarLiquidacion")){
 			
 			IncidenteServiceI servicio = IncidenteBusinessDelegate.getIncidenteService();
@@ -339,7 +325,7 @@ public class IncidenteAction extends ActionSupport implements ServletRequestAwar
 			
 			request.getSession().setAttribute("incidente", reg);
 			
-			return mapping.findForward("exito3");
+			return "exito3";
 		} 
 		else {
 			IncidenteServiceI servicio = IncidenteBusinessDelegate
@@ -353,15 +339,13 @@ public class IncidenteAction extends ActionSupport implements ServletRequestAwar
 
 			request.getSession().setAttribute("b_incidente", reg);
 			request.getSession().setAttribute("b_cliente", cliente);
-			return mapping.findForward("exito2");
+			return "exito2";
 		}
+		*/
+		return null;
 	}
 
-	@Override
-	public void setServletRequest(HttpServletRequest req) {
-		this.request=req;
-	}
 
 	/* FIN METODOS CLAUDIO */
-
+	
 }
