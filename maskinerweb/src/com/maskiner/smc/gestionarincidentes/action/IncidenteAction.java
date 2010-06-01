@@ -21,6 +21,29 @@ import com.opensymphony.xwork2.ActionContext;
 
 public class IncidenteAction {
 	
+	// variables privadas
+	private RegistroIncidentesBean b_incidente;
+	private String formOrigen;
+	
+	
+	
+	
+	public String getFormOrigen() {
+		return formOrigen;
+	}
+
+	public void setFormOrigen(String formOrigen) {
+		this.formOrigen = formOrigen;
+	}
+
+	public RegistroIncidentesBean getB_incidente() {
+		return b_incidente;
+	}
+
+	public void setB_incidente(RegistroIncidentesBean bIncidente) {
+		b_incidente = bIncidente;
+	}
+
 	public String cargarNuevoIncidente() throws Exception {
 
 		Map<String, Object> sesion = ActionContext.getContext().getSession();
@@ -188,10 +211,11 @@ public class IncidenteAction {
 	public String cargarBuscarIncidentes() throws Exception {
 		String exito = "";
 		// recuperar el valor ingresado por el usuario en codIncidente
-		Map<String, Object> request = ActionContext.getContext().getParameters();
+		//Map<String, Object> request = ActionContext.getContext().getParameters();
 		Map<String, Object> sesion = ActionContext.getContext().getSession();	
 		
-		String codIncidente = ((String)request.get("numIncidente")).trim();
+		//String codIncidente = ((String)request.get("numIncidente")).trim();
+		String codIncidente = b_incidente.getStrNumeroIncidente();
 
 		if (codIncidente.equals("")) {
 			exito = "exito1";
@@ -199,7 +223,7 @@ public class IncidenteAction {
 			// verificamos que el formato es el adecuado
 			Pattern patron = Pattern.compile("^(IN)?\\d{1,4}$");
 			boolean encontrado = patron.matcher(codIncidente).find();
-			System.out.println(encontrado);
+			//System.out.println(encontrado);
 			if (encontrado) {
 				if (!codIncidente.startsWith("IN")) {
 					// damos el formato adecuado
@@ -208,17 +232,15 @@ public class IncidenteAction {
 							+ codIncidente.substring(codIncidente.length() - 4);
 				}
 				// buscar si este código devuelve un incidente
-				IncidenteServiceI servicio = IncidenteBusinessDelegate
-						.getIncidenteService();
-				RegistroIncidentesBean incidente = servicio
-						.obtenerIncidente(codIncidente);
-				if (incidente == null) {
+				IncidenteServiceI servicio = IncidenteBusinessDelegate.getIncidenteService();
+				b_incidente = servicio.obtenerIncidente(codIncidente);
+				if (b_incidente == null) {
 					exito = "exito1";
 				} else {
 					exito = "exito2";
-					sesion.put("b_incidente", incidente);
+					sesion.put("b_incidente", b_incidente);
+					System.out.println("Nº maquinarias:"+b_incidente.getArrMaquinariasXIncidente().size());
 				}
-
 			}
 		}
 		return exito;

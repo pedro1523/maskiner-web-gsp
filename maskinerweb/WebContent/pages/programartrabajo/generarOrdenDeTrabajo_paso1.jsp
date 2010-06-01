@@ -50,7 +50,7 @@
     </div>
     <div class="separadovertical">
       <s:text name="pages.programartrabajo.generarot_p1.lblCliente" />
-      <span class="negrita margenderecho">${b_incidente.strRazonSocialCliente}</span>
+      <span class="negrita margenderecho"><s:property value="b_incidente.strRazonSocialCliente"/></span>
     </div>
     <span class="titulotabla"><s:text name="pages.programartrabajo.generarot_p1.listaAverias.titulotabla" /></span>
     <table width="100%" border="0" class="gridview">
@@ -70,16 +70,16 @@
 			<s:iterator var="b_maq" value="b_incidente.arrMaquinariasXIncidente"  >
 				<tr>
 					<td align="center">${itm}</td>
-					<td><s:property value="b_maq.strNumeroTarjetaEquipo"/></td>
-					<td><s:property value="b_maq.strDescripcionMaquinaria" /></td>
-					<td><s:property value="b_maq.strMarcaMaquinaria" /></td>
-					<td><s:property value="b_maq.strModeloMaquinaria" /></td>
-					<td><s:property value="b_maq.strDescripcionAveria"/></td>
+					<td><s:property value="#b_maq.strNumeroTarjetaEquipo"/></td>
+					<td><s:property value="#b_maq.strDescripcionMaquinaria" /></td>
+					<td><s:property value="#b_maq.strMarcaMaquinaria" /></td>
+					<td><s:property value="#b_maq.strModeloMaquinaria" /></td>
+					<td><s:property value="#b_maq.strDescripcionAveria"/></td>
 	        		<td align="center">
-	        			<s:if test="%{b_maq.intEstadoAveria==1}">
+	        			<s:if test="#b_maq.intEstadoAveria==1">
 	        				<span style="color: red; font-weight: bold"><s:text name="pages.programartrabajo.generarot_p1.listaAverias.columna7.mensajeEstadoAveria1" /></span>
 	         			</s:if>
-	         			<s:if test="%{b_maq.intEstadoAveria==2}">
+	         			<s:if test="#b_maq.intEstadoAveria==2">
 	         				<s:url var="urlCargarOTPaso2" action="a_cargarGenerarOT_paso2">
 	         					<s:param name="numtarj">${b_maq.strNumeroTarjetaEquipo}</s:param>
 	         				</s:url>
@@ -87,12 +87,12 @@
 	         					<img src="images/generar.png" />
 	         				</s:a>
 	         			</s:if>
-	         			<s:if test="%{b_maq.intEstadoAveria==3}">
+	         			<s:if test="#b_maq.intEstadoAveria==3">
 	        				<span style="color: green; font-weight: bold"><s:text name="pages.programartrabajo.generarot_p1.listaAverias.columna7.mensajeEstadoAveria3" /></span>
 	         			</s:if>
 	        		</td>
 				</tr>
-				<s:set var="itm" value="%{itm+1}"  />
+				<s:set var="itm" value="#itm+1"  />
 			</s:iterator>
 		</s:if>
       	<s:else>
