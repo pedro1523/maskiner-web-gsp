@@ -28,7 +28,7 @@
 %>
 
 </head>
-<body>
+<body onload="document.forms[0].txtCodIncidente.focus()">
   <h2 class="titulo"><s:text name="pages.programartrabajo.generarot_p1.titulo" /></h2>
   <h3 class="subtitulo"><s:text name="pages.programartrabajo.generarot_p1.subtitulo" /></h3>
     <div class="separadovertical">
@@ -41,12 +41,17 @@
     <div class="separadovertical">
       <s:form method="post" action="a_cargarBuscarIncidente?formOrigen=generarOT">
 	      <label for="txtCodIncidente"><s:text name="pages.programartrabajo.generarot_p1.lblCodIncidente" /></label>
-	      <s:textfield name="b_incidente.strNumeroIncidente" id="txtCodIncidente" size="6" maxlength="6"/>
+	      <s:textfield name="numIncidente"  id="txtCodIncidente" size="6" maxlength="6"/>
+	     
 		  <s:submit type="image" src="images/buscar_azul.gif"/>
 		  <div class="mensajeerror separadovertical">
 		  	<s:actionerror/>
 		  </div>
       </s:form>
+    </div>
+    <div class="separadovertical">
+      <s:text name="pages.programartrabajo.generarot_p1.lblCodIncidente" />
+      <span class="negrita margenderecho"><s:property value="b_incidente.strNumeroIncidente"/></span>
     </div>
     <div class="separadovertical">
       <s:text name="pages.programartrabajo.generarot_p1.lblCliente" />

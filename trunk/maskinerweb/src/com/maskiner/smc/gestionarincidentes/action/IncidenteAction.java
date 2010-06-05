@@ -211,11 +211,9 @@ public class IncidenteAction {
 	public String cargarBuscarIncidentes() throws Exception {
 		String exito = "";
 		// recuperar el valor ingresado por el usuario en codIncidente
-		//Map<String, Object> request = ActionContext.getContext().getParameters();
 		Map<String, Object> sesion = ActionContext.getContext().getSession();	
-		
-		//String codIncidente = ((String)request.get("numIncidente")).trim();
-		String codIncidente = b_incidente.getStrNumeroIncidente();
+		Map<String, Object> parametros = ActionContext.getContext().getParameters();
+		String codIncidente = ((String[]) parametros.get("numIncidente"))[0].trim();
 
 		if (codIncidente.equals("")) {
 			exito = "exito1";
