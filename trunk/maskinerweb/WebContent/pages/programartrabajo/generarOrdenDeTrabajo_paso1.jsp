@@ -51,11 +51,11 @@
     </div>
     <div class="separadovertical">
       <s:text name="pages.programartrabajo.generarot_p1.lblCodIncidente" />
-      <span class="negrita margenderecho"><s:property value="b_incidente.strNumeroIncidente"/></span>
+      <span class="negrita margenderecho"><s:property value="#session.b_incidente.strNumeroIncidente"/></span>
     </div>
     <div class="separadovertical">
       <s:text name="pages.programartrabajo.generarot_p1.lblCliente" />
-      <span class="negrita margenderecho"><s:property value="b_incidente.strRazonSocialCliente"/></span>
+      <span class="negrita margenderecho"><s:property value="#session.b_incidente.strRazonSocialCliente"/></span>
     </div>
     <span class="titulotabla"><s:text name="pages.programartrabajo.generarot_p1.listaAverias.titulotabla" /></span>
     <table width="100%" border="0" class="gridview">
@@ -69,10 +69,10 @@
         <th scope="col"><s:text name="pages.programartrabajo.generarot_p1.listaAverias.columna7.cabecera" /></th>
       </tr>
       
-      <s:if test="%{b_incidente != null}">
-      	<s:if test="%{b_incidente.arrMaquinariasXIncidente.size()>0}">
+      <s:if test="%{#session.b_incidente != null}">
+      	<s:if test="%{#session.b_incidente.arrMaquinariasXIncidente.size()>0}">
 			<s:set var="itm" value="1" />
-			<s:iterator var="b_maq" value="b_incidente.arrMaquinariasXIncidente"  >
+			<s:iterator var="b_maq" value="#session.b_incidente.arrMaquinariasXIncidente"  >
 				<tr>
 					<td align="center">${itm}</td>
 					<td><s:property value="#b_maq.strNumeroTarjetaEquipo"/></td>

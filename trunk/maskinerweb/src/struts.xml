@@ -18,9 +18,17 @@
     		<result name="fracaso">/login.jsp</result>
     	</action>
     	
-    	<action name="a_cargarGenerarOT">
-    		<result type="tiles">d_generarOT_p1</result>
+    	<action 
+    			name="a_cargarGenerarOT"
+    			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
+    			method="cargarGenerarOT" >
+     		<result name="exito" type="tiles">d_generarOT_p1</result>
     	</action>
+    	
+    	<action name="a_homepage">
+    		<result type="tiles">d_inicio</result>
+    	</action>
+    	
 
      	<action 
     			name="a_cargarBuscarIncidente"
@@ -29,6 +37,31 @@
     		<result name="exito1" type="tiles">d_buscar_incidente</result>
     		<result name="exito2" type="tiles">d_generarOT_p1</result>
     	</action>
+    	
+    	<action 
+    			name="a_buscarIncidentes"
+    			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
+    			method="buscarIncidentes">
+     		<result name="exito" type="tiles">d_buscar_incidente</result>
+    	</action>
+ 
+      	<action 
+    			name="a_buscarIncidenteIrAPaginaOrigen"
+    			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
+    			method="irAPaginaOrigen">
+     		<result name="exito1" type="tiles">d_generarOT_inspeccion_principal</result>
+      		<result name="exito2" type="tiles">d_generarOT_p1</result>
+    	</action>
+
+     	<action 
+    			name="a_buscarIncidenteDevolverResultado"
+    			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
+    			method="buscarIncidentesDevolverResultado">
+     		<result name="exito1" type="tiles">d_generarOT_inspeccion_principal</result>
+      		<result name="exito2" type="tiles">d_generarOT_p1</result>
+      		<result name="exito3" type="tiles">d_registrarIL_busqueda</result>
+    	</action>
+    	
 
     </package>
 

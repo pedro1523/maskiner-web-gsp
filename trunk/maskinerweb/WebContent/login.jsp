@@ -15,7 +15,7 @@
  
 <title><s:text name="login.titulopagina"/></title>
 </head>
-<body onload="document.forms[0].txtPassword.focus()" >
+<body onload="document.forms[0].txtUsuario.focus()" >
 	<div id="container">
 		<div id="head">
 			<img alt="Maskiner S.A." src="images/logo_maskiner.png">
@@ -31,7 +31,8 @@
 					</div>
 					<div id="controlescentrales">
 						<label for="password" id="lblPassword"><s:text name="login.lblpassword"/></label>
-						<s:password id="txtPassword" name="password"/>
+						<!--<s:password id="txtPassword" name="password"/>-->
+						<s:textfield id="txtPassword" name="password" value="juanca"/>
 					</div>
 					<div align="right">
 						<s:text var="submittext" name="login.submit"/>
