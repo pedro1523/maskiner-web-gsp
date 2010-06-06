@@ -4,15 +4,14 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.actions.MappingDispatchAction;
+import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.maskiner.smc.gestionarincidentes.bean.DetalleRegistroIncidenteBean;
 import com.maskiner.smc.gestionarincidentes.bean.RegistroIncidentesBean;
@@ -27,25 +26,23 @@ import com.maskiner.smc.programartrabajo.service.ProgramarTrabajoBusinessDelegat
 import com.maskiner.smc.programartrabajo.service.TecnicoServiceI;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
 
-public class ProgramarTrabajoAction extends MappingDispatchAction {
+public class ProgramarTrabajoAction implements RequestAware, SessionAware {
+	
+	private Map<String, Object> request;
+	private Map<String, Object> session;
 
-	public ActionForward cargarGenerarOT(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public String cargarGenerarOT()	throws Exception {
 		
 		//borramos el bean b_incidente de la sesión
-		request.getSession().setAttribute("b_incidente", null);
-		request.getSession().setAttribute("b_ordentrabajo", null);
-		//request.getSession().setAttribute("b_listaPaqueteXOT", null);		
+		session.put("b_incidente",null);
+		session.put("b_ordentrabajo",null);
 
-		return mapping.findForward("exito");
+		return "exito";
 	}
 	
-	public ActionForward cargarGenerarOTPaso2(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public String cargarGenerarOTPaso2() throws Exception {
 		
-		String numTarjeta = request.getParameter("numtarj");
+/*		String numTarjeta = request.getParameter("numtarj");
 		
 		UsuarioBean usuario = (UsuarioBean) request.getSession().getAttribute("usuariologueado");
 		RegistroIncidentesBean incidente = (RegistroIncidentesBean) request.getSession().getAttribute("b_incidente");
@@ -76,26 +73,22 @@ public class ProgramarTrabajoAction extends MappingDispatchAction {
 		ordenTrabajo.setStrDescripcionAveria(detRegIncid.getStrDescripcionAveria());
 		
 		request.getSession().setAttribute("b_ordentrabajo", ordenTrabajo);
-		
-		return mapping.findForward("exito");
+*/		
+		return "exito";
 	}
 	
-	public ActionForward irAGenerarOT_paso2(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public String irAGenerarOT_paso2() throws Exception {
 		
-		request.getSession().setAttribute("b_disponibilidadtecnicos", null);
-		
-		return mapping.findForward("exito");
+/*		request.getSession().setAttribute("b_disponibilidadtecnicos", null);
+*/		
+		return "exito";
 	}
 	
 	
-	public ActionForward cargarGenerarOTPaso3(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public String cargarGenerarOTPaso3() throws Exception {
 		
 		//verificar que no se pasa al paso 3 sin haber asignado al menos un paquete a la o/t
-		OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) request.getSession().getAttribute("b_ordentrabajo");
+/*		OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) request.getSession().getAttribute("b_ordentrabajo");
 		if(ordenTrabajo.getArrPaquetesXOT().size()==0){
 			request.setAttribute("mensajeerror1", "Al menos debe asignar un paquete a la orden de trabajo");
 			return mapping.findForward("fracaso");
@@ -103,13 +96,14 @@ public class ProgramarTrabajoAction extends MappingDispatchAction {
 			//borramos la lista de tecnicos disponibles
 			request.getSession().setAttribute("b_disponibilidadtecnicos", null);
 			return mapping.findForward("exito");
+*/
+		return null;
+		
 	}
 	
-	public ActionForward quitarPaqueteDeOT(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public String quitarPaqueteDeOT() throws Exception {
 		
-		String strCodPaquete = request.getParameter("codPqte");
+/*		String strCodPaquete = request.getParameter("codPqte");
 		//recuperar el paquete para eliminarlo
 		OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) request.getSession().getAttribute("b_ordentrabajo");
 		ArrayList<PaqueteXOTBean> paquetes = ordenTrabajo.getArrPaquetesXOT();
@@ -123,16 +117,14 @@ public class ProgramarTrabajoAction extends MappingDispatchAction {
 		
 		//actualizamos la sesion
 		request.getSession().setAttribute("b_ordentrabajo", ordenTrabajo);
-		
-		return mapping.findForward("exito");
+*/		
+		return "exito";
 	}
 	
 	
-	public ActionForward generarOT(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public String generarOT() throws Exception {
 		
-		//obtener la orden de trabajo a guardar de la sesión
+/*		//obtener la orden de trabajo a guardar de la sesión
 		OrdenTrabajoBean ordenTratajo = (OrdenTrabajoBean) request.getSession().getAttribute("b_ordentrabajo");
 		
 		//verificar que se haya asignado a cada paquete los técnicos requeridos
@@ -168,13 +160,13 @@ public class ProgramarTrabajoAction extends MappingDispatchAction {
 			request.setAttribute("mensajeErrorGenerarOrdenTrabajo", e.getMessage());
 			return mapping.findForward("fracaso");
 		}
+*/	
+		return null;
 	}
 	
-	public ActionForward obtenerDatosHorasNecesarias(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public String obtenerDatosHorasNecesarias()	throws Exception {
 		
-		String strCodPaquete = request.getParameter("paqueteSeleccionado");
+/*		String strCodPaquete = request.getParameter("paqueteSeleccionado");
 		
 		if(strCodPaquete.equals("")){
 			BeanUtils.setProperty(form, "numtecnicosnecesarios", null);
@@ -192,16 +184,14 @@ public class ProgramarTrabajoAction extends MappingDispatchAction {
 				}
 			}
 		}
-		
-		return mapping.findForward("exito");
+*/		
+		return "exito";
 	}
 	
 	
-	public ActionForward buscarDisponibilidadTecnicos(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public String buscarDisponibilidadTecnicos() throws Exception {
 		
-		Date dtFechaAtencion = FormatoFecha.getFechaDe(request.getParameter("fechaAtencion"));
+/*		Date dtFechaAtencion = FormatoFecha.getFechaDe(request.getParameter("fechaAtencion"));
 		Time tmHoraInicio = FormatoFecha.getHoraDe(request.getParameter("horaInicio"));
 		Time tmHoraFin    = FormatoFecha.getHoraDe(request.getParameter("horaFin"));
 		
@@ -215,16 +205,14 @@ public class ProgramarTrabajoAction extends MappingDispatchAction {
 		ArrayList<TecnicoBean> arr = servicio.listarTecnicos(dtFechaAtencion, tmHoraInicio, tmHoraFin);
 		
 		request.getSession().setAttribute("b_disponibilidadtecnicos", arr);
-		
-		return mapping.findForward("exito");
+*/		
+		return "exito";
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ActionForward asignarTecnicosAPaquete(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public String asignarTecnicosAPaquete()	throws Exception {
 		
-		//requperamos el código de paquete seleccionado
+/*		//requperamos el código de paquete seleccionado
 		String strCodPaqueteSeleccionado = request.getParameter("paqueteSeleccionado");
 		
 		//verificamos si se ha seleccionado un paquete de servicio
@@ -343,15 +331,13 @@ public class ProgramarTrabajoAction extends MappingDispatchAction {
 		
 		//guardamos la orden de trabajo en la sesion
 		request.getSession().setAttribute("b_ordentrabajo", ordenTrabajo);
-		
-		return mapping.findForward("exito");
+*/		
+		return "exito";
 	}
 	
-	public ActionForward quitarAsignacionDeTecnicosDePaqueteXOT(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public String quitarAsignacionDeTecnicosDePaqueteXOT() throws Exception {
 		
-		String strCodPaquete = request.getParameter("codPaq");
+/*		String strCodPaquete = request.getParameter("codPaq");
 		
 		OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) request.getSession().getAttribute("b_ordentrabajo");
 		
@@ -377,8 +363,18 @@ public class ProgramarTrabajoAction extends MappingDispatchAction {
 		
 		//registramos las modificaciones en la sesion
 		request.getSession().setAttribute("b_ordentrabajo", ordenTrabajo);
-		
-		return mapping.findForward("exito");
+*/		
+		return "exito";
+	}
+
+	@Override
+	public void setRequest(Map<String, Object> request) {
+		this.request=request;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session=session;
 	}
 	
 }

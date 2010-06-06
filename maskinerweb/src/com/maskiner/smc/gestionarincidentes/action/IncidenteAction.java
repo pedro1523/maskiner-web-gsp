@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.SessionAware;
+
 import com.maskiner.smc.gestionarincidentes.bean.DetalleRegistroIncidenteBean;
 import com.maskiner.smc.gestionarincidentes.bean.RegistroIncidentesBean;
 import com.maskiner.smc.gestionarincidentes.service.IncidenteBusinessDelegate;
@@ -18,30 +21,21 @@ import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasI;
 import com.maskiner.smc.mylib.FormatoFecha;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 
-public class IncidenteAction {
+public class IncidenteAction implements RequestAware, SessionAware {
 	
 	// variables privadas
-	private RegistroIncidentesBean b_incidente;
 	private String formOrigen;
-	
-	
-	
-	
+	private Map<String, Object> request;
+	private Map<String, Object> session;
+		
 	public String getFormOrigen() {
 		return formOrigen;
 	}
 
 	public void setFormOrigen(String formOrigen) {
 		this.formOrigen = formOrigen;
-	}
-
-	public RegistroIncidentesBean getB_incidente() {
-		return b_incidente;
-	}
-
-	public void setB_incidente(RegistroIncidentesBean bIncidente) {
-		b_incidente = bIncidente;
 	}
 
 	public String cargarNuevoIncidente() throws Exception {
@@ -231,13 +225,12 @@ public class IncidenteAction {
 				}
 				// buscar si este código devuelve un incidente
 				IncidenteServiceI servicio = IncidenteBusinessDelegate.getIncidenteService();
-				b_incidente = servicio.obtenerIncidente(codIncidente);
-				if (b_incidente == null) {
+				RegistroIncidentesBean incidente = servicio.obtenerIncidente(codIncidente);
+				if (incidente == null) {
 					exito = "exito1";
 				} else {
 					exito = "exito2";
-					sesion.put("b_incidente", b_incidente);
-					System.out.println("Nº maquinarias:"+b_incidente.getArrMaquinariasXIncidente().size());
+					session.put("b_incidente", incidente);
 				}
 			}
 		}
@@ -246,14 +239,13 @@ public class IncidenteAction {
 
 	public String buscarIncidentes() throws Exception {
 		
-		Map<String, Object> request = ActionContext.getContext().getParameters();
+		Map<String, Object> parametros = ActionContext.getContext().getParameters();
 		
-		String strFormOrigen = (String) request.get("formOrigen");
-		String strEmpresa = ((String) request.get("nombreEmpresa")).trim();
-		String strFechaIncid = ((String) request.get("fechaIncidente")).trim();
-		String strIncidente = ((String) request.get("incidente")).trim();
+		String strEmpresa = ((String[]) parametros.get("nombreEmpresa"))[0].trim();
+		String strFechaIncid = ((String[]) parametros.get("fechaIncidente"))[0].trim();
+		String strIncidente = ((String[]) parametros.get("incidente"))[0].trim();
 		
-		if(strFormOrigen.equals("RegistrarLiquidacion")){
+		if(formOrigen.equals("RegistrarLiquidacion")){
 						
 			Date dtFechaIncid = null;
 			
@@ -266,7 +258,6 @@ public class IncidenteAction {
 			IncidenteServiceI isServicio = IncidenteBusinessDelegate.getIncidenteService();
 			
 			List<RegistroIncidentesBean> lstArr = isServicio.buscarIncidentesParaLiquidacion(strEmpresa, dtFechaIncid, strIncidente);
-			request.put("formOrigen", strFormOrigen);
 			request.put("arr_incidentes", lstArr);
 		}
 		else{
@@ -281,7 +272,6 @@ public class IncidenteAction {
 			IncidenteServiceI isServicio = IncidenteBusinessDelegate.getIncidenteService();
 			
 			List<RegistroIncidentesBean> lstArr = isServicio.buscarIncidentes(strEmpresa, dtFechaIncid, strIncidente);
-			request.put("formOrigen", strFormOrigen);
 			request.put("arr_incidentes", lstArr);
 		}
 		return "exito";
@@ -289,11 +279,7 @@ public class IncidenteAction {
 
 	public String irAPaginaOrigen() throws Exception {
 		
-		Map<String, Object> request = ActionContext.getContext().getParameters();
-
-		String strPaginaOrigen = (String) request.get("formOrigen");
-
-		if (strPaginaOrigen.equals("generarOTInspec")) {
+		if (formOrigen.equals("generarOTInspec")) {
 			return "exito1";
 		} else {
 			return "exito2";
@@ -301,12 +287,10 @@ public class IncidenteAction {
 	}
 
 	public String buscarIncidentesDevolverResultado() throws Exception {
-		/*
-		HttpSession sesion = request.getSession();
 		
-		String paginaOrigen = request.getParameter("formOrigen");
-		String numIncidente = request.getParameter("numIncidente");
-		*/
+		Map<String, Object> parametros = ActionContext.getContext().getParameters();
+		String numIncidente = ((String[]) parametros.get("numIncidente"))[0];
+		
 		/*
 		 * obtiene el bean BeanRegistroIncidentes seleccionado
 		 * 
@@ -320,8 +304,8 @@ public class IncidenteAction {
 		 * request.getSession().setAttribute("b_cliente", cliente);
 		 * ==========================================
 		 */
-		/*
-		if (paginaOrigen.equals("generarOTInspec")) {
+		
+		if (formOrigen.equals("generarOTInspec")) {
 			// obtiene el bean BeanRegistroIncidentes seleccionado
 			
 			IncidenteServiceI servicio = IncidenteBusinessDelegate
@@ -332,18 +316,18 @@ public class IncidenteAction {
 
 			ClienteBean cliente = servicio
 					.obtenerClientePorIncidente(numIncidente);
-			request.getSession().setAttribute("b_cliente", cliente);
-			request.getSession().setAttribute("b_incidente", reg);
+			session.put("b_cliente", cliente);
+			session.put("b_incidente", reg);
 			
 
 			return "exito1";
-		}else if(paginaOrigen.equals("RegistrarLiquidacion")){
+		}else if(formOrigen.equals("RegistrarLiquidacion")){
 			
 			IncidenteServiceI servicio = IncidenteBusinessDelegate.getIncidenteService();
 			
 			RegistroIncidentesBean reg = servicio.obtenerIncidenteParaLiquidacion(numIncidente);
 			
-			request.getSession().setAttribute("incidente", reg);
+			session.put("incidente", reg);
 			
 			return "exito3";
 		} 
@@ -357,12 +341,20 @@ public class IncidenteAction {
 			ClienteBean cliente = servicio
 					.obtenerClientePorIncidente(numIncidente);
 
-			request.getSession().setAttribute("b_incidente", reg);
-			request.getSession().setAttribute("b_cliente", cliente);
+			session.put("b_incidente", reg);
+			session.put("b_cliente", cliente);
 			return "exito2";
 		}
-		*/
-		return null;
+	}
+
+	@Override
+	public void setRequest(Map<String, Object> request) {
+		this.request = request;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session=session;
 	}
 
 
