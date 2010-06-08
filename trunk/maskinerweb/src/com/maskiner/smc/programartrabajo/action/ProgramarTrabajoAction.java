@@ -25,6 +25,7 @@ import com.maskiner.smc.programartrabajo.service.OrdenTrabajoServiceI;
 import com.maskiner.smc.programartrabajo.service.ProgramarTrabajoBusinessDelegate;
 import com.maskiner.smc.programartrabajo.service.TecnicoServiceI;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
+import com.opensymphony.xwork2.ActionContext;
 
 public class ProgramarTrabajoAction implements RequestAware, SessionAware {
 	
@@ -42,10 +43,12 @@ public class ProgramarTrabajoAction implements RequestAware, SessionAware {
 	
 	public String cargarGenerarOTPaso2() throws Exception {
 		
-/*		String numTarjeta = request.getParameter("numtarj");
+		Map<String, Object> parametros = ActionContext.getContext().getParameters();
 		
-		UsuarioBean usuario = (UsuarioBean) request.getSession().getAttribute("usuariologueado");
-		RegistroIncidentesBean incidente = (RegistroIncidentesBean) request.getSession().getAttribute("b_incidente");
+		String numTarjeta = ((String[]) parametros.get("numtarj"))[0];
+		
+		UsuarioBean usuario = (UsuarioBean) session.get("usuariologueado");
+		RegistroIncidentesBean incidente = (RegistroIncidentesBean) session.get("b_incidente");
 		
 		String codRegistrador = usuario.getCodigoUsuario();
 		String numIncidente = incidente.getStrNumeroIncidente();
@@ -72,8 +75,8 @@ public class ProgramarTrabajoAction implements RequestAware, SessionAware {
 		ordenTrabajo.setStrModeloMaquinaria(detRegIncid.getStrModeloMaquinaria());
 		ordenTrabajo.setStrDescripcionAveria(detRegIncid.getStrDescripcionAveria());
 		
-		request.getSession().setAttribute("b_ordentrabajo", ordenTrabajo);
-*/		
+		session.put("b_ordentrabajo", ordenTrabajo);
+		
 		return "exito";
 	}
 	
