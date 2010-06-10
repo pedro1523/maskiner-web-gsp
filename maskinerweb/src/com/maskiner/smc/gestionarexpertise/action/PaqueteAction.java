@@ -3,6 +3,7 @@ package com.maskiner.smc.gestionarexpertise.action;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -10,10 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.actions.MappingDispatchAction;
+import org.apache.struts2.interceptor.ParameterAware;
+import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.maskiner.smc.gestionarexpertise.bean.ActividadesBean;
 import com.maskiner.smc.gestionarexpertise.bean.HerramientaBean;
@@ -24,36 +24,42 @@ import com.maskiner.smc.gestionarexpertise.service.PaquetesServiceI;
 import com.maskiner.smc.programartrabajo.bean.OrdenTrabajoBean;
 import com.maskiner.smc.programartrabajo.bean.PaqueteXOTBean;
 
-public class PaqueteAction extends MappingDispatchAction {
+public class PaqueteAction implements SessionAware, RequestAware, ParameterAware {
+	
+	private Map<String, Object> session;
+	private Map<String, Object> request;
+	private Map<String, String[]> parameters;
 
-	public ActionForward lista(ActionMapping mapping, 
-			ActionForm form,
-			HttpServletRequest request, 
-			HttpServletResponse response)
-			throws Exception  {
+	public String mostrarBuscarPaquetes() throws Exception  {
 
-		String strNombre=request.getParameter("txtNombrePaquete");
-		String strCodMaquinaria = request.getParameter("codMaquinaria");
+		String strCodMaquinaria = parameters.get("codMaquinaria")[0];
+		if(strCodMaquinaria==null)strCodMaquinaria="";
+			
+		PaquetesServiceI servicio=PaqueteBusinessDelegate.getPaqueteService();
+		List<PaqueteBean> lista=servicio.listarPaquete("%", strCodMaquinaria+"%");
+		
+		request.put("listPaquete",lista);		  
+		return "exito";
+	}	
+
+	public String lista() throws Exception  {
+
+		String strNombre= parameters.get("txtNombrePaquete")[0];
+		String strCodMaquinaria = parameters.get("codMaquinaria")[0];
 		if(strNombre==null)strNombre="";
 		if(strCodMaquinaria==null)strCodMaquinaria="";
 			
-		//System.out.println("nombre del criterio :"+ strNombre);
 		PaquetesServiceI servicio=PaqueteBusinessDelegate.getPaqueteService();
 		List<PaqueteBean> lista=servicio.listarPaquete(strNombre+"%", strCodMaquinaria+"%");
 		
-		//System.out.println("tamaño del arreglo-----> "+ lista.size());
-		request.setAttribute("listPaquete",lista);		  
-		return mapping.findForward("exito");
+		request.put("listPaquete",lista);		  
+		return "exito";
 	}	
 
 
-	public ActionForward mostrar(ActionMapping mapping, 
-								ActionForm form,
-								HttpServletRequest request, 
-								HttpServletResponse response)
-								throws Exception  {
+	public String mostrar()	throws Exception  {
 
-		HttpSession session=request.getSession();
+/*		HttpSession session=request.getSession();
 		
 		String strCodigo = request.getParameter("codPaquete");
 		PaquetesServiceI servicio = PaqueteBusinessDelegate.getPaqueteService();		
@@ -78,11 +84,12 @@ public class PaqueteAction extends MappingDispatchAction {
 			session.setAttribute("b_ordentrabajo",ordenTrabajo);		
 			return mapping.findForward("exito");
 		}
-		
+*/		
+		return null;
 	}
 	
-	private boolean existeCodigoPaquete(String codigoPaquete,
-			ArrayList<PaqueteXOTBean> listaPaqueteXOT) {
+	
+	private boolean existeCodigoPaquete(String codigoPaquete, ArrayList<PaqueteXOTBean> listaPaqueteXOT) {
 		boolean blnExiste = false;
 		
 		for(PaqueteXOTBean b: listaPaqueteXOT){
@@ -94,15 +101,10 @@ public class PaqueteAction extends MappingDispatchAction {
 		return blnExiste;
 	}
 	
-	//seguimos
-	public ActionForward listaPaquetes(
-			ActionMapping mapping, 
-			ActionForm form,
-			HttpServletRequest request, 
-			HttpServletResponse response)
-			throws Exception {
+	
+	public String listaPaquetes() throws Exception {
 		
-		
+/*		
 		// 1. Recuperamos parametros del request
 		String strCodigo=request.getParameter("codigoPaquete");
 		String strNombre=request.getParameter("nombrePaquete");
@@ -115,13 +117,14 @@ public class PaqueteAction extends MappingDispatchAction {
 		
 		request.setAttribute("listPaq", lista);		
 		return mapping.findForward("exito");
+*/	
+		return null;
 	}
 	
-	public ActionForward AgregarHerramientaALista(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	
+	public String AgregarHerramientaALista() throws Exception {
 		
-			HttpSession sesion = request.getSession();
+/*			HttpSession sesion = request.getSession();
 			ArrayList<HerramientaBean> DetalleHerr = new ArrayList<HerramientaBean>();
 			if(sesion.getAttribute("Herramienta")==null){
 				DetalleHerr = (ArrayList<HerramientaBean>)sesion.getAttribute("HerramientaIni");
@@ -139,13 +142,13 @@ public class PaqueteAction extends MappingDispatchAction {
 			
 			sesion.setAttribute("Herramienta", DetalleHerr);
 			return mapping.findForward("exito");
-		
+*/		
+		return null;
 	}
 	
-	public ActionForward AgregarMaterialALista(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		
+
+	public String AgregarMaterialALista() throws Exception {
+/*		
 			HttpSession sesion = request.getSession();
 			ArrayList<MaterialesBean> DetalleMat = new ArrayList<MaterialesBean>();
 			if(sesion.getAttribute("Materiales")==null){
@@ -163,13 +166,13 @@ public class PaqueteAction extends MappingDispatchAction {
 			
 			sesion.setAttribute("Materiales", DetalleMat);
 			return mapping.findForward("exito");
-		
+*/		
+		return null;
 	}
 	
-	public ActionForward AgregarActividadesALista(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		
+	
+	public String AgregarActividadesALista() throws Exception {
+/*		
 			HttpSession sesion = request.getSession();
 			ArrayList<ActividadesBean> DetalleAct = new ArrayList<ActividadesBean>();
 			if(sesion.getAttribute("Actividades")==null){
@@ -187,14 +190,14 @@ public class PaqueteAction extends MappingDispatchAction {
 			
 			sesion.setAttribute("Actividades", DetalleAct);
 			return mapping.findForward("exito");
-		
+*/		
+		return null;
 	}
 	
-//fallando	
-	public ActionForward quitarActividades(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		
+
+
+	public String quitarActividades() throws Exception {
+/*		
 		HttpSession sesion = request.getSession();
 		int numItem =new Integer( request.getParameter("num_item").toString());
 		
@@ -210,13 +213,14 @@ public class PaqueteAction extends MappingDispatchAction {
 		}
 		sesion.setAttribute("Actividades", DetalleAct);
 		return mapping.findForward("exito");
+*/	
+		return null;
 	}
 
-//
-	public ActionForward quitarHerramientas(ActionMapping mapping, ActionForward form,
-	HttpServletRequest request, HttpServletResponse response)
-	throws Exception{
-		int fila = new Integer(request.getParameter("numFila").toString());
+
+	public String quitarHerramientas() throws Exception{
+/*		
+ 		int fila = new Integer(request.getParameter("numFila").toString());
 		HttpSession sesion = request.getSession();
 		ArrayList<HerramientaBean> DetalleHerr = new ArrayList<HerramientaBean>();
 	
@@ -229,14 +233,13 @@ public class PaqueteAction extends MappingDispatchAction {
 		}
 		sesion.setAttribute("Detalle", DetalleHerr);
 		return mapping.findForward("exito");
-		
+*/		
+		return null;
 	}
 
 	
-	public ActionForward devolverHerramienta(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-
+	public String devolverHerramienta() throws Exception {
+/*
 			HttpSession sesion = request.getSession();
 			HttpSession sesionMat = request.getSession();
 	
@@ -250,12 +253,13 @@ public class PaqueteAction extends MappingDispatchAction {
 				System.out.println("puta madress");
 				
 				return mapping.findForward("exito");
+*/		
+		return null;
 	}
 	
-	public ActionForward registrarPaquete(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-			
+	
+	public String registrarPaquete() throws Exception {
+/*			
 		//UsuarioBean usuario = (UsuarioBean) request.getSession().getAttribute("usuariologueado");
 		//String codRegistrador = usuario.getCodigoUsuario();
 		//ordenTrabajo.setCodRegistrador(codRegistrador);
@@ -279,7 +283,26 @@ public class PaqueteAction extends MappingDispatchAction {
 			ArrayList<HerramientaBean> detAct = (ArrayList<HerramientaBean>)sesion.getAttribute("DetalleAct");
 		
 			return mapping.findForward("exito");
+*/
+		return null;
+	}
 
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+
+	@Override
+	public void setRequest(Map<String, Object> request) {
+		this.request = request;
+	}
+
+
+	@Override
+	public void setParameters(Map<String, String[]> parameters) {
+		this.parameters = parameters;
 	}
 	
 }
