@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -23,12 +24,13 @@ import com.maskiner.smc.seguridad.bean.UsuarioBean;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class IncidenteAction implements RequestAware, SessionAware {
+public class IncidenteAction implements RequestAware, SessionAware, ParameterAware {
 	
 	// variables privadas
 	private String formOrigen;
 	private Map<String, Object> request;
 	private Map<String, Object> session;
+	private Map<String, String[]> parameters;
 		
 	public String getFormOrigen() {
 		return formOrigen;
@@ -40,22 +42,20 @@ public class IncidenteAction implements RequestAware, SessionAware {
 
 	public String cargarNuevoIncidente() throws Exception {
 
-		Map<String, Object> sesion = ActionContext.getContext().getSession();
-
 		IncidenteServiceI servicio2 = IncidenteBusinessDelegate.getIncidenteService();
 
 		ArrayList<TablaDeTablasBean> arr2;
 		arr2 = servicio2.listarTipoDeAverias();
-		sesion.put("averias", arr2);
+		session.put("averias", arr2);
 			
 		//limpia las variables
-		sesion.remove("CodigoCliente");
-		sesion.remove("codSucursal");
-		sesion.remove("Detalle");
-		sesion.remove("id");
-		sesion.remove("maquinarias");
-		sesion.remove("id");
-		sesion.remove("cliente");
+		session.remove("CodigoCliente");
+		session.remove("codSucursal");
+		session.remove("Detalle");
+		session.remove("id");
+		session.remove("maquinarias");
+		session.remove("id");
+		session.remove("cliente");
 		
 		return "exito";
 	}
@@ -63,11 +63,9 @@ public class IncidenteAction implements RequestAware, SessionAware {
 	@SuppressWarnings("unchecked")
 	public String registrarIncidente() throws Exception {
 
-		Map<String, Object> sesion = ActionContext.getContext().getSession();
-		
-		UsuarioBean usu = (UsuarioBean) sesion.get("usuariologueado");
+		UsuarioBean usu = (UsuarioBean) session.get("usuariologueado");
 		ArrayList<DetalleRegistroIncidenteBean> detalle = 
-			(ArrayList<DetalleRegistroIncidenteBean>) sesion.get("Detalle");
+			(ArrayList<DetalleRegistroIncidenteBean>) session.get("Detalle");
 		
 		if (detalle==null)detalle= new ArrayList<DetalleRegistroIncidenteBean>();
 		
@@ -80,14 +78,14 @@ public class IncidenteAction implements RequestAware, SessionAware {
 		
 		RegistroIncidentesBean regIncidente = new RegistroIncidentesBean();
 		//Aqui se harán Cambios KLM
-		regIncidente.setStrCodigoCliente((String) sesion.get("CodigoCliente"));
+		regIncidente.setStrCodigoCliente((String) session.get("CodigoCliente"));
 		regIncidente.setStrCodigoRegistrador(usu.getCodigoUsuario());
-		regIncidente.setStrSucursal((String) sesion.get("codSucursal"));
+		regIncidente.setStrSucursal((String) session.get("codSucursal"));
 		regIncidente.setIntEstadoIncidente(1);
 
 		IncidenteServiceI servicio = IncidenteBusinessDelegate.getIncidenteService();
 
-		sesion.put("id", servicio.RegistrarIncidenteYDetalle(regIncidente, detalle));
+		session.put("id", servicio.RegistrarIncidenteYDetalle(regIncidente, detalle));
 
 		return "exito";
 		}
@@ -205,9 +203,7 @@ public class IncidenteAction implements RequestAware, SessionAware {
 	public String cargarBuscarIncidentes() throws Exception {
 		String exito = "";
 		// recuperar el valor ingresado por el usuario en codIncidente
-		Map<String, Object> sesion = ActionContext.getContext().getSession();	
-		Map<String, Object> parametros = ActionContext.getContext().getParameters();
-		String codIncidente = ((String[]) parametros.get("numIncidente"))[0].trim();
+		String codIncidente = parameters.get("numIncidente")[0].trim();
 
 		if (codIncidente.equals("")) {
 			exito = "exito1";
@@ -239,11 +235,9 @@ public class IncidenteAction implements RequestAware, SessionAware {
 
 	public String buscarIncidentes() throws Exception {
 		
-		Map<String, Object> parametros = ActionContext.getContext().getParameters();
-		
-		String strEmpresa = ((String[]) parametros.get("nombreEmpresa"))[0].trim();
-		String strFechaIncid = ((String[]) parametros.get("fechaIncidente"))[0].trim();
-		String strIncidente = ((String[]) parametros.get("incidente"))[0].trim();
+		String strEmpresa = parameters.get("nombreEmpresa")[0].trim();
+		String strFechaIncid = parameters.get("fechaIncidente")[0].trim();
+		String strIncidente = parameters.get("incidente")[0].trim();
 		
 		if(formOrigen.equals("RegistrarLiquidacion")){
 						
@@ -288,8 +282,7 @@ public class IncidenteAction implements RequestAware, SessionAware {
 
 	public String buscarIncidentesDevolverResultado() throws Exception {
 		
-		Map<String, Object> parametros = ActionContext.getContext().getParameters();
-		String numIncidente = ((String[]) parametros.get("numIncidente"))[0];
+		String numIncidente = parameters.get("numIncidente")[0];
 		
 		/*
 		 * obtiene el bean BeanRegistroIncidentes seleccionado
@@ -355,6 +348,11 @@ public class IncidenteAction implements RequestAware, SessionAware {
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session=session;
+	}
+
+	@Override
+	public void setParameters(Map<String, String[]> parameters) {
+		this.parameters = parameters;
 	}
 
 

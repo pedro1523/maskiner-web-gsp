@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -27,10 +28,11 @@ import com.maskiner.smc.programartrabajo.service.TecnicoServiceI;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
 import com.opensymphony.xwork2.ActionContext;
 
-public class ProgramarTrabajoAction implements RequestAware, SessionAware {
+public class ProgramarTrabajoAction implements RequestAware, SessionAware, ParameterAware {
 	
 	private Map<String, Object> request;
 	private Map<String, Object> session;
+	private Map<String, String[]> parameters;
 
 	public String cargarGenerarOT()	throws Exception {
 		
@@ -43,9 +45,7 @@ public class ProgramarTrabajoAction implements RequestAware, SessionAware {
 	
 	public String cargarGenerarOTPaso2() throws Exception {
 		
-		Map<String, Object> parametros = ActionContext.getContext().getParameters();
-		
-		String numTarjeta = ((String[]) parametros.get("numtarj"))[0];
+		String numTarjeta = parameters.get("numtarj")[0];
 		
 		UsuarioBean usuario = (UsuarioBean) session.get("usuariologueado");
 		RegistroIncidentesBean incidente = (RegistroIncidentesBean) session.get("b_incidente");
@@ -378,6 +378,11 @@ public class ProgramarTrabajoAction implements RequestAware, SessionAware {
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session=session;
+	}
+
+	@Override
+	public void setParameters(Map<String, String[]> parameters) {
+		this.parameters = parameters;
 	}
 	
 }

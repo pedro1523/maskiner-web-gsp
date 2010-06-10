@@ -69,6 +69,12 @@
      		<result name="exito" type="tiles">d_generarOT_p2</result>
     	</action>
     	
+		<action 
+    			name="a_buscarPaquete"
+    			class="com.maskiner.smc.gestionarexpertise.action.PaqueteAction"
+    			method="mostrarBuscarPaquetes">    			
+    		<result name="exito" type="tiles">d_buscarPaquete</result>	
+		</action>
     	
 
     </package>
