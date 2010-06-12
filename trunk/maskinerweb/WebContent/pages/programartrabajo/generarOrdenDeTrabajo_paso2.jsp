@@ -88,7 +88,7 @@
 							<td><s:property value="#b_paqot.strCodPaquete"/></td>
 							<td><s:property value="#b_paqot.strNombrePaquete"/></td>
 			        		<td align="center">
-			        			<s:url action="a_quitarPaqueteDeOT" value="quitarPaqueteUrl">
+			        			<s:url action="a_quitarPaqueteDeOT" var="quitarPaqueteUrl">
 			        				<s:param name="codPqte"><s:property value="#b_paqot.strCodPaquete"/></s:param>
 			        			</s:url>
 			        			<s:url value="images/quitar.gif" var="imagenQuitarUrl"/>

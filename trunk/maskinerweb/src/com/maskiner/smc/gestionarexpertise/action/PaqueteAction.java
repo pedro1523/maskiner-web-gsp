@@ -59,19 +59,16 @@ public class PaqueteAction implements SessionAware, RequestAware, ParameterAware
 
 	public String mostrar()	throws Exception  {
 
-/*		HttpSession session=request.getSession();
-		
-		String strCodigo = request.getParameter("codPaquete");
+		String strCodigo = parameters.get("codPaquete")[0];
 		PaquetesServiceI servicio = PaqueteBusinessDelegate.getPaqueteService();		
 		PaqueteBean paquete = servicio.obtenerPaquete(strCodigo);
-		OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) session.getAttribute("b_ordentrabajo");
+		OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) session.get("b_ordentrabajo");
 		
 		ArrayList<PaqueteXOTBean> arrPaqXOT = ordenTrabajo.getArrPaquetesXOT();
 		
 		//verificar si existe el código de paquete en el arraylist
 		if(existeCodigoPaquete(strCodigo, arrPaqXOT)){
-			request.setAttribute("mensajeerror", "No se puede ingresar el mismo paquete más de una vez.");
-			return mapping.findForward("fracaso");
+			request.put("mensajeerror", "No se puede ingresar el mismo paquete más de una vez.");
 		}else{
 			PaqueteXOTBean paqXOT = new PaqueteXOTBean();
 			
@@ -81,11 +78,9 @@ public class PaqueteAction implements SessionAware, RequestAware, ParameterAware
 			paqXOT.setIntNumeroTecnicosNecesarios(paquete.getIntCantidadTecPaquete());
 			
 			arrPaqXOT.add(paqXOT);
-			session.setAttribute("b_ordentrabajo",ordenTrabajo);		
-			return mapping.findForward("exito");
+			session.put("b_ordentrabajo",ordenTrabajo);		
 		}
-*/		
-		return null;
+		return "exito";
 	}
 	
 	

@@ -15,7 +15,7 @@
       	<legend><s:text name="pages.gestionarexpertise.buscarPaquete.titulofield" />  </legend>
         <label for="textfield"><s:text name="pages.gestionarexpertise.buscarPaquete.criterio"/>  </label>
 		<s:textfield name="txtNombrePaquete" />
-		<s:submit type="image" src="images/buscar.png"/>
+		<s:submit type="image" src="images/buscar.png" cssStyle="vertical-align:middle; margin-left:10px"/>
       </fieldset>
 	</s:form>
     <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
@@ -39,7 +39,7 @@
         		</s:url>
         		<s:url value="images/nuevo_azul.gif" var="imagenNuevoAzulUrl"/>
         		<a href="${mostrarPaqueteUrl}">
-        			<img alt="" src="${imagenNuevoAzulUrl}">
+        			<img alt="" src="${imagenNuevoAzulUrl}" >
         		</a>
 			</td>	
 		</tr>
@@ -49,7 +49,7 @@
    		<s:url action="a_salirBuscarPaquete" var="salirBuscarPaqueteUrl"/>
     	<s:url value="images/salir.png" var="imagenSalirUrl"/>
     	<a href="${salirBuscarPaqueteUrl}">
-    		<img alt="" src="${imagenSalirUrl}">
+    		<img alt="Salir" src="${imagenSalirUrl}">
     	</a>
 	</div>
 
