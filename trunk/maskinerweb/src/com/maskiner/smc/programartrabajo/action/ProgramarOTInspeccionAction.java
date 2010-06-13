@@ -2,16 +2,12 @@ package com.maskiner.smc.programartrabajo.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.actions.MappingDispatchAction;
-
-import sun.print.PrintJob2D;
+import org.apache.struts2.dispatcher.mapper.ActionMapping;
 
 import com.maskiner.smc.gestionarincidentes.bean.DetalleRegistroIncidenteBean;
 import com.maskiner.smc.gestionarincidentes.bean.RegistroIncidentesBean;
@@ -21,24 +17,21 @@ import com.maskiner.smc.programartrabajo.service.OrdenTrabajoServiceI;
 import com.maskiner.smc.programartrabajo.service.ProgramarTrabajoBusinessDelegate;
 import com.maskiner.smc.programartrabajo.service.TecnicoServiceI;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
+import com.opensymphony.xwork2.ActionSupport;
 
-public class ProgramarOTInspeccionAction extends MappingDispatchAction {
+public class ProgramarOTInspeccionAction extends ActionSupport {
+	
+	private Map<String, Object> session;
 
-	public ActionForward cargarGenerarOTInspeccion(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
+	public String cargarGenerarOTInspeccion()
 			throws Exception {
-
 		//borramos el bean b_incidente de la sesión
-		request.getSession().setAttribute("b_incidente", null);
-		
-		return mapping.findForward("exito");
+		session.put("b_incidente", null);		
+		return "exito";
 	}
 	
 	/*===================CHRISTIAN================================*/
-	public ActionForward lista(ActionMapping mapping, 
-			ActionForm form,
-			HttpServletRequest request, 
-			HttpServletResponse response)
+	public String lista()
 			throws Exception  {		
 			
 			System.out.println("Dentro del metodo lista");
