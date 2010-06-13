@@ -69,8 +69,9 @@
 								<s:param name="numIncidente">${b_incid.strNumeroIncidente}</s:param>
 								<s:param name="formOrigen"><s:property value="formOrigen"/></s:param>
 							</s:url>
+							<s:url var="imgSeleccionarUrl" value="/images/aprob_azul.gif"/>
 							<a href="${linkDevolResult}">
-								<img alt="Seleccionar" src="images/aprob_azul.gif">
+								<img alt="Seleccionar" src="${imgSeleccionarUrl}">
 							</a>
 						</td>
 						<td><s:property value="#b_incid.strNumeroIncidente"/></td>
