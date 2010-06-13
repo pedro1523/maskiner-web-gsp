@@ -36,9 +36,10 @@ public class PaqueteAction implements SessionAware, RequestAware, ParameterAware
 		if(strCodMaquinaria==null)strCodMaquinaria="";
 			
 		PaquetesServiceI servicio=PaqueteBusinessDelegate.getPaqueteService();
-		List<PaqueteBean> lista=servicio.listarPaquete("%", strCodMaquinaria+"%");
+		List<PaqueteBean> lista=servicio.listarPaquete("%", strCodMaquinaria);
 		
-		request.put("listPaquete",lista);		  
+		request.put("listPaquete",lista);
+		request.put("codMaquinaria", strCodMaquinaria);
 		return "exito";
 	}	
 
@@ -50,9 +51,10 @@ public class PaqueteAction implements SessionAware, RequestAware, ParameterAware
 		if(strCodMaquinaria==null)strCodMaquinaria="";
 			
 		PaquetesServiceI servicio=PaqueteBusinessDelegate.getPaqueteService();
-		List<PaqueteBean> lista=servicio.listarPaquete(strNombre+"%", strCodMaquinaria+"%");
+		List<PaqueteBean> lista=servicio.listarPaquete(strNombre+"%", strCodMaquinaria);
 		
 		request.put("listPaquete",lista);		  
+		request.put("codMaquinaria", strCodMaquinaria);
 		return "exito";
 	}	
 

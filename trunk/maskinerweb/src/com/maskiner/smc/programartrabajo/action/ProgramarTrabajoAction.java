@@ -27,8 +27,9 @@ import com.maskiner.smc.programartrabajo.service.ProgramarTrabajoBusinessDelegat
 import com.maskiner.smc.programartrabajo.service.TecnicoServiceI;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 
-public class ProgramarTrabajoAction implements RequestAware, SessionAware, ParameterAware {
+public class ProgramarTrabajoAction extends ActionSupport implements RequestAware, SessionAware, ParameterAware {
 	
 	private Map<String, Object> request;
 	private Map<String, Object> session;
@@ -106,9 +107,9 @@ public class ProgramarTrabajoAction implements RequestAware, SessionAware, Param
 	
 	public String quitarPaqueteDeOT() throws Exception {
 		
-/*		String strCodPaquete = request.getParameter("codPqte");
+		String strCodPaquete = parameters.get("codPqte")[0];
 		//recuperar el paquete para eliminarlo
-		OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) request.getSession().getAttribute("b_ordentrabajo");
+		OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) session.get("b_ordentrabajo");
 		ArrayList<PaqueteXOTBean> paquetes = ordenTrabajo.getArrPaquetesXOT();
 		
 		for(PaqueteXOTBean pqt:paquetes){
@@ -119,8 +120,8 @@ public class ProgramarTrabajoAction implements RequestAware, SessionAware, Param
 		}
 		
 		//actualizamos la sesion
-		request.getSession().setAttribute("b_ordentrabajo", ordenTrabajo);
-*/		
+		session.put("b_ordentrabajo", ordenTrabajo);
+		
 		return "exito";
 	}
 	
