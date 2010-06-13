@@ -65,7 +65,7 @@
     
     <fieldset class="separadovertical">
       <legend><s:text name="pages.programartrabajo.generarot_p2.fieldsetAsignarPaquetes" /></legend>
-      	<s:url var="buscarPaqueteUrl" action="a_buscarPaquete">
+      	<s:url var="buscarPaqueteUrl" action="a_mostrarBuscarPaquete">
       		<s:param name="codMaquinaria">${sessionScope.b_ordentrabajo.strCodMaquinaria}</s:param>
       	</s:url>
       	<s:url var="imagenAgregarUrl" value="images/agregar.png"/>

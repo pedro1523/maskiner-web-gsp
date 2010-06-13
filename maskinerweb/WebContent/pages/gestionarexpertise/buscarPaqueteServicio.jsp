@@ -8,13 +8,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title><s:text name="pages.gestionarexpertise.buscarPaquete.titulopagina"/> </title>
 </head>
-<body>
+<body onload="document.forms[0].txtNombrePaquete.focus()">
 <h2 class="titulo"><s:text name="pages.gestionarexpertise.buscarPaquete.titulo" /> </h2>
 	<s:form action="a_buscarPaquete" method="post">
       <fieldset class="separadovertical" style="width:400px;">
       	<legend><s:text name="pages.gestionarexpertise.buscarPaquete.titulofield" />  </legend>
         <label for="textfield"><s:text name="pages.gestionarexpertise.buscarPaquete.criterio"/>  </label>
-		<s:textfield name="txtNombrePaquete" />
+		<s:textfield name="txtNombrePaquete" id="txtNombrePaquete" />
+		<s:hidden name="codMaquinaria" value="%{#request.codMaquinaria}"/>
 		<s:submit type="image" src="images/buscar.png" cssStyle="vertical-align:middle; margin-left:10px"/>
       </fieldset>
 	</s:form>

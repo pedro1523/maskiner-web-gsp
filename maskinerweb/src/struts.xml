@@ -9,7 +9,15 @@
     <constant name="struts.devMode" value="false" />
 
     <package name="default" extends="tiles-default">
-
+    
+    	<global-results>
+    		<result name="customError">/errorPage.jsp</result>
+    	</global-results>
+    	
+    	<global-exception-mappings>
+    		<exception-mapping result="customError" exception="java.lang.Exception"/>
+    	</global-exception-mappings>
+    	
      	<action 
     			name="a_logueo"
     			class="com.maskiner.smc.seguridad.action.LogueoAction"
@@ -70,7 +78,7 @@
     	</action>
     	
 		<action 
-    			name="a_buscarPaquete"
+    			name="a_mostrarBuscarPaquete"
     			class="com.maskiner.smc.gestionarexpertise.action.PaqueteAction"
     			method="mostrarBuscarPaquetes">    			
     		<result name="exito" type="tiles">d_buscarPaquete</result>	
@@ -81,11 +89,37 @@
 				method="mostrar" >
 			<result name="exito" type="tiles">d_generarOT_p2</result>
 		</action>
+		
+		<action 
+    			name="a_buscarPaquete"
+    			class="com.maskiner.smc.gestionarexpertise.action.PaqueteAction"
+    			method="lista" >    			
+	    	<result name="exito" type="tiles">d_buscarPaquete</result>			
+		</action>
 
 	    <action name="a_salirBuscarPaquete" >
 	    	<result type="tiles">d_generarOT_p2</result>
 	    </action>
 
+     	<action 
+    			name="a_quitarPaqueteDeOT"
+    			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
+    			method="quitarPaqueteDeOT" >
+     		<result name="exito" type="tiles">d_generarOT_p2</result>
+    	</action>
+     
+     	<action 
+    			name="a_cargarGenerarOT_paso3"
+    			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
+    			method="cargarGenerarOTPaso3" >
+     		<result name="exito" type="tiles">d_generarOT_p3</result>
+     		<result name="fracaso" type="tiles">d_generarOT_p2</result>
+    	</action>
+    	
+    	<action name="a_irAGenerarOT_paso1">
+    		<result type="tiles">d_generarOT_p1</result>
+    	</action>
+    	
 
     </package>
 
