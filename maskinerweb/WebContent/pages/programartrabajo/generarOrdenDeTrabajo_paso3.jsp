@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
-<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
-<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
+<%@ taglib uri="/struts-tags" prefix="s" %>
+<%@ taglib uri="/struts-jquery-tags" prefix="sj" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ page import="com.maskiner.smc.mylib.FormatoFecha" %>
@@ -13,16 +12,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<sj:head jqueryui="true"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
-<c:url var="jsCalendar" value="/javascript/triga_calendar/calendar_pe.js" />
-<c:url var="jsCalendarCss" value="/javascript/triga_calendar/calendar.css" />
-<c:url var="jsCalendarImagePath" value="/javascript/triga_calendar/img/" />
-
-<script language="JavaScript" src="${jsCalendar}"></script>
-<link rel="stylesheet" href="${jsCalendarCss}">
-
-
 
 <c:url var="csscontenido" value="/styles/contentStyles/generarOrdenTrabajo_Paso3.css" />
 <link href="${csscontenido}" rel="stylesheet" type="text/css" />
@@ -62,18 +53,18 @@
 </head>
 <body>
 
-  <h2 class="titulo"><bean:message key="pages.programartrabajo.generarot_p3.titulo"/></h2>
-  <h3 class="subrayado"><bean:message key="pages.programartrabajo.generarot_p3.subtitulo"/></h3>
+  <h2 class="titulo"><s:text name="pages.programartrabajo.generarot_p3.titulo"/></h2>
+  <h3 class="subrayado"><s:text name="pages.programartrabajo.generarot_p3.subtitulo"/></h3>
     <div class="separadovertical">
-      <label for="txtRegistrador"><bean:message key="pages.programartrabajo.generarot_p3.lblRegistrador"/></label>
+      <label for="txtRegistrador"><s:text name="pages.programartrabajo.generarot_p3.lblRegistrador"/></label>
       <input type="text" id="txtRegistrador" style="width: 160px" readonly="readonly" value="${registrador}" />
-      <label for="txtFecha" class="margenizquierdo"><bean:message key="pages.programartrabajo.generarot_p3.lblFecha"/></label>
+      <label for="txtFecha" class="margenizquierdo"><s:text name="pages.programartrabajo.generarot_p3.lblFecha"/></label>
       <input type="text" id="txtFecha" style="width: 60px" readonly="readonly" value="${fechaactual}" />
     </div>
     <div class="separadovertical">
-      <label for="txtCodIncidente"><bean:message key="pages.programartrabajo.generarot_p3.lblCodIncidente"/></label>
+      <label for="txtCodIncidente"><s:text name="pages.programartrabajo.generarot_p3.lblCodIncidente"/></label>
       <input type="text" id="txtCodIncidente" style="width: 40px" readonly="readonly" value="${sessionScope.b_ordentrabajo.strNumIncidente}" />
-      <label for="txtCliente" class="margenizquierdo"><bean:message key="pages.programartrabajo.generarot_p3.lblCliente"/></label>
+      <label for="txtCliente" class="margenizquierdo"><s:text name="pages.programartrabajo.generarot_p3.lblCliente"/></label>
       <input type="text" id="txtCliente" style="width: 150px" readonly="readonly" value="${sessionScope.b_incidente.strRazonSocialCliente}" />
     </div>
     <fieldset>

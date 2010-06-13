@@ -10,7 +10,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
+
+<s:url action="a_homepage"  var="cambiarIdioma_EEUUUrl">
+	<s:param name="request_locale">en</s:param>
+</s:url>
+<s:url action="a_homepage" var="cambiarIdioma_FranciaUrl">
+	<s:param name="request_locale">fr</s:param>
+</s:url>
+<s:url action="a_homepage" var="cambiarIdioma_PeruUrl">
+	<s:param name="request_locale"></s:param>
+</s:url>
+
+<s:url value="/images/USA.png" var="USAImgUrl"/>
+<s:url value="/images/France.png" var="FranciaImgUrl"/>
+<s:url value="/images/Peru.png" var="PeruImgUrl"/>
+
 <body>
     <h1><s:text name="app.tituloaplicacion"/></h1>
+    <div style="margin-top: 15px">
+    	<a href="${cambiarIdioma_PeruUrl}"><img alt="Perú" src="${PeruImgUrl}"></a> 
+    	<a href="${cambiarIdioma_FranciaUrl}"><img alt="Francia" src="${FranciaImgUrl}"></a> 
+    	<a href="${cambiarIdioma_EEUUUrl}"><img alt="EEUU" src="${USAImgUrl}"></a> 
+    </div>
 </body>
 </html>
