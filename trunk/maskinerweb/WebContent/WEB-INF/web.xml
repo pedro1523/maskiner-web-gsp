@@ -7,6 +7,9 @@
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
     </filter>
+    <listener>
+		<listener-class>com.maskiner.smc.listener.MaskinerListener</listener-class>
+	</listener>
 
     <filter-mapping>
         <filter-name>struts2</filter-name>
