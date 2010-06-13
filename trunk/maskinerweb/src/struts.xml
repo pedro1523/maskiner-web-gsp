@@ -7,7 +7,9 @@
 
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
     <constant name="struts.devMode" value="false" />
-
+    
+    <include file="/struts-cnm.xml" />
+    
     <package name="default" extends="tiles-default">
     
     	<global-results>
@@ -70,12 +72,6 @@
       		<result name="exito3" type="tiles">d_registrarIL_busqueda</result>
     	</action>
     	
-    	<action 
-    			name="a_cargarGenerarOT_paso2"
-    			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
-    			method="cargarGenerarOTPaso2" >
-     		<result name="exito" type="tiles">d_generarOT_p2</result>
-    	</action>
     	
 		<action 
     			name="a_mostrarBuscarPaquete"
