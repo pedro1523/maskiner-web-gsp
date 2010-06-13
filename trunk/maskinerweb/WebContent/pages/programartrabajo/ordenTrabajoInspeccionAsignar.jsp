@@ -12,31 +12,31 @@
 	<c:url var="jsCalendarImagePath" value="/javascript/triga_calendar/img/" />
 	<script language="JavaScript" src="${jsCalendar}"></script>
 	<link rel="stylesheet" href="${jsCalendarCss}">
-<title>Insert title here</title>
+<title><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.titulopagina" /></title>
 
 </head>
 <body>
-<s:form action="a_ProgramarOTInspeccionAsignarAction" method="post" scriptLanguage="">
+<s:form action="a_ProgramarOTInspeccionAsignarAction" method="post" >
 
 <%if(request.getParameter("numTarjeta")!=null)
 	session.setAttribute("tarjetaEquipo",request.getParameter("numTarjeta"));	%>
-<h2>Orden de trabajo de inspección</h2>
+<h2><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.titulo" /></h2>
         <fieldset class="separadovertical">
-          <legend>Asignación de personal</legend><br>
+          <legend><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.legend" /></legend><br>
           <table>
             <tr>
               
-              <td align="right"><b> Nº INCIDENTE :</b></td>
-              <td>${sessionScope.b_incidente.strNumeroIncidente} </td>
-              <td align="right"><b> RAZON SOCIAL :</b> </td>
+              <td align="right"><b> <s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.nroincidente"/> </b></td>
+              <td> ${sessionScope.b_incidente.strNumeroIncidente} </td>
+              <td align="right"><b><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.razonsocial"/> </b> </td>
               <td>${sessionScope.b_cliente.strRazSocCliente} </td>
               <td class="style2">&nbsp;</td>
             </tr>
             <tr>
               
-              <td align="right"><b> RUC :</b></td>
+              <td align="right"><b> <s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.ruc" /></b></td>
               <td>${sessionScope.b_cliente.strRucCliente}</td>
-              <td align="right"><b> Nº TARJETA EQUIPO :<b></td>
+              <td align="right"><b><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.nrotarjetaequipo" /><b></td>
                         
                   
               <td>${sessionScope.tarjetaEquipo}</td>
@@ -46,26 +46,12 @@
             </tr>
             <tr>
               
-              <td align="right"><b>FECHA INSPECCION :</b></td>
-              <td><html:text property="fechaInspeccion"></html:text>
-		<script language="JavaScript">
-					// whole calendar template can be redefined per individual calendar
-					var A_CALTPL = {
-						'months' : ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-						'weekdays' : ['do', 'lu', 'ma', 'mi', 'ju', 'vi', 'sa'],
-						'yearscroll': true,
-						'weekstart': 0,
-						'centyear'  : 70,
-						'imgpath' : '${jsCalendarImagePath}'
-					};
-					
-					new tcal ({
-						// if referenced by ID then form name is not required
-						'controlname': 'fechaInspeccion'
-					}, A_CALTPL);
-				</script>
-</td>
-              <td align="right"><b>LUGAR ATENCION :</b></td>
+              <td align="right"><b><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.fechainspeccion" /></b></td>
+              <td>
+              <div align="left"> <sj:datepicker name="OTIBean.strFecInspeccion" 
+													 displayFormat="dd/mm/yy"  changeYear="true"	    /> </div>
+			  </td>
+              <td align="right"><b><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.lugaratencion" /></b></td>
               
               <td>
               <s:textfield name="lugarAtencion" value="b_incidente.strLugarAtencionCliente"> </s:textfield>
@@ -76,7 +62,7 @@
             
             <tr>
             
-              <td class="style2" align="right"><b>HORA INICIO :</b></td>
+              <td class="style2" align="right"><b><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.horainicio" /> </b></td>
               <td>
               
               <s:select name="OTIBean.strHorInicio"
@@ -86,7 +72,7 @@
 		       
               </s:select>
               </td>
-              <td align="right"><b>HORA FINAL :</b></td>
+              <td align="right"><b><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.horafin" /></b></td>
               <td><s:select name="OTIBean.strHorFin"
               		list="#application.l_hora" 
               		listKey="codigo"
@@ -105,15 +91,16 @@
 <html:form action="a_registraOrdenTrabajoInspeccion">
         <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
           <thead>
-          <span class="titulotabla">Datos del Técnico:</span>
+          <span class="titulotabla"><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.titulotabla" />
+          </span>
           </thead>
           
           <tr align="center">
           <th>#</th>
-            <th> Apellido Paterno</th>
-            <th> Apellido Materno</th>
-            <th> Nombre</th>
-            <th> Especialidad</th>
+            <th><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.columna1" /></th>
+            <th><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.columna2" /> </th>
+            <th><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.columna3" /> </th>
+            <th><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.columna4" /> </th>
           </tr>
           
           <c:forEach var="tecnico" items="${requestScope.listTecnicos}">
