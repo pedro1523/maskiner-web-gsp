@@ -9,6 +9,10 @@
     <constant name="struts.devMode" value="false" />
     
     <include file="/struts-cnm.xml" />
+    <include file="/struts-jhc.xml" />
+    <include file="/struts-klm.xml" />
+    <include file="/struts-amm.xml" />
+    <include file="/struts-cpm.xml" />
     
     <package name="default" extends="tiles-default">
     
