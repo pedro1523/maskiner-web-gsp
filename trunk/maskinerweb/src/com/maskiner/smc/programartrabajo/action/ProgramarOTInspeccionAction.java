@@ -22,6 +22,55 @@ import com.opensymphony.xwork2.ActionSupport;
 public class ProgramarOTInspeccionAction extends ActionSupport {
 	
 	private Map<String, Object> session;
+	private String fechaInspeccion;
+	private String horaInicio;
+	private String horaFin;
+	private String maq;
+	private String codTecnico;
+	private String chkTecnico;
+	private OrdenTrabajoInspeccionBean OTIBean;
+	//private String tarjetaEquipo;
+	
+	
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+	public String getFechaInspeccion() {
+		return fechaInspeccion;
+	}
+
+	public void setFechaInspeccion(String fechaInspeccion) {
+		this.fechaInspeccion = fechaInspeccion;
+	}
+
+	public String getHoraInicio() {
+		return horaInicio;
+	}
+
+	public void setHoraInicio(String horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	public String getHoraFin() {
+		return horaFin;
+	}
+
+	public void setHoraFin(String horaFin) {
+		this.horaFin = horaFin;
+	}
+
+	public String getMaq() {
+		return maq;
+	}
+
+	public void setMaq(String maq) {
+		this.maq = maq;
+	}
 
 	public String cargarGenerarOTInspeccion()
 			throws Exception {
@@ -35,85 +84,75 @@ public class ProgramarOTInspeccionAction extends ActionSupport {
 			throws Exception  {		
 			
 			System.out.println("Dentro del metodo lista");
-			
+			/*
 			String strFechaInspeccion=request.getParameter("fechaInspeccion");
 			String strHoraInicio=request.getParameter("horaInicio");
 			String strHoraFin=request.getParameter("horaFin");
 			
-			String maq=request.getParameter("maq");
+			String maq=request.getParameter("maq");*/
 			
-			strFechaInspeccion=strFechaInspeccion.substring(6,10)+"-"+strFechaInspeccion.substring(3,5)+"-"+strFechaInspeccion.substring(0,2);
+			this.fechaInspeccion=this.fechaInspeccion.substring(6,10)+"-"+
+								 this.fechaInspeccion.substring(3,5)+"-"+
+								 this.fechaInspeccion.substring(0,2);
 			
-			if(maq==null){			
-			  maq="";
+			if(this.maq==null){			
+			  this.maq="";
 			}
+			
 			System.out.println("maquinaria--->"+maq);
-			request.getSession().setAttribute("maquinaria", maq);
-			if(strFechaInspeccion==null)strFechaInspeccion="";
-			if(strHoraInicio==null)strHoraInicio="";
-			if(strHoraFin==null)strHoraFin="";
+			this.session.put("maquinaria", maq);
+			if(this.fechaInspeccion==null)this.fechaInspeccion="";
+			if(this.horaInicio==null)this.horaInicio="";
+			if(this.horaFin==null)this.horaFin="";
 			
 			
 			
 			TecnicoServiceI servicio=ProgramarTrabajoBusinessDelegate.getTecnicoService();		
-			List<TecnicoBean> lista=servicio.listarTecnicos(strFechaInspeccion,strHoraInicio,
-															strHoraFin);
-			System.out.println("fecha---->"+strFechaInspeccion);
-			System.out.println("Hora Inicio---->"+strHoraInicio);
-			System.out.println("Hora Fin---->"+strHoraFin);
-			System.out.println("tamaño del arreglo-----> "+ lista.size());
-			request.setAttribute("listTecnicos",lista);
-			obtenerCabecera(request, response);
+			List<TecnicoBean> lista=servicio.listarTecnicos(this.fechaInspeccion,this.horaInicio,
+															this.horaFin);
 			
-			return mapping.findForward("exito");
+			session.put("listTecnicos",lista);
+			obtenerCabecera();
+			
+			return "exito";
 		
 		
 		
 			}	
 			
 			
-	public ActionForward mostrar(ActionMapping mapping, 
-			ActionForm form,
-			HttpServletRequest request, 
-			HttpServletResponse response)
+	public String mostrar()
 			throws Exception  {
-			
-			
-			String strCodigo=request.getParameter("codTecnico");
-			if(strCodigo==null)strCodigo="";
-			System.out.println("nombre del criterio :"+ strCodigo);
+						
+			//String strCodigo=request.getParameter("codTecnico");
+			if(this.codTecnico==null)this.codTecnico="";
+			//System.out.println("nombre del criterio :"+ strCodigo);
 			TecnicoServiceI servicio=ProgramarTrabajoBusinessDelegate.getTecnicoService();		
-			TecnicoBean tecnico=servicio.obtenerTecnico(strCodigo);	
-			
-			
-			request.setAttribute("beanTecnico",tecnico);
-			
-			return mapping.findForward("exito");
+			TecnicoBean tecnico=servicio.obtenerTecnico(this.codTecnico);				
+			this.session.put("beanTecnico",tecnico);			
+			return "exito";
 	}
 	
 	
-	public ActionForward registrar(ActionMapping mapping, 
-			ActionForm form,
-			HttpServletRequest request, 
-			HttpServletResponse response)
+	public String registrar()
 			throws Exception  {
 		
 		
 		System.out.println("dentro del metodo registrar");
 		//recuperamos al tecnico
-		String strCodTecnico=request.getParameter("chkTecnico");
-		if(strCodTecnico==null){
-			request.setAttribute("sms","(*)Debe Seleccionar Tecnico");
-			return mapping.findForward("exito1");
+		this.codTecnico=this.chkTecnico;
+		if(this.codTecnico==null){
+			this.session.put("sms","(*)Debe Seleccionar Tecnico");
+			return "exito1";
 		}
 			
 			
-		System.out.println("codigo del tecnico---> "+ strCodTecnico);
+		//System.out.println("codigo del tecnico---> "+ strCodTecnico);
 		//recuperamos la cabecera del formulario de la session
 		OrdenTrabajoInspeccionBean OTIBean=(OrdenTrabajoInspeccionBean)
-											request.getSession().getAttribute("b_OTIAsignar");
+											this.session.get("b_OTIAsignar");
 		//asignamos al tecnico en el bean recuperado
-		OTIBean.setStrCodTecnico(strCodTecnico);
+		OTIBean.setStrCodTecnico(this.codTecnico);
 		
 		//utilizamos el servicio
 		OrdenTrabajoServiceI servicio=ProgramarTrabajoBusinessDelegate.getOrdenTrabajoService();
@@ -121,15 +160,15 @@ public class ProgramarOTInspeccionAction extends ActionSupport {
 		if(servicio.registrarOrdenTrabajoInspeccion(OTIBean)){
 			//recuperamos el bean incidente de la session
 			RegistroIncidentesBean incidenteBean=(RegistroIncidentesBean)
-											request.getSession().getAttribute("b_incidente");
+											this.session.get("b_incidente");
 			
-			String tarjetaEquipo=(String)request.getSession().getAttribute("tarjetaEquipo");
+			String tarjetaEquipo=(String)this.session.get("tarjetaEquipo");
 			ArrayList<DetalleRegistroIncidenteBean> listaEquipos=incidenteBean.getArrMaquinariasXIncidente();
 							
 			for(int i=0;i<listaEquipos.size();i++){
 				if(tarjetaEquipo.equals(listaEquipos.get(i).getStrNumeroTarjetaEquipo())){
 					listaEquipos.remove(i);
-					request.getSession().setAttribute("b_incidente",incidenteBean);
+					this.session.put("b_incidente",incidenteBean);
 					break;
 				}
 					
@@ -137,40 +176,41 @@ public class ProgramarOTInspeccionAction extends ActionSupport {
 			
 			
 			
-			return mapping.findForward("exito");
+			return "exito";
 			
 		}
 		else
-			return mapping.findForward("exito2");
+			return "exito2";
 			
 			
 	}
 	
-	private void obtenerCabecera(HttpServletRequest request, 
-			HttpServletResponse response)throws Exception{
+	private void obtenerCabecera()throws Exception{
 		
 		System.out.println("dentro de obtener Cabecera");
 		try{
-		//recuperamos datos del formulario
+		/*recuperamos datos del formulario
 		String strFechaInspeccion=request.getParameter("fechaInspeccion");
 		String strHoraInicio=request.getParameter("horaInicio");
 		String strHorafin=request.getParameter("horaFin");
 		
 		System.out.println("datos del formulario :");
 		System.out.println("fecha :"+strFechaInspeccion+" hInicio :"+strHoraInicio + 
-							"hFin :"+strHorafin);
+							"hFin :"+strHorafin);*/
 		//recuperamos el bean incidente de la session
 		RegistroIncidentesBean incidenteBean=(RegistroIncidentesBean)
-										request.getSession().getAttribute("b_incidente");
+											 this.session.get("b_incidente");
+										//request.getSession().getAttribute("b_incidente");
 		
 		
-		System.out.println("datos del bean incidente -->"+ incidenteBean.getStrNumeroIncidente());
+		//System.out.println("datos del bean incidente -->"+ incidenteBean.getStrNumeroIncidente());
 		//recuperamos al usuario 		 
-		UsuarioBean usuario=(UsuarioBean)
-									request.getSession().getAttribute("usuariologueado");
+		UsuarioBean usuario=(UsuarioBean) session.get("usuariologueado");
+									//request.getSession().getAttribute("usuariologueado");
 		System.out.println("datos del bean usuario-->"+ usuario.getCodigoUsuario());
 		//recuperamos el detalle de registro de incidente
-		String tarjetaEquipo=(String)request.getSession().getAttribute("tarjetaEquipo");
+		String tarjetaEquipo=(String)session.get("tarjetaEquipo");
+		//request.getSession().getAttribute("tarjetaEquipo");
 		ArrayList<DetalleRegistroIncidenteBean> listaEquipos=incidenteBean.getArrMaquinariasXIncidente();
 		int itemAveria=0;				
 		for(int i=0;i<listaEquipos.size();i++){
@@ -183,16 +223,19 @@ public class ProgramarOTInspeccionAction extends ActionSupport {
 		
 		//asignamos  los datos de los beans recuperados de la session a el bean 
 		//ordentrabajoinspeccionbean		
-		strFechaInspeccion=strFechaInspeccion.substring(6,10)+"-"+strFechaInspeccion.substring(3,5)+"-"+strFechaInspeccion.substring(0,2);
+		this.fechaInspeccion=this.fechaInspeccion.substring(6,10)+"-"+
+							 this.fechaInspeccion.substring(3,5)+"-"+
+							 this.fechaInspeccion.substring(0,2);
+		
 		OrdenTrabajoInspeccionBean OTIBean=new OrdenTrabajoInspeccionBean();		
-		OTIBean.setStrFecInspeccion(strFechaInspeccion);
-		OTIBean.setStrHorInicio(strHoraInicio);
-		OTIBean.setStrHorFin(strHorafin);
+		OTIBean.setStrFecInspeccion(this.fechaInspeccion);
+		OTIBean.setStrHorInicio(this.OTIBean.getStrHorInicio());
+		OTIBean.setStrHorFin(this.OTIBean.getStrHorFin());
 		OTIBean.setStrCodRegistrador(usuario.getCodigoUsuario());		
 		OTIBean.setStrNumIncidente(incidenteBean.getStrNumeroIncidente());		
 		OTIBean.setStrNumTarjeta(tarjetaEquipo);
 		OTIBean.setIntItemAveria(itemAveria);
-		request.getSession().setAttribute("b_OTIAsignar", OTIBean);
+		this.session.put("b_OTIAsignar", OTIBean);
 		}catch(Exception e){
 			System.out.println("error--->"+e.getMessage() );
 		}
