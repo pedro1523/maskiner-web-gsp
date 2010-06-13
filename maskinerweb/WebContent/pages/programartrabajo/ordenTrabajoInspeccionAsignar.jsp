@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
-<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
-<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -18,7 +16,7 @@
 
 </head>
 <body>
-<html:form action="a_ProgramarOTInspeccionAsignarAction" method="post" scriptLanguage="">
+<s:form action="a_ProgramarOTInspeccionAsignarAction" method="post" scriptLanguage="">
 
 <%if(request.getParameter("numTarjeta")!=null)
 	session.setAttribute("tarjetaEquipo",request.getParameter("numTarjeta"));	%>
@@ -69,61 +67,32 @@
 </td>
               <td align="right"><b>LUGAR ATENCION :</b></td>
               
-              <td><html:text property="lugarAtencion" value="${sessionScope.b_incidente.strLugarAtencionCliente}"></html:text></td>
+              <td>
+              <s:textfield name="lugarAtencion" value="b_incidente.strLugarAtencionCliente"> </s:textfield>
+             
+              </td>
               <td class="style2">&nbsp;</td>
             </tr>
             
             <tr>
             
               <td class="style2" align="right"><b>HORA INICIO :</b></td>
-              <td><html:select property="horaInicio">  
-		          <html:option value="07:30">07:30</html:option>
-		          <html:option value="08:00">08:00</html:option>
-		          <html:option value="08:30">08:30</html:option>
-		          <html:option value="09:00">09:00</html:option>
-		          <html:option value="09:30">09:30</html:option>
-		          <html:option value="10:00">10:00</html:option>
-		          <html:option value="10:30">10:30</html:option>
-		          <html:option value="11:00">11:00</html:option>
-		          <html:option value="11:30">11:30</html:option>
-		          <html:option value="12:00">12:00</html:option>
-		          <html:option value="12:30">12:30</html:option>
-		          <html:option value="13:00">13:00</html:option>
-		          <html:option value="13:30">13:30</html:option>
-		          <html:option value="14:00">14:00</html:option>
-		          <html:option value="14:30">14:30</html:option>
-		          <html:option value="15:00">15:00</html:option>
-		          <html:option value="15:30" >15:30</html:option>
-		          <html:option value="16:00">16:00</html:option>
-		          <html:option value="16:30">16:30</html:option>
-		          <html:option value="17:00">17:00</html:option>
-		          <html:option value="17:30">17:30</html:option>
-              </html:select>
+              <td>
+              
+              <s:select name="OTIBean.strHorInicio"
+              		list="#application.l_hora" 
+              		listKey="codigo"
+              		listValue="codigo">                
+		       
+              </s:select>
               </td>
               <td align="right"><b>HORA FINAL :</b></td>
-              <td><html:select property="horaFin">  
-		          <html:option value="07:30">07:30</html:option>
-		          <html:option value="08:00">08:00</html:option>
-		          <html:option value="08:30">08:30</html:option>
-		          <html:option value="09:00">09:00</html:option>
-		          <html:option value="09:30">09:30</html:option>
-		          <html:option value="10:00">10:00</html:option>
-		          <html:option value="10:30">10:30</html:option>
-		          <html:option value="11:00">11:00</html:option>
-		          <html:option value="11:30">11:30</html:option>
-		          <html:option value="12:00">12:00</html:option>
-		          <html:option value="12:30">12:30</html:option>
-		          <html:option value="13:00">13:00</html:option>
-		          <html:option value="13:30">13:30</html:option>
-		          <html:option value="14:00">14:00</html:option>
-		          <html:option value="14:30">14:30</html:option>
-		          <html:option value="15:00">15:00</html:option>
-		          <html:option value="15:30">15:30</html:option>
-		          <html:option value="16:00">16:00</html:option>
-		          <html:option value="16:30">16:30</html:option>
-		          <html:option value="17:00">17:00</html:option>
-		          <html:option value="17:30">17:30</html:option>
-              </html:select>
+              <td><s:select name="OTIBean.strHorFin"
+              		list="#application.l_hora" 
+              		listKey="codigo"
+              		listValue="codigo">                
+		       
+              </s:select>
               </td>
               <td>
 				<html:image src="images/ver_tecnicos.png"></html:image>
@@ -131,7 +100,7 @@
             </tr>
           </table>
         </fieldset>
-</html:form> 
+</s:form> 
 <font color="red">${requestScope.sms}</font>
 <html:form action="a_registraOrdenTrabajoInspeccion">
         <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
