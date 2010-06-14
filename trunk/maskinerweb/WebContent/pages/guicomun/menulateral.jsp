@@ -43,7 +43,7 @@
  
 	  <s:if test="#request.prueba">
 		  <li><s:a action="a_cpm_cargarOTInspeccion"><s:text name="pages.guicomun.menulateral.generarotinspeccion"/></s:a></li>
-	  	  <li><s:a action="a_cargarGenerarOT"><s:text name="pages.guicomun.menulateral.generarot"/></s:a></li>
+	  	  <li><s:a action="a_cnm_cargarGenerarOT"><s:text name="pages.guicomun.menulateral.generarot"/></s:a></li>
 	  </s:if>
 	  
 	  

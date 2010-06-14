@@ -28,9 +28,9 @@
 <body>
     <h1><s:text name="app.tituloaplicacion"/></h1>
     <div style="margin-top: 15px">
-    	<a href="${cambiarIdioma_PeruUrl}"><img alt="Perú" src="${PeruImgUrl}"></a> 
-    	<a href="${cambiarIdioma_FranciaUrl}"><img alt="Francia" src="${FranciaImgUrl}"></a> 
-    	<a href="${cambiarIdioma_EEUUUrl}"><img alt="EEUU" src="${USAImgUrl}"></a> 
+    	<a href="${cambiarIdioma_PeruUrl}" title="<s:text name="pages.guicomun.idioma.espanol"/>"><img alt="Perú" src="${PeruImgUrl}"></a> 
+    	<a href="${cambiarIdioma_FranciaUrl}" title="<s:text name="pages.guicomun.idioma.frances"/>"><img alt="Francia" src="${FranciaImgUrl}"></a> 
+    	<a href="${cambiarIdioma_EEUUUrl}" title="<s:text name="pages.guicomun.idioma.ingles"/>"><img alt="EEUU" src="${USAImgUrl}"></a> 
     </div>
 </body>
 </html>

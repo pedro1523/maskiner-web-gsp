@@ -30,7 +30,7 @@
 <body>
   <h2 class="titulo"><s:text name="pages.programartrabajo.generarot_p2.titulo" /></h2>
   <h3 class="subrayado"><s:text name="pages.programartrabajo.generarot_p2.subtitulo" /></h3>
-  <form action="" method="post">
+
     <div class="separadovertical">
       <s:text name="pages.programartrabajo.generarot_p2.lblRegistrador" />
       <span class="negrita margenderecho">${registrador}</span>
@@ -88,7 +88,7 @@
 							<td><s:property value="#b_paqot.strCodPaquete"/></td>
 							<td><s:property value="#b_paqot.strNombrePaquete"/></td>
 			        		<td align="center">
-			        			<s:url action="a_quitarPaqueteDeOT" var="quitarPaqueteUrl">
+			        			<s:url action="a_cnm_quitarPaqueteDeOT" var="quitarPaqueteUrl">
 			        				<s:param name="codPqte"><s:property value="#b_paqot.strCodPaquete"/></s:param>
 			        			</s:url>
 			        			<s:url value="images/quitar.gif" var="imagenQuitarUrl"/>
@@ -107,8 +107,8 @@
        	</s:if>
     </fieldset>
     <div class="separadovertical margenderecho" align="right"> 
-    	<s:url action="a_irAGenerarOT_paso1" var="irAGenerarOT_paso1Url"/>
-    	<s:url action="a_cargarGenerarOT_paso3" var="cargarGenerarOT_paso3Url"/>
+    	<s:url action="a_cnm_irAGenerarOT_paso1" var="irAGenerarOT_paso1Url"/>
+    	<s:url action="a_cnm_cargarGenerarOT_paso3" var="cargarGenerarOT_paso3Url"/>
     	<s:url action="a_homepage" var="homepageUrl"/>
     	<s:url value="images/atras.png" var="ImagenAtrasUrl"/>
     	<s:url value="images/siguiente.png" var="ImagenSiguienteUrl"/>
@@ -127,6 +127,6 @@
     <s:if test="#request.mensajeerror1!=null">
 	  	<div class="mensajeerror separadoverticalsuperior"><s:property value="#request.mensajeerror1"/></div>
     </s:if>
-  </form>
+
 </body>
 </html>
