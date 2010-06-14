@@ -85,7 +85,7 @@
 	        				<span style="color: red; font-weight: bold"><s:text name="pages.programartrabajo.generarot_p1.listaAverias.columna7.mensajeEstadoAveria1" /></span>
 	         			</s:if>
 	         			<s:if test="#b_maq.intEstadoAveria==2">
-	         				<s:url var="urlCargarOTPaso2" action="a_cargarGenerarOT_paso2">
+	         				<s:url var="urlCargarOTPaso2" action="a_cnm_cargarGenerarOT_paso2">
 	         					<s:param name="numtarj">${b_maq.strNumeroTarjetaEquipo}</s:param>
 	         				</s:url>
 	         				<s:a href="%{urlCargarOTPaso2}">
