@@ -46,6 +46,15 @@
 			<result name="exito" type="tiles">d_generarOT_p3</result>
 			<result name="fracaso" type="tiles">d_generarOT_p2</result>
 		</action>
+		
+		<action 
+    			name="a_cnm_generarOT"
+    			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
+    			method="generarOT">
+     		<result name="exito" type="tiles">d_generarOT_p4</result>
+     		<result name="fracaso" type="tiles">d_generarOT_p3</result>
+    	</action>
+		
 
 	</package>
 

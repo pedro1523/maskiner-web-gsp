@@ -3,6 +3,7 @@
     
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <%@ taglib uri="/struts-jquery-tags" prefix="sj" %>
+<%@ taglib uri="/struts-jquery-grid-tags" prefix="sjg" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ page import="com.maskiner.smc.mylib.FormatoFecha" %>
@@ -56,54 +57,59 @@
   <h2 class="titulo"><s:text name="pages.programartrabajo.generarot_p3.titulo"/></h2>
   <h3 class="subrayado"><s:text name="pages.programartrabajo.generarot_p3.subtitulo"/></h3>
     <div class="separadovertical">
-      <label for="txtRegistrador"><s:text name="pages.programartrabajo.generarot_p3.lblRegistrador"/></label>
-      <input type="text" id="txtRegistrador" style="width: 160px" readonly="readonly" value="${registrador}" />
-      <label for="txtFecha" class="margenizquierdo"><s:text name="pages.programartrabajo.generarot_p3.lblFecha"/></label>
-      <input type="text" id="txtFecha" style="width: 60px" readonly="readonly" value="${fechaactual}" />
+      <s:text name="pages.programartrabajo.generarot_p3.lblRegistrador"/>
+	  <span class="negrita margenderecho">${registrador}</span>
+      <s:text name="pages.programartrabajo.generarot_p3.lblFecha"/>
+	  <span class="negrita">${fechaactual}</span>
     </div>
     <div class="separadovertical">
-      <label for="txtCodIncidente"><s:text name="pages.programartrabajo.generarot_p3.lblCodIncidente"/></label>
-      <input type="text" id="txtCodIncidente" style="width: 40px" readonly="readonly" value="${sessionScope.b_ordentrabajo.strNumIncidente}" />
-      <label for="txtCliente" class="margenizquierdo"><s:text name="pages.programartrabajo.generarot_p3.lblCliente"/></label>
-      <input type="text" id="txtCliente" style="width: 150px" readonly="readonly" value="${sessionScope.b_incidente.strRazonSocialCliente}" />
+      <s:text name="pages.programartrabajo.generarot_p3.lblCodIncidente"/>
+	  <span class="negrita margenderecho"><s:property value="#session.b_ordentrabajo.strNumIncidente"/></span>
+      <s:text name="pages.programartrabajo.generarot_p3.lblCliente"/>
+      <span class="negrita"><s:property value="#session.b_incidente.strRazonSocialCliente"/></span>
     </div>
     <fieldset>
-      <legend><bean:message key="pages.programartrabajo.generarot_p3.fieldsetEquipo"/></legend>
+      <legend><s:text name="pages.programartrabajo.generarot_p3.fieldsetEquipo"/></legend>
       <div>
-        <label for="txtNumTarjeta"><bean:message key="pages.programartrabajo.generarot_p3.lblNumTarjeta"/></label>
-        <input type="text" id="txtNumTarjeta" style="width: 40px" readonly="readonly" value="${sessionScope.b_ordentrabajo.strNumTarjeta}" />
-        <label for="txtDescripcion" class="margenizquierdo"><bean:message key="pages.programartrabajo.generarot_p3.lblDescripcion"/></label>
-        <input type="text" id="txtDescripcion" style="width: 250px" readonly="readonly" value="${sessionScope.b_ordentrabajo.strDescripcionMaquinaria}" />
-        <label for="txtMarca" class="margenizquierdo"><bean:message key="pages.programartrabajo.generarot_p3.lblMarca"/></label>
-        <input type="text" id="txtMarca" style="width: 140px" readonly="readonly" value="${sessionScope.b_ordentrabajo.strMarcaMaquinaria}" />
+        <s:text name="pages.programartrabajo.generarot_p3.lblNumTarjeta"/>
+        <span class="negrita margenderecho"><s:property value="#session.b_ordentrabajo.strNumTarjeta"/></span>
+        <s:text name="pages.programartrabajo.generarot_p3.lblDescripcion"/>
+        <span class="negrita margenderecho"><s:property value="session.b_ordentrabajo.strDescripcionMaquinaria"/></span>
+        <s:text name="pages.programartrabajo.generarot_p3.lblMarca"/>
+        <span class="negrita"><s:property value="#session.b_ordentrabajo.strMarcaMaquinaria"/></span>
       </div>
       <div class="separadoverticalsuperior">
-        <label for="txtModelo"><bean:message key="pages.programartrabajo.generarot_p3.lblModelo"/></label>
-        <input type="text" id="txtModelo" style="width: 100px" readonly="readonly" value="${sessionScope.b_ordentrabajo.strModeloMaquinaria}" />
-        <label for="txtAveria" class="margenizquierdo"><bean:message key="pages.programartrabajo.generarot_p3.lblAveria"/></label>
-        <input type="text" id="txtAveria" style="width: 300px" readonly="readonly" value="${sessionScope.b_ordentrabajo.strDescripcionAveria}" />
+        <s:text name="pages.programartrabajo.generarot_p3.lblModelo"/>
+        <span class="negrita margenderecho"><s:property value="#session.b_ordentrabajo.strModeloMaquinaria"/></span>
+        <s:text name="pages.programartrabajo.generarot_p3.lblAveria"/>
+        <span class="negrita"><s:property value="#session.b_ordentrabajo.strDescripcionAveria"/></span>
       </div>
     </fieldset>
-    <html:form styleId="frmGenerarOT" action="a_generarOT" method="post">
+    
+
+    <s:form id="frmGenerarOT" action="a_cnm_generarOT" method="post">
 	    <div class="separadovertical">
-	      <label for="cboPaquetes"><bean:message key="pages.programartrabajo.generarot_p3.lblPaquetes"/></label>
-	      <html:select property="paqueteSeleccionado" onchange="enviarSubmitCargarDatosHorasNecesarias();" >
-	      	<html:option value=""><bean:message key="pages.programartrabajo.generarot_p3.lblPaquetes.primeraopcion"/></html:option>
-	      	<logic:iterate id="pqt" name="b_ordentrabajo" property="arrPaquetesXOT">
-	      		<html:option value="${pqt.strCodPaquete}">${pqt.strNombrePaquete}</html:option>
-	      	</logic:iterate>
-	      </html:select>
+	      <s:select list="#session.b_ordentrabajo.arrPaquetesXOT"
+	      			listKey="strCodPaquete"
+	      			listValue="strNombrePaquete"
+	      			headerKey="-1"
+	      			headerValue="<s:text name="pages.programartrabajo.generarot_p3.lblPaquetes.primeraopcion"/>"
+	      			emptyOption="true"
+	      			name="paqueteSeleccionado"
+	      			label="<s:text name="pages.programartrabajo.generarot_p3.lblPaquetes"/>"
+	      			onchange="enviarSubmitCargarDatosHorasNecesarias();" />
+
 	      <div class="separadovertical">
-	        <label><bean:message key="pages.programartrabajo.generarot_p3.lblNumTecnicosNecesarios"/></label>
+	        <label><s:text name="pages.programartrabajo.generarot_p3.lblNumTecnicosNecesarios"/></label>
 	        <span><bean:write name="generarOTPaso3Form" property="numtecnicosnecesarios"/></span>
 	        <html:hidden property="numtecnicosnecesarios"/>
-	        <label class="margenizquierdo"><bean:message key="pages.programartrabajo.generarot_p3.lblNumHorasNecesarias"/></label>
+	        <label class="margenizquierdo"><s:text name="pages.programartrabajo.generarot_p3.lblNumHorasNecesarias"/></label>
 	        <span><bean:write name="generarOTPaso3Form" property="numhorasnecesarias"/></span>
 	        <html:hidden property="numhorasnecesarias"/>
 	      </div>
 	    </div>
 	    <div class="separadovertical">
-	      <label for="txtFechaAtencion"><bean:message key="pages.programartrabajo.generarot_p3.lblFechaAtencion"/></label>
+	      <label for="txtFechaAtencion"><s:text name="pages.programartrabajo.generarot_p3.lblFechaAtencion"/></label>
 	      <html:text property="fechaAtencion" styleId="txtFechaAtencion" size="10"/>
 		  <script language="JavaScript">
 				// whole calendar template can be redefined per individual calendar
@@ -121,7 +127,7 @@
 					'controlname': 'txtFechaAtencion'
 				}, A_CALTPL);
 		  </script>        
-	      <label class="margenizquierdo" for="cboHoraInicio"><bean:message key="pages.programartrabajo.generarot_p3.lblHoraInicio"/></label>
+	      <label class="margenizquierdo" for="cboHoraInicio"><s:text name="pages.programartrabajo.generarot_p3.lblHoraInicio"/></label>
 	      <html:select property="horaInicio" styleId="cboHoraInicio">
 	      	<html:option value="07:30">07:30</html:option>
 	        <html:option value="08:00">08:00</html:option>
@@ -145,7 +151,7 @@
 	        <html:option value="17:00">17:00</html:option>
 	        <html:option value="17:30">17:30</html:option>
 	      </html:select>
-	      <label class="margenizquierdo" for="cboHoraFin"><bean:message key="pages.programartrabajo.generarot_p3.lblHoraFin"/></label>
+	      <label class="margenizquierdo" for="cboHoraFin"><s:text name="pages.programartrabajo.generarot_p3.lblHoraFin"/></label>
 	      <html:select property="horaFin" styleId="cboHoraFin">
 	      	<html:option value="07:30">07:30</html:option>
 	        <html:option value="08:00">08:00</html:option>
@@ -186,15 +192,15 @@
 
 	    <div class="separadovertical">
 		  <div id="div_tecnicos">
-	        <span class="titulotabla"><bean:message key="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.titulo"/></span>
+	        <span class="titulotabla"><s:text name="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.titulo"/></span>
 	        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="gridview letrapequena">
 	           <tr>
-	            <th scope="col"><bean:message key="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.cabecera.columna1"/></th>
-	            <th scope="col"><bean:message key="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.cabecera.columna2"/></th>
-	            <th scope="col"><bean:message key="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.cabecera.columna3"/></th>
-	            <th scope="col"><bean:message key="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.cabecera.columna4"/></th>
-	            <th scope="col"><bean:message key="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.cabecera.columna5"/></th>
-	            <th scope="col"><bean:message key="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.cabecera.columna6"/></th>
+	            <th scope="col"><s:text name="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.cabecera.columna1"/></th>
+	            <th scope="col"><s:text name="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.cabecera.columna2"/></th>
+	            <th scope="col"><s:text name="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.cabecera.columna3"/></th>
+	            <th scope="col"><s:text name="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.cabecera.columna4"/></th>
+	            <th scope="col"><s:text name="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.cabecera.columna5"/></th>
+	            <th scope="col"><s:text name="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.cabecera.columna6"/></th>
 	          </tr>
 	          
 	          <logic:notEmpty name="b_disponibilidadtecnicos">
@@ -217,7 +223,7 @@
 	          </logic:notEmpty>
 	          <logic:empty name="b_disponibilidadtecnicos">
 	          	<tr>
-	          		<td colspan="6"><bean:message key="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.pie.sinregistros"/></td>
+	          		<td colspan="6"><s:text name="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.pie.sinregistros"/></td>
 	          	</tr>
 	          </logic:empty>
 	        </table>
@@ -236,11 +242,11 @@
 	        <div class="separadovertical">
 	          <table width="100%" border="0" cellpadding="0" cellspacing="0" class="gridview letrapequena">
 	            <tr>
-	              <th width="17%" scope="col"><bean:message key="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna1"/></th>
-	              <th width="32%" scope="col"><bean:message key="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna2"/></th>
-	              <th scope="col"><bean:message key="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna3"/></th>
-	              <th scope="col"><bean:message key="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna4"/></th>
-	              <th scope="col"><bean:message key="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna5"/></th>
+	              <th width="17%" scope="col"><s:text name="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna1"/></th>
+	              <th width="32%" scope="col"><s:text name="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna2"/></th>
+	              <th scope="col"><s:text name="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna3"/></th>
+	              <th scope="col"><s:text name="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna4"/></th>
+	              <th scope="col"><s:text name="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna5"/></th>
 	            </tr>
 	            <logic:notEmpty name="b_ordentrabajo" property="arrPaquetesXOT">
 	            	<logic:iterate id="b_paqot" name="b_ordentrabajo" property="arrPaquetesXOT" >
@@ -260,7 +266,7 @@
 	            					</ul>
 	            				</logic:notEmpty>
 	            				<logic:empty name="b_paqot" property="arrTecnicosAsignados">
-	            					<span style="color: red"><bean:message key="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna3.datos"/></span>
+	            					<span style="color: red"><s:text name="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna3.datos"/></span>
 	            				</logic:empty>
 	            			</td>
 	            			<td align="center">
@@ -270,7 +276,7 @@
 	            				    <bean:write name="b_paqot" property="tmHoraFin" format="hh:mm"/>
 	            				</logic:notEmpty>
 	            				<logic:empty name="b_paqot" property="dtFechEjecOrdenTrabajo">
-	            					<span style="color: red"><bean:message key="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna4.datos"/></span>
+	            					<span style="color: red"><s:text name="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna4.datos"/></span>
 	            				</logic:empty>
 	            			</td>
 	            			<td align="center">
@@ -301,7 +307,11 @@
 		 		${requestScope.mensajeErrorGenerarOrdenTrabajo}
 		 	</div>
 	    </logic:present>
-    </html:form>
+    </s:form>
+
+
+
+
     
 </body>
 </html>
