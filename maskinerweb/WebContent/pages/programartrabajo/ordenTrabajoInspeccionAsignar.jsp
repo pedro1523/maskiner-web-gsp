@@ -18,7 +18,7 @@
 <body>
 <s:form action="a_ProgramarOTInspeccionAsignarAction" method="post" >
 
-<%if(request.getParameter("numTarjeta")!=null)
+<%if(request.getParameter("numTarjeta")!=null )
 	session.setAttribute("tarjetaEquipo",request.getParameter("numTarjeta"));	%>
 <h2><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.titulo" /></h2>
         <fieldset class="separadovertical">
