@@ -92,17 +92,15 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	public String cargarGenerarOTPaso3() throws Exception {
 		
 		//verificar que no se pasa al paso 3 sin haber asignado al menos un paquete a la o/t
-/*		OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) request.getSession().getAttribute("b_ordentrabajo");
+		OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) session.get("b_ordentrabajo");
 		if(ordenTrabajo.getArrPaquetesXOT().size()==0){
-			request.setAttribute("mensajeerror1", "Al menos debe asignar un paquete a la orden de trabajo");
-			return mapping.findForward("fracaso");
-		}else
+			request.put("mensajeerror1", "Al menos debe asignar un paquete a la orden de trabajo");
+			return "fracaso";
+		}else{
 			//borramos la lista de tecnicos disponibles
-			request.getSession().setAttribute("b_disponibilidadtecnicos", null);
-			return mapping.findForward("exito");
-*/
-		return null;
-		
+			session.put("b_disponibilidadtecnicos", null);
+			return "exito";
+		}
 	}
 	
 	public String quitarPaqueteDeOT() throws Exception {
