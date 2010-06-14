@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts2.dispatcher.mapper.ActionMapping;
-
 import com.maskiner.smc.gestionarincidentes.bean.DetalleRegistroIncidenteBean;
 import com.maskiner.smc.gestionarincidentes.bean.RegistroIncidentesBean;
 import com.maskiner.smc.programartrabajo.bean.OrdenTrabajoInspeccionBean;
