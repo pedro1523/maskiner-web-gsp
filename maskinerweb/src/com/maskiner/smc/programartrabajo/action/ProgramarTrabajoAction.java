@@ -34,6 +34,26 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	private Map<String, Object> request;
 	private Map<String, Object> session;
 	private Map<String, String[]> parameters;
+	
+	private Integer numTecnicosNecesarios;
+	private Integer numHorasNecesarias;
+	
+
+	public Integer getNumTecnicosNecesarios() {
+		return numTecnicosNecesarios;
+	}
+
+	public void setNumTecnicosNecesarios(Integer numTecnicosNecesarios) {
+		this.numTecnicosNecesarios = numTecnicosNecesarios;
+	}
+
+	public Integer getNumHorasNecesarias() {
+		return numHorasNecesarias;
+	}
+
+	public void setNumHorasNecesarias(Integer numHorasNecesarias) {
+		this.numHorasNecesarias = numHorasNecesarias;
+	}
 
 	public String cargarGenerarOT()	throws Exception {
 		
@@ -168,25 +188,26 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	
 	public String obtenerDatosHorasNecesarias()	throws Exception {
 		
-/*		String strCodPaquete = request.getParameter("paqueteSeleccionado");
+		String strCodPaquete = parameters.get("paqueteSeleccionado")[0];
 		
 		if(strCodPaquete.equals("")){
-			BeanUtils.setProperty(form, "numtecnicosnecesarios", null);
-			BeanUtils.setProperty(form, "numhorasnecesarias", null);
+			
+			numTecnicosNecesarios = null;
+			numHorasNecesarias = null;
 		
 		}else{
-			OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) request.getSession().getAttribute("b_ordentrabajo");
+			OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) session.get("b_ordentrabajo");
 			ArrayList<PaqueteXOTBean> paquetes = ordenTrabajo.getArrPaquetesXOT();
 			
 			for(PaqueteXOTBean pqt:paquetes){
 				if(pqt.getStrCodPaquete().equals(strCodPaquete)){
-					BeanUtils.setProperty(form, "numtecnicosnecesarios", pqt.getIntNumeroTecnicosNecesarios());
-					BeanUtils.setProperty(form, "numhorasnecesarias", pqt.getIntNumeroHorasNecesarias());
+					numTecnicosNecesarios = pqt.getIntNumeroTecnicosNecesarios();
+					numHorasNecesarias = pqt.getIntNumeroHorasNecesarias();
 					break;
 				}
 			}
 		}
-*/		
+		
 		return "exito";
 	}
 	
