@@ -12,7 +12,7 @@
     <include file="/struts-jhc.xml" />
     <include file="/struts-klm.xml" />
     <include file="/struts-amm.xml" />
-<!--    <include file="/struts-cepm.xml" />-->
+	<include file="/struts-cepm.xml" />
     
     <package name="default" extends="tiles-default">
     
