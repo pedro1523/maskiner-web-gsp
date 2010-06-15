@@ -1,23 +1,13 @@
 package com.maskiner.smc.gestionarexpertise.action;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.maskiner.smc.gestionarexpertise.bean.ActividadesBean;
-import com.maskiner.smc.gestionarexpertise.bean.HerramientaBean;
-import com.maskiner.smc.gestionarexpertise.bean.MaterialesBean;
 import com.maskiner.smc.gestionarexpertise.bean.PaqueteBean;
 import com.maskiner.smc.gestionarexpertise.service.PaqueteBusinessDelegate;
 import com.maskiner.smc.gestionarexpertise.service.PaquetesServiceI;

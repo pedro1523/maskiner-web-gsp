@@ -48,8 +48,7 @@
 		<action name="a_cpm_ProgramarOTInspeccionAsignarAction"
 			class="com.maskiner.smc.programartrabajo.action.ProgramarOTInspeccionAction"
 			method="lista">
-			<result name="exito" type="tiles">d_generarOT_inspeccion_asignar
-			</result>
+			<result name="exito" type="tiles">d_generarOT_inspeccion_asignar</result>
 		</action>
 		<!--
 			<action path="/a_verTecnico"
@@ -81,12 +80,12 @@
 			class="com.maskiner.smc.gestionarexpertise.action.PaqueteAction"
 			method="mostrar">
 			<result name="exito" type="tiles">d_generarOT_p2</result>
-		</action>
+		</action><!--
 		<action name="a_cpm_mostrarPrefactura"
 			class="com.maskiner.smc.facturacion.action.FacturacionAction" method="mostrar">
 			<result name="exito" type="tiles">d_mostrarPrefactura</result>
 		</action>
-		<!-- FACTURACION -->
+		--><!-- FACTURACION --><!--
 		<action name="a_cpm_buscarPrefacturas"
 			class="com.maskiner.smc.facturacion.action.FacturacionAction" method="buscar">
 			<result name="exito" type="tiles">d_prefactura_buscar</result>
@@ -98,7 +97,7 @@
 			</result>
 		</action>
 
-		<!-- <forward name="exito"  path="d_mostrarPrefactura" ></forward>-->
+		--><!-- <forward name="exito"  path="d_mostrarPrefactura" ></forward>-->
 
  
 
