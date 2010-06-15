@@ -23,19 +23,19 @@
 
 <script type="text/javascript">
 	function enviarSubmitCargarDatosHorasNecesarias(){
-		document.forms["frmGenerarOT"].action="<%= request.getContextPath() %>/a_obtenerDatosHorasNecesarias.do";
+		document.forms["frmGenerarOT"].action="<%= request.getContextPath() %>/a_cnm_obtenerDatosHorasNecesarias.do";
 		document.forms["frmGenerarOT"].submit();
 	}
 	function enviarSubmitBuscarDisponibilidadTecnicos(){
-		document.forms["frmGenerarOT"].action="<%= request.getContextPath() %>/a_buscarDisponibilidadTecnicos.do";
+		document.forms["frmGenerarOT"].action="<%= request.getContextPath() %>/a_cnm_buscarDisponibilidadTecnicos.do";
 		document.forms["frmGenerarOT"].submit();
 	}
 	function enviarSubmitAsignarTecnicosAPaquete(){
-		document.forms["frmGenerarOT"].action="<%= request.getContextPath() %>/a_asignarTecnicosAPaquete.do";
+		document.forms["frmGenerarOT"].action="<%= request.getContextPath() %>/a_cnm_asignarTecnicosAPaquete.do";
 		document.forms["frmGenerarOT"].submit();
 	}
 	function enviarSubmitQuitarAsignacionDeTecnicosDePaqueteXOT(codPaquete){
-		document.forms["frmGenerarOT"].action="<%= request.getContextPath() %>/a_quitarAsignacionDeTecnicosDePaqueteXOT.do?codPaq=" + codPaquete;
+		document.forms["frmGenerarOT"].action="<%= request.getContextPath() %>/a_cnm_quitarAsignacionDeTecnicosDePaqueteXOT.do?codPaq=" + codPaquete;
 		document.forms["frmGenerarOT"].submit();
 	}
 	
@@ -100,12 +100,10 @@
 	      			onchange="enviarSubmitCargarDatosHorasNecesarias();" />
 
 	      <div class="separadovertical">
-	        <label><s:text name="pages.programartrabajo.generarot_p3.lblNumTecnicosNecesarios"/></label>
-	        <span><bean:write name="generarOTPaso3Form" property="numtecnicosnecesarios"/></span>
-	        <html:hidden property="numtecnicosnecesarios"/>
-	        <label class="margenizquierdo"><s:text name="pages.programartrabajo.generarot_p3.lblNumHorasNecesarias"/></label>
-	        <span><bean:write name="generarOTPaso3Form" property="numhorasnecesarias"/></span>
-	        <html:hidden property="numhorasnecesarias"/>
+	        <s:text name="pages.programartrabajo.generarot_p3.lblNumTecnicosNecesarios"/>
+	        <s:label name="numTecnicosNecesarios" cssClass="negrita margenderecho" />
+	        <s:text name="pages.programartrabajo.generarot_p3.lblNumHorasNecesarias"/>
+	        <s:label name="numHorasNecesarias"/>
 	      </div>
 	    </div>
 	    <div class="separadovertical">

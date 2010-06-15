@@ -55,6 +55,37 @@
      		<result name="fracaso" type="tiles">d_generarOT_p3</result>
     	</action>
 		
+     	<action 
+    			name="a_cnm_obtenerDatosHorasNecesarias"
+    			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
+    			method="obtenerDatosHorasNecesarias" >
+     		<result name="exito" type="tiles">d_generarOT_p3</result>
+    	</action>
+    	
+    	<action 
+    			name="a_cnm_buscarDisponibilidadTecnicos"
+    			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
+    			method="buscarDisponibilidadTecnicos" >
+     		<result name="exito" type="tiles">d_generarOT_p3</result>
+    	</action>
+
+    	
+    	<action 
+    			name="a_cnm_asignarTecnicosAPaquete"
+    			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
+    			method="asignarTecnicosAPaquete">
+     		<result name="exito" type="tiles">d_generarOT_p3</result>
+    	</action>
+    	
+    	    	
+    	<action 
+    			name="a_cnm_quitarAsignacionDeTecnicosDePaqueteXOT"
+    			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
+    			method="quitarAsignacionDeTecnicosDePaqueteXOT" >
+     		<result name="exito" type="tiles">d_generarOT_p3</result>
+    	</action>
+
+
 
 	</package>
 
