@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.naming.java.javaURLContextFactory;
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -38,7 +39,34 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	private Integer numTecnicosNecesarios;
 	private Integer numHorasNecesarias;
 	private String paqueteSeleccionado;
+	private String fechaAtencion;
+	private String horaInicio;
+	private String horaFin;
 	
+	
+	public String getHoraFin() {
+		return horaFin;
+	}
+
+	public void setHoraFin(String horaFin) {
+		this.horaFin = horaFin;
+	}
+
+	public String getHoraInicio() {
+		return horaInicio;
+	}
+
+	public void setHoraInicio(String horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	public String getFechaAtencion() {
+		return fechaAtencion;
+	}
+
+	public void setFechaAtencion(String fechaAtencion) {
+		this.fechaAtencion = fechaAtencion;
+	}
 
 	public String getPaqueteSeleccionado() {
 		return paqueteSeleccionado;
@@ -223,21 +251,21 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	
 	public String buscarDisponibilidadTecnicos() throws Exception {
 		
-/*		Date dtFechaAtencion = FormatoFecha.getFechaDe(request.getParameter("fechaAtencion"));
-		Time tmHoraInicio = FormatoFecha.getHoraDe(request.getParameter("horaInicio"));
-		Time tmHoraFin    = FormatoFecha.getHoraDe(request.getParameter("horaFin"));
+		Date dtFechaAtencion = FormatoFecha.getFechaDe(parameters.get("fechaAtencion")[0]);
+		Time tmHoraInicio = FormatoFecha.getHoraDe(parameters.get("horaInicio")[0]);
+		Time tmHoraFin    = FormatoFecha.getHoraDe(parameters.get("horaFin")[0]);
 		
 		if(!tmHoraInicio.before(tmHoraFin)){
-			request.setAttribute("mensajeErrorBuscarDisponibilidadTecnicos", "La hora inicio debe ser menor que la hora final");
-			return mapping.findForward("exito");			
+			request.put("mensajeErrorBuscarDisponibilidadTecnicos", "La hora inicio debe ser menor que la hora final");
+			return "exito";			
 		}
 		
 		TecnicoServiceI servicio = ProgramarTrabajoBusinessDelegate.getTecnicoService();
 		
 		ArrayList<TecnicoBean> arr = servicio.listarTecnicos(dtFechaAtencion, tmHoraInicio, tmHoraFin);
 		
-		request.getSession().setAttribute("b_disponibilidadtecnicos", arr);
-*/		
+		session.put("b_disponibilidadtecnicos", arr);
+		
 		return "exito";
 	}
 	
