@@ -200,17 +200,17 @@
 	          <s:if test="%{#session.b_disponibilidadtecnicos!=null}">
 	          	<s:iterator var="b_tec" value="#session.b_disponibilidadtecnicos">
 					<tr>
-						<td><s:property value="b_tec.strCodTecnico"/></td>
+						<td><s:property value="#b_tec.strCodTecnico"/></td>
 						<td>
-							<s:property value="b_tec.strApellidoPaterno"/> &nbsp;
-							<s:property value="b_tec.strApellidoMaterno"/>,&nbsp;
-							<s:property value="b_tec.strNombre"/>
+							<s:property value="#b_tec.strApellidoPaterno"/> &nbsp;
+							<s:property value="#b_tec.strApellidoMaterno"/>,&nbsp;
+							<s:property value="#b_tec.strNombre"/>
 						</td>
-						<td><s:property value="b_tec.strDescripcionNivelTecnico"/></td>
-						<td><s:property value="b_tec.strDescripcionEspecialidad"/></td>
-						<td align="center"><s:property value="b_tec.intNumeroHorasTrabajadasSemana"/></td>
+						<td><s:property value="#b_tec.strDescripcionNivelTecnico"/></td>
+						<td><s:property value="#b_tec.strDescripcionEspecialidad"/></td>
+						<td align="center"><s:property value="#b_tec.intNumeroHorasTrabajadasSemana"/></td>
 		        		<td align="center">
-		        			<s:checkbox name="seleccionTecnicos" value="b_tec.strCodTecnico"/>
+		        			<s:checkbox name="seleccionTecnicos" value="#b_tec.strCodTecnico"/>
 		        		</td>
 					</tr>
 	          	</s:iterator>
@@ -246,16 +246,16 @@
 	            </tr>
 	            <s:iterator var="b_paqot" value="#session.b_ordentrabajo.arrPaquetesXOT">
             		<tr>
-            			<td><s:property value="b_paqot.strCodPaquete"/></td>
-            			<td><s:property value="b_paqot.strNombrePaquete"/></td>
+            			<td><s:property value="#b_paqot.strCodPaquete"/></td>
+            			<td><s:property value="#b_paqot.strNombrePaquete"/></td>
             			<td>
-            				<s:if test="%{b_paqot.arrTecnicosAsignados.size()>0}">
+            				<s:if test="%{#b_paqot.arrTecnicosAsignados.size()>0}">
             					<ul class="listaTecnicos">
             						<s:iterator var="b_tcopaqot" value="b_paqot.arrTecnicosAsignados">
 	            						<li>
-	            							<s:property value="b_tcopaqot.strApellidoPaterno"/> &nbsp;
-											<s:property value="b_tcopaqot.strApellidoMaterno"/>,&nbsp;
-											<s:property value="b_tcopaqot.strNombre"/>
+	            							<s:property value="#b_tcopaqot.strApellidoPaterno"/> &nbsp;
+											<s:property value="#b_tcopaqot.strApellidoMaterno"/>,&nbsp;
+											<s:property value="#b_tcopaqot.strNombre"/>
 	            						</li>
             						</s:iterator>
             					</ul>
@@ -265,10 +265,10 @@
             				</s:else>
             			</td>
             			<td align="center">
-            				<s:if test="b_paqot.dtFechEjecOrdenTrabajo!=null">
-            					<s:date name="b_paqot.dtFechEjecOrdenTrabajo" format="dd/MM/yyyy"/><br/>
-            					<s:date name="b_paqot.tmHoraInicio" format="hh:mm"/> - 
-            					<s:date name="b_paqot.tmHoraFin" format="hh:mm"/>
+            				<s:if test="#b_paqot.dtFechEjecOrdenTrabajo!=null">
+            					<s:date name="#b_paqot.dtFechEjecOrdenTrabajo" format="dd/MM/yyyy"/><br/>
+            					<s:date name="#b_paqot.tmHoraInicio" format="hh:mm"/> - 
+            					<s:date name="#b_paqot.tmHoraFin" format="hh:mm"/>
             				</s:if>
             				<s:else>
             					<span style="color: red"><s:text name="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna4.datos"/></span>
@@ -291,7 +291,7 @@
 			<s:a action="a_irAGenerarOT_paso2">
 				<img src="<s:url value="/images/atras.png"/>" />
 			</s:a>
-			<s:submit type="image" src="/images/generar.png" />
+			<s:submit type="image" src="images/generar.png" />
 			<s:a action="a_homepage">
 				<img src="<s:url value="/images/salir.png"/>" />
 			</s:a>
