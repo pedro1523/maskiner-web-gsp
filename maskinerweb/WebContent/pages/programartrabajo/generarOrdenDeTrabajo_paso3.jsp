@@ -86,25 +86,26 @@
     </fieldset>
     
     <s:form id="frmGenerarOT" action="a_cnm_generarOT" method="post">
-	    <div class="separadovertical"><!--
+	    <div class="separadovertical">
+	      <s:text name="pages.programartrabajo.generarot_p3.lblPaquetes"/>
+	      <s:text var="primeraOpcionValue" name="pages.programartrabajo.generarot_p3.lblPaquetes.primeraopcion"/>
 	      <s:select list="#session.b_ordentrabajo.arrPaquetesXOT"
 	      			listKey="strCodPaquete"
 	      			listValue="strNombrePaquete"
-	      			headerKey="-1"
-	      			headerValue="<s:text name="pages.programartrabajo.generarot_p3.lblPaquetes.primeraopcion"/>"
-	      			emptyOption="true"
+	      			headerKey=""
+	      			headerValue="%{primeraOpcionValue}"
 	      			name="paqueteSeleccionado"
-	      			label="<s:text name="pages.programartrabajo.generarot_p3.lblPaquetes"/>"
 	      			onchange="enviarSubmitCargarDatosHorasNecesarias();" />
 
-	      --><div class="separadovertical">
+	      <div class="separadovertical">
 	        <s:text name="pages.programartrabajo.generarot_p3.lblNumTecnicosNecesarios"/>
 	        <s:label name="numTecnicosNecesarios" cssClass="negrita margenderecho" />
 	        <s:text name="pages.programartrabajo.generarot_p3.lblNumHorasNecesarias"/>
 	        <s:label name="numHorasNecesarias"/>
 	      </div>
 	    </div>
-	    <div class="separadovertical"><!--
+	    <div class="separadovertical">
+	    	<s:text name="pages.programartrabajo.generarot_p3.lblFechaAtencion"/>
 			<sj:datepicker name="fechaAtencion"
 						   buttonImageOnly="true"
 						   id="txtFechaAtencion"
@@ -112,9 +113,9 @@
 						   displayFormat="dd/mm/yy"
 						   changeYear="true"
 						   changeMonth="true"
-						   cssStyle="margin-right:5px"
-						   label="<s:text name="pages.programartrabajo.generarot_p3.lblFechaAtencion"/>" />
+						   cssStyle="margin-right:5px" />
 
+			<s:text name="pages.programartrabajo.generarot_p3.lblHoraInicio"/>
 			<s:select list="#{'07:30':'07:30',
 							  '08:00':'08:00',
 							  '08:30':'08:30',
@@ -136,9 +137,9 @@
 							  '16:30':'16:30',
 							  '17:00':'17:00',
 							  '17:30':'17:30'}"
-			      	name="horaInicio"
-			      	label="<s:text name="pages.programartrabajo.generarot_p3.lblHoraInicio"/>" />
-
+			      	name="horaInicio" />
+			      	
+			<s:text name="pages.programartrabajo.generarot_p3.lblHoraFin"/>
 			<s:select list="#{'07:30':'07:30',
 							  '08:00':'08:00',
 							  '08:30':'08:30',
@@ -161,10 +162,9 @@
 							  '17:00':'17:00',
 							  '17:30':'17:30'}"
 			      	name="horaFin"
-			      	label="<s:text name="pages.programartrabajo.generarot_p3.lblHoraFin"/>"
 			      	cssClass="margenizquierdo" />
 
-			--><s:url var="enviarBuscDispTecUrl" value="javascript:enviarSubmitBuscarDisponibilidadTecnicos()"/>
+			<s:url var="enviarBuscDispTecUrl" value="javascript:enviarSubmitBuscarDisponibilidadTecnicos()"/>
 			<s:url var="imgBuscDispTecUrl" value="/images/buscar_azul.gif"/>
 
 		    <s:a href="%{enviarBuscDispTecUrl}">
@@ -273,9 +273,10 @@
             				</s:else>
             			</td>
             			<td align="center">
-            				<s:a href="javascript:enviarSubmitQuitarAsignacionDeTecnicosDePaqueteXOT('${b_paqot.strCodPaquete}')">
+            			
+            				<a href="javascript:enviarSubmitQuitarAsignacionDeTecnicosDePaqueteXOT('${b_paqot.strCodPaquete}')">
             					<img src="<s:url value="/images/quitar.gif"/>" />
-            				</s:a>
+            				</a>
             			</td>
             		</tr>
 	            </s:iterator>
