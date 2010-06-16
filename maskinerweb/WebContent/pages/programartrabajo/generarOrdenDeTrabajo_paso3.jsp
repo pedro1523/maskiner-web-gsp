@@ -101,7 +101,9 @@
 	        <s:text name="pages.programartrabajo.generarot_p3.lblNumTecnicosNecesarios"/>
 	        <s:label name="numTecnicosNecesarios" cssClass="negrita margenderecho" />
 	        <s:text name="pages.programartrabajo.generarot_p3.lblNumHorasNecesarias"/>
-	        <s:label name="numHorasNecesarias"/>
+	        <s:label name="numHorasNecesarias" cssClass="negrita" />
+	        <s:hidden name="numTecnicosNecesarios"/>
+	        <s:hidden name="numHorasNecesarias"/>
 	      </div>
 	    </div>
 	    <div class="separadovertical">

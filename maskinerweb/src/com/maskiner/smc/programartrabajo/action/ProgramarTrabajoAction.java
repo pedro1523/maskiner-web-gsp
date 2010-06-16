@@ -37,7 +37,16 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	
 	private Integer numTecnicosNecesarios;
 	private Integer numHorasNecesarias;
+	private String paqueteSeleccionado;
 	
+
+	public String getPaqueteSeleccionado() {
+		return paqueteSeleccionado;
+	}
+
+	public void setPaqueteSeleccionado(String paqueteSeleccionado) {
+		this.paqueteSeleccionado = paqueteSeleccionado;
+	}
 
 	public Integer getNumTecnicosNecesarios() {
 		return numTecnicosNecesarios;
