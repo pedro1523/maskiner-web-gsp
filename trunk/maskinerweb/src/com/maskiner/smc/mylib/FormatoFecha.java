@@ -104,4 +104,14 @@ public class FormatoFecha {
 
 		return (int)((mlls2-mlls1)/ (1000 * 60 * 60 * 24));
 	}
+	
+	public static int getDiffHoras(Time h1, Time h2) {
+		
+		long mlls1 = h1.getTime();
+		long mlls2 = h2.getTime();
+		
+		return (int)((mlls2-mlls1)/ (1000 * 60 * 60));
+	}
+	
+	
 }
