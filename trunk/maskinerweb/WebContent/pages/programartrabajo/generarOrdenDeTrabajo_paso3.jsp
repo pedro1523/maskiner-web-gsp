@@ -3,7 +3,6 @@
     
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <%@ taglib uri="/struts-jquery-tags" prefix="sj" %>
-<%@ taglib uri="/struts-jquery-grid-tags" prefix="sjg" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ page import="com.maskiner.smc.mylib.FormatoFecha" %>
@@ -74,7 +73,7 @@
         <s:text name="pages.programartrabajo.generarot_p3.lblNumTarjeta"/>
         <span class="negrita margenderecho"><s:property value="#session.b_ordentrabajo.strNumTarjeta"/></span>
         <s:text name="pages.programartrabajo.generarot_p3.lblDescripcion"/>
-        <span class="negrita margenderecho"><s:property value="session.b_ordentrabajo.strDescripcionMaquinaria"/></span>
+        <span class="negrita margenderecho"><s:property value="#session.b_ordentrabajo.strDescripcionMaquinaria"/></span>
         <s:text name="pages.programartrabajo.generarot_p3.lblMarca"/>
         <span class="negrita"><s:property value="#session.b_ordentrabajo.strMarcaMaquinaria"/></span>
       </div>
@@ -86,9 +85,8 @@
       </div>
     </fieldset>
     
-
     <s:form id="frmGenerarOT" action="a_cnm_generarOT" method="post">
-	    <div class="separadovertical">
+	    <div class="separadovertical"><!--
 	      <s:select list="#session.b_ordentrabajo.arrPaquetesXOT"
 	      			listKey="strCodPaquete"
 	      			listValue="strNombrePaquete"
@@ -99,93 +97,90 @@
 	      			label="<s:text name="pages.programartrabajo.generarot_p3.lblPaquetes"/>"
 	      			onchange="enviarSubmitCargarDatosHorasNecesarias();" />
 
-	      <div class="separadovertical">
+	      --><div class="separadovertical">
 	        <s:text name="pages.programartrabajo.generarot_p3.lblNumTecnicosNecesarios"/>
 	        <s:label name="numTecnicosNecesarios" cssClass="negrita margenderecho" />
 	        <s:text name="pages.programartrabajo.generarot_p3.lblNumHorasNecesarias"/>
 	        <s:label name="numHorasNecesarias"/>
 	      </div>
 	    </div>
-	    <div class="separadovertical">
-	      <label for="txtFechaAtencion"><s:text name="pages.programartrabajo.generarot_p3.lblFechaAtencion"/></label>
-	      <html:text property="fechaAtencion" styleId="txtFechaAtencion" size="10"/>
-		  <script language="JavaScript">
-				// whole calendar template can be redefined per individual calendar
-				var A_CALTPL = {
-					'months' : ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-					'weekdays' : ['do', 'lu', 'ma', 'mi', 'ju', 'vi', 'sa'],
-					'yearscroll': true,
-					'weekstart': 0,
-					'centyear' : 70,
-					'imgpath' : '${jsCalendarImagePath}'
-				};
-				
-				new tcal ({
-					// if referenced by ID then form name is not required
-					'controlname': 'txtFechaAtencion'
-				}, A_CALTPL);
-		  </script>        
-	      <label class="margenizquierdo" for="cboHoraInicio"><s:text name="pages.programartrabajo.generarot_p3.lblHoraInicio"/></label>
-	      <html:select property="horaInicio" styleId="cboHoraInicio">
-	      	<html:option value="07:30">07:30</html:option>
-	        <html:option value="08:00">08:00</html:option>
-	        <html:option value="08:30">08:30</html:option>
-	        <html:option value="09:00">09:00</html:option>
-	        <html:option value="09:30">09:30</html:option>
-	        <html:option value="10:00">10:00</html:option>
-	        <html:option value="10:30">10:30</html:option>
-	        <html:option value="11:00">11:00</html:option>
-	        <html:option value="11:30">11:30</html:option>
-	        <html:option value="12:00">12:00</html:option>
-	        <html:option value="12:30">12:30</html:option>
-	        <html:option value="13:00">13:00</html:option>
-	        <html:option value="13:30">13:30</html:option>
-	        <html:option value="14:00">14:00</html:option>
-	        <html:option value="14:30">14:30</html:option>
-	        <html:option value="15:00">15:00</html:option>
-	        <html:option value="15:30">15:30</html:option>
-	        <html:option value="16:00">16:00</html:option>
-	        <html:option value="16:30">16:30</html:option>
-	        <html:option value="17:00">17:00</html:option>
-	        <html:option value="17:30">17:30</html:option>
-	      </html:select>
-	      <label class="margenizquierdo" for="cboHoraFin"><s:text name="pages.programartrabajo.generarot_p3.lblHoraFin"/></label>
-	      <html:select property="horaFin" styleId="cboHoraFin">
-	      	<html:option value="07:30">07:30</html:option>
-	        <html:option value="08:00">08:00</html:option>
-	        <html:option value="08:30">08:30</html:option>
-	        <html:option value="09:00">09:00</html:option>
-	        <html:option value="09:30">09:30</html:option>
-	        <html:option value="10:00">10:00</html:option>
-	        <html:option value="10:30">10:30</html:option>
-	        <html:option value="11:00">11:00</html:option>
-	        <html:option value="11:30">11:30</html:option>
-	        <html:option value="12:00">12:00</html:option>
-	        <html:option value="12:30">12:30</html:option>
-	        <html:option value="13:00">13:00</html:option>
-	        <html:option value="13:30">13:30</html:option>
-	        <html:option value="14:00">14:00</html:option>
-	        <html:option value="14:30">14:30</html:option>
-	        <html:option value="15:00">15:00</html:option>
-	        <html:option value="15:30">15:30</html:option>
-	        <html:option value="16:00">16:00</html:option>
-	        <html:option value="16:30">16:30</html:option>
-	        <html:option value="17:00">17:00</html:option>
-	        <html:option value="17:30">17:30</html:option>
-	      </html:select>
-	      <html:link href="javascript:enviarSubmitBuscarDisponibilidadTecnicos()">
-	      	<html:img src="images/buscar_azul.gif" style="magin-left:6px"/>
-	      </html:link>
-	      <logic:messagesPresent>
+	    <div class="separadovertical"><!--
+			<sj:datepicker name="fechaAtencion"
+						   buttonImageOnly="true"
+						   id="txtFechaAtencion"
+						   size="10" 
+						   displayFormat="dd/mm/yy"
+						   changeYear="true"
+						   changeMonth="true"
+						   cssStyle="margin-right:5px"
+						   label="<s:text name="pages.programartrabajo.generarot_p3.lblFechaAtencion"/>" />
+
+			<s:select list="#{'07:30':'07:30',
+							  '08:00':'08:00',
+							  '08:30':'08:30',
+							  '09:00':'09:00',
+							  '09:30':'09:30',
+							  '10:00':'10:00',
+							  '10:30':'10:30',
+							  '11:00':'11:00',
+							  '11:30':'11:30',
+							  '12:00':'12:00',
+							  '12:30':'12:30',
+							  '13:00':'13:00',
+							  '13:30':'13:30',
+							  '14:00':'14:00',
+							  '14:30':'14:30',
+							  '15:00':'15:00',
+							  '15:30':'15:30',
+							  '16:00':'16:00',
+							  '16:30':'16:30',
+							  '17:00':'17:00',
+							  '17:30':'17:30'}"
+			      	name="horaInicio"
+			      	label="<s:text name="pages.programartrabajo.generarot_p3.lblHoraInicio"/>" />
+
+			<s:select list="#{'07:30':'07:30',
+							  '08:00':'08:00',
+							  '08:30':'08:30',
+							  '09:00':'09:00',
+							  '09:30':'09:30',
+							  '10:00':'10:00',
+							  '10:30':'10:30',
+							  '11:00':'11:00',
+							  '11:30':'11:30',
+							  '12:00':'12:00',
+							  '12:30':'12:30',
+							  '13:00':'13:00',
+							  '13:30':'13:30',
+							  '14:00':'14:00',
+							  '14:30':'14:30',
+							  '15:00':'15:00',
+							  '15:30':'15:30',
+							  '16:00':'16:00',
+							  '16:30':'16:30',
+							  '17:00':'17:00',
+							  '17:30':'17:30'}"
+			      	name="horaFin"
+			      	label="<s:text name="pages.programartrabajo.generarot_p3.lblHoraFin"/>"
+			      	cssClass="margenizquierdo" />
+
+			--><s:url var="enviarBuscDispTecUrl" value="javascript:enviarSubmitBuscarDisponibilidadTecnicos()"/>
+			<s:url var="imgBuscDispTecUrl" value="/images/buscar_azul.gif"/>
+
+		    <s:a href="%{enviarBuscDispTecUrl}">
+		    	<img src="${imgBuscDispTecUrl}" style="magin-left:6px"/>
+		    </s:a>
+		    
 	      	<div class="mensajeerror separadovertical">
-	      		<html:errors/>
+	      		<s:actionerror/>
 	      	</div>
-	      </logic:messagesPresent>
-	     <logic:present name="mensajeErrorBuscarDisponibilidadTecnicos">
-	      	<div class="mensajeerror separadovertical">
-	      		${requestScope.mensajeErrorBuscarDisponibilidadTecnicos}
-	      	</div>
-	     </logic:present>
+	      
+	     	<s:if test="%{#request.mensajeErrorBuscarDisponibilidadTecnicos!=null}">
+		      	<div class="mensajeerror separadovertical">
+		      		<s:property value="#request.mensajeErrorBuscarDisponibilidadTecnicos" />
+		      	</div>
+	     	</s:if> 
+	      
 	    </div>
 
 	    <div class="separadovertical">
@@ -200,42 +195,43 @@
 	            <th scope="col"><s:text name="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.cabecera.columna5"/></th>
 	            <th scope="col"><s:text name="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.cabecera.columna6"/></th>
 	          </tr>
-	          
-	          <logic:notEmpty name="b_disponibilidadtecnicos">
-				  <logic:iterate id="b_tec" name="b_disponibilidadtecnicos" >
+	          <s:if test="%{#session.b_disponibilidadtecnicos!=null}">
+	          	<s:iterator var="b_tec" value="#session.b_disponibilidadtecnicos">
 					<tr>
-						<td><bean:write name="b_tec" property="strCodTecnico" /></td>
+						<td><s:property value="b_tec.strCodTecnico"/></td>
 						<td>
-							<bean:write name="b_tec" property="strApellidoPaterno" />&nbsp;
-							<bean:write name="b_tec" property="strApellidoMaterno" />,&nbsp;
-							<bean:write name="b_tec" property="strNombre" />
+							<s:property value="b_tec.strApellidoPaterno"/> &nbsp;
+							<s:property value="b_tec.strApellidoMaterno"/>,&nbsp;
+							<s:property value="b_tec.strNombre"/>
 						</td>
-						<td><bean:write name="b_tec" property="strDescripcionNivelTecnico" /></td>
-						<td><bean:write name="b_tec" property="strDescripcionEspecialidad" /></td>
-						<td align="center"><bean:write name="b_tec" property="intNumeroHorasTrabajadasSemana" /></td>
+						<td><s:property value="b_tec.strDescripcionNivelTecnico"/></td>
+						<td><s:property value="b_tec.strDescripcionEspecialidad"/></td>
+						<td align="center"><s:property value="b_tec.intNumeroHorasTrabajadasSemana"/></td>
 		        		<td align="center">
-		        			<html:multibox property="seleccionTecnicos" value="${b_tec.strCodTecnico}"/>
+		        			<s:checkbox name="seleccionTecnicos" value="b_tec.strCodTecnico"/>
 		        		</td>
 					</tr>
-				  </logic:iterate>
-	          </logic:notEmpty>
-	          <logic:empty name="b_disponibilidadtecnicos">
+	          	</s:iterator>
+	          </s:if>
+	          <s:else>
 	          	<tr>
 	          		<td colspan="6"><s:text name="pages.programartrabajo.generarot_p3.tablatecnicosdisponibles.pie.sinregistros"/></td>
 	          	</tr>
-	          </logic:empty>
+	          </s:else>
+	          
 	        </table>
 	      </div>    	
 	      <div id="div_asignacion">
 	        <div class="separadovertical">
-	        	<html:link href="javascript:enviarSubmitAsignarTecnicosAPaquete()">
-	        		<html:img src="images/asignar.png" />
-	        	</html:link>
-	        	<logic:present scope="request" name="mensajeErrorAsignarTecnicos">
+	        	<s:url var="imgAsignarUrl" value="/images/asignar.png" />
+	        	<s:a href="javascript:enviarSubmitAsignarTecnicosAPaquete()">
+	        		<img src="${imgAsignarUrl}" />
+	        	</s:a>
+	        	<s:if test="%{#session.mensajeErrorAsignarTecnicos}">
 	      			<div class="mensajeerror separadovertical">
-	      				${requestScope.mensajeErrorAsignarTecnicos}
+	      				<s:property value="#session.mensajeErrorAsignarTecnicos"/>
 	      			</div>	        	
-	        	</logic:present>
+	        	</s:if>
 	        </div>
 	        <div class="separadovertical">
 	          <table width="100%" border="0" cellpadding="0" cellspacing="0" class="gridview letrapequena">
@@ -246,70 +242,64 @@
 	              <th scope="col"><s:text name="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna4"/></th>
 	              <th scope="col"><s:text name="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna5"/></th>
 	            </tr>
-	            <logic:notEmpty name="b_ordentrabajo" property="arrPaquetesXOT">
-	            	<logic:iterate id="b_paqot" name="b_ordentrabajo" property="arrPaquetesXOT" >
-	            		<tr>
-	            			<td><bean:write name="b_paqot" property="strCodPaquete" /></td>
-	            			<td><bean:write name="b_paqot" property="strNombrePaquete" /></td>
-	            			<td>
-	            				<logic:notEmpty name="b_paqot" property="arrTecnicosAsignados">
-	            					<ul class="listaTecnicos">
-		            					<logic:iterate id="b_tcopaqot" name="b_paqot" property="arrTecnicosAsignados">
-		            						<li>
-												<bean:write name="b_tcopaqot" property="strApellidoPaterno" />&nbsp;
-												<bean:write name="b_tcopaqot" property="strApellidoMaterno" />,&nbsp;
-												<bean:write name="b_tcopaqot" property="strNombre" />
-		            						</li>
-		            					</logic:iterate>
-	            					</ul>
-	            				</logic:notEmpty>
-	            				<logic:empty name="b_paqot" property="arrTecnicosAsignados">
-	            					<span style="color: red"><s:text name="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna3.datos"/></span>
-	            				</logic:empty>
-	            			</td>
-	            			<td align="center">
-	            				<logic:notEmpty name="b_paqot" property="dtFechEjecOrdenTrabajo" >
-	            					<bean:write name="b_paqot" property="dtFechEjecOrdenTrabajo" format="dd/MM/yyyy"/><br/>
-	            					<bean:write name="b_paqot" property="tmHoraInicio" format="hh:mm"/> - 
-	            				    <bean:write name="b_paqot" property="tmHoraFin" format="hh:mm"/>
-	            				</logic:notEmpty>
-	            				<logic:empty name="b_paqot" property="dtFechEjecOrdenTrabajo">
-	            					<span style="color: red"><s:text name="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna4.datos"/></span>
-	            				</logic:empty>
-	            			</td>
-	            			<td align="center">
-	            				<html:link href="javascript:enviarSubmitQuitarAsignacionDeTecnicosDePaqueteXOT('${b_paqot.strCodPaquete}')">
-	            					<html:img src="images/quitar.gif"/>
-	            				</html:link>
-	            			</td>
-	            		</tr>
-	            	
-	            	</logic:iterate>
-	            </logic:notEmpty>
+	            <s:iterator var="b_paqot" value="#session.b_ordentrabajo.arrPaquetesXOT">
+            		<tr>
+            			<td><s:property value="b_paqot.strCodPaquete"/></td>
+            			<td><s:property value="b_paqot.strNombrePaquete"/></td>
+            			<td>
+            				<s:if test="%{b_paqot.arrTecnicosAsignados.size()>0}">
+            					<ul class="listaTecnicos">
+            						<s:iterator var="b_tcopaqot" value="b_paqot.arrTecnicosAsignados">
+	            						<li>
+	            							<s:property value="b_tcopaqot.strApellidoPaterno"/> &nbsp;
+											<s:property value="b_tcopaqot.strApellidoMaterno"/>,&nbsp;
+											<s:property value="b_tcopaqot.strNombre"/>
+	            						</li>
+            						</s:iterator>
+            					</ul>
+            				</s:if>
+            				<s:else>
+            					<span style="color: red"><s:text name="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna3.datos"/></span>
+            				</s:else>
+            			</td>
+            			<td align="center">
+            				<s:if test="b_paqot.dtFechEjecOrdenTrabajo!=null">
+            					<s:date name="b_paqot.dtFechEjecOrdenTrabajo" format="dd/MM/yyyy"/><br/>
+            					<s:date name="b_paqot.tmHoraInicio" format="hh:mm"/> - 
+            					<s:date name="b_paqot.tmHoraFin" format="hh:mm"/>
+            				</s:if>
+            				<s:else>
+            					<span style="color: red"><s:text name="pages.programartrabajo.generarot_p3.tablaasignaciones.cabecera.columna4.datos"/></span>
+            				</s:else>
+            			</td>
+            			<td align="center">
+            				<s:a href="javascript:enviarSubmitQuitarAsignacionDeTecnicosDePaqueteXOT('${b_paqot.strCodPaquete}')">
+            					<img src="<s:url value="/images/quitar.gif"/>" />
+            				</s:a>
+            			</td>
+            		</tr>
+	            </s:iterator>
 	          </table>
 	        </div>
 	      </div>
 	    </div>
 	    <div class="margenderecho ds" style="padding-top:10px"> </div>
 		<div class="separadovertical" align="right">
-	    	<html:link action="a_irAGenerarOT_paso2">
-	    		<html:img src="images/atras.png"/>
-	    	</html:link>
-	    	<html:image src="images/generar.png" />
-	    	<html:link action="a_homepage">
-	    		<html:img src="images/salir.png"/>
-	    	</html:link>
+			<s:a action="a_irAGenerarOT_paso2">
+				<img src="<s:url value="/images/atras.png"/>" />
+			</s:a>
+			<s:submit type="image" src="/images/generar.png" />
+			<s:a action="a_homepage">
+				<img src="<s:url value="/images/salir.png"/>" />
+			</s:a>
 		</div>
-	    <logic:present name="mensajeErrorGenerarOrdenTrabajo" scope="request">
+		<s:if test="%{#request.mensajeErrorGenerarOrdenTrabajo!=null}">
 		 	<div class="mensajeerror separadovertical">
-		 		${requestScope.mensajeErrorGenerarOrdenTrabajo}
+		 		<s:property value="#request.mensajeErrorGenerarOrdenTrabajo"/>
 		 	</div>
-	    </logic:present>
+		</s:if>
     </s:form>
 
 
-
-
-    
 </body>
 </html>

@@ -1,0 +1,8 @@
+	      <s:select list="#session.b_ordentrabajo.arrPaquetesXOT"
+	      			listKey="strCodPaquete"
+	      			listValue="strNombrePaquete"
+	      			headerKey=""
+	      			headerValue="--seleccione--"
+	      			name="paqueteSeleccionado"
+	      			label="hola"
+	      			onchange="enviarSubmitCargarDatosHorasNecesarias();" />
