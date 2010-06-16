@@ -112,59 +112,24 @@
 						   buttonImageOnly="true"
 						   id="txtFechaAtencion"
 						   size="10" 
+						   readonly="true"
 						   displayFormat="dd/mm/yy"
 						   changeYear="true"
 						   changeMonth="true"
 						   cssStyle="margin-right:5px" />
 
 			<s:text name="pages.programartrabajo.generarot_p3.lblHoraInicio"/>
-			<s:select list="#{'07:30':'07:30',
-							  '08:00':'08:00',
-							  '08:30':'08:30',
-							  '09:00':'09:00',
-							  '09:30':'09:30',
-							  '10:00':'10:00',
-							  '10:30':'10:30',
-							  '11:00':'11:00',
-							  '11:30':'11:30',
-							  '12:00':'12:00',
-							  '12:30':'12:30',
-							  '13:00':'13:00',
-							  '13:30':'13:30',
-							  '14:00':'14:00',
-							  '14:30':'14:30',
-							  '15:00':'15:00',
-							  '15:30':'15:30',
-							  '16:00':'16:00',
-							  '16:30':'16:30',
-							  '17:00':'17:00',
-							  '17:30':'17:30'}"
-			      	name="horaInicio" />
+			<s:select list="#application.l_hora"
+					  listKey="codigo"
+					  listValue="descripcion"
+			      	  name="horaInicio" />
 			      	
 			<s:text name="pages.programartrabajo.generarot_p3.lblHoraFin"/>
-			<s:select list="#{'07:30':'07:30',
-							  '08:00':'08:00',
-							  '08:30':'08:30',
-							  '09:00':'09:00',
-							  '09:30':'09:30',
-							  '10:00':'10:00',
-							  '10:30':'10:30',
-							  '11:00':'11:00',
-							  '11:30':'11:30',
-							  '12:00':'12:00',
-							  '12:30':'12:30',
-							  '13:00':'13:00',
-							  '13:30':'13:30',
-							  '14:00':'14:00',
-							  '14:30':'14:30',
-							  '15:00':'15:00',
-							  '15:30':'15:30',
-							  '16:00':'16:00',
-							  '16:30':'16:30',
-							  '17:00':'17:00',
-							  '17:30':'17:30'}"
-			      	name="horaFin"
-			      	cssClass="margenizquierdo" />
+			<s:select list="#application.l_hora"
+					  listKey="codigo"
+					  listValue="descripcion"
+			      	  name="horaFin"
+			      	  cssClass="margenizquierdo" />
 
 			<s:url var="enviarBuscDispTecUrl" value="javascript:enviarSubmitBuscarDisponibilidadTecnicos()"/>
 			<s:url var="imgBuscDispTecUrl" value="/images/buscar_azul.gif"/>

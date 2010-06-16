@@ -272,49 +272,51 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	@SuppressWarnings("unchecked")
 	public String asignarTecnicosAPaquete()	throws Exception {
 		
-/*		//requperamos el código de paquete seleccionado
-		String strCodPaqueteSeleccionado = request.getParameter("paqueteSeleccionado");
+		//requperamos el código de paquete seleccionado
+		String strCodPaqueteSeleccionado = parameters.get("paqueteSeleccionado")[0];
 		
 		//verificamos si se ha seleccionado un paquete de servicio
 		if(strCodPaqueteSeleccionado.equals("")){
-			request.setAttribute("mensajeErrorAsignarTecnicos", "Debe seleccionar un paquete de servicio");
-			return mapping.findForward("exito");
+			request.put("mensajeErrorAsignarTecnicos", "Debe seleccionar un paquete de servicio");
+			return "exito";
 		}
 		
 		//recuperamos los códigos de los técnicos seleccionados
-		String[] strCodTecnicosSeleccionados = request.getParameterValues("seleccionTecnicos");
+		String[] strCodTecnicosSeleccionados = parameters.get("seleccionTecnicos");
 		
 		//verificamos si se ha seleccionado algún técnico
 		if(strCodTecnicosSeleccionados==null){
-			request.setAttribute("mensajeErrorAsignarTecnicos", "Debe seleccionar al menos un técnico");
-			return mapping.findForward("exito");
+			request.put("mensajeErrorAsignarTecnicos", "Debe seleccionar al menos un técnico");
+			return "exito";
 		} else {
 			//si se ha seleccionado técnicos, verificar que su número sea al menos el indicado
 			//por el número de técnicos necesarios descrito por el paquete de servicio
-			int intNumTecnicosNecesarios = Integer.parseInt(request.getParameter("numtecnicosnecesarios"));
-			if(intNumTecnicosNecesarios>strCodTecnicosSeleccionados.length){
-				request.setAttribute("mensajeErrorAsignarTecnicos", "Debe seleccionar al menos " + intNumTecnicosNecesarios + " técnicos");
-				return mapping.findForward("exito");
+			if(numTecnicosNecesarios>strCodTecnicosSeleccionados.length){
+				request.put("mensajeErrorAsignarTecnicos", "Debe seleccionar al menos " + numTecnicosNecesarios + " técnicos");
+				return "exito";
 			}
 		}
 		
 		//recuperamos la fecha de atención, la hora de inicio y la hora fin
-		Date dtFechAtencion = FormatoFecha.getFechaDe(request.getParameter("fechaAtencion"));
-		Time tmHoraIni 		= FormatoFecha.getHoraDe(request.getParameter("horaInicio"));
-		Time tmHoraFin 		= FormatoFecha.getHoraDe(request.getParameter("horaFin"));
+		Date dtFechAtencion = FormatoFecha.getFechaDe(fechaAtencion);
+		Time tmHoraIni 		= FormatoFecha.getHoraDe(horaInicio);
+		Time tmHoraFin 		= FormatoFecha.getHoraDe(horaFin);
 		
 		//verificamos si la hora de inicio < hora final
 		if(!tmHoraIni.before(tmHoraFin)){
-			request.setAttribute("mensajeErrorAsignarTecnicos", "La hora de inicio debe ser menor que la hora final");
-			return mapping.findForward("exito");
+			request.put("mensajeErrorAsignarTecnicos", "La hora de inicio debe ser menor que la hora final");
+			return "exito";
 		}
 		
 		//verificamos si el numero de horas es al menos el indicado por el paquete
-//		int intNumHorasNecesarias = Integer.parseInt(request.getParameter("numhorasnecesarias"));
-//		if()
+		int intHorasEscogidas = FormatoFecha.getDiffHoras(tmHoraIni, tmHoraFin);
+		if(intHorasEscogidas < numHorasNecesarias){
+			request.put("mensajeErrorAsignarTecnicos", "El número de horas seleccionadas debe ser igual o mayor al número de horas indicado por el paquete");
+			return "exito";
+		}
 		
 		//recuperamos la orden de trabajo
-		OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) request.getSession().getAttribute("b_ordentrabajo");
+		OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) session.get("b_ordentrabajo");
 		
 		//recuperamos los beans asociados a los técnicos disponibles
 		ArrayList<TecnicoBean> arrTecnicosDisponibles = 
@@ -391,7 +393,7 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		
 		//guardamos la orden de trabajo en la sesion
 		request.getSession().setAttribute("b_ordentrabajo", ordenTrabajo);
-*/		
+		
 		return "exito";
 	}
 	
