@@ -17,7 +17,7 @@
     <package name="default" extends="tiles-default">
     
     	<global-results>
-    		<result name="customError">/errorPage.jsp</result>
+    		<result   name="customError">/errorPage.jsp</result>
     	</global-results>
     	
     	<global-exception-mappings>

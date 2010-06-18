@@ -117,23 +117,33 @@ public class FormatoFecha {
 		
 		GregorianCalendar c = (GregorianCalendar) Calendar.getInstance();
 		
-		c.setTime(new java.util.Date(fecha.getTime()));
+		c.setTime(fecha);
 		
-		c.set(Calendar.HOUR, 0);
+		c.set(Calendar.HOUR_OF_DAY, 0);
 		c.set(Calendar.MINUTE, 0);
 		c.set(Calendar.SECOND, 0);
 		c.set(Calendar.MILLISECOND, 0);
-		c.set(Calendar.AM_PM, 1);
+		c.set(Calendar.AM_PM, 0);
 		
+		return c.getTime();
 		
-		SimpleDateFormat sd = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance();
+	}
+
+	public static Date agregarHoraAFecha(Date fecha, String hora) {
 		
+		GregorianCalendar c = (GregorianCalendar) Calendar.getInstance();
 		
-		//System.out.println("dentro funcion: " + sd.format(c.getTime()));
+		c.setTime(fecha);
 		
-		return new Date(c.getTime().getTime());
+		//recupera la hora que esta en firmato HH:MM
 		
+		String[] horaMinuto = hora.split(":");
 		
+		c.add(Calendar.HOUR, Integer.parseInt(horaMinuto[0]));
+		c.add(Calendar.MINUTE, Integer.parseInt(horaMinuto[1]));
+		
+		// TODO Auto-generated method stub
+		return c.getTime();
 	}
 	
 	
