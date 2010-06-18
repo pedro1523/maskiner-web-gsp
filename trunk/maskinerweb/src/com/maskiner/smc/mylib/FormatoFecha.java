@@ -146,5 +146,11 @@ public class FormatoFecha {
 		return c.getTime();
 	}
 	
+	public static String formatearFecha(Date fecha, String formato) {
+		SimpleDateFormat sdf = (SimpleDateFormat) DateFormat.getInstance();
+		sdf.applyPattern(formato);
+		return sdf.format(fecha);
+	}
+	
 	
 }
