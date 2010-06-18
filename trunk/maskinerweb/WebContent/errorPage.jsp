@@ -8,12 +8,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1> :( Que pena!!!!!... ha ocurrido un error en la aplicación</h1>
-	<div style="font-weight:bold">Nombre de error:</div><br>
+	<h1 style="text-shadow: 2px 2px 5px #333"> 
+		<img alt="Que pena!!!" src="<s:url value="/images/triste7.gif"/>" style="vertical-align: middle; margin-right: 10px;" />
+		Que pena!!!!!... ha ocurrido un error de aplicación...
+	</h1>
+	<div style="font-weight:bold">Nombre del error:</div><br>
 	<div style="border: 1px inset silver; padding: 10px; background-color: #EEEEEE ">
 		<s:property value="exception"/>
 	</div>
-	<div style="font-weight:bold; margin: 15px 0 15px 0">Detalle de error:</div>
+	<div style="font-weight:bold; margin: 15px 0 15px 0">Detalle del error:</div>
 	<div style="border: 1px inset silver; padding: 10px; background-color: #EEEEEE ">
 		<s:property value="exceptionStack"/>
 	</div>

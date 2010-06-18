@@ -41,11 +41,40 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	private Integer numTecnicosNecesarios;
 	private Integer numHorasNecesarias;
 	private String paqueteSeleccionado;
+	
 	private String fechaAtencion;
 	private String horaInicio;
 	private String horaFin;
-	
-	
+
+	private String tmp_FechaAtencion;
+	private String tmp_HoraInicio;
+	private String tmp_HoraFin;
+
+		
+	public String getTmp_FechaAtencion() {
+		return tmp_FechaAtencion;
+	}
+
+	public void setTmp_FechaAtencion(String tmpFechaAtencion) {
+		tmp_FechaAtencion = tmpFechaAtencion;
+	}
+
+	public String getTmp_HoraInicio() {
+		return tmp_HoraInicio;
+	}
+
+	public void setTmp_HoraInicio(String tmpHoraInicio) {
+		tmp_HoraInicio = tmpHoraInicio;
+	}
+
+	public String getTmp_HoraFin() {
+		return tmp_HoraFin;
+	}
+
+	public void setTmp_HoraFin(String tmpHoraFin) {
+		tmp_HoraFin = tmpHoraFin;
+	}
+
 	public String getHoraFin() {
 		return horaFin;
 	}
@@ -253,9 +282,17 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	
 	public String buscarDisponibilidadTecnicos() throws Exception {
 		
-		Date dtFechaAtencion = FormatoFecha.getFechaDe(fechaAtencion);
-		Time tmHoraInicio = FormatoFecha.getHoraDe(horaInicio);
-		Time tmHoraFin    = FormatoFecha.getHoraDe(horaFin);
+		session.put("b_disponibilidadtecnicos", null);
+		fechaAtencion = null;
+		horaInicio    = null;
+		horaFin	      = null;
+		
+		
+		//recupera la fecha y horas ingresadas por el usuario
+		
+		Date dtFechaAtencion = 	FormatoFecha.getFechaDe(tmp_FechaAtencion);
+		Time tmHoraInicio 	 = 	FormatoFecha.getHoraDe(tmp_HoraInicio);
+		Time tmHoraFin    	 = 	FormatoFecha.getHoraDe(tmp_HoraFin);
 		
 		if(dtFechaAtencion == null){
 			request.put("mensajeErrorBuscarDisponibilidadTecnicos", "Debe especificar la fecha de atención.");
@@ -264,14 +301,16 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		
 		//verificar que la fecha de atencion sea mayor a la fecha actual
 		dtFechaAtencion = FormatoFecha.getComponenteFecha(dtFechaAtencion);
-		Date dtFechaActual = FormatoFecha.getComponenteFecha(new Date());
+		dtFechaAtencion = FormatoFecha.agregarHoraAFecha(dtFechaAtencion, tmp_HoraInicio);
+		Date dtFechaActual = new Date();
 		
-		System.out.println(dtFechaActual);
-		System.out.println(dtFechaAtencion);
+		
+//		System.out.println("fecha actual  : " + dtFechaActual);
+//		System.out.println("fecha atencion: " + dtFechaAtencion);
 		
 		if(!dtFechaActual.equals(dtFechaAtencion) ){
 			if(dtFechaActual.after(dtFechaAtencion)){
-				request.put("mensajeErrorBuscarDisponibilidadTecnicos", "La fecha de atención debe ser posterior a la fecha actual.");
+				request.put("mensajeErrorBuscarDisponibilidadTecnicos", "La fecha de atención debe ser posterior o igual a la fecha actual.");
 				return "exito";			
 			}
 		}
@@ -286,6 +325,11 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		ArrayList<TecnicoBean> arr = servicio.listarTecnicos(new java.sql.Date(dtFechaAtencion.getTime()), tmHoraInicio, tmHoraFin);
 		
 		session.put("b_disponibilidadtecnicos", arr);
+		
+		//seteamos la fechaAtencion, horaInicio, horaFin
+		fechaAtencion = tmp_FechaAtencion;
+		horaInicio    = tmp_HoraInicio;
+		horaFin	      = tmp_HoraFin;
 		
 		return "exito";
 	}

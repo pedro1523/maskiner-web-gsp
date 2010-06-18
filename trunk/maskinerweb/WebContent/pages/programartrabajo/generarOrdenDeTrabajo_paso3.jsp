@@ -108,7 +108,7 @@
 	    </div>
 	    <div class="separadovertical">
 	    	<s:text name="pages.programartrabajo.generarot_p3.lblFechaAtencion"/>
-			<sj:datepicker name="fechaAtencion"
+			<sj:datepicker name="tmp_FechaAtencion"
 						   buttonImageOnly="true"
 						   id="txtFechaAtencion"
 						   size="10" 
@@ -117,19 +117,19 @@
 						   changeYear="true"
 						   changeMonth="true"
 						   cssStyle="margin-right:5px" />
-
+			<s:hidden name="fechaAtencion"/>
 			<s:label key="pages.programartrabajo.generarot_p3.lblHoraInicio" cssClass="margenizquierdo"/>
 			<s:select list="#application.l_hora"
 					  listKey="codigo"
 					  listValue="descripcion"
-			      	  name="horaInicio" />
-			      	
+			      	  name="tmp_HoraInicio" />
+			<s:hidden name="horaInicio"/>      	
 			<s:label key="pages.programartrabajo.generarot_p3.lblHoraFin" cssClass="margenizquierdo"/>
 			<s:select list="#application.l_hora"
 					  listKey="codigo"
 					  listValue="descripcion"
-			      	  name="horaFin" />
-
+			      	  name="tmp_HoraFin" />
+			<s:hidden name="horaFin"/> 
 			<s:url var="enviarBuscDispTecUrl" value="javascript:enviarSubmitBuscarDisponibilidadTecnicos()"/>
 			<s:url var="imgBuscDispTecUrl" value="/images/buscar_azul.gif"/>
 
