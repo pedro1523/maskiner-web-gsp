@@ -5,7 +5,7 @@ import java.util.GregorianCalendar;
 import java.util.SimpleTimeZone;
 import java.util.regex.*;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
 import java.text.*;
 
@@ -111,6 +111,29 @@ public class FormatoFecha {
 		long mlls2 = h2.getTime();
 		
 		return (int)((mlls2-mlls1)/ (1000 * 60 * 60));
+	}
+	
+	public static Date getComponenteFecha(Date fecha) {
+		
+		GregorianCalendar c = (GregorianCalendar) Calendar.getInstance();
+		
+		c.setTime(new java.util.Date(fecha.getTime()));
+		
+		c.set(Calendar.HOUR, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		c.set(Calendar.MILLISECOND, 0);
+		c.set(Calendar.AM_PM, 1);
+		
+		
+		SimpleDateFormat sd = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance();
+		
+		
+		//System.out.println("dentro funcion: " + sd.format(c.getTime()));
+		
+		return new Date(c.getTime().getTime());
+		
+		
 	}
 	
 	

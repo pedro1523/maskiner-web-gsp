@@ -118,18 +118,17 @@
 						   changeMonth="true"
 						   cssStyle="margin-right:5px" />
 
-			<s:text name="pages.programartrabajo.generarot_p3.lblHoraInicio"/>
+			<s:label key="pages.programartrabajo.generarot_p3.lblHoraInicio" cssClass="margenizquierdo"/>
 			<s:select list="#application.l_hora"
 					  listKey="codigo"
 					  listValue="descripcion"
 			      	  name="horaInicio" />
 			      	
-			<s:text name="pages.programartrabajo.generarot_p3.lblHoraFin"/>
+			<s:label key="pages.programartrabajo.generarot_p3.lblHoraFin" cssClass="margenizquierdo"/>
 			<s:select list="#application.l_hora"
 					  listKey="codigo"
 					  listValue="descripcion"
-			      	  name="horaFin"
-			      	  cssClass="margenizquierdo" />
+			      	  name="horaFin" />
 
 			<s:url var="enviarBuscDispTecUrl" value="javascript:enviarSubmitBuscarDisponibilidadTecnicos()"/>
 			<s:url var="imgBuscDispTecUrl" value="/images/buscar_azul.gif"/>
