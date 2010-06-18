@@ -310,7 +310,10 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		
 		if(!dtFechaActual.equals(dtFechaAtencion) ){
 			if(dtFechaActual.after(dtFechaAtencion)){
-				request.put("mensajeErrorBuscarDisponibilidadTecnicos", "La fecha de atención debe ser posterior o igual a la fecha actual.");
+				request.put("mensajeErrorBuscarDisponibilidadTecnicos", 
+						"La fecha de atención (" + FormatoFecha.formatearFecha(dtFechaAtencion, "dd/MM/yyyy hh:mm a") +
+						") debe ser posterior o igual a la fecha actual (" + 
+						FormatoFecha.formatearFecha(dtFechaActual, "dd/MM/yyyy hh:mm a") + ").");
 				return "exito";			
 			}
 		}
@@ -337,11 +340,10 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	@SuppressWarnings("unchecked")
 	public String asignarTecnicosAPaquete()	throws Exception {
 		
-		//requperamos el código de paquete seleccionado
-		String strCodPaqueteSeleccionado = parameters.get("paqueteSeleccionado")[0];
+		System.out.println("paquete seleccionado" + paqueteSeleccionado);
 		
 		//verificamos si se ha seleccionado un paquete de servicio
-		if(strCodPaqueteSeleccionado.equals("")){
+		if(paqueteSeleccionado.equals("")){
 			request.put("mensajeErrorAsignarTecnicos", "Debe seleccionar un paquete de servicio");
 			return "exito";
 		}
@@ -363,16 +365,32 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		}
 		
 		//recuperamos la fecha de atención, la hora de inicio y la hora fin
+		//si se han seleccionado tecnicos, implica que se ha seteado fechaAtencion, horaInicio y horaFin
+		
 		Date dtFechAtencion = FormatoFecha.getFechaDe(fechaAtencion);
+		Date dtFechaActual  = new Date();
 		Time tmHoraIni 		= FormatoFecha.getHoraDe(horaInicio);
 		Time tmHoraFin 		= FormatoFecha.getHoraDe(horaFin);
 		
-		//verificamos si la hora de inicio < hora final
-		if(!tmHoraIni.before(tmHoraFin)){
+		//verificamos las fechas, puesto que puede haber avanzado la fecha actual y sobrepasado
+		//la fecha de atencion
+		
+		if(!dtFechaActual.equals(dtFechAtencion) ){
+			if(dtFechaActual.after(dtFechAtencion)){
+				request.put("mensajeErrorAsignarTecnicos", 
+						"La fecha de atención (" + FormatoFecha.formatearFecha(dtFechAtencion, "dd/MM/yyyy hh:mm a") +
+						") debe ser posterior o igual a la fecha actual (" + 
+						FormatoFecha.formatearFecha(dtFechaActual, "dd/MM/yyyy hh:mm a") + ").");
+				return "exito";			
+			}
+		}
+
+		//ya no verificamos las horas puesto que esto se verifico al buscar la disponibilidad
+/*		if(!tmHoraIni.before(tmHoraFin)){
 			request.put("mensajeErrorAsignarTecnicos", "La hora de inicio debe ser menor que la hora final");
 			return "exito";
 		}
-		
+*/		
 		//verificamos si el numero de horas es al menos el indicado por el paquete
 		int intHorasEscogidas = FormatoFecha.getDiffHoras(tmHoraIni, tmHoraFin);
 		if(intHorasEscogidas < numHorasNecesarias){
@@ -405,7 +423,7 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		//recuperamos el paquete seleccionado
 		PaqueteXOTBean paqueteSeleccionado = null;
 		for(PaqueteXOTBean pq: paquetesDeOrdenTrabajo){
-			if(pq.getStrCodPaquete().equals(strCodPaqueteSeleccionado)){
+			if(pq.getStrCodPaquete().equals(paqueteSeleccionado)){
 				paqueteSeleccionado = pq;
 				break;
 			}
@@ -450,8 +468,6 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		for(TecnicoBean tco: arrTecnicosSeleccionados){
 			paqueteSeleccionado.getArrTecnicosAsignados().add(tco);
 		}
-		
-		
 		
 		//establecemos la fecha de atención y horas de inicio y fin del paquete seleccionado
 		paqueteSeleccionado.setDtFechEjecOrdenTrabajo(new java.sql.Date(dtFechAtencion.getTime()));

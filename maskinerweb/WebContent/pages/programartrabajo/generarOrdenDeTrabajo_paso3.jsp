@@ -193,9 +193,9 @@
 	        	<s:a href="javascript:enviarSubmitAsignarTecnicosAPaquete()">
 	        		<img src="${imgAsignarUrl}" />
 	        	</s:a>
-	        	<s:if test="%{#session.mensajeErrorAsignarTecnicos}">
+	        	<s:if test="%{#request.mensajeErrorAsignarTecnicos!=null}">
 	      			<div class="mensajeerror separadovertical">
-	      				<s:property value="#session.mensajeErrorAsignarTecnicos"/>
+	      				<s:property value="#request.mensajeErrorAsignarTecnicos"/>
 	      			</div>	        	
 	        	</s:if>
 	        </div>
