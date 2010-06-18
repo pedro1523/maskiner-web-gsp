@@ -1,9 +1,11 @@
 package com.maskiner.smc.programartrabajo.action;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -251,9 +253,28 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	
 	public String buscarDisponibilidadTecnicos() throws Exception {
 		
-		Date dtFechaAtencion = FormatoFecha.getFechaDe(parameters.get("fechaAtencion")[0]);
-		Time tmHoraInicio = FormatoFecha.getHoraDe(parameters.get("horaInicio")[0]);
-		Time tmHoraFin    = FormatoFecha.getHoraDe(parameters.get("horaFin")[0]);
+		Date dtFechaAtencion = FormatoFecha.getFechaDe(fechaAtencion);
+		Time tmHoraInicio = FormatoFecha.getHoraDe(horaInicio);
+		Time tmHoraFin    = FormatoFecha.getHoraDe(horaFin);
+		
+		if(dtFechaAtencion == null){
+			request.put("mensajeErrorBuscarDisponibilidadTecnicos", "Debe especificar la fecha de atención.");
+			return "exito";			
+		}
+		
+		//verificar que la fecha de atencion sea mayor a la fecha actual
+		dtFechaAtencion = FormatoFecha.getComponenteFecha(dtFechaAtencion);
+		Date dtFechaActual = FormatoFecha.getComponenteFecha(new Date());
+		
+		System.out.println(dtFechaActual);
+		System.out.println(dtFechaAtencion);
+		
+		if(!dtFechaActual.equals(dtFechaAtencion) ){
+			if(dtFechaActual.after(dtFechaAtencion)){
+				request.put("mensajeErrorBuscarDisponibilidadTecnicos", "La fecha de atención debe ser posterior a la fecha actual.");
+				return "exito";			
+			}
+		}
 		
 		if(!tmHoraInicio.before(tmHoraFin)){
 			request.put("mensajeErrorBuscarDisponibilidadTecnicos", "La hora inicio debe ser menor que la hora final");
@@ -262,7 +283,7 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		
 		TecnicoServiceI servicio = ProgramarTrabajoBusinessDelegate.getTecnicoService();
 		
-		ArrayList<TecnicoBean> arr = servicio.listarTecnicos(dtFechaAtencion, tmHoraInicio, tmHoraFin);
+		ArrayList<TecnicoBean> arr = servicio.listarTecnicos(new java.sql.Date(dtFechaAtencion.getTime()), tmHoraInicio, tmHoraFin);
 		
 		session.put("b_disponibilidadtecnicos", arr);
 		
@@ -320,7 +341,7 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		
 		//recuperamos los beans asociados a los técnicos disponibles
 		ArrayList<TecnicoBean> arrTecnicosDisponibles = 
-				(ArrayList<TecnicoBean>) request.getSession().getAttribute("b_disponibilidadtecnicos");
+				(ArrayList<TecnicoBean>) session.get("b_disponibilidadtecnicos");
 		
 		//recuperamos a los técnicos seleccionados
 		ArrayList<TecnicoBean> arrTecnicosSeleccionados = new ArrayList<TecnicoBean>();
@@ -366,10 +387,10 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 						for(TecnicoBean tcoSelec: arrTecnicosSeleccionados){
 							for(TecnicoBean tcoEnPaquete: pq.getArrTecnicosAsignados()){
 								if(tcoSelec.getStrCodTecnico().equals(tcoEnPaquete.getStrCodTecnico())){
-									request.setAttribute("mensajeErrorAsignarTecnicos", 
+									request.put("mensajeErrorAsignarTecnicos", 
 									  String.format("El técnico con código %1$s ya fué asignado al paquete %2$s", 
 									  tcoSelec.getStrCodTecnico(), pq.getStrCodPaquete()));
-									return mapping.findForward("exito");
+									return "exito";
 								}
 							}
 						}
@@ -386,13 +407,15 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 			paqueteSeleccionado.getArrTecnicosAsignados().add(tco);
 		}
 		
+		
+		
 		//establecemos la fecha de atención y horas de inicio y fin del paquete seleccionado
-		paqueteSeleccionado.setDtFechEjecOrdenTrabajo(dtFechAtencion);
+		paqueteSeleccionado.setDtFechEjecOrdenTrabajo(new java.sql.Date(dtFechAtencion.getTime()));
 		paqueteSeleccionado.setTmHoraInicio(tmHoraIni);
 		paqueteSeleccionado.setTmHoraFin(tmHoraFin);
 		
 		//guardamos la orden de trabajo en la sesion
-		request.getSession().setAttribute("b_ordentrabajo", ordenTrabajo);
+		session.put("b_ordentrabajo", ordenTrabajo);
 		
 		return "exito";
 	}
