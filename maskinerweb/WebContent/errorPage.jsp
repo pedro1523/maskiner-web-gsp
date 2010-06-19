@@ -13,11 +13,11 @@
 		<s:text name="error.titulo"/>
 	</h1>
 	<div style="font-weight:bold"><s:text name="error.lblnombreerror"/></div><br>
-	<div style="border: 1px inset silver; padding: 10px; background-color: #EEEEEE ">
+	<div style="border: 1px inset silver; padding: 10px; background-color: #EEEEEE; -moz-box-shadow: 3px 3px 5px #333;-webkit-box-shadow: 3px 3px 5px #333; ">
 		<s:property value="exception"/>
 	</div>
 	<div style="font-weight:bold; margin: 15px 0 15px 0"><s:text name="error.lbldetalleerror"/></div>
-	<div style="border: 1px inset silver; padding: 10px; background-color: #EEEEEE ">
+	<div style="border: 1px inset silver; padding: 10px; background-color: #EEEEEE; -moz-box-shadow: 3px 3px 5px #333;-webkit-box-shadow: 3px 3px 5px #333; ">
 		<s:property value="exceptionStack"/>
 	</div>
 </body>

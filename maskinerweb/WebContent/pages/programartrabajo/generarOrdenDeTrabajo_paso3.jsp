@@ -174,7 +174,7 @@
 						<td><s:property value="#b_tec.strDescripcionEspecialidad"/></td>
 						<td align="center"><s:property value="#b_tec.intNumeroHorasTrabajadasSemana"/></td>
 		        		<td align="center">
-		        			<s:checkbox name="seleccionTecnicos" value="#b_tec.strCodTecnico"/>
+		        			<s:checkbox name="seleccionTecnicos"  fieldValue="%{#b_tec.strCodTecnico}"/>
 		        		</td>
 					</tr>
 	          	</s:iterator>
@@ -215,7 +215,7 @@
             			<td>
             				<s:if test="%{#b_paqot.arrTecnicosAsignados.size()>0}">
             					<ul class="listaTecnicos">
-            						<s:iterator var="b_tcopaqot" value="b_paqot.arrTecnicosAsignados">
+            						<s:iterator var="b_tcopaqot" value="#b_paqot.arrTecnicosAsignados">
 	            						<li>
 	            							<s:property value="#b_tcopaqot.strApellidoPaterno"/> &nbsp;
 											<s:property value="#b_tcopaqot.strApellidoMaterno"/>,&nbsp;
@@ -252,7 +252,7 @@
 	    </div>
 	    <div class="margenderecho ds" style="padding-top:10px"> </div>
 		<div class="separadovertical" align="right">
-			<s:a action="a_irAGenerarOT_paso2">
+			<s:a action="a_cnm_irAGenerarOT_paso2">
 				<img src="<s:url value="/images/atras.png"/>" />
 			</s:a>
 			<s:submit type="image" src="images/generar.png" />

@@ -171,8 +171,8 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	
 	public String irAGenerarOT_paso2() throws Exception {
 		
-/*		request.getSession().setAttribute("b_disponibilidadtecnicos", null);
-*/		
+		session.put("b_disponibilidadtecnicos", null);
+		
 		return "exito";
 	}
 	
@@ -330,9 +330,13 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		session.put("b_disponibilidadtecnicos", arr);
 		
 		//seteamos la fechaAtencion, horaInicio, horaFin
-		fechaAtencion = tmp_FechaAtencion;
-		horaInicio    = tmp_HoraInicio;
-		horaFin	      = tmp_HoraFin;
+		
+		if(arr.size()>0){
+			//solo si la busqueda devuelve tecnicos, se setea estas variables
+			fechaAtencion = tmp_FechaAtencion;
+			horaInicio    = tmp_HoraInicio;
+			horaFin	      = tmp_HoraFin;
+		}
 		
 		return "exito";
 	}
@@ -340,7 +344,7 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	@SuppressWarnings("unchecked")
 	public String asignarTecnicosAPaquete()	throws Exception {
 		
-		System.out.println("paquete seleccionado" + paqueteSeleccionado);
+		//System.out.println("paquete seleccionado" + paqueteSeleccionado);
 		
 		//verificamos si se ha seleccionado un paquete de servicio
 		if(paqueteSeleccionado.equals("")){
@@ -353,8 +357,22 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		
 		//verificamos si se ha seleccionado algún técnico
 		if(strCodTecnicosSeleccionados==null){
-			request.put("mensajeErrorAsignarTecnicos", "Debe seleccionar al menos un técnico");
-			return "exito";
+			/* si strCodTecnicosSeleccionados es null puede significar significa que 
+			 * 1) no se ha seleccionado tecnicos o 
+			 * 2) no se ha buscado tecnicos (lista vacia)
+			 * */
+			if (fechaAtencion.equals("")){
+				//campo fecha vacio indica que no se ha buscado tecnicos
+				request.put("mensajeErrorAsignarTecnicos", "Debe buscar los técnico disponibles " + 
+						"(para ello especifique la fecha de atención, hora de inicio y " + 
+						"hora de fin y presione el botón buscar");
+				return "exito";
+			}else{
+				//campo fecha no vacio indica que se ha buscado tecnicos, pero no se selecciono ninguno
+				request.put("mensajeErrorAsignarTecnicos", "Debe seleccionar al menos " + numTecnicosNecesarios + " técnicos");
+				return "exito";
+			}
+			
 		} else {
 			//si se ha seleccionado técnicos, verificar que su número sea al menos el indicado
 			//por el número de técnicos necesarios descrito por el paquete de servicio
@@ -364,10 +382,12 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 			}
 		}
 		
+		//System.out.println("paso la verificacion de tecnicos");
 		//recuperamos la fecha de atención, la hora de inicio y la hora fin
 		//si se han seleccionado tecnicos, implica que se ha seteado fechaAtencion, horaInicio y horaFin
 		
 		Date dtFechAtencion = FormatoFecha.getFechaDe(fechaAtencion);
+		dtFechAtencion = FormatoFecha.agregarHoraAFecha(dtFechAtencion, horaInicio);
 		Date dtFechaActual  = new Date();
 		Time tmHoraIni 		= FormatoFecha.getHoraDe(horaInicio);
 		Time tmHoraFin 		= FormatoFecha.getHoraDe(horaFin);
@@ -380,11 +400,12 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 				request.put("mensajeErrorAsignarTecnicos", 
 						"La fecha de atención (" + FormatoFecha.formatearFecha(dtFechAtencion, "dd/MM/yyyy hh:mm a") +
 						") debe ser posterior o igual a la fecha actual (" + 
-						FormatoFecha.formatearFecha(dtFechaActual, "dd/MM/yyyy hh:mm a") + ").");
+						FormatoFecha.formatearFecha(dtFechaActual, "dd/MM/yyyy hh:mm a") + "). " + 
+						"Vuela a realizar la búsqueda de técnicos disponibles con la fecha y horas correctas");
 				return "exito";			
 			}
 		}
-
+		
 		//ya no verificamos las horas puesto que esto se verifico al buscar la disponibilidad
 /*		if(!tmHoraIni.before(tmHoraFin)){
 			request.put("mensajeErrorAsignarTecnicos", "La hora de inicio debe ser menor que la hora final");
@@ -421,10 +442,10 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		ArrayList<PaqueteXOTBean> paquetesDeOrdenTrabajo = ordenTrabajo.getArrPaquetesXOT();
 		
 		//recuperamos el paquete seleccionado
-		PaqueteXOTBean paqueteSeleccionado = null;
+		PaqueteXOTBean beanPaqueteSeleccionado = null;
 		for(PaqueteXOTBean pq: paquetesDeOrdenTrabajo){
 			if(pq.getStrCodPaquete().equals(paqueteSeleccionado)){
-				paqueteSeleccionado = pq;
+				beanPaqueteSeleccionado = pq;
 				break;
 			}
 		}
@@ -462,17 +483,18 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		}
 		
 		//vaciamos la lista de técnicos para proceder a llenarlo con otros nuevos
-		paqueteSeleccionado.getArrTecnicosAsignados().clear();
+		System.out.println("llegue hasta aqui...");
+		beanPaqueteSeleccionado.getArrTecnicosAsignados().clear();
 		
 		//llenamos la lista de técnicos asignados al paquete seleccionado
 		for(TecnicoBean tco: arrTecnicosSeleccionados){
-			paqueteSeleccionado.getArrTecnicosAsignados().add(tco);
+			beanPaqueteSeleccionado.getArrTecnicosAsignados().add(tco);
 		}
 		
 		//establecemos la fecha de atención y horas de inicio y fin del paquete seleccionado
-		paqueteSeleccionado.setDtFechEjecOrdenTrabajo(new java.sql.Date(dtFechAtencion.getTime()));
-		paqueteSeleccionado.setTmHoraInicio(tmHoraIni);
-		paqueteSeleccionado.setTmHoraFin(tmHoraFin);
+		beanPaqueteSeleccionado.setDtFechEjecOrdenTrabajo(new java.sql.Date(dtFechAtencion.getTime()));
+		beanPaqueteSeleccionado.setTmHoraInicio(tmHoraIni);
+		beanPaqueteSeleccionado.setTmHoraFin(tmHoraFin);
 		
 		//guardamos la orden de trabajo en la sesion
 		session.put("b_ordentrabajo", ordenTrabajo);
