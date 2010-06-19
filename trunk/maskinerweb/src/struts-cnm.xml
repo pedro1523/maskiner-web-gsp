@@ -47,6 +47,13 @@
 		<action name="a_cnm_irAGenerarOT_paso1">
 			<result type="tiles">d_generarOT_p1</result>
 		</action>
+		
+		<action name="a_cnm_irAGenerarOT_paso2"
+    		class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
+    		method="irAGenerarOT_paso2" >
+    		<result name="exito" type="tiles">d_generarOT_p2</result>
+    	</action>		
+		
 
 		<action name="a_cnm_cargarGenerarOT_paso3"
 			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"

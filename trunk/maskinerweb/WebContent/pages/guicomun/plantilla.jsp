@@ -13,9 +13,9 @@
 
 <link href="${cssdiseño}" rel="stylesheet" type="text/css" />
 
-<tiles:useAttribute name="titulo_pagina" id="titulopagina" />
+<tiles:useAttribute name="titulo_pagina" scope="request" id="titulopagina" />
 
-<title><s:text name="%{titulopagina}"/></title>
+<title><s:text name="%{#request.titulopagina}"/></title>
 </head>
 <body class="twoColFixLtHdr">
 	<div id="container">
