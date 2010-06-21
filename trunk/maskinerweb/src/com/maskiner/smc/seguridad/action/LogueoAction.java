@@ -2,17 +2,21 @@ package com.maskiner.smc.seguridad.action;
 
 import java.util.Map;
 
+import org.apache.struts2.interceptor.SessionAware;
+
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
 import com.maskiner.smc.seguridad.service.SeguridadBusinessDelegate;
 import com.maskiner.smc.seguridad.service.SeguridadServiceI;
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 
 
-public class LogueoAction {
+public class LogueoAction extends ActionSupport implements SessionAware {
 	
 	private String usuario;
 	private String password;
 	private String mensaje;
+	private Map<String, Object> session;
 
 
 	public String getUsuario() {
@@ -55,11 +59,10 @@ public class LogueoAction {
 		
 		if(beanUsuario != null){
 			
-			
 			//preguntamos el estado del usuario
 			if(beanUsuario.getEstadoUsuario()==1){
-				Map<String, Object> sesion = ActionContext.getContext().getSession();
-				sesion.put("usuariologueado", beanUsuario);
+				session.put("usuariologueado", beanUsuario);
+				session.put("logged-in", true);
 				return "exito";
 			}else {
 				this.setMensaje("El usuario está inactivo.");
@@ -74,7 +77,14 @@ public class LogueoAction {
 	}
 	
 	public String signOut() {
+		session.remove("logged-in");
 		return "exito";
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+		
 	}
 	
 	
