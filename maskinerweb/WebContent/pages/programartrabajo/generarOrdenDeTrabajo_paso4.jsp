@@ -2,8 +2,6 @@
     pageEncoding="ISO-8859-1"%>
     
 <%@ taglib uri="/struts-tags" prefix="s" %>
-<%@ taglib uri="/struts-jquery-tags" prefix="sj" %>
-<%@ taglib uri="/struts-jquery-grid-tags" prefix="sjg" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,7 +11,7 @@
 
 <c:url var="csscontenido" value="/styles/contentStyles/generarOrdenTrabajo_Paso4.css" />
 <link href="${csscontenido}" rel="stylesheet" type="text/css" />
-<sj:head jqueryui="true"/>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -73,43 +71,42 @@
 	        			<td><s:property value="#b_paqot.strCodPaquete"/></td>
 	        			<td><s:property value="#b_paqot.strNombrePaquete"/></td>
 	        			<td>
-	        				<logic:notEmpty name="b_paqot" property="arrTecnicosAsignados">
+	        				<s:if test="%{#b_paqot.arrTecnicosAsignados.size()>0}">
 	        					<ul class="listaTecnicos">
-	         					<logic:iterate id="b_tcopaqot" name="b_paqot" property="arrTecnicosAsignados">
-	         						<li>
-										<bean:write name="b_tcopaqot" property="strApellidoPaterno" />&nbsp;
-										<bean:write name="b_tcopaqot" property="strApellidoMaterno" />,&nbsp;
-										<bean:write name="b_tcopaqot" property="strNombre" />
-	         						</li>
-	         					</logic:iterate>
+									<s:iterator var="b_tcopaqot" value="#b_paqot.arrTecnicosAsignados">
+		         						<li>
+		         							<s:property value="#b_tcopaqot.strApellidoPaterno"/>&nbsp;
+		         							<s:property value="#b_tcopaqot.strApellidoMaterno"/>,&nbsp;
+		         							<s:property value="#b_tcopaqot.strNombre"/>
+		         						</li>
+									</s:iterator>
 	        					</ul>
-	        				</logic:notEmpty>
+	        				</s:if>
+	        				
 	        			</td>
 	        			<td align="center">
-	        				<logic:notEmpty name="b_paqot" property="dtFechEjecOrdenTrabajo" >
-	        					<bean:write name="b_paqot" property="dtFechEjecOrdenTrabajo" format="dd/MM/yyyy"/><br/>
-	        					<bean:write name="b_paqot" property="tmHoraInicio" format="hh:mm"/> - 
-	        				    <bean:write name="b_paqot" property="tmHoraFin" format="hh:mm"/>
-	        				</logic:notEmpty>
+	        				<s:if test="%{#b_paqot.dtFechEjecOrdenTrabajo!=null}">
+	        					<s:date name="#b_paqot.dtFechEjecOrdenTrabajo" format="dd/MM/yyyy"/><br/>
+	        					<s:date name="#b_paqot.tmHoraInicio" format="hh:mm"/> - 
+	        					<s:date name="#b_paqot.tmHoraFin" format="hh:mm"/>
+	        				</s:if>
 	        			</td>
 	        		</tr>
-	        	
 	        	</s:iterator>
 	        </s:if>
 	      </table>    
       	</td>
       </tr>
     </table>
-   
-    <logic:notEmpty name="b_incidente">
-        <c:set var="cuentaMaquiRevisadas" value="0"/>
-        <logic:iterate id="b_maq" name="b_incidente" property="arrMaquinariasXIncidente">
-        	<logic:equal name="b_maq" property="intEstadoAveria" value="2">
-        		<c:set var="cuentaMaquiRevisadas" value="${cuentaMaquiRevisadas+1}"  />
-        	</logic:equal>
-        </logic:iterate>
-        
-        <logic:greaterThan name="cuentaMaquiRevisadas" value="0">
+    
+    <s:if test="%{#session.b_incidente!=null}">
+        <s:set var="cuentaMaquiRevisadas" value="0"/>
+		<s:iterator var="b_maq" value="#session.b_incidente.arrMaquinariasXIncidente">
+			<s:if test="%{#b_maq.intEstadoAveria==2}">
+				<s:set var="cuentaMaquiRevisadas" value="%{cuentaMaquiRevisadas+1}"/>
+			</s:if>
+		</s:iterator> 
+		<s:if test="%{cuentaMaquiRevisadas>0}">
 		    <div class="separadovertical">
 		      <span class="titulotabla"><s:text name="pages.programartrabajo.generarot_p4.tablaequiposfaltantes.titulo"/></span>
 		      <table width="100%" border="0" cellpadding="5" cellspacing="0" class="gridview">
@@ -123,34 +120,38 @@
 		          <th width="10%" scope="col"><s:text name="pages.programartrabajo.generarot_p4.tablaequiposfaltantes.columna7"/></th>
 		        </tr>
 		        <tr>
-				<c:set var="itm" value="1" />
-				<logic:iterate id="b_maq" name="b_incidente" property="arrMaquinariasXIncidente">
-		       	  <logic:equal name="b_maq" property="intEstadoAveria" value="2">
-		       		<tr>
-						<td align="center">${itm}</td>
-						<td><bean:write name="b_maq" property="strNumeroTarjetaEquipo" /></td>
-						<td><bean:write name="b_maq" property="strDescripcionMaquinaria" /></td>
-						<td><bean:write name="b_maq" property="strMarcaMaquinaria" /></td>
-						<td><bean:write name="b_maq" property="strModeloMaquinaria" /></td>
-						<td><bean:write name="b_maq" property="strDescripcionAveria"/></td>
-		        		<td align="center">
-			 			    <html:link action="a_cargarGenerarOT_paso2?numtarj=${b_maq.strNumeroTarjetaEquipo}">
-					    		<html:img src="images/generar.png"/>
-					    	</html:link>
-		        		</td>
-					</tr>
-					<c:set var="itm" value="${itm+1}"  />
-				  </logic:equal>
-				</logic:iterate>
+		        <s:set var="itm" value="1" />
+		        <s:iterator var="b_maq" value="#session.b_incidente.arrMaquinariasXIncidente">
+		        	<s:if test="%{b_maq.intEstadoAveria==2}">
+			       		<tr>
+							<td align="center"><s:property value="itm"/> </td>
+							<td><s:property value="b_maq.strNumeroTarjetaEquipo"/></td>
+							<td><s:property value="b_maq.strDescripcionMaquinaria"/></td>
+							<td><s:property value="b_maq.strMarcaMaquinaria"/></td>
+							<td><s:property value="b_maq.strModeloMaquinaria"/></td>
+							<td><s:property value="b_maq.strDescripcionAveria"/></td>
+			        		<td align="center">
+			        			<s:url var="cargarGenerarOTPaso2Url" action="a_cargarGenerarOT_paso2">
+			        				<s:param name="numtarj">
+			        					${b_maq.strNumeroTarjetaEquipo}
+			        				</s:param>
+			        			</s:url>
+			        			<a href="${cargarGenerarOTPaso2Url}">
+			        				<img alt="Generar" src="<s:url value="/images/generar.png" />" />
+			        			</a>
+			        		</td>
+						</tr>
+						<s:set var="itm" value="%{itm+1}" />
+		        	</s:if>
+		        </s:iterator>
 			  </table>
-			</div>        
-        </logic:greaterThan>
-      
-      </logic:notEmpty>
+			</div>		
+		</s:if>
+    </s:if>
     <div class="separadovertical" align="right">
-   	    <html:link action="a_homepage">
-    		<html:img src="images/salir.png"/>
-    	</html:link>
+	  	<s:a action="a_homepage">
+			<img src="<s:url value="/images/salir.png"/>" />
+		</s:a>
     </div>
   </form>
 </body>
