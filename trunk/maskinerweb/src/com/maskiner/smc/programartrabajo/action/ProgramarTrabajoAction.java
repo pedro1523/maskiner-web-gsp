@@ -504,9 +504,9 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	
 	public String quitarAsignacionDeTecnicosDePaqueteXOT() throws Exception {
 		
-/*		String strCodPaquete = request.getParameter("codPaq");
+		String strCodPaquete = parameters.get("codPaq")[0];
 		
-		OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) request.getSession().getAttribute("b_ordentrabajo");
+		OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) session.get("b_ordentrabajo");
 		
 		//recuperamos el paquete
 		//recuperamos la lista de paquetes de la orden de trabajo
@@ -529,8 +529,8 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		paquete.getArrTecnicosAsignados().clear();
 		
 		//registramos las modificaciones en la sesion
-		request.getSession().setAttribute("b_ordentrabajo", ordenTrabajo);
-*/		
+		session.put("b_ordentrabajo", ordenTrabajo);
+		
 		return "exito";
 	}
 
