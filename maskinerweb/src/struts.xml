@@ -36,6 +36,14 @@
     		<result type="tiles">d_inicio</result>
     	</action>
     	
+    	<action 
+    			name="a_cerrarsesion"
+    			class="com.maskiner.smc.seguridad.action.LogueoAction"
+    			method="signOut" >
+     		<result name="exito">/login.jsp</result>
+    	</action>
+    	
+    	
 
      	<action 
     			name="a_cargarBuscarIncidente"
