@@ -214,44 +214,42 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	
 	public String generarOT() throws Exception {
 		
-/*		//obtener la orden de trabajo a guardar de la sesión
-		OrdenTrabajoBean ordenTratajo = (OrdenTrabajoBean) request.getSession().getAttribute("b_ordentrabajo");
+		//obtener la orden de trabajo a guardar de la sesión
+		OrdenTrabajoBean ordenTratajo = (OrdenTrabajoBean) session.get("b_ordentrabajo");
 		
 		//verificar que se haya asignado a cada paquete los técnicos requeridos
 		for(PaqueteXOTBean pqot: ordenTratajo.getArrPaquetesXOT()){
 			if(pqot.getDtFechEjecOrdenTrabajo()==null){
-				request.setAttribute("mensajeErrorGenerarOrdenTrabajo", "Debe asignar técnicos a cada paquete de la orden de trabajo");
-				return mapping.findForward("fracaso");
+				request.put("mensajeErrorGenerarOrdenTrabajo", "Debe asignar técnicos a cada paquete de la orden de trabajo");
+				return "fracaso";
 			}
 		}
 		
-		ordenTratajo.setDtFechaOrdenTrabajo(new Date(Calendar.getInstance().getTimeInMillis()));
+		ordenTratajo.setDtFechaOrdenTrabajo(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
 		try {
 			OrdenTrabajoServiceI servicio = ProgramarTrabajoBusinessDelegate.getOrdenTrabajoService();
 			servicio.generarOrdenTrabajo(ordenTratajo);
 			//si todo va bien, registramos el bean ordenTrabajo en sesion
-			request.getSession().setAttribute("b_ordentrabajo", ordenTratajo);
+			session.put("b_ordentrabajo", ordenTratajo);
 			
 			//volvemos a refrescar los incidentes para que reflejen la información añadida a la bd
-			RegistroIncidentesBean incidente = (RegistroIncidentesBean)request.getSession().getAttribute("b_incidente");
+			RegistroIncidentesBean incidente = (RegistroIncidentesBean)session.get("b_incidente");
 			
 			//recuperamos el número de incidente y la razón social del cliente
 			String strNumIncidente = incidente.getStrNumeroIncidente();
-			request.setAttribute("razonsocialcliente", incidente.getStrRazonSocialCliente());
+			request.put("razonsocialcliente", incidente.getStrRazonSocialCliente());
 			
 			IncidenteServiceI servicioIncidente = IncidenteBusinessDelegate.getIncidenteService();
 			incidente = servicioIncidente.obtenerIncidente(strNumIncidente);
 
 			//guardamos en la sesión
-			request.getSession().setAttribute("b_incidente", incidente);
+			session.put("b_incidente", incidente);
 			
-			return mapping.findForward("exito");
+			return "exito";
 		} catch (Exception e) {
-			request.setAttribute("mensajeErrorGenerarOrdenTrabajo", e.getMessage());
-			return mapping.findForward("fracaso");
+			request.put("mensajeErrorGenerarOrdenTrabajo", e.getMessage());
+			return "fracaso";
 		}
-*/	
-		return null;
 	}
 	
 	public String obtenerDatosHorasNecesarias()	throws Exception {
