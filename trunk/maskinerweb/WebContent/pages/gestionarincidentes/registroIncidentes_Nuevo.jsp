@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
 <%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
@@ -46,7 +46,7 @@
 <script type="text/javascript">
 
 /***********************************************
-* Textarea Maxlength script- © Dynamic Drive (www.dynamicdrive.com)
+* Textarea Maxlength script- Â© Dynamic Drive (www.dynamicdrive.com)
 * This notice must stay intact for legal use.
 * Visit http://www.dynamicdrive.com/ for full source code
 ***********************************************/
@@ -61,7 +61,7 @@ function ismaxlengthTxtDescripcion(){
 </script>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Registro de Incidentes</title>
 
 </head>
@@ -106,7 +106,7 @@ function ismaxlengthTxtDescripcion(){
               <legend>Detalle por Incidente</legend>
               <table>
                 <tr>
-	                <td > Sucursal (Localización): </td>
+	                <td > Sucursal (LocalizaciÃ³n): </td>
 	              	<td>
 	              	<html:select property="Sucursal">
 							<html:option value="001" >-- Seleccionar --</html:option>
@@ -127,7 +127,7 @@ function ismaxlengthTxtDescripcion(){
 	                		<tr>
 	                			<th style="width: 19px" align="center" style="width: 18px">#</th>
 	                			<th style="width: 74px" align="center">Nro Tarjeta</th>
-	                			<th style="width: 103px" align="center">Descripción</th>
+	                			<th style="width: 103px" align="center">DescripciÃ³n</th>
 	                			<th style="width: 101px" align="center">Estado</th>
 	                		</tr>
 	                		<tr>
@@ -145,7 +145,7 @@ function ismaxlengthTxtDescripcion(){
                   	</td>
                 </tr>
                 <tr>
-	                <td>Naturaleza de la Avería :</td>
+	                <td>Naturaleza de la AverÃ­a :</td>
 	                <td colspan="3" style="width: 433px">
  	                	<html:select property="cboNatAveria" >
 							<option value="-1">-- Seleccionar --</option>
@@ -156,7 +156,7 @@ function ismaxlengthTxtDescripcion(){
 					</td>
 	            </tr>
                 <tr >
-                  <td>Descripción:</td>
+                  <td>DescripciÃ³n:</td>
                   <td style="width: 439px"><html:textarea property="Descripcion" styleId="txtDescripcion"  style="width: 100%; height: 74px" onkeyup="return ismaxlengthTxtDescripcion()"></html:textarea></td>
                 </tr>
               </table>
@@ -172,8 +172,8 @@ function ismaxlengthTxtDescripcion(){
             <tr>
 			  <th width="10%" align="center">Quitar</th>
               <th width="11%" align="center"> Nro Tarjeta </th>
-              <th width="30%" align="center">Naturaleza de Avería</th>
-              <th width="30%" align="center">Descripción</th>
+              <th width="30%" align="center">Naturaleza de AverÃ­a</th>
+              <th width="30%" align="center">DescripciÃ³n</th>
             </tr>
 
 			<logic:present name="mensajeerror" scope="request">

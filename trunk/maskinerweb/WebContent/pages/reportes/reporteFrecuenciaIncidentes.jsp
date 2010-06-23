@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
@@ -34,7 +34,7 @@
 						<html:img src="images/buscar_azul.gif" style="margin-right:25px;vertical-align:middle"/>  
 					</td>
 					
-					<td>Año: </td>
+					<td>AÃ±o: </td>
 					<td>
 						<html:text property="anio" />  
 					</td>

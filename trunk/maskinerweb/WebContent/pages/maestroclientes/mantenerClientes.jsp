@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -14,10 +14,10 @@
         </div>
         <div>
           <fieldset style="width: 546px;" class="separadovertical">
-            <legend>Búsqueda</legend>
+            <legend>BÃºsqueda</legend>
             <div style="width:80%;float:left;">
                 <div class="separadoverticalinferior">
-                  <label>Razón Social:</label>
+                  <label>RazÃ³n Social:</label>
                   <input type="text" style="width: 350px" />
               </div>
                 <div><span class="separadoverticalinferior">
@@ -41,8 +41,8 @@
           <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
             <tr>
               <th width="57" align="center" style="width: 45px"> Modificar </th>
-              <th width="104" align="center"> Código </th>
-              <th width="323" align="center"> Descripción </th>
+              <th width="104" align="center"> CÃ³digo </th>
+              <th width="323" align="center"> DescripciÃ³n </th>
               <th width="112" align="center"> RUC</th>
               <th width="102" align="center"> Fecha Registro</th>
             </tr>

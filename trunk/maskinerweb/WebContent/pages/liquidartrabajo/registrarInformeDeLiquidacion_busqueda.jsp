@@ -8,8 +8,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <%
@@ -23,12 +23,12 @@
 <head>
 <fmt:formatDate value="<%=new Date() %>" type="date" pattern="dd/MM/yyyy" var="fecha" />
 
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 
-<h2>Generar Informe de Liquidación</h2>
+<h2>Generar Informe de LiquidaciÃ³n</h2>
      <html:form action="a_cargarInformeLiquidacion" method="post">
         <div>
             <table border="0" style="width: 617px">
@@ -48,7 +48,7 @@
           <legend>Datos del incidente</legend>
           <table>
             <tr>
-              <td width="98"><label for="NumIncidente">N° de Incidente:</label></td>
+              <td width="98"><label for="NumIncidente">NÂ° de Incidente:</label></td>
               <td width="40" style="padding: 0pt 0pt 0pt 5px;">
 				<html:text property="NumIncidente" value="${incidente.strNumeroIncidente}"></html:text>
 			  </td>
@@ -67,7 +67,7 @@
 				<html:text property="Cliente" value="${incidente.strCodigoCliente}"></html:text>
 			  </td>
               <td width="32"></td>
-              <td width="116"><label for="especialidadMed">Fecha de Atención:</label></td>
+              <td width="116"><label for="especialidadMed">Fecha de AtenciÃ³n:</label></td>
               <td width="69" style="padding: 0pt 0pt 0pt 5px;">	
 				<html:text property="FechaAtencion" value="${incidente.dtFechaIncidente}"></html:text>
 			  </td>
@@ -80,8 +80,8 @@
           <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
             <tr>
               <th width="17%">Orden de Trabajo</th>
-              <th width="27%">NºTarjeta de Equipo</th>
-              <th width="25%">Clasificación Avería</th>
+              <th width="27%">NÂºTarjeta de Equipo</th>
+              <th width="25%">ClasificaciÃ³n AverÃ­a</th>
               <th width="11%">Registrado</th>
             </tr>
            
@@ -94,7 +94,7 @@
 						<td><bean:write name="b_OT" property="strTipoAveria"/></td>
 	         			<td align="center">
 		        			<logic:equal name="b_OT" property="strEstadoAveria" value="1">
-		        				<span style="color: red; font-weight: bold">O/T inspección no generada</span>
+		        				<span style="color: red; font-weight: bold">O/T inspecciÃ³n no generada</span>
 		        			</logic:equal>
 		        			<logic:equal name="b_OT" property="strEstadoAveria" value="2">
 			 			    	<span style="color: red; font-weight: bold">O/T no generada</span>

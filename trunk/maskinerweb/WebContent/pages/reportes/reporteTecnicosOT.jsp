@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
@@ -10,7 +10,7 @@
 <html>
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<c:url var="jsCalendar" value="/javascript/triga_calendar/calendar_pe.js" />
 	<c:url var="jsCalendarCss" value="/javascript/triga_calendar/calendar.css" />
 	<c:url var="jsCalendarImagePath" value="/javascript/triga_calendar/img/" />
@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<h2 class="titulo">Reporte de Técnicos por Orden de Trabajo</h2>
+<h2 class="titulo">Reporte de TÃ©cnicos por Orden de Trabajo</h2>
 	
 <table>
 

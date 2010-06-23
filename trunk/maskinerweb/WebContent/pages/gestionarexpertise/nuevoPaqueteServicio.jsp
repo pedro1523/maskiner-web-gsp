@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean" %>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
 <%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic" %>
@@ -59,7 +59,7 @@ session.setAttribute("ActividadesIni",ActividadesIni);
 	</script>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
 <%
@@ -155,7 +155,7 @@ session.setAttribute("ActividadesIni",ActividadesIni);
         </tr>
 		<c:forEach var="DetalleHerr" items="${sessionScope.Herramienta}">
 			<tr>
-				<td><html:link action="javascript:enviarSubmitQuitarHerramienta('${DetalleHerr.intItemHerramienta}')"><html:img page="/images/bot_mas (1).gif" title="Quitar avería" /></html:link></td>		
+				<td><html:link action="javascript:enviarSubmitQuitarHerramienta('${DetalleHerr.intItemHerramienta}')"><html:img page="/images/bot_mas (1).gif" title="Quitar averÃ­a" /></html:link></td>		
 				<td align="center">${DetalleHerr.strCodHerramienta}</td>
           		<td align="center">${DetalleHerr.intCantidadHerramientaxPqte}  </td>
           </tr>
@@ -198,7 +198,7 @@ session.setAttribute("ActividadesIni",ActividadesIni);
      
 		<c:forEach var="DetalleMat" items="${sessionScope.Materiales}">
 			<tr>
-			<td><html:link action="a_quitarMaterial"><html:img page="/images/bot_mas (1).gif" title="Quitar avería" /></html:link></td>
+			<td><html:link action="a_quitarMaterial"><html:img page="/images/bot_mas (1).gif" title="Quitar averÃ­a" /></html:link></td>
 				<td align="center">${DetalleMat.strCodMaterial}</td>
           		<td align="center">${DetalleMat.intCantidadMat}  </td>
           </tr>
@@ -229,7 +229,7 @@ session.setAttribute("ActividadesIni",ActividadesIni);
         </tr>
 		<c:forEach var="DetalleAct" items="${sessionScope.Actividades}">
 			<tr>
-			<td><html:link href="javascript:enviarSubmitQuitarActividades('${DetalleAct.strCodPaquetexAct}')"><html:img page="/images/bot_mas (1).gif" title="Quitar avería" /></html:link></td>
+			<td><html:link href="javascript:enviarSubmitQuitarActividades('${DetalleAct.strCodPaquetexAct}')"><html:img page="/images/bot_mas (1).gif" title="Quitar averÃ­a" /></html:link></td>
 				
 				<td align="center">${DetalleAct.strDescripcionAct}</td>
 				

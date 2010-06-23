@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
 <%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
@@ -7,7 +7,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head> 
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:url var="jsCalendar" value="/javascript/triga_calendar/calendar_pe.js" />
 	<c:url var="jsCalendarCss" value="/javascript/triga_calendar/calendar.css" />
 	<c:url var="jsCalendarImagePath" value="/javascript/triga_calendar/img/" />
@@ -53,8 +53,8 @@
       <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
         <tr>
           <th width="7%" align="center">Item</th>
-          <th width="17%" align="center">Nª Prefacrura</th>
-          <th width="29%" align="center">Nª Incidente</th>
+          <th width="17%" align="center">NÂª Prefacrura</th>
+          <th width="29%" align="center">NÂª Incidente</th>
           <th width="36%" align="center">Fecha Incidente</th>
           <th width="11%" align="center">Aprobar Prefactura</th>
         </tr>

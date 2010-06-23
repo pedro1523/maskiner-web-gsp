@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
@@ -9,14 +9,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <form action="">
-<h2 class="titulo">Orden de trabajo de inspección</h2>
+<h2 class="titulo">Orden de trabajo de inspecciÃ³n</h2>
         <fieldset style="width:400px">
-          <legend>Orden de trabajo de inspección</legend>
+          <legend>Orden de trabajo de inspecciÃ³n</legend>
           <table class="separadovertical" style="border-style: hidden; border-width: thin">
             <tr>
               <td colspan="2"> Registro de Incidentes: </td>
@@ -47,12 +47,12 @@
             </tr>
           </table>
         </div>
-        <div class="titulotabla">Atención por Orden de Trabajo de Inspección</div>       
+        <div class="titulotabla">AtenciÃ³n por Orden de Trabajo de InspecciÃ³n</div>       
         <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
           <tr align="center">
             <th>Item</th>
-            <th> Nº Tarjeta de Equipo</th>
-            <th> Avería por Categoria</th>
+            <th> NÂº Tarjeta de Equipo</th>
+            <th> AverÃ­a por Categoria</th>
             <th> Descripcion</th>
             <th> Asignar Personal</th>
           </tr>

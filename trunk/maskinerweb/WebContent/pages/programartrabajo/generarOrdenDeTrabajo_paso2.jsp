@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="/struts-tags" prefix="s" %>
@@ -10,7 +10,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <c:url var="csscontenido" value="/styles/contentStyles/generarOrdenTrabajo_Paso2.css" />
 <link href="${csscontenido}" rel="stylesheet" type="text/css" />
@@ -109,7 +109,7 @@
     <div class="separadovertical margenderecho" align="right"> 
     
     	<s:a action="a_cnm_irAGenerarOT_paso1">
-    		<img alt="Atrás" src="<s:url value="images/atras.png"/>"/>
+    		<img alt="AtrÃ¡s" src="<s:url value="images/atras.png"/>"/>
     	</s:a>
     
     	<s:a action="a_cnm_cargarGenerarOT_paso3">

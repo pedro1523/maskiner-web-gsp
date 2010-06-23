@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="/struts-tags" prefix="s" %>
@@ -9,7 +9,7 @@
 <html>
 <head>
 	<sj:head jqueryui="true"/>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>Insert title here</title>
     
@@ -50,9 +50,9 @@
 		class="gridview">
 		<tr>
 			<th width="7%" scope="col">Seleccionar</th>
-			<th width="14%" scope="col">Cód. Incidente</th>
+			<th width="14%" scope="col">CÃ³d. Incidente</th>
 			<th width="14%" scope="col">Fecha</th>
-			<th width="37%" scope="col">Descripción de incidente</th>
+			<th width="37%" scope="col">DescripciÃ³n de incidente</th>
 			<th width="28%" scope="col">Nombre empresa</th>
 		</tr>
 		<s:if test="%{#request.arr_incidentes!=null}">

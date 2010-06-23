@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
@@ -14,7 +14,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
 <script type="text/javascript">
@@ -30,17 +30,17 @@
 
 </head>
 <body>
-<h2 class="titulo">Registrar Informe de Liquidación</h2>
+<h2 class="titulo">Registrar Informe de LiquidaciÃ³n</h2>
 <html:form styleId="frmRegistrarLiquidacion"
 	action="a_registrarInformeLiquidacion">
 	<div class="separadovertical">
-<label for="txtNumOrdenTrabajo">N°Orden de Trabajo:</label> 
+<label for="txtNumOrdenTrabajo">NÂ°Orden de Trabajo:</label> 
 <html:text property="numOrdenTrabajo" value="${strNumeroOT}" readonly="true"></html:text></div>
 	<fieldset><legend>Datos de la Maquina</legend>
 	<table class="separadovertical">
 		<tbody>
 			<tr>
-				<td style="padding:  5px 5px 5pt 5px;"><label>N° Tarjeta de Equipo </label></td>
+				<td style="padding:  5px 5px 5pt 5px;"><label>NÂ° Tarjeta de Equipo </label></td>
 				<td width="10"> : </td>
 				<td>
 					<bean:write name="b_maquinaria" property="strNumTarjeta"/>
@@ -58,7 +58,7 @@
 				<bean:write name="b_maquinaria" property="strDescMarMaq"/>
 				</td>
 				<td width="20"></td>
-				<td style="padding: 5px 5px 5pt 5px;"><label>N°de Serie  </label></td>
+				<td style="padding: 5px 5px 5pt 5px;"><label>NÂ°de Serie  </label></td>
 				<td width="10"> : </td>
 				<td><bean:write name="b_maquinaria" property="strNumSerieMaquinaria"/>  </td>
 			</tr>
@@ -67,13 +67,13 @@
 	<table>
 		<tbody>
 			<tr>
-				<td style="height: 25px"><label>Ubicación </label></td>
+				<td style="height: 25px"><label>UbicaciÃ³n </label></td>
 				<td width="10"> : </td>
 				<td style="padding: 0pt 0pt 0pt 5px;">
 				<bean:write name="b_maquinaria" property="strDirSucursal"/></td>
 			</tr>
 			<tr>
-				<td><label>Valor en Horómetro</label></td>
+				<td><label>Valor en HorÃ³metro</label></td>
 				<td width="10"> : </td>
 				<td style="padding: 0pt 0pt 0pt 5px;">
 				<html:text property="valorHorometro" readonly="false" value="${b_maquinaria.strMedHorometro}">
@@ -83,7 +83,7 @@
 	</table>
 	</fieldset>
 	<br />
-	<fieldset style=""><legend>Datos de la Atención</legend>
+	<fieldset style=""><legend>Datos de la AtenciÃ³n</legend>
 	<table>
 		<tbody>
 			<tr>
@@ -103,7 +103,7 @@
 							</html:link></td>
 						</tr>
 						<tr>
-							<td><label>Descripción:</label></td>
+							<td><label>DescripciÃ³n:</label></td>
 							<td><html:text property="descripcionMaterialInterno" readonly="true" value="${b_material.strDescripMaterial}"></html:text>
 							</td>
 							<td></td>
@@ -121,7 +121,7 @@
 							<td> <input type="radio" name="Material"/></td>
 						</tr>
 						<tr>
-							<td><label>Descripción: </label></td>
+							<td><label>DescripciÃ³n: </label></td>
 							<td><html:text property="descripcionMaterialExterno"></html:text>
 							</td>
 						</tr>
@@ -158,7 +158,7 @@
 			<tr align="center">
 				<th>Item</th>
 				<th>Tipo</th>
-				<th>Descripción</th>
+				<th>DescripciÃ³n</th>
 				<th>Cantidad</th>
 				<th>Prec.Uni (S/.)</th>
 				<th>Total (S/.)</th>
@@ -181,7 +181,7 @@
 	</table>
 	<br />
 	<span class="titulotabla">Ingrese las horas trabajadas por los
-	técnicos</span>
+	tÃ©cnicos</span>
 	<table cellpadding="5" cellspacing="0" class="gridview">
 		<tr>
 			<th align="center">Nombre</th>
@@ -199,7 +199,7 @@
      	</tr>
 	</table>
 	<br />
-	<label>Descripción de Atención Realizada:</label> <br />
+	<label>DescripciÃ³n de AtenciÃ³n Realizada:</label> <br />
 	<html:textarea property="descripcionAtencionRealizada"
 		style="width: 97%; height: 50px;"></html:textarea> <br />
 	<br />
