@@ -30,18 +30,19 @@
 			method="cargarGenerarOTPaso2">
 			<result name="exito" type="tiles">d_generarOT_p2</result>
 		</action>
-
-		<action name="a_cnm_quitarPaqueteDeOT"
-			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
-			method="quitarPaqueteDeOT">
-			<result name="exito" type="tiles">d_generarOT_p2</result>
-		</action>
-
+		
 		<action name="a_cnm_cargarGenerarOT_paso3"
 			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
 			method="cargarGenerarOTPaso3">
 			<result name="exito" type="tiles">d_generarOT_p3</result>
 			<result name="fracaso" type="tiles">d_generarOT_p2</result>
+		</action>
+		
+
+		<action name="a_cnm_quitarPaqueteDeOT"
+			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
+			method="quitarPaqueteDeOT">
+			<result name="exito" type="tiles">d_generarOT_p2</result>
 		</action>
 
 		<action name="a_cnm_irAGenerarOT_paso1">
@@ -53,16 +54,7 @@
     		method="irAGenerarOT_paso2" >
     		<result name="exito" type="tiles">d_generarOT_p2</result>
     	</action>		
-		
 
-		<action name="a_cnm_cargarGenerarOT_paso3"
-			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
-			method="cargarGenerarOTPaso3">
-			<!-- Usado en el jsp cargarGenerarOT_paso2.jsp -->
-			<result name="exito" type="tiles">d_generarOT_p3</result>
-			<result name="fracaso" type="tiles">d_generarOT_p2</result>
-		</action>
-		
 		<action 
     			name="a_cnm_generarOT"
     			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
