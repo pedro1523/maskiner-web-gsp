@@ -182,7 +182,8 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		//verificar que no se pasa al paso 3 sin haber asignado al menos un paquete a la o/t
 		OrdenTrabajoBean ordenTrabajo = (OrdenTrabajoBean) session.get("b_ordentrabajo");
 		if(ordenTrabajo.getArrPaquetesXOT().size()==0){
-			request.put("mensajeerror1", "Al menos debe asignar un paquete a la orden de trabajo");
+			//request.put("mensajeerror1", "Al menos debe asignar un paquete a la orden de trabajo");
+			request.put("mensajeerror1", getText("pages.programartrabajo.generarot_p2.mensajeerror1"));
 			return "fracaso";
 		}else{
 			//borramos la lista de tecnicos disponibles
@@ -220,7 +221,8 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		//verificar que se haya asignado a cada paquete los técnicos requeridos
 		for(PaqueteXOTBean pqot: ordenTratajo.getArrPaquetesXOT()){
 			if(pqot.getDtFechEjecOrdenTrabajo()==null){
-				request.put("mensajeErrorGenerarOrdenTrabajo", "Debe asignar técnicos a cada paquete de la orden de trabajo");
+				//request.put("mensajeErrorGenerarOrdenTrabajo", "Debe asignar técnicos a cada paquete de la orden de trabajo");
+				request.put("mensajeErrorGenerarOrdenTrabajo", getText("pages.programartrabajo.generarot_p3.mensajeErrorGenerarOrdenTrabajo"));
 				return "fracaso";
 			}
 		}
@@ -293,7 +295,8 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		Time tmHoraFin    	 = 	FormatoFecha.getHoraDe(tmp_HoraFin);
 		
 		if(dtFechaAtencion == null){
-			request.put("mensajeErrorBuscarDisponibilidadTecnicos", "Debe especificar la fecha de atención.");
+			//request.put("mensajeErrorBuscarDisponibilidadTecnicos", "Debe especificar la fecha de atención.");
+			request.put("mensajeErrorBuscarDisponibilidadTecnicos", getText("pages.programartrabajo.generarot_p3.mensajeErrorBuscarDisponibilidadTecnicos"));
 			return "exito";			
 		}
 		
@@ -308,16 +311,23 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		
 		if(!dtFechaActual.equals(dtFechaAtencion) ){
 			if(dtFechaActual.after(dtFechaAtencion)){
-				request.put("mensajeErrorBuscarDisponibilidadTecnicos", 
-						"La fecha de atención (" + FormatoFecha.formatearFecha(dtFechaAtencion, "dd/MM/yyyy hh:mm a") +
-						") debe ser posterior o igual a la fecha actual (" + 
-						FormatoFecha.formatearFecha(dtFechaActual, "dd/MM/yyyy hh:mm a") + ").");
+//				request.put("mensajeErrorBuscarDisponibilidadTecnicos", 
+//						"La fecha de atención (" + FormatoFecha.formatearFecha(dtFechaAtencion, "dd/MM/yyyy hh:mm a") +
+//						") debe ser posterior o igual a la fecha actual (" + 
+//						FormatoFecha.formatearFecha(dtFechaActual, "dd/MM/yyyy hh:mm a") + ").");
+				
+				request.put("mensajeErrorBuscarDisponibilidadTecnicos",
+						getText("pages.programartrabajo.generarot_p3.mensajeErrorBuscarDisponibilidadTecnicos1", 
+						new String[]{FormatoFecha.formatearFecha(dtFechaAtencion, "dd/MM/yyyy hh:mm a"), 
+								FormatoFecha.formatearFecha(dtFechaActual, "dd/MM/yyyy hh:mm a")})); 
+
 				return "exito";			
 			}
 		}
 		
 		if(!tmHoraInicio.before(tmHoraFin)){
-			request.put("mensajeErrorBuscarDisponibilidadTecnicos", "La hora inicio debe ser menor que la hora final");
+			//request.put("mensajeErrorBuscarDisponibilidadTecnicos", "La hora inicio debe ser menor que la hora final");
+			request.put("mensajeErrorBuscarDisponibilidadTecnicos", getText("pages.programartrabajo.generarot_p3.mensajeErrorBuscarDisponibilidadTecnicos3"));
 			return "exito";			
 		}
 		
@@ -346,7 +356,8 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		
 		//verificamos si se ha seleccionado un paquete de servicio
 		if(paqueteSeleccionado.equals("")){
-			request.put("mensajeErrorAsignarTecnicos", "Debe seleccionar un paquete de servicio");
+			//request.put("mensajeErrorAsignarTecnicos", "Debe seleccionar un paquete de servicio");
+			request.put("mensajeErrorAsignarTecnicos", getText("pages.programartrabajo.generarot_p3.mensajeErrorAsignarTecnicos"));
 			return "exito";
 		}
 		
@@ -361,13 +372,16 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 			 * */
 			if (fechaAtencion.equals("")){
 				//campo fecha vacio indica que no se ha buscado tecnicos
-				request.put("mensajeErrorAsignarTecnicos", "Debe buscar los técnico disponibles " + 
-						"(para ello especifique la fecha de atención, hora de inicio y " + 
-						"hora de fin y presione el botón buscar");
+//				request.put("mensajeErrorAsignarTecnicos", "Debe buscar los técnico disponibles " + 
+//						"(para ello especifique la fecha de atención, hora de inicio y " + 
+//						"hora de fin y presione el botón buscar");
+				request.put("mensajeErrorAsignarTecnicos", getText("pages.programartrabajo.generarot_p3.mensajeErrorAsignarTecnicos1"));
+				
 				return "exito";
 			}else{
 				//campo fecha no vacio indica que se ha buscado tecnicos, pero no se selecciono ninguno
-				request.put("mensajeErrorAsignarTecnicos", "Debe seleccionar al menos " + numTecnicosNecesarios + " técnicos");
+				//request.put("mensajeErrorAsignarTecnicos", "Debe seleccionar al menos " + numTecnicosNecesarios + " técnicos");
+				request.put("mensajeErrorAsignarTecnicos", getText("pages.programartrabajo.generarot_p3.mensajeErrorAsignarTecnicos2"));
 				return "exito";
 			}
 			
@@ -375,7 +389,8 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 			//si se ha seleccionado técnicos, verificar que su número sea al menos el indicado
 			//por el número de técnicos necesarios descrito por el paquete de servicio
 			if(numTecnicosNecesarios>strCodTecnicosSeleccionados.length){
-				request.put("mensajeErrorAsignarTecnicos", "Debe seleccionar al menos " + numTecnicosNecesarios + " técnicos");
+				//request.put("mensajeErrorAsignarTecnicos", "Debe seleccionar al menos " + numTecnicosNecesarios + " técnicos");
+				request.put("mensajeErrorAsignarTecnicos", getText("pages.programartrabajo.generarot_p3.mensajeErrorAsignarTecnicos2"));
 				return "exito";
 			}
 		}
@@ -395,11 +410,15 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		
 		if(!dtFechaActual.equals(dtFechAtencion) ){
 			if(dtFechaActual.after(dtFechAtencion)){
-				request.put("mensajeErrorAsignarTecnicos", 
-						"La fecha de atención (" + FormatoFecha.formatearFecha(dtFechAtencion, "dd/MM/yyyy hh:mm a") +
-						") debe ser posterior o igual a la fecha actual (" + 
-						FormatoFecha.formatearFecha(dtFechaActual, "dd/MM/yyyy hh:mm a") + "). " + 
-						"Vuela a realizar la búsqueda de técnicos disponibles con la fecha y horas correctas");
+//				request.put("mensajeErrorAsignarTecnicos", 
+//						"La fecha de atención (" + FormatoFecha.formatearFecha(dtFechAtencion, "dd/MM/yyyy hh:mm a") +
+//						") debe ser posterior o igual a la fecha actual (" + 
+//						FormatoFecha.formatearFecha(dtFechaActual, "dd/MM/yyyy hh:mm a") + "). " + 
+//						"Vuela a realizar la búsqueda de técnicos disponibles con la fecha y horas correctas");
+				request.put("mensajeErrorAsignarTecnicos", getText("pages.programartrabajo.generarot_p3.mensajeErrorAsignarTecnicos3", 
+						new String[]{FormatoFecha.formatearFecha(dtFechAtencion, "dd/MM/yyyy hh:mm a"), 
+						FormatoFecha.formatearFecha(dtFechaActual, "dd/MM/yyyy hh:mm a")}));
+
 				return "exito";			
 			}
 		}
@@ -413,7 +432,8 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		//verificamos si el numero de horas es al menos el indicado por el paquete
 		int intHorasEscogidas = FormatoFecha.getDiffHoras(tmHoraIni, tmHoraFin);
 		if(intHorasEscogidas < numHorasNecesarias){
-			request.put("mensajeErrorAsignarTecnicos", "El número de horas seleccionadas debe ser igual o mayor al número de horas indicado por el paquete");
+			//request.put("mensajeErrorAsignarTecnicos", "El número de horas seleccionadas debe ser igual o mayor al número de horas indicado por el paquete");
+			request.put("mensajeErrorAsignarTecnicos", getText("pages.programartrabajo.generarot_p3.mensajeErrorAsignarTecnicos4"));
 			return "exito";
 		}
 		
@@ -468,9 +488,13 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 						for(TecnicoBean tcoSelec: arrTecnicosSeleccionados){
 							for(TecnicoBean tcoEnPaquete: pq.getArrTecnicosAsignados()){
 								if(tcoSelec.getStrCodTecnico().equals(tcoEnPaquete.getStrCodTecnico())){
+//									request.put("mensajeErrorAsignarTecnicos", 
+//									  String.format("El técnico con código %1$s ya fué asignado al paquete %2$s", 
+//									  tcoSelec.getStrCodTecnico(), pq.getStrCodPaquete()));
 									request.put("mensajeErrorAsignarTecnicos", 
-									  String.format("El técnico con código %1$s ya fué asignado al paquete %2$s", 
-									  tcoSelec.getStrCodTecnico(), pq.getStrCodPaquete()));
+											getText("pages.programartrabajo.generarot_p3.mensajeErrorAsignarTecnicos5", 
+											new String[]{tcoSelec.getStrCodTecnico(),pq.getStrCodPaquete()}));
+
 									return "exito";
 								}
 							}
@@ -481,7 +505,7 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		}
 		
 		//vaciamos la lista de técnicos para proceder a llenarlo con otros nuevos
-		System.out.println("llegue hasta aqui...");
+		//System.out.println("llegue hasta aqui...");
 		beanPaqueteSeleccionado.getArrTecnicosAsignados().clear();
 		
 		//llenamos la lista de técnicos asignados al paquete seleccionado
