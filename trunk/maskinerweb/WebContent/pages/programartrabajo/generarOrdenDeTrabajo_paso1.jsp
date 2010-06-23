@@ -40,7 +40,7 @@
      </div>
     <div class="separadovertical">
       <s:form method="post" action="a_cargarBuscarIncidente?formOrigen=generarOT">
-	      <label for="txtCodIncidente"><s:text name="pages.programartrabajo.generarot_p1.lblCodIncidente" /></label>
+	      <label for="txtCodIncidente"><s:text name="pages.programartrabajo.generarot_p1.lblBuscarCodIncidente" /></label>
 	      <s:textfield name="numIncidente"  id="txtCodIncidente" size="6" maxlength="6"/>
 	     
 		  <s:submit type="image" src="images/buscar_azul.gif"/>

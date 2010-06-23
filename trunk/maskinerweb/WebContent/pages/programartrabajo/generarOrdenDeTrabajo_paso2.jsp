@@ -107,22 +107,18 @@
        	</s:if>
     </fieldset>
     <div class="separadovertical margenderecho" align="right"> 
-    	<s:url action="a_cnm_irAGenerarOT_paso1" var="irAGenerarOT_paso1Url"/>
-    	<s:url action="a_cnm_cargarGenerarOT_paso3" var="cargarGenerarOT_paso3Url"/>
-    	<s:url action="a_homepage" var="homepageUrl"/>
-    	<s:url value="images/atras.png" var="ImagenAtrasUrl"/>
-    	<s:url value="images/siguiente.png" var="ImagenSiguienteUrl"/>
-    	<s:url value="images/salir.png" var="ImagenSalirUrl"/>
     
-    	<a href="${irAGenerarOT_paso1Url}">
-    		<img alt="Atrás" src="${ImagenAtrasUrl}"/>
-    	</a>
-    	<a href="${cargarGenerarOT_paso3Url}">
-    		<img alt="Siguiente" src="${ImagenSiguienteUrl}">
-    	</a>
-    	<a href="${homepageUrl}">
-    		<img alt="Salir" src="${ImagenSalirUrl}">
-    	</a>
+    	<s:a action="a_cnm_irAGenerarOT_paso1">
+    		<img alt="Atrás" src="<s:url value="images/atras.png"/>"/>
+    	</s:a>
+    
+    	<s:a action="a_cnm_cargarGenerarOT_paso3">
+    		<img alt="Siguiente" src="<s:url value="images/siguiente.png"/>">
+    	</s:a>
+    
+    	<s:a action="a_homepage">
+    		<img alt="Salir" src="<s:url value="images/salir.png"/>">
+    	</s:a>
     </div>
     <s:if test="#request.mensajeerror1!=null">
 	  	<div class="mensajeerror separadoverticalsuperior"><s:property value="#request.mensajeerror1"/></div>

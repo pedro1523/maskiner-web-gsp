@@ -103,10 +103,10 @@
         <s:set var="cuentaMaquiRevisadas" value="0"/>
 		<s:iterator var="b_maq" value="#session.b_incidente.arrMaquinariasXIncidente">
 			<s:if test="%{#b_maq.intEstadoAveria==2}">
-				<s:set var="cuentaMaquiRevisadas" value="%{cuentaMaquiRevisadas+1}"/>
+				<s:set var="cuentaMaquiRevisadas" value="%{#cuentaMaquiRevisadas+1}"/>
 			</s:if>
 		</s:iterator> 
-		<s:if test="%{cuentaMaquiRevisadas>0}">
+		<s:if test="%{#cuentaMaquiRevisadas>0}">
 		    <div class="separadovertical">
 		      <span class="titulotabla"><s:text name="pages.programartrabajo.generarot_p4.tablaequiposfaltantes.titulo"/></span>
 		      <table width="100%" border="0" cellpadding="5" cellspacing="0" class="gridview">
@@ -122,16 +122,16 @@
 		        <tr>
 		        <s:set var="itm" value="1" />
 		        <s:iterator var="b_maq" value="#session.b_incidente.arrMaquinariasXIncidente">
-		        	<s:if test="%{b_maq.intEstadoAveria==2}">
+		        	<s:if test="%{#b_maq.intEstadoAveria==2}">
 			       		<tr>
-							<td align="center"><s:property value="itm"/> </td>
-							<td><s:property value="b_maq.strNumeroTarjetaEquipo"/></td>
-							<td><s:property value="b_maq.strDescripcionMaquinaria"/></td>
-							<td><s:property value="b_maq.strMarcaMaquinaria"/></td>
-							<td><s:property value="b_maq.strModeloMaquinaria"/></td>
-							<td><s:property value="b_maq.strDescripcionAveria"/></td>
+							<td align="center"><s:property value="#itm"/> </td>
+							<td><s:property value="#b_maq.strNumeroTarjetaEquipo"/></td>
+							<td><s:property value="#b_maq.strDescripcionMaquinaria"/></td>
+							<td><s:property value="#b_maq.strMarcaMaquinaria"/></td>
+							<td><s:property value="#b_maq.strModeloMaquinaria"/></td>
+							<td><s:property value="#b_maq.strDescripcionAveria"/></td>
 			        		<td align="center">
-			        			<s:url var="cargarGenerarOTPaso2Url" action="a_cargarGenerarOT_paso2">
+			        			<s:url var="cargarGenerarOTPaso2Url" action="a_cnm_cargarGenerarOT_paso2">
 			        				<s:param name="numtarj">
 			        					${b_maq.strNumeroTarjetaEquipo}
 			        				</s:param>
@@ -141,7 +141,7 @@
 			        			</a>
 			        		</td>
 						</tr>
-						<s:set var="itm" value="%{itm+1}" />
+						<s:set var="itm" value="%{#itm+1}" />
 		        	</s:if>
 		        </s:iterator>
 			  </table>
