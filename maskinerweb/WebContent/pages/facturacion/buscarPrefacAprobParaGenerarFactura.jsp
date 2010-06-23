@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
 <%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
@@ -8,7 +8,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html> 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:url var="jsCalendar" value="/javascript/triga_calendar/calendar_pe.js" />
 	<c:url var="jsCalendarCss" value="/javascript/triga_calendar/calendar.css" />
 	<c:url var="jsCalendarImagePath" value="/javascript/triga_calendar/img/" />
@@ -57,8 +57,8 @@
         <tr>
           <th width="46" align="center">Item</th>
           <th width="82" align="center">Cliente</th>
-          <th width="137" align="center">Nº Prefactura</th>
-          <th width="166" align="center">N° Incidente</th>
+          <th width="137" align="center">NÂº Prefactura</th>
+          <th width="166" align="center">NÂ° Incidente</th>
           <th width="183" align="center">Fecha Incidente</th>
           <th width="74" align="center">Generar Factura</th>
         </tr>

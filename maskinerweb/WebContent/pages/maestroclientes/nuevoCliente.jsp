@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -23,7 +23,7 @@
             <legend>Datos Generales</legend>
             <table style="width: 603px">
               <tr >
-                <td style="width: 89px">Razón Social:</td>
+                <td style="width: 89px">RazÃ³n Social:</td>
                 <td colspan="3"><input style="width: 459px"></td>
               </tr>
               <tr>
@@ -33,13 +33,13 @@
                 <td align="justify" style="width: 268px"><input style="width: 255px"></td>
               </tr>
               <tr >
-                <td style="width: 89px">Descripción:</td>
+                <td style="width: 89px">DescripciÃ³n:</td>
                 <td colspan="3"><textarea style="width: 462px"></textarea></td>
               </tr>
             </table>
           </fieldset>
           <fieldset class="separadovertical">
-            <legend>Localización de Sucursales</legend>
+            <legend>LocalizaciÃ³n de Sucursales</legend>
             <table>
               <tr >
                 <td style="width: 89px">Distrito:</td>
@@ -47,11 +47,11 @@
                   </select></td>
               </tr>
               <tr>
-                <td>Dirección :</td>
+                <td>DirecciÃ³n :</td>
                 <td colspan="3"><input style="width: 477px"></td>
               </tr>
               <tr >
-                <td>Teléfono:</td>
+                <td>TelÃ©fono:</td>
                 <td style="width: 170px"><input style="width: 150px"></td>
                 <td style="width: 60px">Fax:</td>
                 <td><input style="width: 150px"></td>
@@ -68,8 +68,8 @@
               <tr>
                 <th align="center" style="width: 30px; background-color: #A8A8A8"> # </th>
                 <th align="center" style="width: 87px; background-color: #A8A8A8"> Distrito </th>
-                <th align="center" style="width: 176px; background-color: #A8A8A8"> Dirección </th>
-                <th align="center" style="width: 70px; background-color: #A8A8A8">Teléfono</th>
+                <th align="center" style="width: 176px; background-color: #A8A8A8"> DirecciÃ³n </th>
+                <th align="center" style="width: 70px; background-color: #A8A8A8">TelÃ©fono</th>
                 <th align="center" style="width: 83px; background-color: #A8A8A8">Fax</th>
                 <th align="center" style="width: 144px; background-color: #A8A8A8">Contacto</th>
               </tr>

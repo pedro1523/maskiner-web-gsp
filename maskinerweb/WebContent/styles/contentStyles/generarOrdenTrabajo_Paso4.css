@@ -1,9 +1,9 @@
-@CHARSET "ISO-8859-1";
+@CHARSET "UTF-8";
 
 /***************************************************************************************/
 /************ ESTILOS DE ELEMENTOS CON ID, TALES COMO CONTROLES, CAJAS DE TEXTO*********/
 /************ PUEDEN SOBREESCRIBIR ELEMENTOS EXISTENTES EN designStyles.css SI**********/
-/************ FUERA NECESARIO. CADA P¡GINA DEBER¡ TENER UN ARCHIVO contentStyles.css****/
+/************ FUERA NECESARIO. CADA P√ÅGINA DEBER√Å TENER UN ARCHIVO contentStyles.css****/
 /************ DIFERENTE QUE TENGA SUS PROPIOS ELEMENTOS CON ID ESTABLECIDOS ************/
 /***************************************************************************************/	
 

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
@@ -11,7 +11,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html >
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body >
@@ -47,7 +47,7 @@
 			<td>${sessionScope.b_prefactura.strDireccion}
 		</tr>
 		<tr>
-			<td align="right"><b>N° Prefactura :</b> </td>
+			<td align="right"><b>NÂ° Prefactura :</b> </td>
 			<td>${sessionScope.b_prefactura.strNumPrefactura}
 			
 			<td align="right"><b>Fecha Prefactura :</b> </td>
@@ -57,8 +57,8 @@
       <hr />
 <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
 		<tr>
-          <th width="139" align="center">Código</th>
-          <th width="172" align="center">Descripción</th>
+          <th width="139" align="center">CÃ³digo</th>
+          <th width="172" align="center">DescripciÃ³n</th>
           <th width="149" align="center">Cantidad</th>
           <th align="center">PrecioUnitario</th>
           <th align="center">Importe</th>

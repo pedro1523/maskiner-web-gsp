@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
@@ -15,7 +15,7 @@
     
 </head>
 <body>
-	<h2 class="titulo">Reporte Porcentaje de Utilización de Maquinaria</h2>
+	<h2 class="titulo">Reporte Porcentaje de UtilizaciÃ³n de Maquinaria</h2>
 <table>
 
 	<tr>
