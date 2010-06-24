@@ -32,11 +32,11 @@
 
 <body>
     <h1><s:text name="app.tituloaplicacion"/></h1>
-    <div style="margin-top: 15px">
-    	<a href="${cambiarIdioma_PeruUrl}" title="<s:text name="pages.guicomun.idioma.espanol"/>"><img alt="Perú" src="${PeruImgUrl}"></a> 
-    	<a href="${cambiarIdioma_FranciaUrl}" title="<s:text name="pages.guicomun.idioma.frances"/>"><img alt="Francia" src="${FranciaImgUrl}"></a> 
-    	<a href="${cambiarIdioma_EEUUUrl}" title="<s:text name="pages.guicomun.idioma.ingles"/>"><img alt="EEUU" src="${USAImgUrl}"></a> 
-    	<a href="${cambiarIdioma_ArabeUrl}" title="<s:text name="pages.guicomun.idioma.arabe"/>"><img alt="Arabe" src="${ArabeImgUrl}"></a> 
+    <div style="position: absolute; top: 90px">
+    	<a href="${cambiarIdioma_PeruUrl}" title="<s:text name="pages.guicomun.idioma.espanol"/>"><img src="${PeruImgUrl}"></a> 
+    	<a href="${cambiarIdioma_FranciaUrl}" title="<s:text name="pages.guicomun.idioma.frances"/>"><img src="${FranciaImgUrl}"></a> 
+    	<a href="${cambiarIdioma_EEUUUrl}" title="<s:text name="pages.guicomun.idioma.ingles"/>"><img src="${USAImgUrl}"></a> 
+    	<a href="${cambiarIdioma_ArabeUrl}" title="<s:text name="pages.guicomun.idioma.arabe"/>"><img src="${ArabeImgUrl}"></a> 
     </div>
 </body>
 </html>
