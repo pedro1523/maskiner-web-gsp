@@ -1,7 +1,7 @@
 package com.maskiner.smc.gestionarincidentes.action;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -251,7 +251,9 @@ public class IncidenteAction implements RequestAware, SessionAware, ParameterAwa
 			
 			IncidenteServiceI isServicio = IncidenteBusinessDelegate.getIncidenteService();
 			
-			List<RegistroIncidentesBean> lstArr = isServicio.buscarIncidentesParaLiquidacion(strEmpresa, dtFechaIncid, strIncidente);
+			List<RegistroIncidentesBean> lstArr = isServicio.buscarIncidentesParaLiquidacion(strEmpresa, 
+					dtFechaIncid == null ? null : new java.sql.Date(dtFechaIncid.getTime()), 
+					strIncidente);
 			request.put("arr_incidentes", lstArr);
 		}
 		else{
@@ -265,7 +267,9 @@ public class IncidenteAction implements RequestAware, SessionAware, ParameterAwa
 			
 			IncidenteServiceI isServicio = IncidenteBusinessDelegate.getIncidenteService();
 			
-			List<RegistroIncidentesBean> lstArr = isServicio.buscarIncidentes(strEmpresa, dtFechaIncid, strIncidente);
+			List<RegistroIncidentesBean> lstArr = isServicio.buscarIncidentes(strEmpresa, 
+					dtFechaIncid == null ? null : new java.sql.Date(dtFechaIncid.getTime()), 
+					strIncidente);
 			request.put("arr_incidentes", lstArr);
 		}
 		return "exito";
