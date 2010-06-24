@@ -381,7 +381,8 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 			}else{
 				//campo fecha no vacio indica que se ha buscado tecnicos, pero no se selecciono ninguno
 				//request.put("mensajeErrorAsignarTecnicos", "Debe seleccionar al menos " + numTecnicosNecesarios + " técnicos");
-				request.put("mensajeErrorAsignarTecnicos", getText("pages.programartrabajo.generarot_p3.mensajeErrorAsignarTecnicos2"));
+				request.put("mensajeErrorAsignarTecnicos", getText("pages.programartrabajo.generarot_p3.mensajeErrorAsignarTecnicos2",
+						new String[]{numTecnicosNecesarios.toString()}));
 				return "exito";
 			}
 			
@@ -390,7 +391,8 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 			//por el número de técnicos necesarios descrito por el paquete de servicio
 			if(numTecnicosNecesarios>strCodTecnicosSeleccionados.length){
 				//request.put("mensajeErrorAsignarTecnicos", "Debe seleccionar al menos " + numTecnicosNecesarios + " técnicos");
-				request.put("mensajeErrorAsignarTecnicos", getText("pages.programartrabajo.generarot_p3.mensajeErrorAsignarTecnicos2"));
+				request.put("mensajeErrorAsignarTecnicos", getText("pages.programartrabajo.generarot_p3.mensajeErrorAsignarTecnicos2",
+						new String[]{numTecnicosNecesarios.toString()}));
 				return "exito";
 			}
 		}
