@@ -36,7 +36,8 @@
       <span class="negrita margenderecho">${registrador}</span>
       
       <s:text name="pages.programartrabajo.generarot_p1.lblFechaRegistro" />
-      <span class="negrita">${fechaactual}</span>
+<!--      <span class="negrita">${fechaactual}</span>-->
+	  <span class="negrita">${fechaactual}</span>
      </div>
     <div class="separadovertical">
       <s:form method="post" action="a_cargarBuscarIncidente?formOrigen=generarOT">
