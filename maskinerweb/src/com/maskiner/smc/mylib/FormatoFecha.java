@@ -58,6 +58,11 @@ public class FormatoFecha {
 		DateFormat formateador = new SimpleDateFormat("dd/MM/yyyy"); 
 		return formateador.format(fecha);
 	}
+//	public static String getFechaActual(String formato){
+//		Date fecha = new Date(Calendar.getInstance().getTimeInMillis());
+//		DateFormat formateador = new SimpleDateFormat(formato); 
+//		return formateador.format(fecha);
+//	}
 	
 	public static String getFechaDe(Date fecha){
 		DateFormat formateador = new SimpleDateFormat("dd/MM/yyyy"); 
