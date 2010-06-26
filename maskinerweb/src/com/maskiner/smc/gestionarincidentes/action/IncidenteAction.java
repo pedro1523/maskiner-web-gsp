@@ -233,11 +233,14 @@ public class IncidenteAction implements RequestAware, SessionAware, ParameterAwa
 		return exito;
 	}
 
+	
 	public String buscarIncidentes() throws Exception {
 		
 		String strEmpresa = parameters.get("nombreEmpresa")[0].trim();
 		String strFechaIncid = parameters.get("fechaIncidente")[0].trim();
 		String strIncidente = parameters.get("incidente")[0].trim();
+		
+		System.out.println("FORMULARIO DE ORIGEN---> " + formOrigen);
 		
 		if(formOrigen.equals("RegistrarLiquidacion")){
 						
@@ -304,7 +307,7 @@ public class IncidenteAction implements RequestAware, SessionAware, ParameterAwa
 		
 		if (formOrigen.equals("generarOTInspec")) {
 			// obtiene el bean BeanRegistroIncidentes seleccionado
-			
+			System.out.println("NUMERO DE INCIDENTE---> " + numIncidente);
 			IncidenteServiceI servicio = IncidenteBusinessDelegate
 					.getIncidenteService();
 
@@ -313,6 +316,8 @@ public class IncidenteAction implements RequestAware, SessionAware, ParameterAwa
 
 			ClienteBean cliente = servicio
 					.obtenerClientePorIncidente(numIncidente);
+			
+			System.out.println("tamaño del arreglo -- > " + reg.getArrMaquinariasXIncidente().size());
 			session.put("b_cliente", cliente);
 			session.put("b_incidente", reg);
 			
