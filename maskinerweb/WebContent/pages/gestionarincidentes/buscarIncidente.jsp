@@ -18,8 +18,12 @@
 	<h2 class="titulo">Buscar incidente de servicio</h2>
 	<s:url var="actionFormUrl" action="a_buscarIncidentes">
 		<!-- ${param.formOrigen} -->
-		<s:param name="formOrigen"><s:property value="formOrigen"/></s:param>
+		<s:param name="formOrigen">
+			<s:property value="formOrigen"/>
+		</s:param>
 	</s:url>
+	
+	  
 	<s:form action="%{actionFormUrl}" method="post">
 		<fieldset>
 			<legend>Criterios:</legend>
@@ -40,7 +44,7 @@
 				<s:textfield name="incidente" id="txtIncidente" cssStyle="width:150px"/>
 			</div>
 			<div class="separadoverticalsuperior" align="right">
-				<s:url var="imgBuscarUrl" value="/images/buscar.png"/>
+					<s:url var="imgBuscarUrl" value="/images/buscar.png"/>
 				<s:submit type="image" src="%{imgBuscarUrl}" />
 			</div>
 		</fieldset>
@@ -67,7 +71,10 @@
 						<td align="center">
 							<s:url var="linkDevolResult" action="a_buscarIncidenteDevolverResultado">
 								<s:param name="numIncidente">${b_incid.strNumeroIncidente}</s:param>
+								
 								<s:param name="formOrigen"><s:property value="formOrigen"/></s:param>
+							
+							
 							</s:url>
 							<s:url var="imgSeleccionarUrl" value="/images/aprob_azul.gif"/>
 							<a href="${linkDevolResult}">
