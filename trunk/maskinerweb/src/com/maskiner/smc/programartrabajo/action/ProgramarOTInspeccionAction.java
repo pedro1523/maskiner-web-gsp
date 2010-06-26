@@ -24,9 +24,18 @@ public class ProgramarOTInspeccionAction extends ActionSupport {
 	private String codTecnico;
 	private String chkTecnico;
 	private OrdenTrabajoInspeccionBean OTIBean;
+	private String formOrigen;
 	//private String tarjetaEquipo;
 	
 	
+	public String getFormOrigen() {
+		return formOrigen;
+	}
+
+	public void setFormOrigen(String formOrigen) {
+		this.formOrigen = formOrigen;
+	}
+
 	public Map<String, Object> getSession() {
 		return session;
 	}
@@ -70,7 +79,12 @@ public class ProgramarOTInspeccionAction extends ActionSupport {
 	public String cargarGenerarOTInspeccion()
 			throws Exception {
 		//borramos el bean b_incidente de la sesión
-		session.put("b_incidente", null);		
+		try {
+			session.put("b_incidente",null);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());		
+			}
+				
 		return "exito";
 	}
 	
@@ -240,6 +254,9 @@ public class ProgramarOTInspeccionAction extends ActionSupport {
 	
 			
 	/*================FIN===================*/
-	
+	public String cargarBuscarIncidente(){
+		
+		return "exito";
+	}
 	
 }
