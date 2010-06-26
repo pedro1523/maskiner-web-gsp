@@ -9,11 +9,11 @@
 
 
 	<package name="cnm" extends="tiles-default" namespace="/">
-	
+
 	   	<global-results>
     		<result name="customError">/errorPage.jsp</result>
     	</global-results>
-    	
+    	    	
     	<global-exception-mappings>
     		<exception-mapping result="customError" exception="java.lang.Exception"/>
     	</global-exception-mappings>
