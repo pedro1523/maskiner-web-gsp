@@ -18,7 +18,19 @@
 			<!--forward="d_generarOT_inspeccion_asignar" r/>  -->
 			<result type="tiles">d_generarOT_inspeccion_asignar</result>
 		</action>
+		<action 
+    			name="a_cpm_cargarBuscarIncidente1"	
+    			class="com.maskiner.smc.programartrabajo.action.ProgramarOTInspeccionAction"
+    			method="cargarBuscarIncidente" >	
+    			<result name="exito" type="tiles">d_buscar_incidente</result>
+    	</action>		
 
+		<action 
+    			name="a_cpm_cargarOTInspeccion"
+    			class="com.maskiner.smc.programartrabajo.action.ProgramarOTInspeccionAction"
+    			method="cargarGenerarOTInspeccion" >
+    		<result name="exito" type="tiles">d_generarOT_inspeccion_principal</result>
+    	</action>
       
  	<!-- Action - Programar OTInspeccion  FIN -->
  <!--
@@ -47,9 +59,11 @@
 	
 
 
-		<action name="a_cpm_cargarBuscarIncidente1">
-			<!--forward="d_buscar_incidente" />	-->
-			<result type="tiles">d_buscar_incidente</result>
+		<action name="a_cpm_cargarBuscarIncidente1"
+			class="com.maskiner.smc.programartrabajo.action.ProgramarOTInspeccionAction"
+			method="cargarBuscarIncidente">
+			
+			<result name="exito" type="tiles">d_buscar_incidente</result>
 		</action>
 		<!-- Action - Programar OTInspeccion -->
 
