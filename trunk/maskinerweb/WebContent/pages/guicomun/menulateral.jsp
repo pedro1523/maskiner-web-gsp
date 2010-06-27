@@ -60,7 +60,7 @@
 	        request.setAttribute("prueba",prueba);
 	  %>
 	  <s:if test="#request.prueba">
-	  	  <li><s:a action="a_cargarPrefactura"><s:text name="pages.guicomun.menulateral.aprobarprefactura"/></s:a></li>
+	  	  <li><s:a action="a_cpm_cargarPrefactura"><s:text name="pages.guicomun.menulateral.aprobarprefactura"/></s:a></li>
 	  </s:if>
 
 	  <%
