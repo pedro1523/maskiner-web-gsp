@@ -1,18 +1,11 @@
 package com.maskiner.smc.programartrabajo.action;
 
-import java.util.Date;
 import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.naming.java.javaURLContextFactory;
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -29,7 +22,6 @@ import com.maskiner.smc.programartrabajo.service.OrdenTrabajoServiceI;
 import com.maskiner.smc.programartrabajo.service.ProgramarTrabajoBusinessDelegate;
 import com.maskiner.smc.programartrabajo.service.TecnicoServiceI;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ProgramarTrabajoAction extends ActionSupport implements RequestAware, SessionAware, ParameterAware {
@@ -50,7 +42,7 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	private String tmp_HoraInicio;
 	private String tmp_HoraFin;
 	
-	
+
 	public String getTmp_FechaAtencion() {
 		return tmp_FechaAtencion;
 	}
@@ -124,7 +116,6 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	}
 
 	public String cargarGenerarOT()	throws Exception {
-		
 		
 		//borramos el bean b_incidente de la sesión
 		session.put("b_incidente",null);
@@ -250,7 +241,9 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 			
 			return "exito";
 		} catch (Exception e) {
-			request.put("mensajeErrorGenerarOrdenTrabajo", e.getMessage());
+			
+			e.printStackTrace();
+			request.put("mensajeErrorGenerarOrdenTrabajo", getText("pages.programartrabajo.generarot_p3.mensajeErrorGenerarOrdenTrabajo1"));
 			
 			return "fracaso";
 		}
