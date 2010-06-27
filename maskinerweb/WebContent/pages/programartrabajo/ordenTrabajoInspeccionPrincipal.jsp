@@ -29,11 +29,7 @@
 	              	<img alt="Buscar Incidente" src="./images/buscar_azul.gif">
 	              </a>
 	              
-	              <!--
-            	<html:link action="a_cargarBuscarIncidente1?formOrigen=generarOTInspec">
-              		<html:img page="/images/buscar_azul.gif"/>
-              	</html:link>
-             --></td>
+	            </td>
               <td>&nbsp;</td>
             </tr>
           </table>
@@ -74,7 +70,8 @@
 						<td><s:property value="#b_maq.strDescripcionAveria"/></td>
 						<td align="center">
 							<s:url var="v_asignar" action="a_cpm_OTIAsignar"> 
-								<s:param name="numTarjeta">{b_maq.strNumeroTarjetaEquipo}</s:param>
+								<s:param name="numTarjeta"><s:property value="#b_maq.strNumeroTarjetaEquipo"/></s:param>
+								<!--<s:param name="numIncidente"><s:property value="#b_maq.strNumeroIncidente" />  </s:param>-->
 							</s:url>
 							<s:a href="%{v_asignar}">
 								<img src="images/nuevo_azul.gif" border="0" />

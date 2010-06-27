@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib uri="/struts-jquery-tags" prefix="sj" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -16,10 +17,12 @@
 
 </head>
 <body>
-<s:form action="a_ProgramarOTInspeccionAsignarAction" method="post" >
 
-<%if(request.getParameter("numTarjeta")!=null )
-	session.setAttribute("tarjetaEquipo",request.getParameter("numTarjeta"));	%>
+	<%if(request.getParameter("numTarjeta")!=null)
+	session.setAttribute("tarjetaEquipo",request.getParameter("numTarjeta") );	%>
+<s:form action="a_cpm_ProgramarOTInspeccionAsignarAction" method="post" >
+
+
 <h2><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.titulo" /></h2>
         <fieldset class="separadovertical">
           <legend><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.legend" /></legend><br>
@@ -27,19 +30,19 @@
             <tr>
               
               <td align="right"><b> <s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.nroincidente"/> </b></td>
-              <td> ${sessionScope.b_incidente.strNumeroIncidente} </td>
+              <td> <s:property value="#session.b_incidente.strNumeroIncidente"/> </td>
               <td align="right"><b><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.razonsocial"/> </b> </td>
-              <td>${sessionScope.b_cliente.strRazSocCliente} </td>
+              <td><s:property value="#session.b_cliente.strRazSocCliente"/>  </td>
               <td class="style2">&nbsp;</td>
             </tr>
             <tr>
               
               <td align="right"><b> <s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.ruc" /></b></td>
-              <td>${sessionScope.b_cliente.strRucCliente}</td>
-              <td align="right"><b><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.nrotarjetaequipo" /><b></td>
+              <td><s:property value="#session.b_cliente.strRucCliente"/> </td>
+              <td align="right"><b><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.nrotarjetaequipo" /></b></td>
                         
-                  
-              <td>${sessionScope.tarjetaEquipo}</td>
+               <s:param name="tarjeta" value="numTarjeta"></s:param>  
+              <td>${sessionScope.tarjetaEquipo}    </td>
                
                
               <td class="style2">&nbsp;</td>
@@ -48,13 +51,26 @@
               
               <td align="right"><b><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.fechainspeccion" /></b></td>
               <td>
-              <div align="left"> <sj:datepicker name="OTIBean.strFecInspeccion" 
-													 displayFormat="dd/mm/yy"  changeYear="true"	    /> </div>
+              <div align="left"> 
+              <sj:datepicker name="fechaInspeccion" 
+							 displayFormat="dd/mm/yy" 
+							 changeYear="true"	    />
+              		<!--<sj:datepicker name="fechaIncidente"
+							   buttonImageOnly="true"
+							   id="fechaInspeccion"
+							   size="10" 
+							   displayFormat="dd/mm/yy"
+							   changeYear="true"
+							   changeMonth="true"
+							   cssStyle="margin-right:5px" />
+              
+             
+               --></div>
 			  </td>
               <td align="right"><b><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.lugaratencion" /></b></td>
               
               <td>
-              <s:textfield name="lugarAtencion" value="b_incidente.strLugarAtencionCliente"> </s:textfield>
+             <s:textfield name="lugarAtencion" value="%{#session.b_incidente.strLugarAtencionCliente}"> </s:textfield>
              
               </td>
               <td class="style2">&nbsp;</td>
@@ -81,17 +97,19 @@
               </s:select>
               </td>
               <td>
-				<html:image src="images/ver_tecnicos.png"></html:image>
+              <s:submit value="Ver Tecnicos"></s:submit>
+				<!--<html:image src="images/ver_tecnicos.png"></html:image>-->
               </td>
             </tr>
           </table>
         </fieldset>
 </s:form> 
-<font color="red">${requestScope.sms}</font>
-<html:form action="a_registraOrdenTrabajoInspeccion">
+<!--<font color="red"><s:property value="requestScope.sms"/> </font>-->
+<s:form action="a_registraOrdenTrabajoInspeccion">
         <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
           <thead>
-          <span class="titulotabla"><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.titulotabla" />
+          <span class="titulotabla">
+          	<s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.titulotabla" />
           </span>
           </thead>
           
@@ -103,29 +121,28 @@
             <th><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.columna4" /> </th>
           </tr>
           
-          <c:forEach var="tecnico" items="${requestScope.listTecnicos}">
-          <tr>
-          <td align="center">
-          <html:radio property="chkTecnico" value="${tecnico.strCodTecnico}" ></html:radio>
-           </td>
-          	 <td align="center">${tecnico.strApellidoPaterno}   </td>
-          	 <td align="center">${tecnico.strApellidoMaterno}</td>
-          	 <td align="center">${tecnico.strNombre}</td>
-          	 <td align="center">${tecnico.strDescripcionEspecialidad}</td>	  
-         </tr>
+          <s:iterator var="tecnico" value="#session.listTecnicos">
+          	<tr>
+          		 <td align="center"><s:radio list="#tecnico.strCodTecnico" name="chkTecnico" ></s:radio>  </td>
+          		 <td align="center"><s:property value="#tecnico.strApellidoPaterno"/> </td>
+	          	 <td align="center"><s:property value="#tecnico.strApellidoMaterno"/>   </td>
+	          	 <td align="center"><s:property value="#tecnico.strNombre"/> </td>
+	          	 <td align="center"><s:property value="#tecnico.strDescripcionEspecialidad"/> </td>	
+          	</tr>
+          
+          </s:iterator>
           
           
-          </c:forEach>
           
           
         </table>
-        <div class="separadovertical" align="right"> 			  
+        <!--<div class="separadovertical" align="right"> 			  
 			<html:image src="images/asignar.png" onclick="verTecnico"> </html:image> 
 			<html:link action="a_cancelarOTIAsignar">
 				<img src="images/cancelar.png" alt="Cancelar" width="71" height="25" border="0" />
 			</html:link> 
 		 </div>
      
-</html:form>
+--></s:form>
 </body>
 </html>
