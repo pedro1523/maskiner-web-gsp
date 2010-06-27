@@ -251,6 +251,11 @@
 	      </div>
 	    </div>
 	    <div class="margenderecho ds" style="padding-top:10px"> </div>
+		<s:if test="%{#request.mensajeErrorGenerarOrdenTrabajo!=null}">
+		 	<div class="mensajeerror separadovertical">
+		 		<s:property value="#request.mensajeErrorGenerarOrdenTrabajo"/>
+		 	</div>
+		</s:if>
 		<div class="separadovertical" align="right">
 			<s:a action="a_cnm_irAGenerarOT_paso2">
 				<img src="<s:url value="/images/atras.png"/>" />
@@ -260,11 +265,6 @@
 				<img src="<s:url value="/images/salir.png"/>" />
 			</s:a>
 		</div>
-		<s:if test="%{#request.mensajeErrorGenerarOrdenTrabajo!=null}">
-		 	<div class="mensajeerror separadovertical">
-		 		<s:property value="#request.mensajeErrorGenerarOrdenTrabajo"/>
-		 	</div>
-		</s:if>
     </s:form>
 
 

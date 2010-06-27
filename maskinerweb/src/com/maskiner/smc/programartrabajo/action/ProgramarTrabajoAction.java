@@ -49,8 +49,8 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	private String tmp_FechaAtencion;
 	private String tmp_HoraInicio;
 	private String tmp_HoraFin;
-
-		
+	
+	
 	public String getTmp_FechaAtencion() {
 		return tmp_FechaAtencion;
 	}
@@ -124,6 +124,7 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 	}
 
 	public String cargarGenerarOT()	throws Exception {
+		
 		
 		//borramos el bean b_incidente de la sesión
 		session.put("b_incidente",null);
@@ -250,6 +251,7 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 			return "exito";
 		} catch (Exception e) {
 			request.put("mensajeErrorGenerarOrdenTrabajo", e.getMessage());
+			
 			return "fracaso";
 		}
 	}
