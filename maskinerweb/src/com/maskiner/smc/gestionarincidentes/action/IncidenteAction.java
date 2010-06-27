@@ -204,7 +204,7 @@ public class IncidenteAction implements RequestAware, SessionAware, ParameterAwa
 		String exito = "";
 		// recuperar el valor ingresado por el usuario en codIncidente
 		String codIncidente = parameters.get("numIncidente")[0].trim();
-
+		
 		if (codIncidente.equals("")) {
 			exito = "exito1";
 		} else {
@@ -228,7 +228,8 @@ public class IncidenteAction implements RequestAware, SessionAware, ParameterAwa
 					exito = "exito2";
 					session.put("b_incidente", incidente);
 				}
-			}
+			} else
+				exito = "exito1";
 		}
 		return exito;
 	}
@@ -340,11 +341,11 @@ public class IncidenteAction implements RequestAware, SessionAware, ParameterAwa
 			RegistroIncidentesBean reg = servicio
 					.obtenerIncidente(numIncidente);
 
-			ClienteBean cliente = servicio
-					.obtenerClientePorIncidente(numIncidente);
+//			ClienteBean cliente = servicio
+//					.obtenerClientePorIncidente(numIncidente);
 
 			session.put("b_incidente", reg);
-			session.put("b_cliente", cliente);
+//			session.put("b_cliente", cliente);
 			return "exito2";
 		}
 	}
