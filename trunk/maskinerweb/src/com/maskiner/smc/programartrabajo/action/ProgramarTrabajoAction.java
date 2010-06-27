@@ -311,6 +311,10 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 //						") debe ser posterior o igual a la fecha actual (" + 
 //						FormatoFecha.formatearFecha(dtFechaActual, "dd/MM/yyyy hh:mm a") + ").");
 				
+				System.out.println(getText("pages.programartrabajo.generarot_p3.mensajeErrorBuscarDisponibilidadTecnicos1", 
+						new String[]{FormatoFecha.formatearFecha(dtFechaAtencion, "dd/MM/yyyy hh:mm a"), 
+								FormatoFecha.formatearFecha(dtFechaActual, "dd/MM/yyyy hh:mm a")}));
+				
 				request.put("mensajeErrorBuscarDisponibilidadTecnicos",
 						getText("pages.programartrabajo.generarot_p3.mensajeErrorBuscarDisponibilidadTecnicos1", 
 						new String[]{FormatoFecha.formatearFecha(dtFechaAtencion, "dd/MM/yyyy hh:mm a"), 
