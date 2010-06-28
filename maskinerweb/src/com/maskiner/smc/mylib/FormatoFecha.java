@@ -156,6 +156,45 @@ public class FormatoFecha {
 		sdf.applyPattern(formato);
 		return sdf.format(fecha);
 	}
+
+	
+	/**
+	 * Detecta si dos rangos de hora a y b se intersectan.<br>
+	 * Rango a = (a0, a1).<br>
+	 * Rango b = (b0, b1).<br>
+	 * donde a0 < a1 y b0 < b1
+	 * @param a0 : Límite inferior del rango a.
+	 * @param a1 : Límite superior del rango a.
+	 * @param b0 : Límite inferior del rango b.
+	 * @param b1 : Límite superior del rango b.
+	 * @return true, si hay colisión, false en caso contrario.
+	 */
+	public static boolean detectarColisionHoras(Time a0, Time a1, Time b0, Time b1){
+		boolean resultado = false;
+		
+		//creamos un calendar iterador calIterator y otro calendar que representa el límite
+		//superior de a
+		GregorianCalendar calIterator = (GregorianCalendar) Calendar.getInstance();
+		GregorianCalendar calLimitSupA = (GregorianCalendar) Calendar.getInstance();
+		calIterator.setTimeInMillis(a0.getTime());
+		calLimitSupA.setTimeInMillis(a1.getTime());
+		
+		//creamos calendar para el intervalo b
+		GregorianCalendar calLimitInfB = (GregorianCalendar) Calendar.getInstance();
+		GregorianCalendar calLimitSupB = (GregorianCalendar) Calendar.getInstance();
+		calLimitInfB.setTimeInMillis(b0.getTime());
+		calLimitSupB.setTimeInMillis(b1.getTime());
+		
+		while(calIterator.before(calLimitSupA) || calIterator.equals(calLimitSupA)){
+			if(calIterator.after(calLimitInfB) && calIterator.before(calLimitSupB)){
+				resultado = true;
+				break;
+			}
+			calIterator.add(Calendar.MINUTE, 30);
+		}
+		
+		return resultado;
+	}
 	
 	
 }

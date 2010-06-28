@@ -470,6 +470,10 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 		}
 		
 		//verificamos si no hay superposición de fecha, hora y técnicos
+		
+		//volvemos a recuperar la fecha de atención, sin hora de inicio añadida.
+		dtFechAtencion = FormatoFecha.getFechaDe(fechaAtencion);
+		
 		for(PaqueteXOTBean pq: paquetesDeOrdenTrabajo){
 			//System.out.println("paq. en OT:" + pq.getCodPaquete() + ", paq. selec:" + paqueteSeleccionado.getCodPaquete());
 			if(!pq.equals(paqueteSeleccionado)){
@@ -480,10 +484,13 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 					Time hB0 = tmHoraFin;
 					Time hA1 = pq.getTmHoraInicio();
 					Time hB1 = pq.getTmHoraFin();
-					if((hA0.compareTo(hA1)<=0 && hA1.compareTo(hB0)<=0) ||
-					   (hA1.compareTo(hA0)<=0 && hB0.compareTo(hB1)<=0) ||
-					   (hA0.compareTo(hB1)<=0 && hB1.compareTo(hB0)<=0) ||
-					   (hA0.compareTo(hA1)<=0 && hB1.compareTo(hB0)<=0)){
+//					if((hA0.compareTo(hA1)<=0 && hA1.compareTo(hB0)<=0) ||
+//					   (hA1.compareTo(hA0)<=0 && hB0.compareTo(hB1)<=0) ||
+//					   (hA0.compareTo(hB1)<=0 && hB1.compareTo(hB0)<=0) ||
+//					   (hA0.compareTo(hA1)<=0 && hB1.compareTo(hB0)<=0)){
+									
+					if(FormatoFecha.detectarColisionHoras(hA0, hB0, hA1, hB1)){
+					
 						//si existe superposición de horas, verificar si al menos
 						//un técnico está comprometido
 						for(TecnicoBean tcoSelec: arrTecnicosSeleccionados){
