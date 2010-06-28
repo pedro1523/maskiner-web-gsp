@@ -21,30 +21,40 @@
 	</s:form>
     <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
       <tr>
-        <th width="7%" align="center"><s:text name="pages.gestionarexpertise.buscarPaquete.tabla.columna1" />  </th>
-        <th width="17%" align="center"><s:text name="pages.gestionarexpertise.buscarPaquete.tabla.columna2" /> </th>
-        <th width="29%" align="center"><s:text name="pages.gestionarexpertise.buscarPaquete.tabla.columna3"/> </th>
-        <th width="36%" align="center"><s:text name="pages.gestionarexpertise.buscarPaquete.tabla.columna4" /> </th>
-  		<th width="36%" align="center">#</th>          
+        <th align="center"><s:text name="pages.gestionarexpertise.buscarPaquete.tabla.columna1" />  </th>
+        <th align="center"><s:text name="pages.gestionarexpertise.buscarPaquete.tabla.columna2" /> </th>
+        <th align="center"><s:text name="pages.gestionarexpertise.buscarPaquete.tabla.columna3"/> </th>
+        <th align="center"><s:text name="pages.gestionarexpertise.buscarPaquete.tabla.columna4" /> </th>
+  		<th align="center"><s:text name="pages.gestionarexpertise.buscarPaquete.tabla.columna5" /></th>          
       </tr>
    
-	  <c:forEach var="paquete" items="${requestScope.listPaquete}">
-		<tr>
-			<td align="center">${paquete.strCodPaquete}</td>
-       		<td align="center">${paquete.strNombre}  </td>
-       		<td align="center">${paquete.strMarcaMaqApliPaquete}</td>
-       		<td align="center">${paquete.strModeloMaqApliPaquete}</td>
-        	<td align="center">
-        		<s:url action="a_mostrarPaquete" var="mostrarPaqueteUrl">
-        			<s:param name="codPaquete">${paquete.strCodPaquete}</s:param>
-        		</s:url>
-        		<s:url value="images/nuevo_azul.gif" var="imagenNuevoAzulUrl"/>
-        		<a href="${mostrarPaqueteUrl}">
-        			<img alt="" src="${imagenNuevoAzulUrl}" >
-        		</a>
-			</td>	
-		</tr>
-	  </c:forEach>
+   	 <s:if test="%{#request.listPaquete!=null}">
+   	 	<s:if test="%{#request.listPaquete.size()>0}">
+	   	  <c:forEach var="paquete" items="${requestScope.listPaquete}">
+			<tr>
+	        	<td align="center">
+	        		<s:url action="a_mostrarPaquete" var="mostrarPaqueteUrl">
+	        			<s:param name="codPaquete">${paquete.strCodPaquete}</s:param>
+	        		</s:url>
+	        		<s:url value="/images/aprob_azul.gif" var="imagenaprob_azulUrl"/>
+	        		<a href="${mostrarPaqueteUrl}">
+	        			<img alt="" src="${imagenaprob_azulUrl}" >
+	        		</a>
+				</td>	
+				<td align="center">${paquete.strCodPaquete}</td>
+	       		<td align="center">${paquete.strNombre}  </td>
+	       		<td align="center">${paquete.strMarcaMaqApliPaquete}</td>
+	       		<td align="center">${paquete.strModeloMaqApliPaquete}</td>
+			</tr>
+		  </c:forEach>
+   	 	</s:if>
+   	 	<s:else>
+			<tr>
+				<td colspan="5">Sin coincidencias</td>
+			</tr>
+   	 	</s:else>
+   	 </s:if>
+   
     </table>
     <div class="separadovertical margenderecho" align="right"> 
    		<s:url action="a_salirBuscarPaquete" var="salirBuscarPaqueteUrl"/>
