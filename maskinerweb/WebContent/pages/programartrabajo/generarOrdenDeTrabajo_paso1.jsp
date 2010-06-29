@@ -90,7 +90,11 @@
 	         					<s:param name="numtarj">${b_maq.strNumeroTarjetaEquipo}</s:param>
 	         				</s:url>
 	         				<s:a href="%{urlCargarOTPaso2}">
-	         					<img src="images/generar.png" />
+<!--	         					<img src="images/generar.png" />-->
+								
+								<s:text var="generarImgi18n" name="pages.botones.generar" />
+								<s:url var="generarImgUrl" value="%{generarImgi18n}" />
+								<img src="${generarImgUrl}" />
 	         				</s:a>
 	         			</s:if>
 	         			<s:if test="#b_maq.intEstadoAveria==3">
@@ -111,7 +115,9 @@
     </table>
     <div class="separadovertical margenderecho" align="right"> 
     	<s:a action="a_homepage">
-    		<img src="images/salir.png" />
+			<s:text var="salirImgi18n" name="pages.botones.salir" />
+			<s:url var="salirImgUrl" value="%{salirImgi18n}" />
+    		<img src="${salirImgUrl}" />
     	</s:a>
     </div>
  </body>
