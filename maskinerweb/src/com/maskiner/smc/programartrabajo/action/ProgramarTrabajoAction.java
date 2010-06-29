@@ -415,7 +415,7 @@ public class ProgramarTrabajoAction extends ActionSupport implements RequestAwar
 //						"La fecha de atención (" + FormatoFecha.formatearFecha(dtFechAtencion, "dd/MM/yyyy hh:mm a") +
 //						") debe ser posterior o igual a la fecha actual (" + 
 //						FormatoFecha.formatearFecha(dtFechaActual, "dd/MM/yyyy hh:mm a") + "). " + 
-//						"Vuela a realizar la búsqueda de técnicos disponibles con la fecha y horas correctas");
+//						"Vuela a realizar la búsqueda de técnicos disponibles con la fecha y horas actualizadas");
 				request.put("mensajeErrorAsignarTecnicos", getText("pages.programartrabajo.generarot_p3.mensajeErrorAsignarTecnicos3", 
 						new String[]{FormatoFecha.formatearFecha(dtFechAtencion, "dd/MM/yyyy hh:mm a"), 
 						FormatoFecha.formatearFecha(dtFechaActual, "dd/MM/yyyy hh:mm a")}));
