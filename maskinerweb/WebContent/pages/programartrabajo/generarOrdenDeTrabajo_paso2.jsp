@@ -68,9 +68,10 @@
       	<s:url var="buscarPaqueteUrl" action="a_mostrarBuscarPaquete">
       		<s:param name="codMaquinaria">${sessionScope.b_ordentrabajo.strCodMaquinaria}</s:param>
       	</s:url>
-      	<s:url var="imagenAgregarUrl" value="images/agregar.png"/>
+		<s:text var="agregarImgi18n" name="pages.botones.agregar" />
+		<s:url var="agregarImgUrl" value="%{agregarImgi18n}" />
       	<a href="${buscarPaqueteUrl}">
-      		<img alt="Agregar" src="${imagenAgregarUrl}" style="vertical-align:middle;">
+      		<img alt="Agregar" src="${agregarImgUrl}" style="vertical-align:middle;">
       	</a>
       	<s:if test="%{#session.b_ordentrabajo.arrPaquetesXOT.size()>0}">
 			<div class="separadoverticalsuperior">
@@ -108,16 +109,22 @@
     </fieldset>
     <div class="separadovertical margenderecho" align="right"> 
     
+		<s:text var="atrasImgi18n" name="pages.botones.atras" />
+		<s:url var="atrasImgUrl" value="%{atrasImgi18n}" />
     	<s:a action="a_cnm_irAGenerarOT_paso1">
-    		<img alt="Atrás" src="<s:url value="images/atras.png"/>"/>
+    		<img alt="Atrás" src="${atrasImgUrl}"/>
     	</s:a>
     
+ 		<s:text var="siguienteImgi18n" name="pages.botones.siguiente" />
+		<s:url var="siguienteImgUrl" value="%{siguienteImgi18n}" />
     	<s:a action="a_cnm_cargarGenerarOT_paso3">
-    		<img alt="Siguiente" src="<s:url value="images/siguiente.png"/>">
+    		<img alt="Siguiente" src="${siguienteImgUrl}"/>">
     	</s:a>
     
+ 		<s:text var="salirImgi18n" name="pages.botones.salir" />
+		<s:url var="salirImgUrl" value="%{salirImgi18n}" />
     	<s:a action="a_homepage">
-    		<img alt="Salir" src="<s:url value="images/salir.png"/>">
+    		<img alt="Salir" src="${salirImgUrl}"/>">
     	</s:a>
     </div>
     <s:if test="#request.mensajeerror1!=null">
