@@ -6,18 +6,101 @@
     <struts>
     	<package name="amm" extends="tiles-default" namespace="/">	
     	
-	   	<global-results>
-    		<result name="customError">/errorPage.jsp</result>
-    	</global-results>
+    		<action 
+    			name="a_cargarRegistroIncidente"
+    			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
+    			method="cargarNuevoIncidente" >
+     			<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
+    		</action>
+    		
+    		<action name="a_buscarCliente"
+    			class="com.maskiner.smc.maestroclientes.action.MaestroClientesAction"
+    			method="cargar" >
+    		<result name="exito" type="tiles">d_buscarCliente</result>
+    		</action>
     	
-    	<global-exception-mappings>
-    		<exception-mapping result="customError" exception="java.lang.Exception"/>
-    	</global-exception-mappings>
+    		<action name="a_devolverCliente"
+    			class="com.maskiner.smc.maestroclientes.action.MaestroClientesAction"
+    			method="devolver" >
+    		<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
+    		</action>
+    					  
+    		<action name="a_buscarMaquinaria"
+    			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
+    			method="buscarMaquinarias" >
+    		<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
+    		</action>
+    		
+    		<!-- GENERAR INFORME DE LIQUIDACION -->
+    		<action name="a_cargarInformeLiquidacion"
+    			class="com.maskiner.smc.liquidartrabajo.action.LiquidarTrabajoAction"
+    			method="cargarRegistrarInformeLiquidacionPaso1" >
+    		<result name="exito" type="tiles">d_registrarIL_busqueda</result>
+    		</action>
+			
+			<action name="a_cargarBuscarIncidenteLiquidacion"
+    			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
+    			method="cargarBuscarIncidenteLiquidacion" >
+    		<result name="exito" type="tiles">d_buscar_incidente</result>
+    		</action>
+    		
+    		<action name="a_cargarRegistrarInformeLiquidacionPaso2"
+				class="com.maskiner.smc.liquidartrabajo.action.LiquidarTrabajoAction"
+				method="cargarRegistrarInformeLiquidacionPaso2">
+			<result name="exito" type="tiles" >d_registrarIL</result>
+			</action>
+			
+			<action name="a_registrarInformeLiquidacion"
+					class="com.maskiner.smc.liquidartrabajo.action.LiquidarTrabajoAction"
+					method="registrarInformeLiquidacion">
+				<result name="exito" type="tiles">d_registrarIL_confirmacion</result>
+				<result name="fracaso" type="tiles" >d_registrarIL</result>	
+			</action>
+			
+			<!-- BUSCAR MATERIALES -->
     	
-    	
-    	
-    	
+    		<action name="a_cargarBuscarMateriales"
+				class="com.maskiner.smc.logistica.action.MaterialesAction"
+				method="cargarBuscarMateriales">
+			<result name="exito" type="tiles">d_buscarMateriales</result>
+			</action>
+			
+			<action name="a_buscarMateriales"
+				class="com.maskiner.smc.logistica.action.MaterialesAction"
+				method="buscarMateriales">
+			<result name="exito" type="tiles">d_buscarMateriales</result>
+			</action>
+			
+			<action name="a_buscarMaterialesSalir"
+				class="com.maskiner.smc.logistica.action.MaterialesAction"
+				method="buscarMaterialesSalir">
+			<result name="exito" type="tiles" >d_registrarIL</result>
+			</action>
+			
+			<action name="a_buscarMaterialesDevolverMaterial"
+				class="com.maskiner.smc.logistica.action.MaterialesAction"
+				method="buscarMaterialesDevolverMaterial">
+			<result name="exito" type="tiles">d_registrarIL</result>
+			</action>
+			
+			<action name="a_agregarMaterialAlista"
+				class="com.maskiner.smc.logistica.action.MaterialesAction"
+				method="AgregarALista">
+			<result name="exito" type="tiles">d_registrarIL</result>
+			</action>
+			
+			<action name="a_quitarMaterialDeLista"
+				class="com.maskiner.smc.logistica.action.MaterialesAction"
+				method="QuitarDeLista">
+			<result name="exito" type="tiles">d_registrarIL</result>
+			</action>
+			
+			<action name="a_buscarMaterialesSalir"
+				class="com.maskiner.smc.logistica.action.MaterialesAction"
+				method="buscarMaterialesSalir">
+			<result name="exito" type="tiles" >d_registrarIL</result>
+			</action>
+			
    		</package>
-    
-    
+     
     </struts>

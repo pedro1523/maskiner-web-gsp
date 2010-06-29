@@ -1,15 +1,11 @@
 package com.maskiner.smc.liquidartrabajo.action;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.actions.MappingDispatchAction;
+import org.apache.struts2.interceptor.ParameterAware;
+import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.maskiner.smc.gestionarincidentes.bean.RegistroIncidentesBean;
 import com.maskiner.smc.liquidartrabajo.bean.LiquidacionBean;
@@ -20,83 +16,111 @@ import com.maskiner.smc.liquidartrabajo.service.LiquidarTrabajoBusinessDelegate;
 import com.maskiner.smc.maestromaquinarias.bean.MaquinariaSucursalBean;
 import com.maskiner.smc.mylib.FormatoFecha;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
+import com.opensymphony.xwork2.ActionSupport;
 
-public class LiquidarTrabajoAction extends MappingDispatchAction {
+
+public class LiquidarTrabajoAction extends ActionSupport implements RequestAware, SessionAware, ParameterAware{
 	
-	public ActionForward registrarInformeLiquidacion(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	private String formOrigen;
+	private Map<String, Object> request;
+	private Map<String, Object> session;
+	private Map<String, String[]> parameters;
 		
-		HttpSession sesion = request.getSession();
-		
+	public String getFormOrigen() {
+		return formOrigen;
+	}
+
+	public void setFormOrigen(String formOrigen) {
+		this.formOrigen = formOrigen;
+	}
+	
+	
+	
+	public String registrarInformeLiquidacion()throws Exception {
 		LiquidacionServiceI servicio = LiquidarTrabajoBusinessDelegate.getLiquidacionService();
-		UsuarioBean usuario = (UsuarioBean) request.getSession().getAttribute("usuariologueado");
-		RegistroIncidentesBean inc = (RegistroIncidentesBean) request.getSession().getAttribute("incidente");
-		
+		UsuarioBean usuario = (UsuarioBean) session.get("usuariologueado");
+		RegistroIncidentesBean inc = (RegistroIncidentesBean) session.get("incidente");
 		
 		LiquidacionBean liq = new LiquidacionBean();
-		liq.setStrNumOrdTrabajo((String)sesion.getAttribute("strNumeroOT"));
+		liq.setStrNumOrdTrabajo((String)session.get("strNumeroOT"));
 		liq.setStrCodRegistrador(usuario.getCodigoUsuario());
-		liq.setStrDesAtenRealizada(request.getParameter("descripcionAtencionRealizada"));
-		liq.setStrAporConocimiento(request.getParameter("aporteConocimiento"));
+		liq.setStrDesAtenRealizada(parameters.get("descripcionAtencionRealizada")[0].toString());
+		liq.setStrAporConocimiento(parameters.get("aporteConocimiento")[0].toString());
 		liq.setStrNumIncidente(inc.getStrNumeroIncidente().toString());
 		liq.setIntEstLiquidacion(1);
-		try{
-		liq.setIntValHorometro(Integer.parseInt(request.getParameter("valorHorometro")));
-		}catch (Exception e) {
-			request.setAttribute("mensajeerror1", "Debe ingresar un valor en Horómetro Válido");
-			return mapping.findForward("fracaso");
-		}
 		
-		ArrayList<MaterialesXLiquidacionBean> mat = (ArrayList<MaterialesXLiquidacionBean>)sesion.getAttribute("Materiales");
+		try{
+			liq.setIntValHorometro(Integer.parseInt(parameters.get("valorHorometro")[0]));
+			}catch (Exception e) {
+				request.put("mensajeerror1",getText("pages.liquidartrabajo.registrarILPaso2.mensajeError3") );
+				return "fracaso";
+		}
+			
+		ArrayList<MaterialesXLiquidacionBean> mat = (ArrayList<MaterialesXLiquidacionBean>)session.get("Materiales");
 		if(mat==null){
-			request.setAttribute("mensajeerror1", "Debe ingresar al menos un material para registrar el Informe");
-			return mapping.findForward("fracaso");
+				request.put("mensajeerror1", getText("pages.liquidartrabajo.registrarILPaso2.mensajeError4"));
+				return "fracaso";
 		}else{
 		
 		
-			String[] HorasIni = request.getParameterValues("horaInicio");
-			String[] HorasFin = request.getParameterValues("horaFin");
+			String[] HorasIni = parameters.get("horaInicio");
+			String[] HorasFin = parameters.get("horaFin");
 			
-			ArrayList<TecnicosXLiquidacionBean> tecnicos = (ArrayList<TecnicosXLiquidacionBean>)sesion.getAttribute("tecnicos");
+			ArrayList<TecnicosXLiquidacionBean> tecnicos = (ArrayList<TecnicosXLiquidacionBean>)session.get("tecnicos");
 			
 			for(int i=0;i<HorasIni.length ;i++){
 				 TecnicosXLiquidacionBean tec = tecnicos.get(i);
 				 tec.setTmHoraInicio(FormatoFecha.getHoraDe(HorasIni[i]));
 				 tec.setTmHoraFin(FormatoFecha.getHoraDe(HorasFin[i]));
 				 if(FormatoFecha.getHoraDe(HorasFin[i])==null || FormatoFecha.getHoraDe(HorasIni[i])==null){
-						request.setAttribute("mensajeerror1", "Debe agregar las horas de todos los técnicos");
-						return mapping.findForward("fracaso");
+					request.put("mensajeerror1",getText("pages.liquidartrabajo.registrarILPaso2.mensajeError5"));
+					return "fracaso";
 				 }
-				 tec.setStrCodOrdenTrabajo((String)sesion.getAttribute("strNumeroOT"));
+				 tec.setStrCodOrdenTrabajo((String)session.get("strNumeroOT"));
 				 tecnicos.set(i, tec);
 			}
 			
-			sesion.setAttribute("idLiq", servicio.RegistrarLiquidacionYDetalle(liq, mat,tecnicos));
+			session.put("idLiq", servicio.RegistrarLiquidacionYDetalle(liq, mat,tecnicos));
 			
-			return mapping.findForward("exito");
+			return "exito";
 		}
+
 	}
 	
-	
-	public ActionForward cargarRegistrarInformeLiquidacionPaso2(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		HttpSession sesion = request.getSession();
-		String strCodOrdenTrabajo =request.getParameter("numOT");
-				
-		//obtenemos el bean MaquinariaXSucursal
+	public String cargarRegistrarInformeLiquidacionPaso1()throws Exception {
+		session.remove("incidente");
+		
+		return "exito";
+	}
+	public String cargarRegistrarInformeLiquidacionPaso2()throws Exception {
+		String strCodOrdenTrabajo = parameters.get("numOT")[0].toString();
+		
 		LiquidacionServiceI servicio = LiquidarTrabajoBusinessDelegate.getLiquidacionService();
 		
 		MaquinariaSucursalBean maq = servicio.obtenerMaquinariaXOT(strCodOrdenTrabajo);
 		ArrayList<TecnicosXLiquidacionBean> tecnicos = servicio.obtenerTecnicosXOT(strCodOrdenTrabajo);
 		
-		
-		sesion.setAttribute("tecnicos", tecnicos);
-		sesion.setAttribute("b_maquinaria", maq);
-		sesion.setAttribute("strNumeroOT", strCodOrdenTrabajo);
-		
-		return mapping.findForward("exito");
+		session.put("tecnicos", tecnicos);
+		session.put("b_maquinaria", maq);
+		session.put("strNumeroOT", strCodOrdenTrabajo);
+	
+		return "exito";
 	}
 
+
+	@Override
+	public void setRequest(Map<String, Object> request) {
+		this.request = request;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session=session;
+	}
+
+	@Override
+	public void setParameters(Map<String, String[]> parameters) {
+		this.parameters = parameters;
+	}
+	
 }
