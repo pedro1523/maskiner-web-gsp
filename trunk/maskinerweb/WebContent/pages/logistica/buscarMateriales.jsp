@@ -1,72 +1,81 @@
-<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean" %>
-<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
-<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic" %>
+    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/plantilla.dwt" codeOutsideHTMLIsLocked="false" -->
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><bean:message key="pages.gestionarincidentes.buscarCliente.titulopagina"/></title>
+<title><s:text name="pages.logistica.buscarMateriales.titulopagina" /></title>
 <link href="${cssdiseño}" rel="stylesheet" type="text/css" />
 	
 </head>
 <body class="twoColFixLtHdr">
 <div id="contenedor">
 
-    <h2 class="titulo">Buscar Materiales e Insumos</h2>
-    <html:form  method="post" action="a_buscarMateriales">
+    <h2 class="titulo"><s:text name="pages.logistica.buscarMateriales.subtitulo" /></h2>
+    <s:form  method="post" action="a_buscarMateriales">
     	<div class="separadovertical">
-    		<label for="txtTipoMaterial">Tipo Material:</label>
-    		<html:select property="tipoMaterial" styleId="txtTipoMaterial" >
-    		    <html:option value="0">(todos)</html:option>
-				<html:optionsCollection name="b_tiposMateriales" label="strTipoMaterial" value="intCodTipoMaterial"  />
-    		</html:select>
-    		<label for="txtDescripMaterial">Tipo Material:</label>
-    		<html:text property="descripMaterial" styleId="txtDescripMaterial"></html:text>
-    		<html:image src="images/buscar_azul.gif" ></html:image>
+    		<s:text name="pages.logistica.buscarMateriales.lblTipoMaterial" />
+			<s:select name="tipoMaterial" 
+		               	list="#session.b_tiposMateriales" 
+		                listKey="intCodTipoMaterial" 
+		                listValue="strTipoMaterial"/>
+
+    		<s:text name="pages.logistica.buscarMateriales.lblDescripcionMaterial" />
+    		<s:textfield name="descripMaterial"></s:textfield>
+			<s:url var="imgBuscarUrl" value="/images/buscar.png"/>
+				<s:submit type="image" src="%{imgBuscarUrl}" />
     	</div>
-    </html:form>
+    </s:form>
     <div class="separadovertical" >
        	<table style="width: 100%;" class="gridview">
    			<tr>
-	   			<th>Seleccionar</th>
-	   			<th>Código</th>
-	   			<th>Tipo</th>
-	   			<th>Descripción</th>
-	   			<th>Unidad Medida</th>
-	   			<th>Precio Unitario</th>
+	   			<th><s:text name="pages.logistica.buscarMateriales.listaMateriales.columna.Seleccionar" /></th>
+	   			<th><s:text name="pages.logistica.buscarMateriales.listaMateriales.columna.Codigo" /></th>
+	   			<th><s:text name="pages.logistica.buscarMateriales.listaMateriales.columna.Tipo" /></th>
+	   			<th><s:text name="pages.logistica.buscarMateriales.listaMateriales.columna.Descripcion" /></th>
+	   			<th><s:text name="pages.logistica.buscarMateriales.listaMateriales.columna.UnidadMedida" /> </th>
+	   			<th><s:text name="pages.logistica.buscarMateriales.listaMateriales.columna.PrecioUnitario" /> </th>
    			</tr>
-   			
-   			<logic:notEmpty name="b_materiales">
-   				<logic:iterate id="b_mat" name="b_materiales">
+   			<s:if test="%{#request.b_materiales!=null}">
+				<s:if test="%{#request.b_materiales.size()==0}">
+					<tr>
+						<td colspan="5">No hay coincidencias</td>
+					</tr>
+				</s:if>
+				<s:else>
+				<s:iterator var="b_mat" value="#request.b_materiales">			
 					<tr>
 		          		<td align="center">
-		          			<html:link action="a_buscarMaterialesDevolverMaterial?CodMaterial=${b_mat.strCodMaterial}">
-								<html:img src="images/aprob_azul.gif" />
-							</html:link>
+							<s:url var="linkDevolResult" action="a_buscarMaterialesDevolverMaterial">
+								<s:param name="CodMaterial">${b_mat.strCodMaterial}</s:param>
+							</s:url>
+							<s:url var="imgSeleccionarUrl" value="/images/aprob_azul.gif"/>
+							<a href="${linkDevolResult}">
+								<img alt="Seleccionar" src="${imgSeleccionarUrl}"/>
+							</a>
+		          			
 						</td>	
-						<td align="center"><bean:write name="b_mat" property="strCodMaterial"/> </td>
-		          		<td><bean:write name="b_mat" property="strTipoMaterial"/> </td>
-		          		<td><bean:write name="b_mat" property="strDescripMaterial"/> </td>
-		          		<td align="center"><bean:write name="b_mat" property="strUnidadMedida"/> </td>
-		          		<td align="center"><bean:write name="b_mat" property="bdPrecioUnitario"/> </td>
+						<td align="center"><s:property value="#b_mat.strCodMaterial"/> </td>
+		          		<td><s:property value="#b_mat.strTipoMaterial"/> </td>
+		          		<td><s:property value="#b_mat.strDescripMaterial"/></td>
+		          		<td align="center"><s:property value="#b_mat.strUnidadMedida"/> </td>
+		          		<td align="center"><s:property value="#b_mat.bdPrecioUnitario"/></td>
 					</tr>
-   				</logic:iterate>
-   			</logic:notEmpty>
-   			<logic:empty name="b_materiales">
-   				<tr>
-   					<td colspan="6">Sin datos que mostrar</td>
-   				</tr>
-   			</logic:empty>
-   			
+   				
+
+				</s:iterator>
+				</s:else>		
+			</s:if>
+
 		</table>
 	</div>
        
     <div align="right" class="separadovertical">
-    	<html:link action="a_buscarMaterialesSalir">
-     		<html:img src="images/salir.png" />
-    	</html:link>
+		<s:a action="a_buscarMaterialesSalir">
+			<img src="images/salir.png" />
+		</s:a>
     </div>
 	
 

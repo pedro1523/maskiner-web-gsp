@@ -103,7 +103,9 @@ public class LiquidarTrabajoAction extends ActionSupport implements RequestAware
 		session.put("tecnicos", tecnicos);
 		session.put("b_maquinaria", maq);
 		session.put("strNumeroOT", strCodOrdenTrabajo);
-	
+		
+		session.remove("b_material");
+		session.remove("Materiales");
 		return "exito";
 	}
 
