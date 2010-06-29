@@ -1,69 +1,68 @@
 package com.maskiner.smc.maestroclientes.action;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import org.apache.struts2.interceptor.ParameterAware;
+import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.maskiner.smc.maestroclientes.bean.ClienteBean;
+import com.maskiner.smc.maestroclientes.bean.SucursalBean;
 import com.maskiner.smc.maestroclientes.service.MaestroClientesBusinessDelegate;
 import com.maskiner.smc.maestroclientes.service.MaestroClientesI;
-import com.maskiner.smc.maestromaquinarias.bean.MaquinariaSucursalBean;
-import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasBusinessDelegate;
-import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasI;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.actions.MappingDispatchAction;
-
-
-public class MaestroClientesAction extends MappingDispatchAction {
-
+public class MaestroClientesAction implements RequestAware, SessionAware, ParameterAware {
 	
-	public ActionForward cargar(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	// variables privadas
+	private String formOrigen;
+	private Map<String, Object> request;
+	private Map<String, Object> session;
+	private Map<String, String[]> parameters;
+	
+	
+	public String getFormOrigen() {
+		return formOrigen;
+	}
 
-		
+	public void setFormOrigen(String formOrigen) {
+		this.formOrigen = formOrigen;
+	}
+
+	public String cargar()throws Exception {
+		/*
 		String RazSocCliente = request.getParameter("RazSocCliente");
 		if (RazSocCliente==null){
 			RazSocCliente="";
-		}
-		HttpSession sesion = request.getSession();
+		}*/
 
 		MaestroClientesI servicio = MaestroClientesBusinessDelegate.getMaestroClientesService();
 		
-		ArrayList<ClienteBean> arr =  servicio.buscarPorCliente(RazSocCliente);
+		ArrayList<ClienteBean> arr =  servicio.buscarPorCliente("");
+		request.put("arr_clientes", arr);
+			
 
-			request.setAttribute("clientes", arr);
-			return mapping.findForward("exito");
-
-		
+		return "exito";
 	}
 	
-	public ActionForward devolver(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public String devolver()throws Exception {
 
-			HttpSession sesion = request.getSession();
+		String CodCliente = parameters.get("CodCliente")[0].trim();
 		
-			String CodCliente = request.getParameter("CodCliente");
-	
-			MaestroClientesI servicio = MaestroClientesBusinessDelegate.getMaestroClientesService();
-
-				ClienteBean cliente = servicio.obtenerClientePK(CodCliente);
-	
-				sesion.setAttribute("cliente", cliente);
+		MaestroClientesI servicio = MaestroClientesBusinessDelegate.getMaestroClientesService();
 		
-				return mapping.findForward("exito");
+		ClienteBean cliente = servicio.obtenerClientePK(CodCliente);
+		
+		ArrayList<SucursalBean> arrSucursalBean = cliente.getArrSucursalBean();
+		
+		session.put("cliente", cliente);
+		session.put("arrSucursalBean", arrSucursalBean);
+		
+		return "exito";
 	}
 	
-	public ActionForward cargar2(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-
+	public String cargar2()throws Exception {
+/*
 		HttpSession sesion = request.getSession();
 		
 		String codSucursal =  "001";//request.getParameter("Sucursal");;
@@ -75,7 +74,23 @@ public class MaestroClientesAction extends MappingDispatchAction {
 		
 		
 			sesion.setAttribute("maquinarias", arr);
-			return mapping.findForward("exito");
+			return mapping.findForward("exito");*/
 		
+		return null;
+	}
+
+	@Override
+	public void setRequest(Map<String, Object> request) {
+		this.request = request;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session=session;
+	}
+
+	@Override
+	public void setParameters(Map<String, String[]> parameters) {
+		this.parameters = parameters;
 	}
 }
