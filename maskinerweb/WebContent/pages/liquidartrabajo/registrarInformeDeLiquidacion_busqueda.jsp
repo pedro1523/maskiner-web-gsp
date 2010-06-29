@@ -94,7 +94,7 @@
 						     	</s:a>
 							</s:if>
 							<s:if test="#b_OT.strEstadoAveria==4">		
-		        				<span style="color: red; font-weight: bold"><s:text name="pages.liquidartrabajo.registrarIL.detalleEquipos.Registrado.mensajeEstadoOT4" /></span>
+		        				<span style="color: green; font-weight: bold"><s:text name="pages.liquidartrabajo.registrarIL.detalleEquipos.Registrado.mensajeEstadoOT4" /></span>
 							</s:if>
         				</td>
 					</tr>
