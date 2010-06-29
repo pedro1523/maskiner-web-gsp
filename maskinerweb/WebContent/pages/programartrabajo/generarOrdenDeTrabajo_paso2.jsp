@@ -118,13 +118,13 @@
  		<s:text var="siguienteImgi18n" name="pages.botones.siguiente" />
 		<s:url var="siguienteImgUrl" value="%{siguienteImgi18n}" />
     	<s:a action="a_cnm_cargarGenerarOT_paso3">
-    		<img alt="Siguiente" src="${siguienteImgUrl}"/>">
+    		<img alt="Siguiente" src="${siguienteImgUrl}">
     	</s:a>
     
  		<s:text var="salirImgi18n" name="pages.botones.salir" />
 		<s:url var="salirImgUrl" value="%{salirImgi18n}" />
     	<s:a action="a_homepage">
-    		<img alt="Salir" src="${salirImgUrl}"/>">
+    		<img alt="Salir" src="${salirImgUrl}">
     	</s:a>
     </div>
     <s:if test="#request.mensajeerror1!=null">
