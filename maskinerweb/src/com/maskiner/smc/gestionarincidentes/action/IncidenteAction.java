@@ -16,13 +16,9 @@ import com.maskiner.smc.gestionarincidentes.service.IncidenteBusinessDelegate;
 import com.maskiner.smc.gestionarincidentes.service.IncidenteServiceI;
 import com.maskiner.smc.logistica.bean.TablaDeTablasBean;
 import com.maskiner.smc.maestroclientes.bean.ClienteBean;
-import com.maskiner.smc.maestromaquinarias.bean.MaquinariaSucursalBean;
-import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasBusinessDelegate;
-import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasI;
 import com.maskiner.smc.mylib.FormatoFecha;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 
 public class IncidenteAction implements RequestAware, SessionAware, ParameterAware {
 	
@@ -175,16 +171,15 @@ public class IncidenteAction implements RequestAware, SessionAware, ParameterAwa
 		*/
 		return null;
 	}
-
-	public String buscarIncidenteLiquidacion() throws Exception {
-		/*
-		HttpSession sesion = request.getSession();
-		sesion.setAttribute("incidente", null);
-		sesion.setAttribute("maquinarias", null);
-		sesion.setAttribute("Detalle",null);
+	public String cargarBuscarIncidenteLiquidacion() throws Exception {
+		java.sql.Date dtFechaIncid = null;
+		IncidenteServiceI isServicio = IncidenteBusinessDelegate.getIncidenteService();
+		List<RegistroIncidentesBean> lstArr = isServicio.buscarIncidentesParaLiquidacion("",dtFechaIncid, "");
+		request.put("arr_incidentes", lstArr);
+		session.remove("incidente");
+		session.remove("maquinarias");
+		session.remove("Detalle");
 		return "exito";
-		*/
-		return null;
 	}
 
 	public String devolver() throws Exception {

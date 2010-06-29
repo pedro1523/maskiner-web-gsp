@@ -1,9 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
-<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
-<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="/struts-tags" prefix="s" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.maskiner.smc.liquidartrabajo.bean.MaterialesXLiquidacionBean"%>
@@ -14,7 +11,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 
 <script type="text/javascript">
@@ -26,64 +23,64 @@
 		document.forms["frmRegistrarLiquidacion"].action="<%=request.getContextPath()%>/a_agregarMaterialAlista.do";
 		document.forms["frmRegistrarLiquidacion"].submit();
 	}
+	
+	function quitarMaterial(posMaterial){
+		document.forms["frmRegistrarLiquidacion"].action="<%=request.getContextPath()%>/a_quitarMaterialDeLista.do?posMaterial="+posMaterial;
+		document.forms["frmRegistrarLiquidacion"].submit();
+	}
 </script>
 
 </head>
 <body>
-<h2 class="titulo">Registrar Informe de Liquidación</h2>
-<html:form styleId="frmRegistrarLiquidacion"
-	action="a_registrarInformeLiquidacion">
+<h2 class="titulo">Registrar Informe de Liquidaci�n</h2>
+<s:form  id="frmRegistrarLiquidacion" action="a_registrarInformeLiquidacion" method="post">
 	<div class="separadovertical">
-<label for="txtNumOrdenTrabajo">N°Orden de Trabajo:</label> 
-<html:text property="numOrdenTrabajo" value="${strNumeroOT}" readonly="true"></html:text></div>
-	<fieldset><legend>Datos de la Maquina</legend>
+		<s:text name="pages.liquidartrabajo.registrarILPaso2.lblNumOrdenTrabajo" />
+		<span class="negrita margenderecho">${strNumeroOT}</span>
+	</div>
+	<fieldset><legend><s:text name="pages.liquidartrabajo.registrarIL.fieldsetDatosMaquinaria" /></legend>
 	<table class="separadovertical">
 		<tbody>
 			<tr>
-				<td style="padding:  5px 5px 5pt 5px;"><label>N° Tarjeta de Equipo </label></td>
-				<td width="10"> : </td>
-				<td>
-					<bean:write name="b_maquinaria" property="strNumTarjeta"/>
+				<td style="padding: 5px 5px 5pt 5px;"><s:text name="pages.liquidartrabajo.registrarILPaso2.lblNumTarjeta" />
+					<span class="negrita margenderecho">${b_maquinaria.strNumTarjeta}</span>
 				</td>
-				<td width="20"></td>
-				<td style="5pt 5px 5pt 5px;"><label>Modelo </label></td>
-				<td width="10"> : </td>
-				<td style="padding: 0pt 0pt 0pt 5px;">
-				<bean:write name="b_maquinaria" property="strModMaquinaria"/></td>
+				<td style="padding: 5pt 5px 5pt 5px;"><s:text name="pages.liquidartrabajo.registrarILPaso2.lblModelo" />
+					<span class="negrita margenderecho">${b_maquinaria.strModMaquinaria}</span>
+				</td>
 			</tr>
 			<tr>
-				<td style="padding: 5px 5px 5pt 5px;"><label>Marca </label></td>
-				<td width="10"> : </td>
-				<td>
-				<bean:write name="b_maquinaria" property="strDescMarMaq"/>
+				<td style="padding: 5px 5px 5pt 5px;">
+					<s:text name="pages.liquidartrabajo.registrarILPaso2.lblMarca" />
+					<span class="negrita margenderecho">${b_maquinaria.strDescMarMaq}</span>
 				</td>
-				<td width="20"></td>
-				<td style="padding: 5px 5px 5pt 5px;"><label>N°de Serie  </label></td>
-				<td width="10"> : </td>
-				<td><bean:write name="b_maquinaria" property="strNumSerieMaquinaria"/>  </td>
+				<td style="padding: 5px 5px 5pt 5px;">
+					<s:text name="pages.liquidartrabajo.registrarILPaso2.lblNumSerie" />
+					<span class="negrita margenderecho">${b_maquinaria.strNumSerieMaquinaria}</span>
+				</td>
 			</tr>
 		</tbody>
 	</table>
 	<table>
 		<tbody>
 			<tr>
-				<td style="height: 25px"><label>Ubicación </label></td>
-				<td width="10"> : </td>
+				<td style="height: 25px"><s:text name="pages.liquidartrabajo.registrarILPaso2.lblUbicacion" /></td>
 				<td style="padding: 0pt 0pt 0pt 5px;">
-				<bean:write name="b_maquinaria" property="strDirSucursal"/></td>
+					<span class="negrita margenderecho">${b_maquinaria.strDirSucursal}</span>
+				</td>
 			</tr>
 			<tr>
-				<td><label>Valor en Horómetro</label></td>
-				<td width="10"> : </td>
+				<td><s:text name="pages.liquidartrabajo.registrarILPaso2.lblValorHorometro" /></td>
 				<td style="padding: 0pt 0pt 0pt 5px;">
-				<html:text property="valorHorometro" readonly="false" value="${b_maquinaria.strMedHorometro}">
-				</html:text></td>
+				<s:textfield name="valorHorometro" readonly="false" value="%{#session.b_maquinaria.strMedHorometro}">
+				</s:textfield>
+				</td>
 			</tr>
 		</tbody>
 	</table>
 	</fieldset>
 	<br />
-	<fieldset style=""><legend>Datos de la Atención</legend>
+	<fieldset style=""><legend><s:text name="pages.liquidartrabajo.registrarIL.fieldsetDatosAtencion" /></legend>
 	<table>
 		<tbody>
 			<tr>
@@ -91,22 +88,26 @@
 				<table>
 					<tbody>
 						<tr>
-							<td colspan="2"><label>Materiales Adicionales
-							Utilizados</label> <input type="radio" checked="checked" name="Material"/> </td>
+							<td colspan="2"><s:text name="pages.liquidartrabajo.registrarILPaso2.lblMaterialesAdicionales" />
+								<input type="radio" checked="checked" name="Material"/> </td>
 							<td></td>
 						</tr>
 						<tr>
-							<td><label>Material:</label></td>
-							<td><html:text property="materialInterno" readonly="true" value="${b_material.strDescTipoMaterial}"></html:text></td>
-							<td><html:link href="javascript:buscarMaterialInterno();">
-								<html:img src="images/buscar_azul.gif" />
-							</html:link></td>
-						</tr>
-						<tr>
-							<td><label>Descripción:</label></td>
-							<td><html:text property="descripcionMaterialInterno" readonly="true" value="${b_material.strDescripMaterial}"></html:text>
+							<td><s:text name="pages.liquidartrabajo.registrarILPaso2.lblMaterial" /></td>
+							<td><span class="negrita margenderecho">${b_material.strDescTipoMaterial}</span></td>
+							<td>
+							<s:url var="buscarMaterialUrl" value="javascript:buscarMaterialInterno()"/>
+							<s:url var="imgBuscar" value="/images/buscar_azul.gif"/>
+						    <s:a href="%{buscarMaterialUrl}">
+						    	<img src="${imgBuscar}" style="magin-left:6px"/>
+						    </s:a>	
+		
 							</td>
-							<td></td>
+						</tr>
+						<tr>
+							<td><s:text name="pages.liquidartrabajo.registrarILPaso2.lblDescripcion" /></td>
+							<td><span class="negrita margenderecho">${b_material.strDescripMaterial}</span>
+							</td>		
 						</tr>
 					</tbody>
 				</table>
@@ -117,17 +118,17 @@
 				<table>
 					<tbody>
 						<tr>
-							<td><label>Material Externo:</label></td>
+							<td><s:text name="pages.liquidartrabajo.registrarILPaso2.lblMaterialExterno" /></td>
 							<td> <input type="radio" name="Material"/></td>
 						</tr>
 						<tr>
-							<td><label>Descripción: </label></td>
-							<td><html:text property="descripcionMaterialExterno"></html:text>
+							<td><s:text name="pages.liquidartrabajo.registrarILPaso2.lblDescripcion" /></td>
+							<td><s:textfield name="descripcionMaterialExterno"></s:textfield>
 							</td>
 						</tr>
 						<tr>
-							<td><label> Monto Unitario:</label></td>
-							<td><html:text property="montoUnitarioMaterialExterno"></html:text>
+							<td><s:text name="pages.liquidartrabajo.registrarILPaso2.lblMontoUnitario" /></td>
+							<td><s:textfield name="montoUnitarioMaterialExterno"></s:textfield>
 							</td>
 						</tr>
 					</tbody>
@@ -140,82 +141,94 @@
 	<table>
 		<tbody>
 			<tr>
-				<td width="59"><label>Cantidad: </label></td>
-				<td width="111"><html:text property="cantidadMaterial"></html:text>
+				<td width="59"><s:text name="pages.liquidartrabajo.registrarILPaso2.lblCantidad" /></td>
+				<td width="111">
+					<s:textfield name="cantidadMaterial"></s:textfield>
 				</td>
-				<td width="124"><html:link href="javascript:agregarMaterial();">
-					<html:img src="images/agregar.png" />
-				</html:link></td>
+				<td width="124">
+					<s:url var="agregarMaterialUrl" value="javascript:agregarMaterial()"/>
+					<s:url var="imgAgregar" value="/images/agregar.png"/>
+		
+				    <s:a href="%{agregarMaterialUrl}">
+				    	<img src="${imgAgregar}" style="magin-left:6px"/>
+				    </s:a>
+				</td>
 			</tr>
 		</tbody>
 	</table>
-    <logic:present name="mensajeerror" scope="request">
-	  	<div class="mensajeerror separadoverticalsuperior"><bean:write name="mensajeerror" scope="request"/> </div>
-	</logic:present>
-	<br />
+	<s:if test="#request.mensajeerror!=null">
+	  	<div class="mensajeerror separadoverticalsuperior"><s:property value="#request.mensajeerror"/></div>
+    </s:if>
+	<br/>
 	<table cellpadding="5" cellspacing="0" class="gridview" width="100%">
 		<tbody>
 			<tr align="center">
-				<th>Item</th>
-				<th>Tipo</th>
-				<th>Descripción</th>
-				<th>Cantidad</th>
-				<th>Prec.Uni (S/.)</th>
-				<th>Total (S/.)</th>
+				<th><s:text name="pages.liquidartrabajo.registrarILPaso2.listaMateriales.cabecera.Item" /></th>
+				<th><s:text name="pages.liquidartrabajo.registrarILPaso2.listaMateriales.cabecera.Tipo" /></th>
+				<th><s:text name="pages.liquidartrabajo.registrarILPaso2.listaMateriales.cabecera.Descripcion" /></th>
+				<th><s:text name="pages.liquidartrabajo.registrarILPaso2.listaMateriales.cabecera.Cantidad" /></th>
+				<th><s:text name="pages.liquidartrabajo.registrarILPaso2.listaMateriales.cabecera.PrecioUni" /></th>
+				<th><s:text name="pages.liquidartrabajo.registrarILPaso2.listaMateriales.cabecera.Total" /></th>
+				<th></th>
 			</tr>
-			<tr>
-     			<c:forEach var="material" items="${Materiales}">
-     				<tr>
-						<td>${material.intItem}</td>
-     					<td>${material.strDescripTipoMaterial}</td>
-     					<td>${material.strDescripMaterial}</td>
-     					<td>${material.intCantidad}</td>
-						<td>${material.decPrecioUnitario}</td>
-						<td>${material.decMontoTotal}</td>
-     				</tr>
-     			</c:forEach>
-     		</tr>
-				
-
+			
+     		<s:iterator var="material" value="#session.Materiales" >
+				<tr>
+					<td><s:property value="#material.intItem"/></td>					
+					<td><s:property value="#material.strDescripTipoMaterial"/></td>
+					<td><s:property value="#material.strDescripMaterial"/></td>
+					<td><s:property value="#material.intCantidad"/></td>
+					<td><s:property value="#material.decPrecioUnitario"/></td>
+					<td><s:property value="#material.decMontoTotal"/></td>
+					<td>
+					<a href="javascript:quitarMaterial('${material.intItem}')">
+            			<img src="<s:url value="/images/quitar.gif"/>" />
+            		</a>
+					</td>     			
+     			</tr> 
+    		</s:iterator>
 		</tbody>
 	</table>
 	<br />
-	<span class="titulotabla">Ingrese las horas trabajadas por los
-	técnicos</span>
+	<span class="titulotabla"><s:text name="pages.liquidartrabajo.registrarILPaso2.lblIngreseHoras" /></span>
 	<table cellpadding="5" cellspacing="0" class="gridview">
 		<tr>
-			<th align="center">Nombre</th>
-			<th align="center">Hora Inicio</th>
-			<th align="center">Hora Fin</th>
+			<th align="center"><s:text name="pages.liquidartrabajo.registrarILPaso2.listaTecnicos.cabecera.Nombre" /></th>
+			<th align="center"><s:text name="pages.liquidartrabajo.registrarILPaso2.listaTecnicos.cabecera.HoraInicio" /></th>
+			<th align="center"><s:text name="pages.liquidartrabajo.registrarILPaso2.listaTecnicos.cabecera.HoraFin" /></th>
 		</tr>
 		<tr>
-   			<c:forEach var="tecnico" items="${tecnicos}">
+			<s:iterator var="tecnico" value="#session.tecnicos" >
    				<tr>
-	   				<td>${tecnico.strNombreCompleto}</td>
-					<td><html:text property="horaInicio" value=""></html:text></td>
-					<td><html:text property="horaFin" value=""></html:text></td>
+	   				<td><s:property value="#tecnico.strNombreCompleto"/></td>
+					<td><s:textfield name="horaInicio"></s:textfield> </td>
+					<td><s:textfield name="horaFin"></s:textfield></td>
    				</tr>
-   			</c:forEach>
+			</s:iterator>
      	</tr>
 	</table>
 	<br />
-	<label>Descripción de Atención Realizada:</label> <br />
-	<html:textarea property="descripcionAtencionRealizada"
-		style="width: 97%; height: 50px;"></html:textarea> <br />
+	<s:text name="pages.liquidartrabajo.registrarILPaso2.lblDescripcionAtencion" />
 	<br />
-	<label>Aporte de Conocimiento:</label> <br />
-	<html:textarea property="aporteConocimiento"
-		style="width: 97%; height: 50px;"></html:textarea></fieldset>
-    <logic:present name="mensajeerror1" scope="request">
-	  	<div class="mensajeerror separadoverticalsuperior"><bean:write name="mensajeerror1" scope="request"/> </div>
-	</logic:present>
+	<s:textarea name="descripcionAtencionRealizada" cssStyle="width: 97%; height: 50px;"></s:textarea> 
+	<br />
+	<br />
+	<s:text name="pages.liquidartrabajo.registrarILPaso2.lblAporteConocimiento" />
+	<br />
+	<s:textarea name="aporteConocimiento" cssStyle="width: 97%; height: 50px;"></s:textarea>
+	</fieldset>
+    <s:if test="#request.mensajeerror1!=null">
+	  	<div class="mensajeerror separadoverticalsuperior"><s:property value="#request.mensajeerror1"/></div>
+    </s:if>
 	<div class="separadoverticalsuperior" align="right">
-		<html:image src="images/registrar.png"></html:image> 
-		<html:link action="a_homepage">
-			<html:img src="images/salir.png" />
-		</html:link>
+		<s:url var="imgRegistrarUrl" value="/images/registrar.png"/>
+				<s:submit type="image" src="%{imgRegistrarUrl}" />
+	
+		<s:a action="a_homepage">
+	    		<img src="images/salir.png" />
+	    </s:a>
 	</div>
-</html:form>
+</s:form>
 
 </body>
 </html>

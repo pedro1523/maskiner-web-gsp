@@ -1,15 +1,13 @@
-<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
-<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
-<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
 <%@ page import="java.util.Date"%>
 <%@ page import="com.maskiner.smc.mylib.FormatoFecha" %>
 <%@ page import="com.maskiner.smc.seguridad.bean.UsuarioBean"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <%
@@ -23,20 +21,23 @@
 <head>
 <fmt:formatDate value="<%=new Date() %>" type="date" pattern="dd/MM/yyyy" var="fecha" />
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
 
-<h2>Generar Informe de Liquidaci贸n</h2>
-     <html:form action="a_cargarInformeLiquidacion" method="post">
+<h2>Generar Informe de Liquidaci髇</h2>
+     <s:form action="a_cargarBuscarIncidenteLiquidacion?formOrigen=RegistrarLiquidacion" method="post">
         <div>
             <table border="0" style="width: 617px">
               <tr>
-                <td align="left" style="width: 300px">Registrador : 
-                <html:text property="Registrador" value="${registrador}" style="width: 200px" readonly="true"></html:text></td>
-                <td align="center" style="width: 250px">Fecha :
-                  <html:text property="Fecha" value="${fechaactual}" readonly="true"></html:text>
+                <td align="left" style="width: 300px"> 
+                	<s:text name="pages.liquidartrabajo.registrarIL.lblCodRegistrador" />
+				    <span class="negrita margenderecho">${registrador}</span>
+				</td>
+                <td align="center" style="width: 250px"> 
+                	<s:text name="pages.liquidartrabajo.registrarIL.lblFechaRegistro" />
+      				<span class="negrita">${fechaactual}</span>
                 </td>
               </tr>
             </table>
@@ -45,86 +46,76 @@
         <br/>
 
         <fieldset style="width:500px;">
-          <legend>Datos del incidente</legend>
-          <table>
-            <tr>
-              <td width="98"><label for="NumIncidente">N掳 de Incidente:</label></td>
-              <td width="40" style="padding: 0pt 0pt 0pt 5px;">
-				<html:text property="NumIncidente" value="${incidente.strNumeroIncidente}"></html:text>
-			  </td>
-              <td width="20">
-				<html:link href="a_cargarBuscarIncidenteLiquidacion.do?formOrigen=RegistrarLiquidacion">
-					<img src="images/buscar_azul.gif" width="18" height="18" alt="Buscar" />
-				</html:link>
-			  </td>
-            </tr>
-          </table>
-          <br />
-          <table>
-            <tr>
-              <td width="44"><label for="Cliente">Cliente:</label></td>
-              <td width="169" style="padding: 0pt 0pt 0pt 5px;">
-				<html:text property="Cliente" value="${incidente.strCodigoCliente}"></html:text>
-			  </td>
-              <td width="32"></td>
-              <td width="116"><label for="especialidadMed">Fecha de Atenci贸n:</label></td>
-              <td width="69" style="padding: 0pt 0pt 0pt 5px;">	
-				<html:text property="FechaAtencion" value="${incidente.dtFechaIncidente}"></html:text>
-			  </td>
-            </tr>
-          </table>
+          <legend><s:text name="pages.liquidartrabajo.registrarIL.lblFechaRegistro" /></legend>
+          	<div class="separadovertical">
+        	 <s:text name="pages.liquidartrabajo.registrarIL.lblCodIncidente" />
+     			<span class="negrita margenderecho"><s:property value="#session.incidente.strNumeroIncidente"/></span>
+				<s:submit type="image" src="images/buscar_azul.gif"/>
+		  	</div>
+			<div class="separadovertical">			
+                <s:text name="pages.liquidartrabajo.registrarIL.lblRazSocCliente" />
+				<span class="negrita margenderecho"><s:property value="#session.incidente.strCodigoCliente"/></span>
+			</div>
+			<div class="separadovertical">
+				<s:text name="pages.liquidartrabajo.registrarIL.lblFechaAtencion" />
+				<span class="negrita margenderecho"><s:property value="#session.incidente.dtFechaIncidente"/></span>
+			</div>
         </fieldset>
         <br />
         <fieldset>
-          <legend>Detalle de  Orden de Trabajo por Incidente</legend>
+          <legend> <s:text name="pages.liquidartrabajo.registrarIL.legendDetalle" /></legend>
           <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
             <tr>
-              <th width="17%">Orden de Trabajo</th>
-              <th width="27%">N潞Tarjeta de Equipo</th>
-              <th width="25%">Clasificaci贸n Aver铆a</th>
-              <th width="11%">Registrado</th>
+              <th width="17%"><s:text name="pages.liquidartrabajo.registrarIL.detalleEquipos.cabecera.OrdenTrabajo" /></th>
+              <th width="27%"><s:text name="pages.liquidartrabajo.registrarIL.detalleEquipos.cabecera.NummTarjeta" /></th>
+              <th width="25%"><s:text name="pages.liquidartrabajo.registrarIL.detalleEquipos.cabecera.ClasificacionAveria" /></th>
+              <th width="11%"><s:text name="pages.liquidartrabajo.registrarIL.detalleEquipos.cabecera.Registrado" /></th>
             </tr>
-           
-			<logic:present name="incidente">
+           <s:if test="%{#session.incidente != null}">
+				<s:if test="%{#session.incidente.arrOrdenDeTrabajoXIncidente.size()>0}">
 			<c:set var="itm" value="1" />
-				<logic:iterate id="b_OT" name="incidente" property="arrOrdenDeTrabajoXIncidente">
+				<s:iterator var="b_OT" value="#session.incidente.arrOrdenDeTrabajoXIncidente"  >
+				
 					<tr>
-						<td><bean:write name="b_OT" property="strNumeroOT" /></td>
-						<td><bean:write name="b_OT" property="strNumeroTarjeta" /></td>
-						<td><bean:write name="b_OT" property="strTipoAveria"/></td>
+						<td><s:property value="#b_OT.strNumeroOT"/></td>
+						<td><s:property value="#b_OT.strNumeroTarjeta"/></td>
+						<td><s:property value="#b_OT.strTipoAveria"/></td>
 	         			<td align="center">
-		        			<logic:equal name="b_OT" property="strEstadoAveria" value="1">
-		        				<span style="color: red; font-weight: bold">O/T inspecci贸n no generada</span>
-		        			</logic:equal>
-		        			<logic:equal name="b_OT" property="strEstadoAveria" value="2">
-			 			    	<span style="color: red; font-weight: bold">O/T no generada</span>
-		        			</logic:equal>
-		         			<logic:equal name="b_OT" property="strEstadoAveria" value="3">
-								<html:link action="a_cargarRegistrarInformeLiquidacionPaso2?numOT=${b_OT.strNumeroOT}">
-						    		<html:img src="images/generar.png"/>
-						    	</html:link>
-							</logic:equal>
-		        			<logic:equal name="b_OT" property="strEstadoAveria" value="4">
-								<html:link action="a_cargarRegistrarInformeLiquidacionPaso2?numOT=${b_OT.strNumeroOT}">
-						    		<html:img src="images/generar.png"/>
-								</html:link>
-			 			    	<span style="color: green; font-weight: bold">Inf.Liq. generado</span>
-		        			</logic:equal>
+							<s:if test="#b_OT.strEstadoAveria==1">		
+		        				<span style="color: red; font-weight: bold"><s:text name="pages.liquidartrabajo.registrarIL.detalleEquipos.Registrado.mensajeEstadoOT1" /></span>
+							</s:if>
+		        			<s:if test="#b_OT.strEstadoAveria==2">		
+		        				<span style="color: red; font-weight: bold"><s:text name="pages.liquidartrabajo.registrarIL.detalleEquipos.Registrado.mensajeEstadoOT2" /></span>
+							</s:if>
+							<s:if test="#b_OT.strEstadoAveria==3">		
+								<s:a action="a_cargarRegistrarInformeLiquidacionPaso2" >
+									<img src="images/generar.png" />
+							      	<s:param name="numOT" >${b_OT.strNumeroOT}</s:param>							     
+						     	</s:a>
+							</s:if>
+							<s:if test="#b_OT.strEstadoAveria==4">		
+		        				<span style="color: red; font-weight: bold"><s:text name="pages.liquidartrabajo.registrarIL.detalleEquipos.Registrado.mensajeEstadoOT4" /></span>
+							</s:if>
         				</td>
 					</tr>
 					<c:set var="itm" value="${itm+1}"  />
-				</logic:iterate>
-			</logic:present>
-			<logic:empty name="incidente">
-				  	<tr>
-				  		<td colspan="7" align="center">Sin Ordenes que mostrar</td>
-				  	</tr>
-			</logic:empty>
+				</s:iterator>
+				</s:if>
+      	<s:else>
+	 	  	<tr>
+		  		<td colspan="7"><s:text name="pages.liquidartrabajo.registrarIL.listaOrdenes.sinDatosParaMostrar" /></td>
+		  	</tr>
+      	</s:else>
+			</s:if>
 
           </table>
         </fieldset>
-        <div class="separadovertical margenderecho" align="right"> <html:link action="a_homepage"><img src="images/salir.png" alt="Salir" width="71" height="25" border="0" /></html:link> </div>
-      </html:form>
+        <div class="separadovertical margenderecho" align="right"> 
+	        <s:a action="a_homepage">
+	    		<img src="images/salir.png" />
+	    	</s:a>
+		</div>
+      </s:form>
 
 </body>
 </html>
