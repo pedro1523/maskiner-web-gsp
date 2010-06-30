@@ -14,11 +14,17 @@
     		<exception-mapping result="customError" exception="java.lang.Exception"/>
     	</global-exception-mappings>
 
-		<action name="a_cpm_OTIAsignar">
-			<!--forward="d_generarOT_inspeccion_asignar" r/>  -->
-			<result type="tiles">d_generarOT_inspeccion_asignar</result>
+		<!--<action name="a_cpm_OTIAsignar"
+				class="com.maskiner.smc.programartrabajo.action.ProgramarOTInspeccionAction"
+    			method="cargarOTIAsignar" >			
+			<result name="exito" type="tiles">d_generarOT_inspeccion_asignar</result>
 		</action>
-		<action 
+		
+		--><action name="a_cpm_OTIAsignar">			
+			<result  type="tiles">d_generarOT_inspeccion_asignar</result>
+		</action>
+		
+	<action 
     			name="a_cpm_cargarBuscarIncidente1"	
     			class="com.maskiner.smc.programartrabajo.action.ProgramarOTInspeccionAction"
     			method="cargarBuscarIncidente" >	
@@ -82,8 +88,8 @@
 		<action name="a_cpm_registraOrdenTrabajoInspeccion"
 			class="com.maskiner.smc.programartrabajo.action.ProgramarOTInspeccionAction"
 			method="registrar">
-			<result name="exito" type="tiles">d_generarOT_inspeccion_principal
-			</result>
+			<result name="exito" type="tiles">d_generarOT_inspeccion_principal</result>
+			<result name="exito1" type="tiles">d_generarOT_inspeccion_asignar</result>
 		</action>
 
 		<!-- Action - Programar OTInspeccion  FIN -->
@@ -107,12 +113,19 @@
 			class="com.maskiner.smc.facturacion.action.FacturacionAction" method="mostrar">
 			<result name="exito" type="tiles">d_mostrarPrefactura</result>
 		</action>
-		--><!-- FACTURACION --><!--
+		
+		--><!-- FACTURACION -->
+		
+		<action name="a_cpm_cargarPrefactura">
+    			<result type="tiles">d_prefactura_buscar</result>
+        </action>
+		
 		<action name="a_cpm_buscarPrefacturas"
-			class="com.maskiner.smc.facturacion.action.FacturacionAction" method="buscar">
+			class="com.maskiner.smc.facturacion.action.FacturacionAction"
+			 method="buscar">
 			<result name="exito" type="tiles">d_prefactura_buscar</result>
 		</action>
-
+		<!--
 		<action name="a_cpm_aprobarPrefactura"
 			class="com.maskiner.smc.facturacion.action.FacturacionAction" method="aprobar">
 			<result name="exito" type="tiles">d_prefactura_aprobada_confirmacion
