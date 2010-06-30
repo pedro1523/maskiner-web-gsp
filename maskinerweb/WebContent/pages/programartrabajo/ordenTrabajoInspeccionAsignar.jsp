@@ -3,24 +3,38 @@
 
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib uri="/struts-jquery-tags" prefix="sj" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<sj:head jqueryui="true"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<c:url var="jsCalendar" value="/javascript/triga_calendar/calendar_pe.js" />
-	<c:url var="jsCalendarCss" value="/javascript/triga_calendar/calendar.css" />
-	<c:url var="jsCalendarImagePath" value="/javascript/triga_calendar/img/" />
-	<script language="JavaScript" src="${jsCalendar}"></script>
-	<link rel="stylesheet" href="${jsCalendarCss}">
-<title><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.titulopagina" /></title>
 
+<title><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.titulopagina" /></title>
+<script type="text/javascript">
+	function validarCampos(){
+		var fecha 	= document.forms["frmoti"].frmoti.fechaInspeccion.value;
+		var hInicio = document.forms["frmoti"].frmoti.horaInicio.value;
+		var hFin	= document.forms["frmoti"].frmoti.horaFin.value;
+		
+		if(fecha.equals("")){
+			alert('Ingrese Fecha de Inspección');
+			return false;
+		}
+		if(hInicio>=hFin){
+			alert('Hora inicio no puede ser mayo o igual a la hora fin');
+			return false;
+		}
+		
+		return true;
+	}
+</script>
 </head>
 <body>
 
 	<%if(request.getParameter("numTarjeta")!=null)
 	session.setAttribute("tarjetaEquipo",request.getParameter("numTarjeta") );	%>
-<s:form action="a_cpm_ProgramarOTInspeccionAsignarAction" method="post" >
+<s:form action="a_cpm_ProgramarOTInspeccionAsignarAction" method="post"  name="frmoti" >
 
 
 <h2><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.titulo" /></h2>
@@ -52,20 +66,20 @@
               <td align="right"><b><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.fechainspeccion" /></b></td>
               <td>
               <div align="left"> 
-              <sj:datepicker name="fechaInspeccion" 
-							 displayFormat="dd/mm/yy" 
-							 changeYear="true"	    />
-              		<!--<sj:datepicker name="fechaIncidente"
+             
+              		<sj:datepicker name="fechaInspeccion"
 							   buttonImageOnly="true"
 							   id="fechaInspeccion"
 							   size="10" 
 							   displayFormat="dd/mm/yy"
 							   changeYear="true"
 							   changeMonth="true"
-							   cssStyle="margin-right:5px" />
+							   cssStyle="margin-right:5px" 
+							   value="%{#session.fechaInspeccion}"
+							     />
               
              
-               --></div>
+               </div>
 			  </td>
               <td align="right"><b><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.lugaratencion" /></b></td>
               
@@ -81,7 +95,7 @@
               <td class="style2" align="right"><b><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.horainicio" /> </b></td>
               <td>
               
-              <s:select name="OTIBean.strHorInicio"
+              <s:select name="horaInicio"
               		list="#application.l_hora" 
               		listKey="codigo"
               		listValue="codigo">                
@@ -89,7 +103,7 @@
               </s:select>
               </td>
               <td align="right"><b><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.horafin" /></b></td>
-              <td><s:select name="OTIBean.strHorFin"
+              <td><s:select name="horaFin"
               		list="#application.l_hora" 
               		listKey="codigo"
               		listValue="codigo">                
@@ -97,15 +111,21 @@
               </s:select>
               </td>
               <td>
-              <s:submit value="Ver Tecnicos"></s:submit>
+              <s:submit value="Ver Tecnicos" type="image" src="images/ver_tecnicos.png" onclick="javascript:validarCampos()"></s:submit>
+              
 				<!--<html:image src="images/ver_tecnicos.png"></html:image>-->
               </td>
+            </tr>
+            <tr>
+            	<td colspan="4">
+            		<font color="red">${sessionScope.mensajeError}  </font>
+            	</td>
             </tr>
           </table>
         </fieldset>
 </s:form> 
 <!--<font color="red"><s:property value="requestScope.sms"/> </font>-->
-<s:form action="a_registraOrdenTrabajoInspeccion">
+<s:form action="a_cpm_registraOrdenTrabajoInspeccion">
         <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
           <thead>
           <span class="titulotabla">
@@ -123,7 +143,7 @@
           
           <s:iterator var="tecnico" value="#session.listTecnicos">
           	<tr>
-          		 <td align="center"><s:radio list="#tecnico.strCodTecnico" name="chkTecnico" ></s:radio>  </td>
+          		 <td align="center"><input type="radio" name="chkTecnico" value="${tecnico.strCodTecnico}"> </td>
           		 <td align="center"><s:property value="#tecnico.strApellidoPaterno"/> </td>
 	          	 <td align="center"><s:property value="#tecnico.strApellidoMaterno"/>   </td>
 	          	 <td align="center"><s:property value="#tecnico.strNombre"/> </td>
@@ -136,13 +156,17 @@
           
           
         </table>
-        <!--<div class="separadovertical" align="right"> 			  
-			<html:image src="images/asignar.png" onclick="verTecnico"> </html:image> 
+      	<div class="separadovertical" align="right"> 	
+      		<s:submit src="images/asignar.png" type="image"></s:submit>
+      		<s:a href="a_cancelarOTIAsignar">
+      			<img src="images/cancelar.png" alt="Cancelar" width="71" height="25" border="0" />
+      		</s:a>	  
+			<!--<html:image src="images/asignar.png" onclick="verTecnico"> </html:image> 
 			<html:link action="a_cancelarOTIAsignar">
 				<img src="images/cancelar.png" alt="Cancelar" width="71" height="25" border="0" />
 			</html:link> 
-		 </div>
+		 --></div>
      
---></s:form>
+</s:form>
 </body>
 </html>
