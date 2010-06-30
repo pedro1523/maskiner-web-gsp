@@ -137,10 +137,6 @@
 		    	<img src="${imgBuscDispTecUrl}" style="magin-left:6px"/>
 		    </s:a>
 		    
-	      	<div class="mensajeerror separadovertical">
-	      		<s:actionerror/>
-	      	</div>
-	      
 	     	<s:if test="%{#request.mensajeErrorBuscarDisponibilidadTecnicos!=null}">
 		      	<div class="mensajeerror separadovertical">
 		      		<s:property value="#request.mensajeErrorBuscarDisponibilidadTecnicos" />
@@ -189,9 +185,10 @@
 	      </div>    	
 	      <div id="div_asignacion">
 	        <div class="separadovertical">
-	        	<s:url var="imgAsignarUrl" value="/images/asignar.png" />
+		 		<s:text var="asignarImgi18n" name="pages.botones.asignar" />
+				<s:url var="asignarImgUrl" value="%{asignarImgi18n}" />
 	        	<s:a href="javascript:enviarSubmitAsignarTecnicosAPaquete()">
-	        		<img src="${imgAsignarUrl}" />
+	        		<img src="${asignarImgUrl}" />
 	        	</s:a>
 	        	<s:if test="%{#request.mensajeErrorAsignarTecnicos!=null}">
 	      			<div class="mensajeerror separadovertical">
@@ -257,12 +254,20 @@
 		 	</div>
 		</s:if>
 		<div class="separadovertical" align="right">
+			<s:text var="atrasImgi18n" name="pages.botones.atras" />
+			<s:url var="atrasImgUrl" value="%{atrasImgi18n}" />
 			<s:a action="a_cnm_irAGenerarOT_paso2">
-				<img src="<s:url value="/images/atras.png"/>" />
+				<img src="${atrasImgUrl}" />
 			</s:a>
-			<s:submit type="image" src="images/generar.png" />
+			
+			<s:text var="generarImgi18n" name="pages.botones.generar" />
+			<s:url var="generarImgUrl" value="%{generarImgi18n}" />
+			<s:submit type="image" src="%{#generarImgUrl}"/>
+			
+	 		<s:text var="salirImgi18n" name="pages.botones.salir" />
+			<s:url var="salirImgUrl" value="%{salirImgi18n}" />
 			<s:a action="a_homepage">
-				<img src="<s:url value="/images/salir.png"/>" />
+				<img src="${salirImgUrl}" />
 			</s:a>
 		</div>
     </s:form>

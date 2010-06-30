@@ -136,8 +136,11 @@
 			        					${b_maq.strNumeroTarjetaEquipo}
 			        				</s:param>
 			        			</s:url>
+			        			
+								<s:text var="generarImgi18n" name="pages.botones.generar" />
+								<s:url var="generarImgUrl" value="%{generarImgi18n}" />
 			        			<a href="${cargarGenerarOTPaso2Url}">
-			        				<img alt="Generar" src="<s:url value="/images/generar.png" />" />
+			        				<img alt="Generar" src="${generarImgUrl}" />
 			        			</a>
 			        		</td>
 						</tr>
@@ -149,8 +152,10 @@
 		</s:if>
     </s:if>
     <div class="separadovertical" align="right">
-	  	<s:a action="a_homepage">
-			<img src="<s:url value="/images/salir.png"/>" />
+ 		<s:text var="salirImgi18n" name="pages.botones.salir" />
+		<s:url var="salirImgUrl" value="%{salirImgi18n}" />
+ 	  	<s:a action="a_homepage">
+			<img src="${salirImgUrl}" />
 		</s:a>
     </div>
   </form>
