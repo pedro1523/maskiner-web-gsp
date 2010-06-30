@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
-<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
-<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib uri="/struts-jquery-tags" prefix="sj" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -64,15 +63,15 @@
           <th align="center">Importe</th>
         </tr>
 
-<c:forEach var="lista" items="${sessionScope.a_lista}" >
+<s:iterator var="lista" value="#sessionScope.a_lista" >
 	<tr>
 		<td colspan="5">
 			<h3>Maquinaria: ${lista.strNumTarjeta}</h3>
 		</td>
 	</tr>
 
-		<c:forEach var="listDetalle" items="${sessionScope.a_listaDetalle}" >
-				<c:if test="${lista.strLiquidacion == listDetalle.strNumLiquidacion}"> 
+		<s:iterator var="listDetalle" value="#sessionScope.a_listaDetalle" >
+				<s:if test="%{#lista.strLiquidacion == #listDetalle.strNumLiquidacion}"> 
 					
       				<tr>
 						<td align="center">${listDetalle.strCodigo}</td>
@@ -81,53 +80,57 @@
 						<td align="right">${listDetalle.decPrecio}</td>
 						<td align="right">${listDetalle.decImporte}</td>
 					</tr>
-						<c:if test="${listDetalle.strCodigo=='MA0000'}">
-							<c:set var="totalAdicionales" value="${totalAdicionales + listDetalle.decImporte}" />
-						</c:if>
-						<c:if test="${listDetalle.strCodigo!='MA0000' && listDetalle.strFlag!='TC' }">
-							<c:set var="totalMateriales" value="${totalMateriales+listDetalle.decImporte}" />
-						</c:if>
-						<c:if test="${listDetalle.strFlag=='TC'}" >
-							<c:set var="totalServicio" value="${totalServicio+listDetalle.decImporte}" />
-						</c:if> 
+						<s:if test="%{#listDetalle.strCodigo=='MA0000'}">
+							<s:set var="totalAdicionales" value="#{totalAdicionales + listDetalle.decImporte}" />
+						</s:if>
+						<s:if test="%{#listDetalle.strCodigo!='MA0000' && listDetalle.strFlag!='TC' }">
+							<s:set var="totalMateriales" value="#{totalMateriales+listDetalle.decImporte}" />
+						</s:if>
+						<s:if test="%{#listDetalle.strFlag=='TC'}" >
+							<s:set var="totalServicio" value="#{totalServicio+listDetalle.decImporte}" />
+						</s:if> 
 							
-				 </c:if>
+				 </s:if>
 							
-		</c:forEach>
+		</s:iterator>
 			
 			<tr>
 			          <td colspan="3" rowspan="4" align="center" style="border-left:none; border-bottom:none;">&nbsp;</td>
 			          <td width="118" align="right" class="gridview1 subtotalheader">Total Materiales</td>
-			          <td width="120" align="center" class="gridview1 subtotalcontent"><c:out value="${totalMateriales}"></c:out> </td>
+			          <td width="120" align="center" class="gridview1 subtotalcontent">${totalMateriales}</td>
 			        </tr>
 			        <tr>
 			          <td align="right" class="gridview1 subtotalheader">Total Servicios</td>
-			          <td align="center" class="gridview1 subtotalcontent"><c:out value="${totalServicio}"></c:out> </td>
+			          <td align="center" class="gridview1 subtotalcontent">${totalServicio}</td>
 			        </tr>
 			        <tr>
 			          <td align="right" class="gridview1 subtotalheader">Total Adicionales</td>
-			          <td align="center" class="gridview1 subtotalcontent"><c:out value="${totalAdicionales}"></c:out> </td>
+			          <td align="center" class="gridview1 subtotalcontent">"${totalAdicionales}" </td>
 			        </tr>
-			        <tr><c:set var="subTotal" value="${totalMateriales + totalAdicionales + totalServicio}" />
+			        <tr><s:set var="subTotal" value="#{totalMateriales + totalAdicionales + totalServicio}" />
 			          <td align="right" class="gridview1 subtotalheader">SubTotal</td>
 			          <td align="center" class="gridview1 subtotalcontent">${subTotal}</td>
 			   </tr>
 <br>
-<c:set var="total" value="${total + subTotal}" />
-<c:set var="totalAdicionales" value="0" />	
-<c:set var="totalMateriales" value="0" />
-<c:set var="totalServicio" value="0" />
+<s:set var="total" value="#{total + subTotal}" />
+<s:set var="totalAdicionales" value="0" />	
+<s:set var="totalMateriales" value="0" />
+<s:set var="totalServicio" value="0" />
 
-</c:forEach>  
+</s:iterator>  
     
       </table>
 <div align="left"> 
-<html:form action="a_aprobarPrefactura?monto=${total}">
+<s:url action="a_aprobarPrefactura" var="urlForm">
+	<s:param name="monto">${total}</s:param>
+</s:url>
+<s:form  action="%{#urlForm}" >
+
 Rechazar<input type="checkbox" value="1"  name="chkObservacion"/> <font color="Red">${requestScope.mensaje} </font><br>
 observacion :<br>
 <textArea  cols="30" rows="5" name="observacion"></textarea> 
 
-</div>
+
 <div class="separadovertical margenderecho" align="right">
       <table  cellpadding="5" cellspacing="0" class="gridview1 separadovertical">
         <tr>
@@ -141,17 +144,15 @@ observacion :<br>
 
       
        <div class="separadovertical margenderecho" align="right">
-			<html:image src="images/guardar.png" >
-				
-			 </html:image>			
+       <s:submit type="image" src="images/guardar.png"></s:submit>	
  
 		<a href="index.html">
 			<img src="images/salir.png" alt="Salir" width="71" height="25" border="0" />
 		</a>
 	</div>
-</html:form>
-     </div>
- 
 
+    
+ </s:form>
+ </div>
 </body>
 </html>
