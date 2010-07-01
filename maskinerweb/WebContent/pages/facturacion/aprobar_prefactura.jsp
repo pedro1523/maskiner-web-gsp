@@ -63,56 +63,64 @@
           <th align="center">Importe</th>
         </tr>
 
-<s:iterator var="lista" value="#sessionScope.a_lista" >
+<s:iterator var="lista" value="#session.a_lista" >
 	<tr>
 		<td colspan="5">
 			<h3>Maquinaria: ${lista.strNumTarjeta}</h3>
 		</td>
 	</tr>
 
-		<s:iterator var="listDetalle" value="#sessionScope.a_listaDetalle" >
+		<s:iterator var="listDetalle" value="#session.a_listaDetalle" >
 				<s:if test="%{#lista.strLiquidacion == #listDetalle.strNumLiquidacion}"> 
 					
       				<tr>
-						<td align="center">${listDetalle.strCodigo}</td>
-						<td align="center">${listDetalle.strDescripcion}</td>
-						<td align="right">${listDetalle.intCantidad}</td>
-						<td align="right">${listDetalle.decPrecio}</td>
-						<td align="right">${listDetalle.decImporte}</td>
+						<td align="center"><s:property value="#listDetalle.strCodigo"/></td>
+						<td align="center"><s:property value="#listDetalle.strDescripcion"/></td>
+						<td align="right"><s:property value="#listDetalle.intCantidad"/></td>
+						<td align="right"><s:property value="#listDetalle.decPrecio"/></td>
+						<td align="right"><s:property value="#listDetalle.decImporte"/></td>
 					</tr>
-						<s:if test="%{#listDetalle.strCodigo=='MA0000'}">
-							<s:set var="totalAdicionales" value="#{totalAdicionales + listDetalle.decImporte}" />
+						<s:if test="%{#listDetalle.strCodigo =='MA0000'}">
+							<s:set var="totalAdicionales" value="%{#totalAdicionales + #listDetalle.decImporte }" />
 						</s:if>
-						<s:if test="%{#listDetalle.strCodigo!='MA0000' && listDetalle.strFlag!='TC' }">
-							<s:set var="totalMateriales" value="#{totalMateriales+listDetalle.decImporte}" />
+						<s:if test="%{#listDetalle.strCodigo != 'MA0000' && #listDetalle.strFlag != 'TC' }">
+							<s:set var="totalMateriales" value="%{#totalMateriales + #listDetalle.decImporte  }" />
 						</s:if>
-						<s:if test="%{#listDetalle.strFlag=='TC'}" >
-							<s:set var="totalServicio" value="#{totalServicio+listDetalle.decImporte}" />
-						</s:if> 
-							
+						<s:if test="%{#listDetalle.strFlag == 'TC'}" >
+							<s:set var="totalServicio" value="%{#totalServicio + #listDetalle.decImporte  }" />
+						</s:if>
 				 </s:if>
-							
+				 
 		</s:iterator>
-			
-			<tr>
+				<s:if test="%{#totalMateriales == null}">
+			        	<s:set var="totalMateriales" value="0" />
+			        </s:if>
+			        <s:if test="%{#totalAdicionales == null}">
+			        	<s:set var="totalAdicionales" value="0" />
+			        </s:if>
+			        <s:if test="%{#totalServicio == null}">
+			        	<s:set var="totalServicio" value="0" />
+			        </s:if>
+				<tr>
 			          <td colspan="3" rowspan="4" align="center" style="border-left:none; border-bottom:none;">&nbsp;</td>
 			          <td width="118" align="right" class="gridview1 subtotalheader">Total Materiales</td>
-			          <td width="120" align="center" class="gridview1 subtotalcontent">${totalMateriales}</td>
+			          <td width="120" align="center" class="gridview1 subtotalcontent"><s:property value="#totalMateriales"/></td>
 			        </tr>
 			        <tr>
 			          <td align="right" class="gridview1 subtotalheader">Total Servicios</td>
-			          <td align="center" class="gridview1 subtotalcontent">${totalServicio}</td>
+			          <td align="center" class="gridview1 subtotalcontent"> <s:property  value="#totalServicio"/></td>
 			        </tr>
 			        <tr>
 			          <td align="right" class="gridview1 subtotalheader">Total Adicionales</td>
-			          <td align="center" class="gridview1 subtotalcontent">"${totalAdicionales}" </td>
+			          <td align="center" class="gridview1 subtotalcontent"><s:property value="#totalAdicionales"/> </td>
 			        </tr>
-			        <tr><s:set var="subTotal" value="#{totalMateriales + totalAdicionales + totalServicio}" />
+			        <tr>
+			       <s:set var="subTotal" value="%{#totalMateriales + #totalAdicionales + #totalServicio}" />
 			          <td align="right" class="gridview1 subtotalheader">SubTotal</td>
-			          <td align="center" class="gridview1 subtotalcontent">${subTotal}</td>
+			          <td align="center" class="gridview1 subtotalcontent"><s:property value="#subTotal"/></td>
 			   </tr>
 <br>
-<s:set var="total" value="#{total + subTotal}" />
+<s:set var="total" value="%{#total + #subTotal}" />
 <s:set var="totalAdicionales" value="0" />	
 <s:set var="totalMateriales" value="0" />
 <s:set var="totalServicio" value="0" />
@@ -137,7 +145,7 @@ observacion :<br>
 	  
           <th width="118" align="right" bgcolor="#FFFFFF">Total</th>
           <td width="120"><strong>
-            <label><c:out value="${total}"></c:out> </label>
+            <label>  <s:property value="%{#total}"/>  </label>
             </strong></td>
         </tr>
       </table></div>
