@@ -83,7 +83,7 @@
           	
         </table>
         <div class="separadovertical margenderecho" align="right"> 
-	        <s:a action="a_homepage.do">
+	        <s:a action="a_homepage">
 	        <img src="images/salir.png" alt="Salir" width="71" height="25" border="0" />
 	        </s:a>        
         </div>

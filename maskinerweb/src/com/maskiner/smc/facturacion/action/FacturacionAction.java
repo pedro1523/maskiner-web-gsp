@@ -168,76 +168,79 @@ public class FacturacionAction implements SessionAware,RequestAware,ParameterAwa
 		
 		/*recuperacmos los montos de los servicio*/
 		
-//		String[]aServicio=obtenerServicio(request);
-//		
-//		String strValorCheck=request.getParameter("chkObservacion");
-//		UsuarioBean usuario=(UsuarioBean)request.getSession().getAttribute("usuariologueado");
-//		System.out.println("check" + strValorCheck);
-//		if(strValorCheck==null){
-//		System.out.println("dentro del if ");
-//		BigDecimal monto=BigDecimal.valueOf(Double.parseDouble( request.getParameter("monto")));
-//		PrefacturaBean prefactura=(PrefacturaBean)request.getSession().getAttribute("b_prefactura");
-//		
-//		 
-//		
-//		double dblMontoDescuento=obtenerMontoDescuento(request, prefactura.getStrCodCliente());
-//		
-//		prefactura.setDecMonPrefactura(monto);
-//		prefactura.setStrCodRegistrador(usuario.getCodigoUsuario());
-//		prefactura.setDecMonDescuento(new BigDecimal(dblMontoDescuento));		
-//		FacturacionServiceI servicio=FacturacionBusinessDelegate.getFacturacionService();
-//		/*recuperamos la serie y el numero de factura */
-//		System.out.println("prefactura "+prefactura.getStrNumPrefactura() );
-//		
-//		
-//		
-//		request.getSession().setAttribute("NumPrefac", prefactura.getStrNumPrefactura());
-//				if(servicio.aprobarPrefactura(prefactura, true,aServicio)){
-//					servicio.grabarFactura(prefactura);
-//					String[] aCodigo=servicio.obtenerSerieFactura(prefactura.getStrNumPrefactura());
-//					grabarDetalleFactura(aServicio, aCodigo);
-//					return mapping.findForward("exito");
-//				}
-//				else{System.out.println("Error al grabar prefactura");
-//					return mapping.findForward("exito");
-//					}
-//		}		
-//		else{
-//			System.out.println("dentro del else ");
-//			String strObservacion=request.getParameter("observacion");
-//			if(strObservacion.trim().equals("")){
-//				request.setAttribute("mensaje","(*)Ingrese Observación");
-//				return mapping.findForward("exito1");				
-//			}else{
-//			BigDecimal monto=BigDecimal.valueOf(Double.parseDouble( request.getParameter("monto")));
-//			PrefacturaBean prefactura=(PrefacturaBean)request.getSession().getAttribute("b_prefactura");
-//			double dblMontoDescuento=obtenerMontoDescuento(request, prefactura.getStrCodCliente());
-//			prefactura.setDecMonDescuento(new BigDecimal(dblMontoDescuento));
-//			prefactura.setDecMonPrefactura(monto);
-//			prefactura.setStrObsPrefactura(strObservacion);
-//			prefactura.setStrCodRegistrador(usuario.getCodigoUsuario());
-//			FacturacionServiceI servicio=FacturacionBusinessDelegate.getFacturacionService();
-//			request.getSession().setAttribute("NumPrefac", prefactura.getStrNumPrefactura());
-//			servicio.aprobarPrefactura(prefactura, false,aServicio);
-//			/*recuperamos la serie y el numero de factura */
-//			servicio.grabarFactura(prefactura);
-//			String[] aCodigo=servicio.obtenerSerieFactura(prefactura.getStrNumPrefactura());
-//			grabarDetalleFactura(aServicio, aCodigo);
-//				return mapping.findForward("exito");			
-//			}
-//		}		
-		return "";
-  }
-	
-	
-	
-	
-	private String[] obtenerServicio (HttpServletRequest request){	
+		String[]aServicio=obtenerServicio();
+		String strValorCheck=null;
+		try{
+		 strValorCheck=parameters.get("chkObservacion")[0];
+		}catch (Exception e) {
+
+		}
+		UsuarioBean usuario=(UsuarioBean)session.get("usuariologueado");
+		System.out.println("check" + strValorCheck);
+		if(strValorCheck==null){
+			System.out.println("dentro del if ");
+			BigDecimal monto=BigDecimal.valueOf(Double.parseDouble(parameters.get("monto")[0]));
+			PrefacturaBean prefactura=(PrefacturaBean)session.get("b_prefactura");
+			
+	//		 
+	//		
+			double dblMontoDescuento=obtenerMontoDescuento( prefactura.getStrCodCliente());
+			
+			prefactura.setDecMonPrefactura(monto);
+			prefactura.setStrCodRegistrador(usuario.getCodigoUsuario());
+			prefactura.setDecMonDescuento(new BigDecimal(dblMontoDescuento));		
+			FacturacionServiceI servicio=FacturacionBusinessDelegate.getFacturacionService();
+	//		recuperamos la serie y el numero de factura 
+			System.out.println("prefactura "+prefactura.getStrNumPrefactura() );
 		
-		ArrayList<PrefacturaAuxBean>lista=(ArrayList<PrefacturaAuxBean>
-											)request.getSession().getAttribute("a_lista");
+			
+			session.put("NumPrefac", prefactura.getStrNumPrefactura());
+			if(servicio.aprobarPrefactura(prefactura, true,aServicio)){
+						servicio.grabarFactura(prefactura);
+						String[] aCodigo=servicio.obtenerSerieFactura(prefactura.getStrNumPrefactura());
+						grabarDetalleFactura(aServicio, aCodigo);
+						return  "exito";
+			}
+			else{System.out.println("Error al grabar prefactura");
+						return "exito";
+			}
+		}		
+		else{
+				System.out.println("dentro del else ");
+				String strObservacion=parameters.get("observacion")[0];
+				if(strObservacion.trim().equals("")){
+					request.put("mensaje","(*)Ingrese Observación");
+					return "exito";				
+				}else{
+				BigDecimal monto=BigDecimal.valueOf(Double.parseDouble(parameters.get("monto")[0]));
+				PrefacturaBean prefactura=(PrefacturaBean)session.get("b_prefactura");
+				double dblMontoDescuento=obtenerMontoDescuento( prefactura.getStrCodCliente());
+				prefactura.setDecMonDescuento(new BigDecimal(dblMontoDescuento));
+				prefactura.setDecMonPrefactura(monto);
+				prefactura.setStrObsPrefactura(strObservacion);
+				prefactura.setStrCodRegistrador(usuario.getCodigoUsuario());
+				FacturacionServiceI servicio=FacturacionBusinessDelegate.getFacturacionService();
+				session.put("NumPrefac", prefactura.getStrNumPrefactura());
+				servicio.aprobarPrefactura(prefactura, false,aServicio);
+				/*recuperamos la serie y el numero de factura */
+				servicio.grabarFactura(prefactura);
+				String[] aCodigo=servicio.obtenerSerieFactura(prefactura.getStrNumPrefactura());
+				grabarDetalleFactura(aServicio, aCodigo);
+					return "exito";			
+			  }	
+	 	
+		}  
+	
+		
+		
+	}
+	
+	
+	private String[] obtenerServicio (){	
+		
+		ArrayList<PrefacturaAuxBean>lista=(ArrayList<PrefacturaAuxBean>											)session.get("a_lista");
 		ArrayList<DetallePrefacturaBean> listaDetalle=(ArrayList<DetallePrefacturaBean>)
-														request.getSession().getAttribute("a_listaDetalle");
+														session.get("a_listaDetalle");
 		
 		String[] servicio=new String[3];
 		double totalMateriales=0;
@@ -277,11 +280,11 @@ public class FacturacionAction implements SessionAware,RequestAware,ParameterAwa
 		
 	}
 	
-	private double obtenerMontoDescuento(HttpServletRequest request,String strCodCliente) throws Exception{
+	private double obtenerMontoDescuento(String strCodCliente) throws Exception{
 		FacturacionServiceI servicio=FacturacionBusinessDelegate.getFacturacionService();
 		double descuento=0;
 		ArrayList<DetallePrefacturaBean> listaDetalle=(ArrayList<DetallePrefacturaBean>)
-													request.getSession().getAttribute("a_listaDetalle");
+													session.get("a_listaDetalle");
 
 		
 		for(int i=0;i<listaDetalle.size();i++){

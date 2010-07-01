@@ -158,7 +158,7 @@
         </table>
       	<div class="separadovertical" align="right"> 	
       		<s:submit src="images/asignar.png" type="image"></s:submit>
-      		<s:a href="a_cancelarOTIAsignar">
+      		<s:a href="a_cpm_cancelarOTIAsignar">
       			<img src="images/cancelar.png" alt="Cancelar" width="71" height="25" border="0" />
       		</s:a>	  
 			<!--<html:image src="images/asignar.png" onclick="verTecnico"> </html:image> 

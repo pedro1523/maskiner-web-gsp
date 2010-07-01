@@ -18,10 +18,10 @@
       <br />
       <br />
       <hr/>
-      <div class="separadovertical margenderecho" align="right">
-   	    <s:a action="a_homepage">
-    		<img src="images/salir.png"/>
-    	</s:a>
-      </div>
+       <div class="separadovertical margenderecho" align="right">
+		<s:a action="a_homepage">
+	    		<img src="images/salir.png" />
+	    </s:a>
+	</div>
 </body>
 </html>
