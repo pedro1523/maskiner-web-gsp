@@ -84,22 +84,22 @@ public class MaterialesAction extends ActionSupport implements RequestAware, Ses
 	}
 	public String QuitarDeLista()throws Exception {
 		int intPosMaterial = Integer.parseInt(parameters.get("posMaterial")[0].trim());
-		ArrayList<MaterialesXLiquidacionBean> arrMateriales = new ArrayList<MaterialesXLiquidacionBean>();
-		arrMateriales = (ArrayList<MaterialesXLiquidacionBean>)session.get("arrMateriales");
-		arrMateriales.remove(intPosMaterial-1);
+		ArrayList<MaterialesXLiquidacionBean> Materiales = new ArrayList<MaterialesXLiquidacionBean>();
+		Materiales = (ArrayList<MaterialesXLiquidacionBean>)session.get("Materiales");
+		Materiales.remove(intPosMaterial-1);
 		
-		session.put("arrMateriales", arrMateriales);
+		session.put("Materiales", Materiales);
 		return "exito";
 	}
 	
 	public String AgregarALista() throws Exception {
 		
-		ArrayList<MaterialesXLiquidacionBean> arrMateriales = new ArrayList<MaterialesXLiquidacionBean>();
+		ArrayList<MaterialesXLiquidacionBean> Materiales = new ArrayList<MaterialesXLiquidacionBean>();
 		
-		if (session.get("arrMateriales")==null){
-			arrMateriales = (ArrayList<MaterialesXLiquidacionBean>)session.get("arrMaterialesIni");
+		if (session.get("Materiales")==null){
+			Materiales = (ArrayList<MaterialesXLiquidacionBean>)session.get("materialesIni");
 		}else {
-			arrMateriales = (ArrayList<MaterialesXLiquidacionBean>)session.get("arrMateriales");
+			Materiales = (ArrayList<MaterialesXLiquidacionBean>)session.get("Materiales");
 		}
 		
 		if(session.get("b_material")==null){
@@ -125,12 +125,12 @@ public class MaterialesAction extends ActionSupport implements RequestAware, Ses
 			material.setIntCantidad(Integer.parseInt(parameters.get("cantidadMaterial")[0].trim()));
 			material.setDecPrecioUnitario(bean.getBdPrecioUnitario());
 			material.setDecMontoTotal(bean.getBdPrecioUnitario().multiply(new BigDecimal(i)));
-			material.setIntItem(arrMateriales.size()+1);
+			material.setIntItem(Materiales.size()+1);
 			
 			
-			arrMateriales.add(material);
+			Materiales.add(material);
 	
-			session.put("arrMateriales", arrMateriales);
+			session.put("Materiales", Materiales);
 			return "exito";
 		}
 	}

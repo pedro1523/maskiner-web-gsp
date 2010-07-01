@@ -91,6 +91,10 @@
 			<result name="exito" type="tiles">d_generarOT_inspeccion_principal</result>
 			<result name="exito1" type="tiles">d_generarOT_inspeccion_asignar</result>
 		</action>
+		<action name="a_cpm_cancelarOTIAsignar">
+			<result  type="tiles">d_generarOT_inspeccion_principal</result>
+		</action>
+
 
 		<!-- Action - Programar OTInspeccion  FIN -->
 		
@@ -125,14 +129,15 @@
 			 method="buscar">
 			<result name="exito" type="tiles">d_prefactura_buscar</result>
 		</action>
-		<!--
+		 
 		<action name="a_cpm_aprobarPrefactura"
-			class="com.maskiner.smc.facturacion.action.FacturacionAction" method="aprobar">
+			class="com.maskiner.smc.facturacion.action.FacturacionAction"
+			 method="aprobar">
 			<result name="exito" type="tiles">d_prefactura_aprobada_confirmacion
 			</result>
 		</action>
 
-		--><!-- <forward name="exito"  path="d_mostrarPrefactura" ></forward>-->
+		 <!-- <forward name="exito"  path="d_mostrarPrefactura" ></forward>-->
 
  
 

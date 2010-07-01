@@ -62,7 +62,10 @@
           <th align="center">PrecioUnitario</th>
           <th align="center">Importe</th>
         </tr>
-
+						<s:set var="totalServicio" value="0" />
+						<s:set var="totalMateriales" value="0" />
+						<s:set var="totalAdicionales" value="0" />
+						<s:set var="total" value="0"/>
 <s:iterator var="lista" value="#session.a_lista" >
 	<tr>
 		<td colspan="5">
@@ -80,6 +83,7 @@
 						<td align="right"><s:property value="#listDetalle.decPrecio"/></td>
 						<td align="right"><s:property value="#listDetalle.decImporte"/></td>
 					</tr>
+						
 						<s:if test="%{#listDetalle.strCodigo =='MA0000'}">
 							<s:set var="totalAdicionales" value="%{#totalAdicionales + #listDetalle.decImporte }" />
 						</s:if>
@@ -129,7 +133,7 @@
     
       </table>
 <div align="left"> 
-<s:url action="a_aprobarPrefactura" var="urlForm">
+<s:url action="a_cpm_aprobarPrefactura" var="urlForm">
 	<s:param name="monto">${total}</s:param>
 </s:url>
 <s:form  action="%{#urlForm}" >
