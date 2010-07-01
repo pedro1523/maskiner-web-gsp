@@ -55,13 +55,13 @@
 	<result name="exito"  type="tiles" >/pages/programartrabajo/ordenTrabajoInspeccionAsignar.jsp</result>
 	</action>
 	-->
-	<action 
+		<action 
     			name="a_cpm_buscarPaquete"
     			class="com.maskiner.smc.gestionarexpertise.action.PaqueteAction"
     			method="lista"     			
     			>    			
-    	<result name="exito" type="tiles" >d_buscarPaquete</result>			
-	</action>
+	    	<result name="exito" type="tiles" >d_buscarPaquete</result>			
+		</action>
 	
 
 
