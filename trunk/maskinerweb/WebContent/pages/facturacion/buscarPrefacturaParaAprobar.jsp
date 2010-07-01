@@ -55,7 +55,7 @@
 			        <td align="center"><s:property value="#lista.strNumOrdTrabajo"/> </td>
 			        <td align="center"><s:property value="#lista.strFecIncidente"/></td>
 			        <td align="center">
-			          <s:url var="mostrarPrefactura" action="a_mostrarPrefactura">
+			          <s:url var="mostrarPrefactura" action="a_cpm_mostrarPrefactura">
 			          	<s:param name="prefactura">${lista.strNumPrefactura}</s:param>
 			          	<s:param name="incidente">${lista.strNumOrdTrabajo}</s:param>
 			          </s:url>
