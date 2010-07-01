@@ -63,16 +63,16 @@ public class LiquidarTrabajoAction extends ActionSupport implements RequestAware
 		}else{
 		
 		
-			String[] HorasIni = parameters.get("horaInicio");
-			String[] HorasFin = parameters.get("horaFin");
+			String[] arrStrHorasIni = parameters.get("horaInicio");
+			String[] arrStrHorasFin = parameters.get("horaFin");
 			
 			ArrayList<TecnicosXLiquidacionBean> tecnicos = (ArrayList<TecnicosXLiquidacionBean>)session.get("tecnicos");
 			
-			for(int i=0;i<HorasIni.length ;i++){
+			for(int i=0;i<arrStrHorasIni.length ;i++){
 				 TecnicosXLiquidacionBean tec = tecnicos.get(i);
-				 tec.setTmHoraInicio(FormatoFecha.getHoraDe(HorasIni[i]));
-				 tec.setTmHoraFin(FormatoFecha.getHoraDe(HorasFin[i]));
-				 if(FormatoFecha.getHoraDe(HorasFin[i])==null || FormatoFecha.getHoraDe(HorasIni[i])==null){
+				 tec.setTmHoraInicio(FormatoFecha.getHoraDe(arrStrHorasIni[i]));
+				 tec.setTmHoraFin(FormatoFecha.getHoraDe(arrStrHorasFin[i]));
+				 if(FormatoFecha.getHoraDe(arrStrHorasFin[i])==null || FormatoFecha.getHoraDe(arrStrHorasIni[i])==null){
 					request.put("mensajeerror1",getText("pages.liquidartrabajo.registrarILPaso2.mensajeError5"));
 					return "fracaso";
 				 }

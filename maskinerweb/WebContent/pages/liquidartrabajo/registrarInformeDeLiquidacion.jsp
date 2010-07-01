@@ -32,7 +32,7 @@
 
 </head>
 <body>
-<h2 class="titulo">Registrar Informe de Liquidación</h2>
+<h2 class="titulo"><s:text name="pages.liquidartrabajo.registrarILPaso2.titulo" /></h2>
 <s:form  id="frmRegistrarLiquidacion" action="a_registrarInformeLiquidacion" method="post">
 	<div class="separadovertical">
 		<s:text name="pages.liquidartrabajo.registrarILPaso2.lblNumOrdenTrabajo" />
