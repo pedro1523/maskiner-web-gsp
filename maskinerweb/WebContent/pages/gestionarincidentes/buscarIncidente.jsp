@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="/struts-tags" prefix="s" %>
@@ -9,7 +9,7 @@
 <html>
 <head>
 	<sj:head jqueryui="true"/>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <title>Insert title here</title>
     
@@ -18,12 +18,8 @@
 	<h2 class="titulo">Buscar incidente de servicio</h2>
 	<s:url var="actionFormUrl" action="a_buscarIncidentes">
 		<!-- ${param.formOrigen} -->
-		<s:param name="formOrigen">
-			<s:property value="formOrigen"/>
-		</s:param>
+		<s:param name="formOrigen"><s:property value="formOrigen"/></s:param>
 	</s:url>
-	
-	  
 	<s:form action="%{actionFormUrl}" method="post">
 		<fieldset>
 			<legend>Criterios:</legend>
@@ -44,7 +40,7 @@
 				<s:textfield name="incidente" id="txtIncidente" cssStyle="width:150px"/>
 			</div>
 			<div class="separadoverticalsuperior" align="right">
-					<s:url var="imgBuscarUrl" value="/images/buscar.png"/>
+				<s:url var="imgBuscarUrl" value="/images/buscar.png"/>
 				<s:submit type="image" src="%{imgBuscarUrl}" />
 			</div>
 		</fieldset>
@@ -54,9 +50,9 @@
 		class="gridview">
 		<tr>
 			<th width="7%" scope="col">Seleccionar</th>
-			<th width="14%" scope="col">CÃ³d. Incidente</th>
+			<th width="14%" scope="col">Cód. Incidente</th>
 			<th width="14%" scope="col">Fecha</th>
-			<th width="37%" scope="col">DescripciÃ³n de incidente</th>
+			<th width="37%" scope="col">Descripción de incidente</th>
 			<th width="28%" scope="col">Nombre empresa</th>
 		</tr>
 		<s:if test="%{#request.arr_incidentes!=null}">
@@ -71,10 +67,7 @@
 						<td align="center">
 							<s:url var="linkDevolResult" action="a_buscarIncidenteDevolverResultado">
 								<s:param name="numIncidente">${b_incid.strNumeroIncidente}</s:param>
-								
 								<s:param name="formOrigen"><s:property value="formOrigen"/></s:param>
-							
-							
 							</s:url>
 							<s:url var="imgSeleccionarUrl" value="/images/aprob_azul.gif"/>
 							<a href="${linkDevolResult}">
