@@ -5,7 +5,7 @@
 
     <struts>
     	<package name="amm" extends="tiles-default" namespace="/">	
-    	
+    	<!-- 
     		<action 
     			name="a_cargarRegistroIncidente"
     			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
@@ -30,7 +30,7 @@
     			method="buscarMaquinarias" >
     		<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
     		</action>
-    		
+    		 -->
     		<!-- GENERAR INFORME DE LIQUIDACION -->
     		<action name="a_cargarInformeLiquidacion"
     			class="com.maskiner.smc.liquidartrabajo.action.LiquidarTrabajoAction"

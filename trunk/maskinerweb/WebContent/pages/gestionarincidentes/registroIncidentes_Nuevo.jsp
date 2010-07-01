@@ -1,11 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 
-<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
-<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
-<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
+<%@ taglib uri="/struts-jquery-tags" prefix="sj" %>
 
 <%@ page import="com.maskiner.smc.mylib.FormatoFecha" %>
 <%@ page import="com.maskiner.smc.seguridad.bean.UsuarioBean"%>
@@ -30,15 +28,15 @@
 
 <script type="text/javascript">
 	function enviarSubmitAgregarALista(){
-		document.forms["frmNuevoIncidente"].action="<%= request.getContextPath() %>/a_AgregarIncidenteALista.do";
+		document.forms["frmNuevoIncidente"].action="<%= request.getContextPath() %>/a_AgregarIncidenteALista";
 		document.forms["frmNuevoIncidente"].submit();
 	}
 	function enviarSubmitBuscarMaquinarias(){
-		document.forms["frmNuevoIncidente"].action="<%= request.getContextPath() %>/a_buscarMaquinaria.do";
+		document.forms["frmNuevoIncidente"].action="<%= request.getContextPath() %>/a_buscarMaquinaria";
 		document.forms["frmNuevoIncidente"].submit();
 	}
-	function enviarSubmitQuitarIndidenteDeLista(intNumeroItem){
-		document.forms["frmNuevoIncidente"].action="<%= request.getContextPath() %>/a_QuitarIncidenteDeLista.do?numFila=" + intNumeroItem;
+	function enviarSubmitQuitarIndidenteDeLista(nroTarjeta){
+		document.forms["frmNuevoIncidente"].action="<%= request.getContextPath() %>/a_QuitarIncidenteDeLista?numFila=" + nroTarjeta;
 		document.forms["frmNuevoIncidente"].submit();
 	}
 </script>
@@ -46,7 +44,7 @@
 <script type="text/javascript">
 
 /***********************************************
-* Textarea Maxlength script- © Dynamic Drive (www.dynamicdrive.com)
+* Textarea Maxlength script- � Dynamic Drive (www.dynamicdrive.com)
 * This notice must stay intact for legal use.
 * Visit http://www.dynamicdrive.com/ for full source code
 ***********************************************/
@@ -61,20 +59,24 @@ function ismaxlengthTxtDescripcion(){
 </script>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Registro de Incidentes</title>
 
 </head>
 <body>
-    <html:form  styleId="frmNuevoIncidente" method="post" action="a_cargarRegistroIncidente">
-	<h2 class="titulo">Nuevo Registro de Incidentes</h2>
+	<s:form name="frmNuevoIncidente" method="post" action="a_cargarRegistroIncidente">	
+	
+	<h2 class="titulo"><s:text name="pages.gestionarincidentes.registrarIncidente_Nuevo.titulo" /></h2>
           <div>
             <table border="0" style="width: 617px">
               <tr>
-                <td align="left" style="width: 335px">Registrador : 
-                <html:text property="Registrador" value="${registrador}" style="width: 200px" readonly="true"></html:text></td>
-                <td align="right" style="width: 250px">Fecha :
-                  <html:text property="Fecha" value="${fechaactual}" readonly="true"></html:text>
+                <td align="left" style="width: 335px">
+                <s:text name="pages.gestionarincidentes.regincidentes.lblRegistrador" />
+      				<span class="negrita margenderecho">${registrador}</span>
+                </td>
+                <td align="right" style="width: 250px">
+                <s:text name="pages.gestionarincidentes.regincidentes.lblFechaRegistro" />
+      				<span class="negrita">${fechaactual}</span>
                 </td>
               </tr>
             </table>
@@ -84,15 +86,18 @@ function ismaxlengthTxtDescripcion(){
           <div>
             <table  class="separadovertical" style="border-style: hidden; border-width: thin">
               <tr>
-                <td colspan="2"> Cliente: </td>
+                <td colspan="2">
+					<s:text name="pages.gestionarincidentes.regincidentes.lblCliente" />
+				</td>
               	<td>
-              		<html:text  property="Cliente" readonly="true" value="${sessionScope.cliente.strRazSocCliente}" ></html:text>
-              		<html:hidden property="CodCliente" value="${sessionScope.cliente.strCodCliente}"/>
+              		<span class="negrita margenderecho"><s:property value="#session.cliente.strRazSocCliente"/></span>
+              		<input type="hidden" name="CodCliente" value="${cliente.strCodCliente}">
+              		<s:hidden name="CodCliente" value="#session.cliente.strCodCliente"></s:hidden>
               	</td>
               	<td>
-              		<html:link action="a_buscarCliente">
-              		<html:img page="/images/buscar_azul.gif" />
-              		</html:link>
+              	<s:a action="a_buscarCliente">
+		    		<img src="images/buscar_azul.gif" />
+		    	</s:a>
               	</td>
               </tr>
             </table>
@@ -103,109 +108,119 @@ function ismaxlengthTxtDescripcion(){
 
           <div>
             <fieldset style="width: 617px" >
-              <legend>Detalle por Incidente</legend>
+              <legend><s:text name="pages.gestionarincidentes.regincidentes.fieldsetDetalleXIncidente" /></legend>
               <table>
                 <tr>
-	                <td > Sucursal (Localización): </td>
+	                <td ><s:text name="pages.gestionarincidentes.regincidentes.lblSucursal" /></td>
 	              	<td>
-	              	<html:select property="Sucursal">
-							<html:option value="001" >-- Seleccionar --</html:option>
-							<c:forEach var="sucursal" items="${sessionScope.cliente.arrSucursalBean}">
-								<html:option value="${sucursal.strNumSucursal}">${sucursal.strDescDistrito}</html:option>
-							</c:forEach>
-
-					</html:select>
-						<html:link href="javascript:enviarSubmitBuscarMaquinarias()" >
-              				<html:img page="/images/buscar_azul.gif"/>
-						</html:link>
+	              
+	              	<s:select name="Sucursal" 
+		               	list="#session.arrSucursalBean" 
+		                listKey="strNumSucursal" 
+		                listValue="strDescDistrito"/> 
+			                
+			             	<s:submit onclick="enviarSubmitBuscarMaquinarias()" value="Buscar"></s:submit>
+	         				
 					</td>
               	</tr>
                 <tr>
-	                <td style="width: 165px">Nro de Tarjeta:</td>
+	                <td style="width: 165px"><s:text name="pages.gestionarincidentes.regincidentes.lblNroTarjeta" /></td>
 	                <td>
 	                	<table style="width: 100%;" class="gridview">
 	                		<tr>
 	                			<th style="width: 19px" align="center" style="width: 18px">#</th>
-	                			<th style="width: 74px" align="center">Nro Tarjeta</th>
-	                			<th style="width: 103px" align="center">Descripción</th>
-	                			<th style="width: 101px" align="center">Estado</th>
+	                			<th style="width: 74px" align="center"><s:text name="pages.gestionarincidentes.regincidentes.listaMaquinarias.columna1.cabecera" /></th>
+	                			<th style="width: 103px" align="center"><s:text name="pages.gestionarincidentes.regincidentes.listaMaquinarias.columna2.cabecera" /></th>
+	                			<th style="width: 101px" align="center"><s:text name="pages.gestionarincidentes.regincidentes.listaMaquinarias.columna3.cabecera" /></th>
 	                		</tr>
 	                		<tr>
-	                			<c:forEach var="maquinarias" items="${maquinarias}">
-	                				<tr>
-	                					<td><html:radio property="chk" value="${maquinarias.strNumTarjeta}"></html:radio></td>
-	                					<td>${maquinarias.strNumTarjeta}</td>
-	                					<td>${maquinarias.strDescMaq}</td>
-	                					<td>${maquinarias.strDesEstMaquinaria}</td>
-	                				</tr>
-	                			</c:forEach>
+	                			<s:iterator var="maquinaria" value="#session.arr_maquinarias">
+							<tr>
+	                		<td><input name="chk" type="radio" value="${maquinaria.strNumTarjeta}"></td>
+	                				  			 <s:if test="%#request.mensajeerror2!=null">
+	  	<div class="mensajeerror separadoverticalsuperior">
+	  	<s:property value="#request.mensajeerror1"/></div>
+    </s:if>
+	                				<td><s:property value="#maquinaria.strNumTarjeta"/></td>
+									<td><s:property value="#maquinaria.strDescMaq" /></td>
+									<td><s:property value="#maquinaria.strDesEstMaquinaria" /></td>
+	                			</tr>
+	                			</s:iterator>
+	                			 <s:if test="%#request.mensajeerror1!=null">
+	  	<div class="mensajeerror separadoverticalsuperior">
+	  	<s:property value="#request.mensajeerror1"/></div>
+    </s:if>
+           
+    
+	
 	                		</tr>
 	                	</table>
 					<br>
                   	</td>
                 </tr>
                 <tr>
-	                <td>Naturaleza de la Avería :</td>
-	                <td colspan="3" style="width: 433px">
- 	                	<html:select property="cboNatAveria" >
-							<option value="-1">-- Seleccionar --</option>
-							<c:forEach var="averia" items="${averias}">
-								<option value="${averia.intCodItemTabla}">${averia.strDescTabla}</option>
-							</c:forEach>
-						</html:select>
+	                <td><s:text name="pages.gestionarincidentes.regincidentes.lblNaturalezaAveria" /></td>
+	                <td colspan="3" style="width:433px">
+	                <s:select name="cboNatAveria" 
+			               	 list="#session.averia"
+			                listKey="intCodItemTabla"
+			                listValue="strDescTabla" />
 					</td>
 	            </tr>
                 <tr >
-                  <td>Descripción:</td>
-                  <td style="width: 439px"><html:textarea property="Descripcion" styleId="txtDescripcion"  style="width: 100%; height: 74px" onkeyup="return ismaxlengthTxtDescripcion()"></html:textarea></td>
+                  <td><s:text name="pages.gestionarincidentes.regincidentes.lblDescripcion" /></td>
+                  <td style="width: 439px">
+                  <s:textarea name="Descripcion" id="txtDescripcion" onkeyup="return ismaxlengthTxtDescripcion()"></s:textarea>
                 </tr>
               </table>
             </fieldset>
           </div>
           <div align="right">
-				<html:link href="javascript:enviarSubmitAgregarALista()">
-          			<html:img page="/images/bot_mas.gif"/>
-				</html:link>          		
-
+          	
+          		<s:url var="imgAgregarUrl" value="images/bot_mas.gif"/>
+          		<s:a href="javascript:enviarSubmitAgregarALista()">
+          		<img src="${imgAgregarUrl}" />
+          		</s:a>
+          	
            </div>
           <table cellspacing="0" cellpadding="5" class="gridview" width="100%">
             <tr>
-			  <th width="10%" align="center">Quitar</th>
-              <th width="11%" align="center"> Nro Tarjeta </th>
-              <th width="30%" align="center">Naturaleza de Avería</th>
-              <th width="30%" align="center">Descripción</th>
+			  <!-- <th width="10%" align="center"><s:text name="pages.gestionarincidentes.regincidentes.columna1.cabecera" /></th> -->
+              <th width="11%" align="center"><s:text name="pages.gestionarincidentes.regincidentes.columna2.cabecera" />  </th>
+              <th width="30%" align="center"><s:text name="pages.gestionarincidentes.regincidentes.columna3.cabecera" /></th>
+              <th width="30%" align="center"><s:text name="pages.gestionarincidentes.regincidentes.columna4.cabecera" /></th>
             </tr>
-
-			<logic:present name="mensajeerror" scope="request">
-	 		 	<div class="mensajeerror separadoverticalsuperior"><bean:write name="mensajeerror" scope="request"/> </div>
-			</logic:present>
-
- 			<c:forEach var="Detalles" items="${sessionScope.Detalle}">
+			
+			<s:iterator var="detalle" value="#session.Detalle">
 				<tr>
-					<td>
-						<html:link href="javascript:enviarSubmitQuitarIndidenteDeLista('${Detalles.intNumeroItem}')">
-          					<html:img page="/images/bot_mas (1).gif"/>
-          				</html:link>
-					</td>
- 					<td>${Detalles.strNumeroTarjetaEquipo}</td>
- 					<td>${Detalles.intNaturalezaAveria}</td>
- 					<td>${Detalles.strDescripcionNaturalezaAveria}</td>
-				</tr>
- 			</c:forEach>
+       				<td><s:property value="#detalle.strNumeroTarjetaEquipo"/></td>
+					<td><s:property value="#detalle.intNaturalezaAveria" /></td>
+					<td><s:property value="#detalle.strDescripcionNaturalezaAveria" /></td>
+	            </tr>    			
+	        </s:iterator>
  
           </table>
           <br>
           <div align="right">
-          		<html:link action="a_registrarIncidente"><html:img page="/images/guardar.png"/></html:link>
-          		<html:link action="a_homepage"><html:img page="/images/salir.png"/></html:link> 
+				<s:url action="a_homepage" var="homepageUrl"/>
+				<s:url value="images/salir.png" var="ImagenSalirUrl"/>
+				<s:url action="a_registrarIncidente" var="registrarUrl"/>
+				<s:url value="images/guardar.png" var="ImagenRegistrarUrl"/>
+
+				   	<a href="${registrarUrl}">
+			    		<img alt="Registrar" src="${ImagenRegistrarUrl}">
+			    	</a>
+			    	<a href="${homepageUrl}">
+			    		<img alt="Salir" src="${ImagenSalirUrl}">
+			    	</a>
           </div>
        
-    <logic:present name="mensajeerror1" scope="request">
-	  	<div class="mensajeerror separadoverticalsuperior"><bean:write name="mensajeerror1" scope="request"/> </div>
-	</logic:present>
+			<s:if test="%{#request.mensajeerror1!=null}">
+		  		<div class="mensajeerror separadoverticalsuperior"><s:property value="#request.mensajeerror1"/></div>
+       		</s:if>
 
-     </html:form>
-
+    
+	</s:form>
 
 </body>
 </html>

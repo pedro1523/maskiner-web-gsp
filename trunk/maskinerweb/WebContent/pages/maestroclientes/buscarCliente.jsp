@@ -1,13 +1,12 @@
-<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean" %>
-<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
-<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
+<%@ taglib uri="/struts-jquery-tags" prefix="sj" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/plantilla.dwt" codeOutsideHTMLIsLocked="false" -->
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><bean:message key="pages.gestionarincidentes.buscarCliente.titulopagina"/></title>
+<title></title>
 <link href="${cssdiseño}" rel="stylesheet" type="text/css" />
 	
 </head>
@@ -16,16 +15,19 @@
 
       <div>
     	<h2>Buscar Cliente</h2>
-      <html:form  method="post" action="a_buscarCliente">
+	<s:url var="actionFormUrl" action="a_buscarCliente">
+			<!-- ${param.formOrigen} -->
+			<s:param name="formOrigen"><s:property value="formOrigen"/></s:param>
+	</s:url>
+      <s:form  method="post" action="%{actionFormUrl}">
         <div >
           <table>
             <tr>
-              <td height="24" >Cliente : </td>
+              <td height="24" ><s:text name="pages.buscarCliente.lblCliente" /></td>
               <td style="width: 353px">
-					<html:text property="RazSocCliente" />
-				<html:image src="images/buscar_azul.gif" >
-	              		<!-- <img src="images/buscar_azul.gif" width="18" height="18" alt="Buscar" style="vertical-align:middle" /> -->
-	              </html:image>
+					<s:textfield name="RazSocCliente" id="txtRazSocCliente" cssStyle="width:100px"/>
+				<s:url var="imgBuscarUrl" value="/images/buscar.png"/>
+				<s:submit type="image" src="%{imgBuscarUrl}" />
               </td>
             </tr>
           </table >
@@ -34,34 +36,56 @@
         <div >
         <table style="width: 100%;" class="gridview">
    			<tr>
-   			<th>Codigo</th>
-   			<th>Razon Social</th>
-   			<th>Ruc</th>
-   			<th>Email</th>
-   			<th>Seleccionar</th>
+   			<th><s:text name="pages.programartrabajo.buscarCliente.ListaClientes.cabecera.Codigo" /></th>
+   			<th><s:text name="pages.programartrabajo.buscarCliente.ListaClientes.cabecera.RazonSocial" /></th>
+   			<th><s:text name="pages.programartrabajo.buscarCliente.ListaClientes.cabecera.Ruc" /></th>
+   			<th><s:text name="pages.programartrabajo.buscarCliente.ListaClientes.cabecera.Email" /></th>
+   			<th><s:text name="pages.programartrabajo.buscarCliente.ListaClientes.cabecera.Seleccionar" /></th>
    			</tr>
-		       <c:forEach var="cliente" items="${requestScope.clientes}">
+			<s:if test="%{#request.arr_clientes!=null}">
+				<s:if test="%{#request.arr_clientes.size()==0}">
+				<tr>
+					<td colspan="5">Sin coincidencias</td>
+				</tr>
+			</s:if>
+			<s:else>
+				<s:iterator var="cliente" value="#request.arr_clientes">
 					<tr>
-						<td align="center">${cliente.strCodCliente} </td>
-		          		<td align="center">${cliente.strRazSocCliente} </td>
-		          		<td align="center">${cliente.strRucCliente} </td>
-		          		<td align="center">${cliente.strEmailCliente}  </td>
-		          		<td align="center"><html:link action="a_devolverCliente?CodCliente=${cliente.strCodCliente}">
-										  <img src="images/nuevo_azul.gif" alt="" border="0" /></html:link>
-						</td>	
+						<td align="center">
+							<s:url var="linkDevolResult" action="a_devolverCliente">
+								<s:param name="CodCliente">${cliente.strCodCliente}</s:param>
+								<s:param name="formOrigen"><s:property value="formOrigen"/></s:param>
+							</s:url>
+							<s:url var="imgSeleccionarUrl" value="/images/aprob_azul.gif"/>
+							<a href="${linkDevolResult}">
+								<img alt="Seleccionar" src="${imgSeleccionarUrl}">
+							</a>
+						</td>
+						<td><s:property value="#cliente.strCodCliente"/></td>
+						<td><s:property value="#cliente.strRazSocCliente"/></td>
+						<td><s:property value="#cliente.strRucCliente"/></td>
+						<td><s:property value="#cliente.strEmailCliente"/></td>
 					</tr>
-				</c:forEach>
+				</s:iterator>
+			</s:else>	
+			
+			</s:if>
 			</table>
 			</div>
         </div>
         </br>
         
-        <div align="right" class="separadovertical">
-        	<html:link action="a_cargarRegistroIncidente">
-        		<html:img src="images/salir.png"/>
-        	</html:link>
-        </div>
-      </html:form>
+		<div class="separadovertical" align="right">
+			<s:url var="linkIrPagOrigen" action="a_cargarRegistroIncidente">
+				<s:param name="formOrigen"><s:property value="formOrigen"/></s:param>
+			</s:url>
+			<a href="${linkIrPagOrigen}">
+				<s:url var="imgCancelarUrl" value="/images/cancelar.png"/>
+				<img src="${imgCancelarUrl}" alt="Cancelar" width="71" height="25" border="0" />
+			</a>
+		</div>
+
+      </s:form>
 </div>
 </div>
 </body>

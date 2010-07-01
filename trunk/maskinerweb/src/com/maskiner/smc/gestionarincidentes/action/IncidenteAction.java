@@ -16,11 +16,16 @@ import com.maskiner.smc.gestionarincidentes.service.IncidenteBusinessDelegate;
 import com.maskiner.smc.gestionarincidentes.service.IncidenteServiceI;
 import com.maskiner.smc.logistica.bean.TablaDeTablasBean;
 import com.maskiner.smc.maestroclientes.bean.ClienteBean;
+import com.maskiner.smc.maestroclientes.bean.SucursalBean;
+import com.maskiner.smc.maestromaquinarias.bean.MaquinariaSucursalBean;
+import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasBusinessDelegate;
+import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasI;
 import com.maskiner.smc.mylib.FormatoFecha;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 
-public class IncidenteAction implements RequestAware, SessionAware, ParameterAware {
+public class IncidenteAction extends  ActionSupport  implements RequestAware, SessionAware, ParameterAware {
 	
 	// variables privadas
 	private String formOrigen;
@@ -37,21 +42,28 @@ public class IncidenteAction implements RequestAware, SessionAware, ParameterAwa
 	}
 
 	public String cargarNuevoIncidente() throws Exception {
-
+		session.put("Detalle", null);
 		IncidenteServiceI servicio2 = IncidenteBusinessDelegate.getIncidenteService();
-
+		
+		ClienteBean cliente = new ClienteBean();
+		ArrayList<SucursalBean> arrSucursalBean = new ArrayList<SucursalBean>();
+		cliente.setArrSucursalBean(arrSucursalBean);
+		
+		session.put("cliente", cliente);
+		session.put("arrSucursalBean", arrSucursalBean);
+		//ultima prueba del día
 		ArrayList<TablaDeTablasBean> arr2;
 		arr2 = servicio2.listarTipoDeAverias();
-		session.put("averias", arr2);
+		session.put("averia", arr2);
 			
 		//limpia las variables
-		session.remove("CodigoCliente");
+		/*session.remove("CodigoCliente");
 		session.remove("codSucursal");
 		session.remove("Detalle");
 		session.remove("id");
 		session.remove("maquinarias");
 		session.remove("id");
-		session.remove("cliente");
+		session.remove("cliente");*/
 		
 		return "exito";
 	}
@@ -59,21 +71,20 @@ public class IncidenteAction implements RequestAware, SessionAware, ParameterAwa
 	@SuppressWarnings("unchecked")
 	public String registrarIncidente() throws Exception {
 
-		UsuarioBean usu = (UsuarioBean) session.get("usuariologueado");
+UsuarioBean usu = (UsuarioBean) session.get("usuariologueado");
+		
 		ArrayList<DetalleRegistroIncidenteBean> detalle = 
 			(ArrayList<DetalleRegistroIncidenteBean>) session.get("Detalle");
 		
 		if (detalle==null)detalle= new ArrayList<DetalleRegistroIncidenteBean>();
 		
 		if(detalle.size()==0){
-			
-			ActionContext.getContext().getValueStack().set("mensajeerror1", "Primero debe agregar una incidencia");
-			
+			request.put("mensajeerror1",getText("pages.gestionarincidentes.regincidentes.mensajeErrorAgregarIncidencia"));
 			return "fracaso";
 		}else{
 		
 		RegistroIncidentesBean regIncidente = new RegistroIncidentesBean();
-		//Aqui se harán Cambios KLM
+		
 		regIncidente.setStrCodigoCliente((String) session.get("CodigoCliente"));
 		regIncidente.setStrCodigoRegistrador(usu.getCodigoUsuario());
 		regIncidente.setStrSucursal((String) session.get("codSucursal"));
@@ -90,47 +101,59 @@ public class IncidenteAction implements RequestAware, SessionAware, ParameterAwa
 	@SuppressWarnings("unchecked")
 	public String AgregarALista() throws Exception {
 		
-		/*
-		HttpSession sesion = request.getSession();
-		ArrayList<DetalleRegistroIncidenteBean> Detalles = new ArrayList<DetalleRegistroIncidenteBean>();
-		if (sesion.getAttribute("Detalle") == null) {
-			Detalles = (ArrayList<DetalleRegistroIncidenteBean>) sesion.getAttribute("DetalleIni");
-		} else {
-			Detalles = (ArrayList<DetalleRegistroIncidenteBean>) sesion.getAttribute("Detalle");
+System.out.println("a ver...");
+		
+		String numTarjetaEq = parameters.get("chk")[0];
+		String naturalezaAveria = parameters.get("cboNatAveria")[0];
+		String descripcionNatAveria = parameters.get("Descripcion")[0];
+		
+		ArrayList<DetalleRegistroIncidenteBean> Detalles =
+			new ArrayList<DetalleRegistroIncidenteBean>();
+		if(session.get("Detalle")==null){
+			Detalles=(ArrayList<DetalleRegistroIncidenteBean>) session.get("DetalleIni");
 		}
-
-
+			else{
+				Detalles=(ArrayList<DetalleRegistroIncidenteBean>) session.get("Detalle");
+			}
+		
 		DetalleRegistroIncidenteBean detalle = new DetalleRegistroIncidenteBean();
+		detalle.setStrNumeroTarjetaEquipo(numTarjetaEq);
+		detalle.setIntNaturalezaAveria(Integer.parseInt(naturalezaAveria));
+		detalle.setStrDescripcionNaturalezaAveria(descripcionNatAveria);
 		
-		detalle.setStrNumeroTarjetaEquipo(request.getParameter("chk"));
-		detalle.setIntNaturalezaAveria(Integer.parseInt(request.getParameter("cboNatAveria")));
-		detalle.setStrDescripcionNaturalezaAveria(request.getParameter("Descripcion"));
-		
-		if (request.getParameter("chk")==null){
-			request.setAttribute("mensajeerror", "Primero debe seleccionar alguna maquinaria");
+		if(numTarjetaEq==null){
+			request.put("mensajeerror1",getText("pages.gestionarincidentes.regincidentes.mensajeError1"));
 			return "fracaso";
-		}else if(request.getParameter("cboNatAveria").equals("-1")){
-			request.setAttribute("mensajeerror", "Debe seleccionar una maturaleza de avería");
+		}else if(naturalezaAveria.equals("-1")){
+			request.put("mensajeerror1",getText("pages.gestionarincidentes.regincidentes.mensajeError2"));
 			return "fracaso";
-		}else if(request.getParameter("Descripcion").equals("")){
-				request.setAttribute("mensajeerror", "Debe ingresar la descripción de la avería");
-				return "fracaso";
+		}else if(descripcionNatAveria.length()<1){
+			request.put("mensajeerror1",getText("pages.gestionarincidentes.regincidentes.mensajeError3"));
+			return "fracaso";
 		}else{
-		
-		
-		detalle.setStrNumeroTarjetaEquipo(request.getParameter("chk"));
-		detalle.setIntNumeroItem(Detalles.size());
+			detalle.setStrNumeroTarjetaEquipo(numTarjetaEq);
+			detalle.setIntNumeroItem(Detalles.size());
 
-		Detalles.add(detalle);
-		
-		sesion.setAttribute("Detalle", Detalles);
-		return "exito";
-		}
-		*/	
-		return null;
+			Detalles.add(detalle);
+			
+			session.put("Detalle", Detalles);
+			return "exito";
+		}		
 	}
 
 	public String quitarIncidenteDeLista() throws Exception {
+		String strNumTarjeta = parameters.get("numFila")[0];
+		//int strNumTarjeta= new Integer(parameters.get("numFila").toString());
+		ArrayList<DetalleRegistroIncidenteBean> Detalles = new ArrayList<DetalleRegistroIncidenteBean>();
+		Detalles = (ArrayList<DetalleRegistroIncidenteBean>) session.get("Detalle");
+
+		for (int i = 0; i < Detalles.size(); i++) {
+			if (Detalles.get(i).getStrNumeroTarjetaEquipo() == strNumTarjeta) {
+				Detalles.remove(i);
+			}
+		}
+				session.put("Detalle", Detalles);
+		
 		/*
 		HttpSession sesion = request.getSession();
 		ArrayList<DetalleRegistroIncidenteBean> Detalles = new ArrayList<DetalleRegistroIncidenteBean>();
@@ -148,29 +171,25 @@ public class IncidenteAction implements RequestAware, SessionAware, ParameterAwa
 		sesion.setAttribute("Detalle", Detalles);
 		return "exito";
 		*/
-		return null;
+		return "exito";
 	}
 
 	public String buscarMaquinarias() throws Exception {
-		/*
-		HttpSession sesion = request.getSession();
-		String codCliente = request.getParameter("CodCliente");
-		String codSucursal = request.getParameter("Sucursal");
-
+		ClienteBean c = (ClienteBean) session.get("cliente");
+		String codCliente = c.getStrCodCliente();
+		String codSucursal = parameters.get("Sucursal")[0].toString();//(String) request.get("Sucursal");
+		System.out.println(codCliente);
+		System.out.println(codSucursal);
 		MaestroMaquinariasI servicio = MaestroMaquinariasBusinessDelegate
-				.getMaestroMaquinariasService();
-
+		.getMaestroMaquinariasService();
+		
 		ArrayList<MaquinariaSucursalBean> arr = servicio
-				.buscarMaquinariaXSucursal(codCliente, codSucursal);
-
-		sesion.setAttribute("maquinarias", arr);
-		sesion.setAttribute("codSucursal", codSucursal);
-		sesion.setAttribute("CodigoCliente", request.getParameter("CodCliente"));
-
+		.buscarMaquinariaXSucursal(codCliente, codSucursal);
+		
+		session.put("arr_maquinarias", arr);
+		
 		return "exito";
-		*/
-		return null;
-	}
+		}
 	public String cargarBuscarIncidenteLiquidacion() throws Exception {
 		java.sql.Date dtFechaIncid = null;
 		IncidenteServiceI isServicio = IncidenteBusinessDelegate.getIncidenteService();
