@@ -137,6 +137,8 @@ public class FacturacionAction implements SessionAware,RequestAware,ParameterAwa
 		ArrayList<PrefacturaAuxBean>lista=(ArrayList<PrefacturaAuxBean>) servicio.obtenerMateriales_x_Liquidacion(strNumIncidente);
 		ArrayList<DetallePrefacturaBean> listaDetalle=(ArrayList<DetallePrefacturaBean>) 
 														servicio.obtenerMateriales_x_Liquidacion1(strNumIncidente);
+		System.out.println("LISTA--> " + lista.size() );
+		System.out.println("LISTA DETALLE--> " + listaDetalle.size());
 		session.put("b_prefactura", prefactura);			
 		session.put("a_lista", lista);
 		session.put("a_listaDetalle", listaDetalle);
