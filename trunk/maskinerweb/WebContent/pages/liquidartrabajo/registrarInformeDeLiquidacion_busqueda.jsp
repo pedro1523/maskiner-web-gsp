@@ -26,7 +26,7 @@
 </head>
 <body>
 
-<h2>Generar Informe de Liquidación</h2>
+<h2 class="titulo"><s:text name="pages.liquidartrabajo.registrarIL.titulo" /></h2>
      <s:form action="a_cargarBuscarIncidenteLiquidacion?formOrigen=RegistrarLiquidacion" method="post">
         <div>
             <table border="0" style="width: 617px">

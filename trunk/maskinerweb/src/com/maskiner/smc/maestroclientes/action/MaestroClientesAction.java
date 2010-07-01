@@ -38,8 +38,8 @@ public class MaestroClientesAction implements RequestAware, SessionAware, Parame
 
 		MaestroClientesI servicio = MaestroClientesBusinessDelegate.getMaestroClientesService();
 		
-		ArrayList<ClienteBean> arr =  servicio.buscarPorCliente("");
-		request.put("arr_clientes", arr);
+		ArrayList<ClienteBean> arrClientes =  servicio.buscarPorCliente("");
+		request.put("arr_clientes", arrClientes);
 			
 
 		return "exito";
