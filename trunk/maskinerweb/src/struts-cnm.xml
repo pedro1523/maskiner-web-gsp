@@ -92,6 +92,11 @@
     			method="quitarAsignacionDeTecnicosDePaqueteXOT" >
      		<result name="exito" type="tiles">d_generarOT_p3</result>
     	</action>
+    	
+    	<action name="a_cnm_repFreInc">
+    		<result type="tiles">d_repFreInc</result>
+    	</action>
+   	
 
 
 	</package>
