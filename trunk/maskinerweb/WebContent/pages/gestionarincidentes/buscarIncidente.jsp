@@ -34,7 +34,8 @@
 							   displayFormat="dd/mm/yy"
 							   changeYear="true"
 							   changeMonth="true"
-							   cssStyle="margin-right:5px" />
+							   cssStyle="margin-right:5px"
+							   readonly="true" />
 				
 				<label for="txtIncidente" class="margenizquierdo">Incidente</label>
 				<s:textfield name="incidente" id="txtIncidente" cssStyle="width:150px"/>
