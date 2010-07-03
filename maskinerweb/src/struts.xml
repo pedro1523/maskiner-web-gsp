@@ -43,8 +43,6 @@
      		<result name="exito">/login.jsp</result>
     	</action>
     	
-    	
-
      	<action 
     			name="a_cargarBuscarIncidente"
     			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
