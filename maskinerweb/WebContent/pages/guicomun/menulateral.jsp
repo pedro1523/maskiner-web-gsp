@@ -93,11 +93,11 @@
    	        request.setAttribute("prueba",prueba);
 	  %>
 	 <s:if test="#request.prueba">
-	  	  <li><s:a action="a_repGastMaq"><s:text name="pages.guicomun.menulateral.reportegastosmaquinaria"/></s:a></li>
-	      <li><s:a action="a_repUtiMaq"><s:text name="pages.guicomun.menulateral.reporteutilizacionmaquinaria"/></s:a></li>
-	      <li><s:a action="a_repFreInc"><s:text name="pages.guicomun.menulateral.reportefrecuenciaincidente"/></s:a></li>
-	      <li><s:a action="a_repHisMaq"><s:text name="pages.guicomun.menulateral.reportehistorialmaquinaria"/></s:a></li>
-		  <li><s:a action="a_repTecOT"><s:text name="pages.guicomun.menulateral.reportetecnicosporot"/></s:a></li>
+	  	  <li><s:a action="a_cnm_repGastMaq"><s:text name="pages.guicomun.menulateral.reportegastosmaquinaria"/></s:a></li>
+	      <li><s:a action="a_cnm_repUtiMaq"><s:text name="pages.guicomun.menulateral.reporteutilizacionmaquinaria"/></s:a></li>
+	      <li><s:a action="a_cnm_repFreInc"><s:text name="pages.guicomun.menulateral.reportefrecuenciaincidente"/></s:a></li>
+	      <li><s:a action="a_cnm_repHisMaq"><s:text name="pages.guicomun.menulateral.reportehistorialmaquinaria"/></s:a></li>
+		  <li><s:a action="a_cnm_repTecOT"><s:text name="pages.guicomun.menulateral.reportetecnicosporot"/></s:a></li>
 	      
 	 </s:if>
 	  

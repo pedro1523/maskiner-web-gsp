@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
-<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
-<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
+<%@ taglib uri="/struts-tags" prefix="s" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,38 +13,34 @@
     
 </head>
 <body>
-	<h2 class="titulo">Reporte de Frecuencia de Incidentes</h2>
+	<h2 class="titulo"><s:text name="pages.reportes.repFreInc.titulo" /></h2>
 <table>
 
 	<tr>
 
 		<!--  aqui va el cuerpo -->
 		<td class="separadovertical">
-			<html:form method="post" action="a_reporteMaquinariaFre">
+			<s:form method="post" action="a_reporteMaquinariaFre">
 			<table class="control" >
 				<tr>
-					
-			        <br/><br/>
-				   
-					<td>Cliente: </td>
+					<td><s:text name="pages.reportes.repFreInc.lblcliente" /></td>
 					<td>
-						<html:text property="cliente" />
-						<html:img src="images/buscar_azul.gif" style="margin-right:25px;vertical-align:middle"/>  
+						<s:textfield name="cliente" label="hola" labelposition="left" labelSeparator=":" value="34" />
+<!--						<html:img src="images/buscar_azul.gif" style="margin-right:25px;vertical-align:middle"/>  -->
 					</td>
 					
-					<td>Año: </td>
+					<td><s:text name="pages.reportes.repFreInc.lblannio" /></td>
 					<td>
-						<html:text property="anio" />  
+						<s:textfield name="anio" />
 					</td>
 					
-					
 					<td>
-						<html:submit style="margin-left:20px"> Generar Reporte </html:submit>
+						<s:submit cssStyle="margin-left:20px" value="Generar Reporte" />
 					</td>
 				</tr>
 			</table>
 
-			</html:form>
+			</s:form>
 		
 		
 		</td>
