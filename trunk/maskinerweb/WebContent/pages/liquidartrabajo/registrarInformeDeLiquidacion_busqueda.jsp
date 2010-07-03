@@ -46,7 +46,7 @@
         <br/>
 
         <fieldset style="width:500px;">
-          <legend><s:text name="pages.liquidartrabajo.registrarIL.lblFechaRegistro" /></legend>
+          <legend><s:text name="pages.liquidartrabajo.registrarIL.fieldsetDatosIncidente" /></legend>
           	<div class="separadovertical">
         	 <s:text name="pages.liquidartrabajo.registrarIL.lblCodIncidente" />
      			<span class="negrita margenderecho"><s:property value="#session.incidente.strNumeroIncidente"/></span>
