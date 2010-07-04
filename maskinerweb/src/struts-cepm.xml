@@ -133,10 +133,29 @@
 		<action name="a_cpm_aprobarPrefactura"
 			class="com.maskiner.smc.facturacion.action.FacturacionAction"
 			 method="aprobar">
-			<result name="exito" type="tiles">d_prefactura_aprobada_confirmacion
-			</result>
+			<result name="exito" type="tiles">d_prefactura_aprobada_confirmacion</result>
+			<result name="exito1" type="tiles">d_mostrarPrefactura</result>
 		</action>
 
+
+		<action 
+    			name="a_cpm_cargarFactura"
+    			 >
+    			<result type="tiles">d_factura_buscar</result>
+    	</action>
+    	
+    	<action name="a_cpm_buscarPrefacturasAprobadas"
+			class="com.maskiner.smc.facturacion.action.FacturacionAction"
+			 method="buscarPrefacturasAprobadas">
+			<result name="exito" type="tiles">d_factura_buscar</result>
+			
+		</action> 
+    	<action name="a_cpm_generarFactura"
+			class="com.maskiner.smc.facturacion.action.FacturacionAction"
+			 method="mostrarFactura">
+			<result name="exito" type="tiles">d_factura_generar</result>
+			
+		</action>
 		 <!-- <forward name="exito"  path="d_mostrarPrefactura" ></forward>-->
 
  
