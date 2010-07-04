@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
-<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
-<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib uri="/struts-jquery-tags" prefix="sj" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page import="java.util.Date"%>
@@ -89,7 +88,11 @@
       </div>
       <span class="separadovertical"><b>SON: ${sessionScope.monto}</b> </span>
       <hr />
-      <div class="separadovertical margenderecho" align="right"> <img src="images/imprimir.png" alt="Aceptar" width="71" height="25" border="0" style="margin-right:10px" />
-		<html:link action="a_homepage.do"> <img src="images/salir.png" alt="Salir" width="71" height="25" border="0" /> </html:link></div>
+      <div class="separadovertical margenderecho" align="right"> 
+      	<img src="images/imprimir.png" alt="Aceptar" width="71" height="25" border="0" style="margin-right:10px" />
+		<s:a action="a_homepage">
+			<img src="images/salir.png" alt="Salir" width="71" height="25" border="0" />
+		 </s:a>
+		 </div>
 </body>
 </html>
