@@ -13,9 +13,6 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.maskiner.smc.gestionarincidentes.bean.DetalleRegistroIncidenteBean;
 import com.maskiner.smc.gestionarincidentes.bean.RegistroIncidentesBean;
-import com.maskiner.smc.gestionarincidentes.service.IncidenteBusinessDelegate;
-import com.maskiner.smc.gestionarincidentes.service.IncidenteServiceI;
-import com.maskiner.smc.maestroclientes.bean.ClienteBean;
 import com.maskiner.smc.mylib.FormatoFecha;
 import com.maskiner.smc.programartrabajo.bean.OrdenTrabajoInspeccionBean;
 import com.maskiner.smc.programartrabajo.bean.TecnicoBean;
@@ -23,7 +20,6 @@ import com.maskiner.smc.programartrabajo.service.OrdenTrabajoServiceI;
 import com.maskiner.smc.programartrabajo.service.ProgramarTrabajoBusinessDelegate;
 import com.maskiner.smc.programartrabajo.service.TecnicoServiceI;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
-import com.opensymphony.xwork2.ActionSupport;
 
 public class ProgramarOTInspeccionAction implements RequestAware, SessionAware, ParameterAware  {
 	
@@ -224,6 +220,7 @@ public class ProgramarOTInspeccionAction implements RequestAware, SessionAware, 
 		//recuperamos al tecnico
 		
 		ArrayList<TecnicoBean> a_lista=(ArrayList<TecnicoBean>) session.get("listTecnicos");
+		String strLugarAtencion="";
 		if(a_lista==null){
 			session.put("mensajeError", "No existen técnicos disponibles");
 			return "exito1";
@@ -235,6 +232,13 @@ public class ProgramarOTInspeccionAction implements RequestAware, SessionAware, 
 			session.put("mensajeError", "falta seleccionar técnico");
 			return "exito1";
 		}
+		
+		try{
+			strLugarAtencion=parameters.get("lugarAtencion")[0].trim();
+		}catch (Exception e) {
+			session.put("mensajeError", "Ingrese Lugar de Atención");
+			return "exito1";
+		}
 			
 		
 			session.remove("mensajeError");
@@ -243,6 +247,7 @@ public class ProgramarOTInspeccionAction implements RequestAware, SessionAware, 
 		//recuperamos la cabecera del formulario de la session
 		OrdenTrabajoInspeccionBean OTIBean=(OrdenTrabajoInspeccionBean)
 											session.get("b_OTIAsignar");
+		
 		//asignamos al tecnico en el bean recuperado
 		OTIBean.setStrCodTecnico(codTecnico);
 		
@@ -253,7 +258,7 @@ public class ProgramarOTInspeccionAction implements RequestAware, SessionAware, 
 			//recuperamos el bean incidente de la session
 			RegistroIncidentesBean incidenteBean=(RegistroIncidentesBean)
 											session.get("b_incidente");
-			
+			incidenteBean.setStrLugarAtencionCliente(strLugarAtencion);
 			String tarjetaEquipo=(String)session.get("tarjetaEquipo");
 			ArrayList<DetalleRegistroIncidenteBean> listaEquipos=incidenteBean.getArrMaquinariasXIncidente();
 							
