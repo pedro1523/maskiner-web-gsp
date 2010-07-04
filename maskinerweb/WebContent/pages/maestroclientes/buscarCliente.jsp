@@ -31,7 +31,7 @@
               </td>
             </tr>
           </table >
-          </br>
+          <br/>
           
         <div >
         <table style="width: 100%;" class="gridview">
@@ -58,7 +58,7 @@
 							</s:url>
 							<s:url var="imgSeleccionarUrl" value="/images/aprob_azul.gif"/>
 							<a href="${linkDevolResult}">
-								<img alt="Seleccionar" src="${imgSeleccionarUrl}">
+								<img alt="Seleccionar" src="${imgSeleccionarUrl}"/>
 							</a>
 						</td>
 						<td><s:property value="#cliente.strCodCliente"/></td>

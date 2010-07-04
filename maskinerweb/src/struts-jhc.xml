@@ -31,7 +31,8 @@
     		<action name="a_devolverCliente"
     			class="com.maskiner.smc.maestroclientes.action.MaestroClientesAction"
     			method="devolver" >
-    		<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
+    			<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
+    			<result name="exito1" type="tiles">d_repFreInc</result>
     		</action>
     					  
     		<action name="a_buscarMaquinaria"

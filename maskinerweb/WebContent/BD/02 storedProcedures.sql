@@ -1679,5 +1679,59 @@ select idInf;
 
 END $$
 
+/* Stored procedures para reportes */
+
+DROP PROCEDURE IF EXISTS `pr_reporteFrecuenciaIncidentes` $$
+CREATE PROCEDURE `pr_reporteFrecuenciaIncidentes`(
+ IN vcod_cli char(6),
+ IN vanio    char(4)
+ )
+BEGIN
+
+SELECT  cli.cod_cli,
+        cli.raz_soc_cli,
+        vanio AS annio,
+        ms.num_tar,
+        mq.desc_maq,
+        (SELECT COUNT(*) FROM maquinariasucursal_x_incidente msi inner join incidente inc
+         ON msi.num_inc = inc.num_inc WHERE CONVERT(YEAR(inc.fec_inc),CHAR(4)) LIKE vanio
+         AND inc.cod_cli = vcod_cli AND msi.natur_aver = '1') AS cant_hidrau,
+        (SELECT COUNT(*) FROM maquinariasucursal_x_incidente msi inner join incidente inc
+         ON msi.num_inc = inc.num_inc WHERE CONVERT(YEAR(inc.fec_inc),CHAR(4)) LIKE vanio
+         AND inc.cod_cli = vcod_cli AND msi.natur_aver = '2') AS cant_mecan,
+        (SELECT COUNT(*) FROM maquinariasucursal_x_incidente msi inner join incidente inc
+         ON msi.num_inc = inc.num_inc WHERE CONVERT(YEAR(inc.fec_inc),CHAR(4)) LIKE vanio
+         AND inc.cod_cli = vcod_cli AND msi.natur_aver = '3') AS cant_elect,
+        (SELECT COUNT(*) FROM maquinariasucursal_x_incidente msi inner join incidente inc
+         ON msi.num_inc = inc.num_inc WHERE CONVERT(YEAR(inc.fec_inc),CHAR(4)) LIKE vanio
+         AND inc.cod_cli = vcod_cli AND msi.natur_aver = '4') AS cant_neumat,
+        (SELECT COUNT(*) FROM maquinariasucursal_x_incidente msi inner join incidente inc
+         ON msi.num_inc = inc.num_inc WHERE CONVERT(YEAR(inc.fec_inc),CHAR(4)) LIKE vanio
+         AND inc.cod_cli = vcod_cli AND msi.natur_aver = '5') AS cant_otro,
+        ((SELECT COUNT(*) FROM maquinariasucursal_x_incidente msi inner join incidente inc
+          ON msi.num_inc = inc.num_inc WHERE CONVERT(YEAR(inc.fec_inc),CHAR(4)) LIKE vanio
+          AND inc.cod_cli = vcod_cli AND msi.natur_aver = '1')+
+          (SELECT COUNT(*) FROM maquinariasucursal_x_incidente msi inner join incidente inc
+          ON msi.num_inc = inc.num_inc WHERE CONVERT(YEAR(inc.fec_inc),CHAR(4)) LIKE vanio
+          AND inc.cod_cli = vcod_cli AND msi.natur_aver = '2')+
+          (SELECT COUNT(*) FROM maquinariasucursal_x_incidente msi inner join incidente inc
+          ON msi.num_inc = inc.num_inc WHERE CONVERT(YEAR(inc.fec_inc),CHAR(4)) LIKE vanio
+          AND inc.cod_cli = vcod_cli AND msi.natur_aver = '3')+
+          (SELECT COUNT(*) FROM maquinariasucursal_x_incidente msi inner join incidente inc
+          ON msi.num_inc = inc.num_inc WHERE CONVERT(YEAR(inc.fec_inc),CHAR(4)) LIKE vanio
+          AND inc.cod_cli = vcod_cli AND msi.natur_aver = '4')+
+          (SELECT COUNT(*) FROM maquinariasucursal_x_incidente msi inner join incidente inc
+          ON msi.num_inc = inc.num_inc WHERE CONVERT(YEAR(inc.fec_inc),CHAR(4)) LIKE vanio
+          AND inc.cod_cli = vcod_cli AND msi.natur_aver = '5')) AS cant_total
+FROM cliente cli inner join sucursal suc
+ON cli.cod_cli = suc.cod_cli
+INNER JOIN maquinariasucursal ms
+ON ms.num_suc = suc.num_suc
+AND ms.cod_cli = suc.cod_cli
+INNER JOIN maquinaria mq
+ON ms.cod_maq = mq.cod_maq
+WHERE cli.cod_cli = vcod_cli;
+
+END $$
 
 DELIMITER ;

@@ -97,6 +97,13 @@
     		<result type="tiles">d_repFreInc</result>
     	</action>
    	
+        <action name="a_cnm_generarRepFrecIncid"   
+				class="com.maskiner.smc.reportes.action.ReporteGastosMaquinariaAction" 
+				method="ListarFrecuenciaIncidentes" >
+					
+			<result name="exito" type="tiles">d_repFreInc</result>       	    			
+             			
+     </action>   
 
 
 	</package>

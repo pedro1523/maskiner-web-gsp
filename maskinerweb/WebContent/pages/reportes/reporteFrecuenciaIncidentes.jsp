@@ -14,44 +14,24 @@
 </head>
 <body>
 	<h2 class="titulo"><s:text name="pages.reportes.repFreInc.titulo" /></h2>
-<table>
-
-	<tr>
-
-		<!--  aqui va el cuerpo -->
-		<td class="separadovertical">
-			<s:form method="post" action="a_reporteMaquinariaFre">
-			<table class="control" >
-				<tr>
-					<td><s:text name="pages.reportes.repFreInc.lblcliente" /></td>
-					<td>
-						<s:textfield name="cliente" label="hola" labelposition="left" labelSeparator=":" value="34" />
-<!--						<html:img src="images/buscar_azul.gif" style="margin-right:25px;vertical-align:middle"/>  -->
-					</td>
-					
-					<td><s:text name="pages.reportes.repFreInc.lblannio" /></td>
-					<td>
-						<s:textfield name="anio" />
-					</td>
-					
-					<td>
-						<s:submit cssStyle="margin-left:20px" value="Generar Reporte" />
-					</td>
-				</tr>
-			</table>
-
-			</s:form>
-		
-		
-		</td>
-
-
-	</tr>
-
-
-
-</table>
-
+    <fieldset>
+      <legend><s:text name="pages.reportes.repFreInc.fieldsetCriterios" /></legend>
+	  <s:form method="post" action="a_cnm_generarRepFrecIncid">
+	      <div class="separadoverticalinferior">
+	        <s:text name="pages.reportes.repFreInc.lblcliente" />
+	        <s:textfield name="cliente.strCodCliente" value="CL0001"/>
+	        <s:a action="a_buscarCliente">
+	        	<s:param name="formOrigen">repFrecInc</s:param>
+	        	<s:url var="imgBuscarAzulUrl" value="/images/buscar_azul.gif"/>
+	        	<img src="${imgBuscarAzulUrl}" style="margin-right:25px;vertical-align:middle"/>
+	        </s:a>
+	        <s:text name="pages.reportes.repFreInc.lblannio" />
+	        <s:textfield name="anio" value="2000" />
+	        <s:submit cssStyle="margin-left:20px" value="Generar Reporte" />
+	      </div>
+	      <s:actionerror/>
+	  </s:form>      
+    </fieldset>
 
 </body>
 </html>
