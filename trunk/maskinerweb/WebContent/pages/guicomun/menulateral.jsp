@@ -68,7 +68,7 @@
 	        request.setAttribute("prueba",prueba);
 	  %>
 	  <s:if test="#request.prueba">
-	  	  <li><s:a action="a_cargarFactura"><s:text name="pages.guicomun.menulateral.generarfactura"/></s:a></li>
+	  	  <li><s:a action="a_cpm_cargarFactura"><s:text name="pages.guicomun.menulateral.generarfactura"/></s:a></li>
 	  </s:if>
 
 	  <%
