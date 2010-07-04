@@ -6,10 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts2.dispatcher.mapper.ActionMapping;
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -177,6 +173,7 @@ public class FacturacionAction implements SessionAware,RequestAware,ParameterAwa
 		}
 		UsuarioBean usuario=(UsuarioBean)session.get("usuariologueado");
 		System.out.println("check" + strValorCheck);
+		
 		if(strValorCheck==null){
 			System.out.println("dentro del if ");
 			BigDecimal monto=BigDecimal.valueOf(Double.parseDouble(parameters.get("monto")[0]));
@@ -209,8 +206,8 @@ public class FacturacionAction implements SessionAware,RequestAware,ParameterAwa
 				System.out.println("dentro del else ");
 				String strObservacion=parameters.get("observacion")[0];
 				if(strObservacion.trim().equals("")){
-					request.put("mensaje","(*)Ingrese Observación");
-					return "exito";				
+					request.put("mensaje","Ingrese Observación");
+					return "exito1";				
 				}else{
 				BigDecimal monto=BigDecimal.valueOf(Double.parseDouble(parameters.get("monto")[0]));
 				PrefacturaBean prefactura=(PrefacturaBean)session.get("b_prefactura");
