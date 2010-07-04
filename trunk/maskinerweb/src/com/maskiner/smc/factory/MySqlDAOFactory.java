@@ -20,6 +20,7 @@ import com.maskiner.smc.programartrabajo.dao.MySqlOrdenTrabajoDAO;
 import com.maskiner.smc.programartrabajo.dao.MySqlTecnicoDAO;
 import com.maskiner.smc.programartrabajo.dao.OrdenTrabajoDAO;
 import com.maskiner.smc.programartrabajo.dao.TecnicoDAO;
+import com.maskiner.smc.reportes.dao.ReportesDAO;
 import com.maskiner.smc.seguridad.dao.MySqlSeguridadDAO;
 import com.maskiner.smc.seguridad.dao.SeguridadDAO;
 
@@ -89,6 +90,12 @@ public class MySqlDAOFactory extends DAOFactory {
 	public FacturacionDAO getFacturaDAO() {
 		// TODO Auto-generated method stub
 		return new MySqlFacturacionDAO();
+	}
+
+	@Override
+	public ReportesDAO getReportesDAO() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

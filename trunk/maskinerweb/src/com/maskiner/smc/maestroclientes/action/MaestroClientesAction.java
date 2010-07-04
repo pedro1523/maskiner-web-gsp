@@ -20,7 +20,16 @@ public class MaestroClientesAction implements RequestAware, SessionAware, Parame
 	private Map<String, Object> session;
 	private Map<String, String[]> parameters;
 	
+	private ClienteBean cliente;
 	
+	public ClienteBean getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(ClienteBean cliente) {
+		this.cliente = cliente;
+	}
+
 	public String getFormOrigen() {
 		return formOrigen;
 	}
@@ -51,14 +60,20 @@ public class MaestroClientesAction implements RequestAware, SessionAware, Parame
 		
 		MaestroClientesI servicio = MaestroClientesBusinessDelegate.getMaestroClientesService();
 		
-		ClienteBean cliente = servicio.obtenerClientePK(CodCliente);
+		cliente = servicio.obtenerClientePK(CodCliente);
 		
-		ArrayList<SucursalBean> arrSucursalBean = cliente.getArrSucursalBean();
-		
-		session.put("cliente", cliente);
-		session.put("arrSucursalBean", arrSucursalBean);
-		
-		return "exito";
+		if (formOrigen.equals("repFrecInc")){
+			return "exito1";
+		}else{
+			//devuelve el control al jsp: registroIncidentes_Nuevo.jsp (definition: d_registrarIncidente_Nuevo)
+			ArrayList<SucursalBean> arrSucursalBean = cliente.getArrSucursalBean();
+			
+			session.put("cliente", cliente);
+			session.put("arrSucursalBean", arrSucursalBean);
+			
+			return "exito";
+		}
+			
 	}
 	
 	public String cargar2()throws Exception {

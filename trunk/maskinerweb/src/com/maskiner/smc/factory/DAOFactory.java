@@ -14,6 +14,7 @@ import com.maskiner.smc.maestroclientes.dao.MaestroClientesDAO;
 import com.maskiner.smc.maestromaquinarias.dao.MaestroMaquinariasDAO;
 import com.maskiner.smc.programartrabajo.dao.OrdenTrabajoDAO;
 import com.maskiner.smc.programartrabajo.dao.TecnicoDAO;
+import com.maskiner.smc.reportes.dao.ReportesDAO;
 import com.maskiner.smc.seguridad.dao.SeguridadDAO;
 
 
@@ -24,6 +25,7 @@ public abstract class DAOFactory {
     public static final int DB2 = 3;
     public static final int SQLSERVER = 4;
     public static final int XML = 5;
+    public static final int JPA = 6;
     
     // metodos que devuelven DAOS
     
@@ -37,17 +39,12 @@ public abstract class DAOFactory {
     public abstract TablaDeTablasDAO getTablaDeTablasDAO();
     public abstract MaterialesDAO getMaterialesDAO();
     public abstract LiquidacionDAO getLiquidacionDAO();
-    //CHRISTIAN
     public abstract FacturacionDAO getFacturaDAO();
-    //FIN
-    public static DAOFactory getDAOFactory(){
-    	/* devuelve un DAOFActory del tipo especificado en
-    		el archivo de recursos engine.properties */
-    	
-    	ResourceBundle rb = ResourceBundle.getBundle("com.maskiner.smc.recursos.engine");
-    	int motor = Integer.parseInt(rb.getString("motor_bd"));
-    	
-        switch(motor){
+    public abstract ReportesDAO getReportesDAO();
+    
+    
+    public static DAOFactory getDAOFactory(int whichFactory) {
+        switch(whichFactory){
 	   		case MYSQL:
 	    	    return new MySqlDAOFactory();
 	     	/*case DB2:
@@ -56,9 +53,24 @@ public abstract class DAOFactory {
 	    	    return new SqlServerDAOFactory();
 	    	case XML:
 	    	    return new XmlDAOFactory();*/
+	       	case JPA:
+	       	    return new JpaDAOFactory();
+
 	    	default:
 	    	    return null;
         }
+		
+	}
+
+    public static DAOFactory getDAOFactory(){
+    	/* devuelve un DAOFActory del tipo especificado en
+    		el archivo de recursos engine.properties */
+    	
+    	ResourceBundle rb = ResourceBundle.getBundle("com.maskiner.smc.recursos.engine");
+    	int motor = Integer.parseInt(rb.getString("motor_bd"));
+    	
+    	return getDAOFactory(motor);
+    	
     }
     
     
