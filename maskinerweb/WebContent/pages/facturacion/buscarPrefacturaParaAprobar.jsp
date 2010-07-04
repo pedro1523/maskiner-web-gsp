@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2 class="titulo">Aprobar Prefactura</h2>
+<h2 class="titulo">Buscar Prefactura</h2>
 <s:form action="a_cpm_buscarPrefacturas"> 
 		<fieldset>
 			<legend>Criterios:</legend>
