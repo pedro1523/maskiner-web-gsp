@@ -19,14 +19,14 @@
 	  <s:form method="post" action="a_cnm_generarRepFrecIncid">
 	      <div class="separadoverticalinferior">
 	        <s:text name="pages.reportes.repFreInc.lblcliente" />
-	        <s:textfield name="cliente.strCodCliente" value="CL0001"/>
+	        <s:textfield name="cliente.strCodCliente" value="CL0002"/>
 	        <s:a action="a_buscarCliente">
 	        	<s:param name="formOrigen">repFrecInc</s:param>
 	        	<s:url var="imgBuscarAzulUrl" value="/images/buscar_azul.gif"/>
 	        	<img src="${imgBuscarAzulUrl}" style="margin-right:25px;vertical-align:middle"/>
 	        </s:a>
 	        <s:text name="pages.reportes.repFreInc.lblannio" />
-	        <s:textfield name="anio" value="2000" />
+	        <s:textfield name="anio" value="2009" />
 	        <s:submit cssStyle="margin-left:20px" value="Generar Reporte" />
 	      </div>
 	      <s:actionerror/>
