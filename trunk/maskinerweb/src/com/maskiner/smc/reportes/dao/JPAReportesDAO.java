@@ -45,7 +45,9 @@ public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 			
 			resultado.add(r);
 		}
-		
+/*	
+		List<ReporteFrecuenciaIncidentesBean> resultado = q.getResultList();
+*/			
 		return resultado;
 	}
 

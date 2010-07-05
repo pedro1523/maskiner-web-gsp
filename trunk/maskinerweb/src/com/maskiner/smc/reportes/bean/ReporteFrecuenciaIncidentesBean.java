@@ -1,11 +1,11 @@
 package com.maskiner.smc.reportes.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
 import org.eclipse.persistence.annotations.NamedStoredProcedureQuery;
 import org.eclipse.persistence.annotations.StoredProcedureParameter;
 
@@ -17,6 +17,9 @@ import org.eclipse.persistence.annotations.StoredProcedureParameter;
 			@StoredProcedureParameter(queryParameter="annio", name="vanio", type=String.class)
 		},
 		returnsResultSet=true
+/*		,
+		resultClass=ReporteFrecuenciaIncidentesBean.class
+*/
 )
 public class ReporteFrecuenciaIncidentesBean implements Serializable {
 	
