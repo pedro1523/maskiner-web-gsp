@@ -1,6 +1,7 @@
 package com.maskiner.smc.reportes.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,8 +20,13 @@ import org.eclipse.persistence.annotations.StoredProcedureParameter;
 )
 public class ReporteFrecuenciaIncidentesBean implements Serializable {
 	
-	@Column(name="cod_cli")
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2967003664281209474L;
+
 	@Id
+	@Column(name="cod_cli")
 	private String codCliente;
 	
 	@Column(name="raz_soc_cli")

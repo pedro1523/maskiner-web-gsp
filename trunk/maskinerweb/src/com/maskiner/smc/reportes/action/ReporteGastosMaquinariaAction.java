@@ -1,5 +1,6 @@
 package com.maskiner.smc.reportes.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 	
 	private ClienteBean cliente;
 	private String      anio;
+	private List<ReporteFrecuenciaIncidentesBean> arrRepFrecIncBean;
 	
 	public String getAnio() {
 		return anio;
@@ -38,6 +40,14 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 		this.cliente = cliente;
 	}
 
+	public List<ReporteFrecuenciaIncidentesBean> getArrRepFrecIncBean() {
+		return arrRepFrecIncBean;
+	}
+
+	public void setArrRepFrecIncBean(
+			List<ReporteFrecuenciaIncidentesBean> arrRepFrecIncBean) {
+		this.arrRepFrecIncBean = arrRepFrecIncBean;
+	}
 
 	public String ListarGastosMaquinarias() throws Exception {
  
@@ -129,10 +139,17 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 //				MySqlDbConn.obtenerConexion());
 		
 		ReportesServiceI servicio = ReportesBusinessDelegate.getReporteService();
-		List<ReporteFrecuenciaIncidentesBean> datos = 
+		arrRepFrecIncBean = 
 			servicio.obtenerDatosReporteFrecuenciaIncidentes(cliente.getStrCodCliente(), anio);
-
-		//System.out.println(datos.size());
+		
+//		System.out.println("Tamaño: " + arrRepFrecIncBean.size());
+//		
+//		for(ReporteFrecuenciaIncidentesBean r: arrRepFrecIncBean){
+//			System.out.println("cod cli: " + r.getCodCliente());
+//			System.out.println("raz soc. cli: " + r.getRazonSocialCliente());
+//			System.out.println("-------------------------------------------");
+//		}
+		
 		return vista;
 
 	}

@@ -10,6 +10,10 @@
 
 	<package name="cnm" extends="tiles-default" namespace="/">
 
+    	<result-types>
+    		<result-type name="jasper" class="org.apache.struts2.views.jasperreports.JasperReportsResult"/>
+    	</result-types>
+    	
 	   	<global-results>
     		<result name="customError">/errorPage.jsp</result>
     	</global-results>
@@ -101,7 +105,15 @@
 				class="com.maskiner.smc.reportes.action.ReporteGastosMaquinariaAction" 
 				method="ListarFrecuenciaIncidentes" >
 					
-			<result name="exito" type="tiles">d_repFreInc</result>       	    			
+			<result name="exito" type="jasper">
+				<param name="location">/pages/reportes/RFrecuenciaIncidentes.jasper</param>
+				<param name="dataSource">arrRepFrecIncBean</param>
+				<param name="contentDisposition">
+					attachment;filename="incidentes.pdf"
+				</param>
+				<param name="format">PDF</param>
+				d_repFreInc
+			</result>       	    			
              			
      </action>   
 
