@@ -10,9 +10,6 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 
 		<!-- El listado completo de entidades que estaran bajo la persitencia de JPA -->
-		<class>com.maskiner.smc.reportes.bean.ReporteFrecuenciaIncidentesBean</class>
-
-		
 
 		<properties>
 			<property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver" />

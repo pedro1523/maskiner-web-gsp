@@ -21,9 +21,8 @@ public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 		EntityManager manager = getEntityManager();
 		
 		Query q = manager.createNamedQuery("pr_reporteFrecuenciaIncidentes");
-		q.setParameter("cod_cli", codCliente);
-		q.setParameter("annio", annio);
-		
+		q.setParameter(1, codCliente);
+		q.setParameter(2, annio);
 		Vector<Object[]> datos = (Vector<Object[]>) q.getResultList();
 		
 		ArrayList<ReporteFrecuenciaIncidentesBean> resultado = new ArrayList<ReporteFrecuenciaIncidentesBean>();
@@ -45,9 +44,6 @@ public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 			
 			resultado.add(r);
 		}
-/*	
-		List<ReporteFrecuenciaIncidentesBean> resultado = q.getResultList();
-*/			
 		return resultado;
 	}
 
