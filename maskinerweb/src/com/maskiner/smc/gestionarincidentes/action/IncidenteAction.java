@@ -42,7 +42,7 @@ public class IncidenteAction extends  ActionSupport  implements RequestAware, Se
 	}
 
 	public String cargarNuevoIncidente() throws Exception {
-		session.put("Detalle", null);
+		
 		IncidenteServiceI servicio2 = IncidenteBusinessDelegate.getIncidenteService();
 		
 		ClienteBean cliente = new ClienteBean();
@@ -64,14 +64,15 @@ public class IncidenteAction extends  ActionSupport  implements RequestAware, Se
 		session.remove("maquinarias");
 		session.remove("id");
 		session.remove("cliente");*/
-		
+		session.remove("Detalle");
+		session.remove("arr_maquinarias");
 		return "exito";
 	}
 
 	@SuppressWarnings("unchecked")
 	public String registrarIncidente() throws Exception {
 
-UsuarioBean usu = (UsuarioBean) session.get("usuariologueado");
+		UsuarioBean usuario = (UsuarioBean) session.get("usuariologueado");
 		
 		ArrayList<DetalleRegistroIncidenteBean> detalle = 
 			(ArrayList<DetalleRegistroIncidenteBean>) session.get("Detalle");
@@ -86,7 +87,7 @@ UsuarioBean usu = (UsuarioBean) session.get("usuariologueado");
 		RegistroIncidentesBean regIncidente = new RegistroIncidentesBean();
 		
 		regIncidente.setStrCodigoCliente((String) session.get("CodigoCliente"));
-		regIncidente.setStrCodigoRegistrador(usu.getCodigoUsuario());
+		regIncidente.setStrCodigoRegistrador(usuario.getCodigoUsuario());
 		regIncidente.setStrSucursal((String) session.get("codSucursal"));
 		regIncidente.setIntEstadoIncidente(1);
 
@@ -101,7 +102,18 @@ UsuarioBean usu = (UsuarioBean) session.get("usuariologueado");
 	@SuppressWarnings("unchecked")
 	public String AgregarALista() throws Exception {
 		
-System.out.println("a ver...");
+		try {
+			String a =parameters.get("Sucursal")[0].toString();
+		} catch (Exception e) {
+			request.put("mensajeerror1",getText("pages.gestionarincidentes.regincidentes.mensajeError4"));
+			return "exito";
+		}
+		try {			
+			String b = parameters.get("chk")[0].toString();
+		} catch (Exception e) {
+			request.put("mensajeerror1",getText("pages.gestionarincidentes.regincidentes.mensajeError5"));
+			return "exito";
+		}
 		
 		String numTarjetaEq = parameters.get("chk")[0];
 		String naturalezaAveria = parameters.get("cboNatAveria")[0];
@@ -112,9 +124,9 @@ System.out.println("a ver...");
 		if(session.get("Detalle")==null){
 			Detalles=(ArrayList<DetalleRegistroIncidenteBean>) session.get("DetalleIni");
 		}
-			else{
-				Detalles=(ArrayList<DetalleRegistroIncidenteBean>) session.get("Detalle");
-			}
+		else{
+			Detalles=(ArrayList<DetalleRegistroIncidenteBean>) session.get("Detalle");
+		}
 		
 		DetalleRegistroIncidenteBean detalle = new DetalleRegistroIncidenteBean();
 		detalle.setStrNumeroTarjetaEquipo(numTarjetaEq);
@@ -142,44 +154,33 @@ System.out.println("a ver...");
 	}
 
 	public String quitarIncidenteDeLista() throws Exception {
-		String strNumTarjeta = parameters.get("numFila")[0];
+		int intNumFila = Integer.parseInt(parameters.get("numFila")[0].toString());
 		//int strNumTarjeta= new Integer(parameters.get("numFila").toString());
 		ArrayList<DetalleRegistroIncidenteBean> Detalles = new ArrayList<DetalleRegistroIncidenteBean>();
 		Detalles = (ArrayList<DetalleRegistroIncidenteBean>) session.get("Detalle");
-
-		for (int i = 0; i < Detalles.size(); i++) {
-			if (Detalles.get(i).getStrNumeroTarjetaEquipo() == strNumTarjeta) {
-				Detalles.remove(i);
-			}
-		}
-				session.put("Detalle", Detalles);
-		
-		/*
-		HttpSession sesion = request.getSession();
-		ArrayList<DetalleRegistroIncidenteBean> Detalles = new ArrayList<DetalleRegistroIncidenteBean>();
-
-		Detalles = (ArrayList<DetalleRegistroIncidenteBean>) sesion.getAttribute("Detalle");
-
-		int fila = new Integer(request.getParameter("numFila").toString());
-
-		for (int i = 0; i < Detalles.size(); i++) {
-			if (Detalles.get(i).getIntNumeroItem() == fila) {
-				Detalles.remove(i);
-			}
-		}
-
-		sesion.setAttribute("Detalle", Detalles);
-		return "exito";
-		*/
+		Detalles.remove(intNumFila);
+		session.put("Detalle", Detalles);
+	
 		return "exito";
 	}
 
 	public String buscarMaquinarias() throws Exception {
+		
+		try {
+			String a =parameters.get("Sucursal")[0].toString();
+		} catch (Exception e) {
+			request.put("mensajeerror1",getText("pages.gestionarincidentes.regincidentes.mensajeError4"));
+			return "exito";
+		}
+		
 		ClienteBean c = (ClienteBean) session.get("cliente");
 		String codCliente = c.getStrCodCliente();
 		String codSucursal = parameters.get("Sucursal")[0].toString();//(String) request.get("Sucursal");
-		System.out.println(codCliente);
-		System.out.println(codSucursal);
+		
+		
+		session.put("CodigoCliente", codCliente);
+		session.put("codSucursal", codSucursal);
+
 		MaestroMaquinariasI servicio = MaestroMaquinariasBusinessDelegate
 		.getMaestroMaquinariasService();
 		

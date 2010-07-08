@@ -35,8 +35,8 @@
 		document.forms["frmNuevoIncidente"].action="<%= request.getContextPath() %>/a_buscarMaquinaria";
 		document.forms["frmNuevoIncidente"].submit();
 	}
-	function enviarSubmitQuitarIndidenteDeLista(nroTarjeta){
-		document.forms["frmNuevoIncidente"].action="<%= request.getContextPath() %>/a_QuitarIncidenteDeLista?numFila=" + nroTarjeta;
+	function enviarSubmitQuitarIndidenteDeLista(intNumeroItem){
+		document.forms["frmNuevoIncidente"].action="<%= request.getContextPath() %>/a_QuitarIncidenteDeLista?numFila=" + intNumeroItem;
 		document.forms["frmNuevoIncidente"].submit();
 	}
 </script>
@@ -95,7 +95,7 @@ function ismaxlengthTxtDescripcion(){
               		<s:hidden name="CodCliente" value="#session.cliente.strCodCliente"></s:hidden>
               	</td>
               	<td>
-              	<s:a action="a_buscarCliente">
+              	<s:a action="a_cargarBuscarCliente">
 		    		<img src="images/buscar_azul.gif" />
 		    	</s:a>
               	</td>
@@ -137,22 +137,20 @@ function ismaxlengthTxtDescripcion(){
 	                			<s:iterator var="maquinaria" value="#session.arr_maquinarias">
 							<tr>
 	                		<td><input name="chk" type="radio" value="${maquinaria.strNumTarjeta}"></td>
-	                				  			 <s:if test="%#request.mensajeerror2!=null">
-	  	<div class="mensajeerror separadoverticalsuperior">
-	  	<s:property value="#request.mensajeerror1"/></div>
-    </s:if>
+             				  		<s:if test="%#request.mensajeerror2!=null">
+									  	<div class="mensajeerror separadoverticalsuperior">
+									  	<s:property value="#request.mensajeerror1"/></div>
+								    </s:if>
 	                				<td><s:property value="#maquinaria.strNumTarjeta"/></td>
 									<td><s:property value="#maquinaria.strDescMaq" /></td>
 									<td><s:property value="#maquinaria.strDesEstMaquinaria" /></td>
 	                			</tr>
 	                			</s:iterator>
 	                			 <s:if test="%#request.mensajeerror1!=null">
-	  	<div class="mensajeerror separadoverticalsuperior">
-	  	<s:property value="#request.mensajeerror1"/></div>
-    </s:if>
-           
-    
-	
+								  	<div class="mensajeerror separadoverticalsuperior">
+								  	<s:property value="#request.mensajeerror1"/></div>
+							    </s:if>
+     
 	                		</tr>
 	                	</table>
 					<br>
@@ -186,6 +184,7 @@ function ismaxlengthTxtDescripcion(){
           <table cellspacing="0" cellpadding="5" class="gridview" width="100%">
             <tr>
 			  <!-- <th width="10%" align="center"><s:text name="pages.gestionarincidentes.regincidentes.columna1.cabecera" /></th> -->
+			  <th width="10%" align="center"><s:text name="pages.gestionarincidentes.regincidentes.columna1.cabecera" /></th>	
               <th width="11%" align="center"><s:text name="pages.gestionarincidentes.regincidentes.columna2.cabecera" />  </th>
               <th width="30%" align="center"><s:text name="pages.gestionarincidentes.regincidentes.columna3.cabecera" /></th>
               <th width="30%" align="center"><s:text name="pages.gestionarincidentes.regincidentes.columna4.cabecera" /></th>
@@ -193,6 +192,11 @@ function ismaxlengthTxtDescripcion(){
 			
 			<s:iterator var="detalle" value="#session.Detalle">
 				<tr>
+					<td>
+	          		<a href="javascript:enviarSubmitQuitarIndidenteDeLista('${detalle.intNumeroItem}')">
+            			<img src="<s:url value="/images/quitar.gif"/>" />
+            		</a>
+					</td>
        				<td><s:property value="#detalle.strNumeroTarjetaEquipo"/></td>
 					<td><s:property value="#detalle.intNaturalezaAveria" /></td>
 					<td><s:property value="#detalle.strDescripcionNaturalezaAveria" /></td>
