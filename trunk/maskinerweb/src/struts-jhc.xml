@@ -22,17 +22,22 @@
      			<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
     		</action>
     		
-    		<action name="a_buscarCliente"
+    		<action name="a_cargarBuscarCliente"
     			class="com.maskiner.smc.maestroclientes.action.MaestroClientesAction"
     			method="cargar" >
+    		<result name="exito" type="tiles">d_buscarCliente</result>
+    		</action>
+    		
+    		<action name="a_buscarCliente"
+    			class="com.maskiner.smc.maestroclientes.action.MaestroClientesAction"
+    			method="buscar" >
     		<result name="exito" type="tiles">d_buscarCliente</result>
     		</action>
     	
     		<action name="a_devolverCliente"
     			class="com.maskiner.smc.maestroclientes.action.MaestroClientesAction"
     			method="devolver" >
-    			<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
-    			<result name="exito1" type="tiles">d_repFreInc</result>
+    		<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
     		</action>
     					  
     		<action name="a_buscarMaquinaria"
@@ -42,7 +47,7 @@
     	 	
     		</action>
     		
-    				<action name="a_AgregarIncidenteALista"
+    		<action name="a_AgregarIncidenteALista"
     			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
     			method="AgregarALista" >
     		<result name="fracaso" type="tiles">d_registrarIncidente_Nuevo</result>
@@ -55,13 +60,13 @@
     			method="registrarIncidente"	>
     		<result name="fracaso" type="tiles">d_registrarIncidente_Nuevo</result>
      		<result name="exito" type="tiles">d_registrarIncidente_Confirmacion</result>
-    	</action>
-    			 	<action name="a_QuitarIncidenteDeLista"
+    		</action>
+    		
+    		<action name="a_QuitarIncidenteDeLista"
     			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
     			method="quitarIncidenteDeLista">
-    		<result name="exito" type="tiles">d_registrarIncidente_Nuevo"</result>
-    	</action>
-    	
+    		<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
+    		</action>	
     	
    		</package>
     
