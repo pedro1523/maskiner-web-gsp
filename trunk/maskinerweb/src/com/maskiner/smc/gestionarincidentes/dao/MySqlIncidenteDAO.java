@@ -125,17 +125,19 @@ public class MySqlIncidenteDAO implements IncidenteDAO {
 		}
 		
 		
-		
+		/**********ACCCCCCCCCCCCCCCCCCCCA**/	
 		for(int i=0;i<det.size();i++){
 			DetalleRegistroIncidenteBean detalle = det.get(i);
-			CallableStatement st2 = cn.prepareCall("{call pr_agregarMaquinariaXIncidente(?,?,?,?)}");
+			CallableStatement st2 = cn.prepareCall("{call pr_agregarMaquinariaXIncidente(?,?,?,?,?)}");
 			st2.setString(1, id);
 			st2.setString(2, detalle.getStrNumeroTarjetaEquipo());
 			st2.setString(3, detalle.getStrDescripcionNaturalezaAveria());
 			st2.setInt(4, detalle.getIntNaturalezaAveria());
+			st2.setInt(5, detalle.getIntNumeroItem());
 			st2.executeUpdate();
 		}
 		
+		/**********ACCCCCCCCCCCCCCCCCCCCA**/		
 
 		
 		cn.close();
