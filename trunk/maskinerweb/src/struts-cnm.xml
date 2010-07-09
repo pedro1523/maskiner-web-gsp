@@ -103,7 +103,7 @@
    	
         <action name="a_cnm_generarRepFrecIncid"   
 				class="com.maskiner.smc.reportes.action.ReporteGastosMaquinariaAction" 
-				method="ListarFrecuenciaIncidentes" >
+				method="listarFrecuenciaIncidentes" >
 					
 			<result name="exito" type="jasper">
 				<param name="location">/pages/reportes/RFrecuenciaIncidentes.jasper</param>
@@ -113,7 +113,8 @@
 				</param>
 				<param name="format">PDF</param>
 				d_repFreInc
-			</result>       	    			
+			</result>
+			<result name="input" type="tiles">d_repFreInc</result>       	    			
              			
      </action>   
 
