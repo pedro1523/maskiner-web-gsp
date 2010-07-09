@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
-<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
-<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,17 +24,16 @@
 
 <h2 class="titulo">Reporte de Técnicos por Orden de Trabajo</h2>
 	
-<table>
-
-	<tr>
-
-		<!--  aqui va el cuerpo -->
-		<td class="separadovertical">
-			<html:form method="post" action="a_reporteTecnicosOT">
+<s:form method="post" action="a_reporteTecnicosOT">
+	<div class="separadovertical">
+		<s:label key="pages.reportes.repTecOT.lblOrdenTrabajo" />
+		<s:textfield />
+	</div>		  	
+		  
 			<table class="control separadovertical" >
 				<tr>
 					
-				   <td>Orden de Trabajo: </td>
+				   <td> </td>
 					<td>
 						<html:text property="ot" />
 						<html:link action="a_irbuscarOT">
@@ -96,17 +93,7 @@
 				</tr>
 			</table>
 
-			</html:form>
-		
-		
-		</td>
-
-
-	</tr>
-
-
-
-</table>
+</s:form>
 
 
 </body>
