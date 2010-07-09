@@ -7,6 +7,9 @@ import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.maskiner.smc.gestionarincidentes.service.IncidenteBusinessDelegate;
+import com.maskiner.smc.gestionarincidentes.service.IncidenteServiceI;
+import com.maskiner.smc.logistica.bean.TablaDeTablasBean;
 import com.maskiner.smc.maestroclientes.bean.ClienteBean;
 import com.maskiner.smc.maestroclientes.bean.SucursalBean;
 import com.maskiner.smc.maestroclientes.service.MaestroClientesBusinessDelegate;
@@ -20,14 +23,23 @@ public class MaestroClientesAction implements RequestAware, SessionAware, Parame
 	private Map<String, Object> session;
 	private Map<String, String[]> parameters;
 	
-	private ClienteBean cliente;
+	private String codCliente;
+	private String anio;
 	
-	public ClienteBean getCliente() {
-		return cliente;
+	public String getAnio() {
+		return anio;
 	}
 
-	public void setCliente(ClienteBean cliente) {
-		this.cliente = cliente;
+	public void setAnio(String annio) {
+		this.anio = annio;
+	}
+
+	public String getCodCliente() {
+		return codCliente;
+	}
+
+	public void setCodCliente(String codCliente) {
+		this.codCliente = codCliente;
 	}
 
 	public String getFormOrigen() {
@@ -44,23 +56,23 @@ public class MaestroClientesAction implements RequestAware, SessionAware, Parame
 		if (RazSocCliente==null){
 			RazSocCliente="";
 		}*/
+		System.out.println("Cliente:"+ codCliente);
+		System.out.println("Anio"+ anio);
+
 
 		MaestroClientesI servicio = MaestroClientesBusinessDelegate.getMaestroClientesService();
 		
 		ArrayList<ClienteBean> arrClientes =  servicio.buscarPorCliente("");
 		request.put("arr_clientes", arrClientes);
 			
-
 		return "exito";
 	}
 	
 	public String devolver()throws Exception {
 
-		String CodCliente = parameters.get("CodCliente")[0].trim();
-		
 		MaestroClientesI servicio = MaestroClientesBusinessDelegate.getMaestroClientesService();
 		
-		cliente = servicio.obtenerClientePK(CodCliente);
+		ClienteBean cliente = servicio.obtenerClientePK(codCliente);
 		
 		if (formOrigen.equals("repFrecInc")){
 			return "exito1";
@@ -74,6 +86,39 @@ public class MaestroClientesAction implements RequestAware, SessionAware, Parame
 			return "exito";
 		}
 			
+	}
+	
+	public String buscarClienteIrPaginaOrigen() throws Exception{
+		if(formOrigen.equals("repFrecInc")){
+			return "exito1";
+		}else{
+			//******formOrigen=="registroIncidentesNuevo"*********//
+			session.put("Detalle", null);
+			IncidenteServiceI servicio2 = IncidenteBusinessDelegate.getIncidenteService();
+			
+			ClienteBean cliente = new ClienteBean();
+			ArrayList<SucursalBean> arrSucursalBean = new ArrayList<SucursalBean>();
+			cliente.setArrSucursalBean(arrSucursalBean);
+			
+			session.put("cliente", cliente);
+			session.put("arrSucursalBean", arrSucursalBean);
+			//ultima prueba del día
+			ArrayList<TablaDeTablasBean> arr2;
+			arr2 = servicio2.listarTipoDeAverias();
+			session.put("averia", arr2);
+				
+			//limpia las variables
+			/*session.remove("CodigoCliente");
+			session.remove("codSucursal");
+			session.remove("Detalle");
+			session.remove("id");
+			session.remove("maquinarias");
+			session.remove("id");
+			session.remove("cliente");*/
+			
+			return "exito";
+		}
+		
 	}
 	
 	public String cargar2()throws Exception {

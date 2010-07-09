@@ -43,6 +43,8 @@ public class IncidenteAction extends  ActionSupport  implements RequestAware, Se
 
 	public String cargarNuevoIncidente() throws Exception {
 		
+		//session.put("Detalle", null);
+		
 		IncidenteServiceI servicio2 = IncidenteBusinessDelegate.getIncidenteService();
 		
 		ClienteBean cliente = new ClienteBean();

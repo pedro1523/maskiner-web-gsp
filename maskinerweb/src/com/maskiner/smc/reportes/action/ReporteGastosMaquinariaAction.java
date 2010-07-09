@@ -19,7 +19,7 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 	private Map<String, Object> session;
 	private Map<String, String[]> parameters;
 	
-	private ClienteBean cliente;
+	private String codCliente;
 	private String      anio;
 	private List<ReporteFrecuenciaIncidentesBean> arrRepFrecIncBean;
 	
@@ -31,12 +31,12 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 		this.anio = anio;
 	}
 
-	public ClienteBean getCliente() {
-		return cliente;
+	public String getCodCliente() {
+		return codCliente;
 	}
 
-	public void setCliente(ClienteBean cliente) {
-		this.cliente = cliente;
+	public void setCodCliente(String codCliente) {
+		this.codCliente = codCliente;
 	}
 
 	public List<ReporteFrecuenciaIncidentesBean> getArrRepFrecIncBean() {
@@ -48,7 +48,7 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 		this.arrRepFrecIncBean = arrRepFrecIncBean;
 	}
 
-	public String ListarGastosMaquinarias() throws Exception {
+	public String listarGastosMaquinarias() throws Exception {
  
 		String vista = "exito";
  
@@ -87,7 +87,7 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 		return vista;	
 	}
 
-	public String ListarUtilizacionMaquinarias() throws Exception {
+	public String listarUtilizacionMaquinarias() throws Exception {
 
 		String vista = "exito";
 
@@ -113,47 +113,19 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 
 	}
 
-	public String ListarFrecuenciaIncidentes() throws Exception {
+	public String listarFrecuenciaIncidentes() throws Exception {
 
 		String vista = "exito";
 
-//		String strcliente = cliente.getStrCodCliente();
-//		String stranio = request.getParameter("anio");
-//
-//		InputStream entrada = getServlet().getServletContext()
-//				.getResourceAsStream(
-//						"/pages/reportes/RFrecuenciaIncidentes.jasper");
-//
-//		HashMap<String, Object> parametros = new HashMap<String, Object>();
-//		parametros.put("cod_cli", strcliente);
-//		parametros.put("anio", stranio);
-//		parametros.put("img_cen",getServlet().getServletContext().getResourceAsStream("/pages/reportes/logomaskiner.png"));
-//		parametros.put("img_cab",getServlet().getServletContext().getResourceAsStream("/pages/reportes/logomaskinerletras.png"));
-//		
-//
-//		ServletOutputStream salida = response.getOutputStream();
-//
-//		response.setContentType("application/pdf");
-//		JasperRunManager.runReportToPdfStream(entrada, salida, parametros,
-//				MySqlDbConn.obtenerConexion());
-		
 		ReportesServiceI servicio = ReportesBusinessDelegate.getReporteService();
 		arrRepFrecIncBean = 
-			servicio.obtenerDatosReporteFrecuenciaIncidentes(cliente.getStrCodCliente(), anio);
-		
-//		System.out.println("Tamaño: " + arrRepFrecIncBean.size());
-//		
-//		for(ReporteFrecuenciaIncidentesBean r: arrRepFrecIncBean){
-//			System.out.println("cod cli: " + r.getCodCliente());
-//			System.out.println("raz soc. cli: " + r.getRazonSocialCliente());
-//			System.out.println("-------------------------------------------");
-//		}
+			servicio.obtenerDatosReporteFrecuenciaIncidentes(codCliente, anio);
 		
 		return vista;
 
 	}
 
-	public String ListarHistorialMaquinaria() throws Exception {
+	public String listarHistorialMaquinaria() throws Exception {
 
 		String vista = "exito";
 
@@ -179,7 +151,7 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 
 	}
 	
-	public String ListarTecnicosOT() throws Exception {
+	public String listarTecnicosOT() throws Exception {
  
 		String vista = "exito";
  		
