@@ -10,26 +10,23 @@
 
 
 <title>Insert title here</title>
-    
+
 </head>
 <body>
 	<h2 class="titulo"><s:text name="pages.reportes.repFreInc.titulo" /></h2>
     <fieldset>
       <legend><s:text name="pages.reportes.repFreInc.fieldsetCriterios" /></legend>
-	  <s:form method="post" action="a_cnm_generarRepFrecIncid">
+	  <s:form name="frmReporteIncidentes" method="post" action="a_cnm_generarRepFrecIncid">
 	      <div class="separadoverticalinferior">
 	        <s:text name="pages.reportes.repFreInc.lblcliente" />
-	        <s:textfield name="cliente.strCodCliente"/>
-	        <s:a action="a_buscarCliente">
-	        	<s:param name="formOrigen">repFrecInc</s:param>
-	        	<s:url var="imgBuscarAzulUrl" value="/images/buscar_azul.gif"/>
-	        	<img src="${imgBuscarAzulUrl}" style="margin-right:25px;vertical-align:middle"/>
-	        </s:a>
+	        <s:textfield name="codCliente"/>
+	        <s:submit action="a_buscarCliente" type="image" src="images/buscar_azul.gif"/>
 	        <s:text name="pages.reportes.repFreInc.lblannio" />
 	        <s:textfield name="anio" />
+	        <s:hidden name="formOrigen" value="repFrecInc"/>
 	        <s:submit cssStyle="margin-left:20px" value="Generar Reporte" />
 	      </div>
-	      <s:actionerror/>
+	      <s:fielderror cssClass="mensajeerror" />
 	  </s:form>      
     </fieldset>
 
