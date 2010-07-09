@@ -15,11 +15,10 @@
 
       <div>
     	<h2>Buscar Cliente</h2>
-	<s:url var="actionFormUrl" action="a_buscarCliente">
-			<!-- ${param.formOrigen} -->
-			<s:param name="formOrigen"><s:property value="formOrigen"/></s:param>
-	</s:url>
-      <s:form  method="post" action="%{actionFormUrl}">
+      <s:form  method="post" action="a_buscarCliente">
+      	<s:hidden name="formOrigen"/>
+      	<s:hidden name="codCliente"/>
+      	<s:hidden name="anio"/>
         <div >
           <table>
             <tr>
@@ -31,7 +30,7 @@
               </td>
             </tr>
           </table >
-          </br>
+          <br/>
           
         <div >
         <table style="width: 100%;" class="gridview">
@@ -53,12 +52,14 @@
 					<tr>
 						<td align="center">
 							<s:url var="linkDevolResult" action="a_devolverCliente">
-								<s:param name="CodCliente">${cliente.strCodCliente}</s:param>
+								<s:param name="codCliente">${cliente.strCodCliente}</s:param>
 								<s:param name="formOrigen"><s:property value="formOrigen"/></s:param>
+								<s:param name="anio"><s:property value="anio"/></s:param>
+								
 							</s:url>
 							<s:url var="imgSeleccionarUrl" value="/images/aprob_azul.gif"/>
 							<a href="${linkDevolResult}">
-								<img alt="Seleccionar" src="${imgSeleccionarUrl}">
+								<img alt="Seleccionar" src="${imgSeleccionarUrl}"/>
 							</a>
 						</td>
 						<td><s:property value="#cliente.strCodCliente"/></td>
@@ -74,18 +75,22 @@
 			</div>
         </div>
         <br/>
-        
-		<div class="separadovertical" align="right">
-			<s:url var="linkIrPagOrigen" action="a_cargarRegistroIncidente">
-				<s:param name="formOrigen"><s:property value="formOrigen"/></s:param>
-			</s:url>
-			<a href="${linkIrPagOrigen}">
-				<s:url var="imgCancelarUrl" value="/images/cancelar.png"/>
-				<img src="${imgCancelarUrl}" alt="Cancelar" width="71" height="25" border="0" />
-			</a>
-		</div>
 
       </s:form>
+      
+        
+	<div class="separadovertical" align="right">
+		<s:url var="linkIrPagOrigen" action="a_buscarClienteIrPaginaOrigen">
+			<s:param name="formOrigen"><s:property value="formOrigen"/></s:param>
+			<s:param name="codCliente"><s:property value="codCliente"/></s:param>
+			<s:param name="anio"><s:property value="anio"/></s:param>
+		</s:url>
+		<a href="${linkIrPagOrigen}">
+			<s:url var="imgCancelarUrl" value="/images/cancelar.png"/>
+			<img src="${imgCancelarUrl}" alt="Cancelar" width="71" height="25" border="0" />
+		</a>
+	</div>
+      
 </div>
 </div>
 </body>
