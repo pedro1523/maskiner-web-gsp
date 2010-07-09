@@ -20,7 +20,7 @@
 	      <div class="separadoverticalinferior">
 	        <s:text name="pages.reportes.repFreInc.lblcliente" />
 	        <s:textfield name="codCliente"/>
-	        <s:submit action="a_buscarCliente" type="image" src="images/buscar_azul.gif"/>
+	        <s:submit action="a_cargarBuscarCliente" type="image" src="images/buscar_azul.gif"/>
 	        <s:text name="pages.reportes.repFreInc.lblannio" />
 	        <s:textfield name="anio" />
 	        <s:hidden name="formOrigen" value="repFrecInc"/>

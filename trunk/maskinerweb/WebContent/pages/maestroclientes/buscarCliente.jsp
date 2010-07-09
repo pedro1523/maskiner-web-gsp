@@ -24,7 +24,7 @@
             <tr>
               <td height="24" ><s:text name="pages.buscarCliente.lblCliente" /></td>
               <td style="width: 353px">
-					<s:textfield name="RazSocCliente" id="txtRazSocCliente" cssStyle="width:100px"/>
+					<s:textfield name="razSocCliente" id="txtRazSocCliente" cssStyle="width:100px"/>
 				<s:url var="imgBuscarUrl" value="/images/buscar.png"/>
 				<s:submit type="image" src="%{imgBuscarUrl}" />
               </td>

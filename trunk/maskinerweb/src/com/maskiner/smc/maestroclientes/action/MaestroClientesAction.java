@@ -25,7 +25,16 @@ public class MaestroClientesAction implements RequestAware, SessionAware, Parame
 	
 	private String codCliente;
 	private String anio;
+	private String razSocCliente;
 	
+	public String getRazSocCliente() {
+		return razSocCliente;
+	}
+
+	public void setRazSocCliente(String razSocCliente) {
+		this.razSocCliente = razSocCliente;
+	}
+
 	public String getAnio() {
 		return anio;
 	}
@@ -51,15 +60,6 @@ public class MaestroClientesAction implements RequestAware, SessionAware, Parame
 	}
 
 	public String cargar()throws Exception {
-		/*
-		String RazSocCliente = request.getParameter("RazSocCliente");
-		if (RazSocCliente==null){
-			RazSocCliente="";
-		}*/
-		System.out.println("Cliente:"+ codCliente);
-		System.out.println("Anio"+ anio);
-
-
 		MaestroClientesI servicio = MaestroClientesBusinessDelegate.getMaestroClientesService();
 		
 		ArrayList<ClienteBean> arrClientes =  servicio.buscarPorCliente("");
@@ -67,6 +67,18 @@ public class MaestroClientesAction implements RequestAware, SessionAware, Parame
 			
 		return "exito";
 	}
+	
+	public String buscar()throws Exception {
+
+		MaestroClientesI servicio = MaestroClientesBusinessDelegate.getMaestroClientesService();
+		
+		ArrayList<ClienteBean> arrClientes =  servicio.buscarPorCliente(razSocCliente);
+		request.put("arr_clientes", arrClientes);
+			
+		return "exito";
+	}
+	
+	
 	
 	public String devolver()throws Exception {
 
