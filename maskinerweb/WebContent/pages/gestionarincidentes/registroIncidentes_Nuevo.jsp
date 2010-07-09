@@ -96,6 +96,7 @@ function ismaxlengthTxtDescripcion(){
               	</td>
               	<td>
               	<s:a action="a_cargarBuscarCliente">
+              		<s:param name="formOrigen">registroIncidentesNuevo</s:param>
 		    		<img src="images/buscar_azul.gif" />
 		    	</s:a>
               	</td>
