@@ -12,8 +12,13 @@
 	</field>
 	
 	<field  name="anio">
-		<field-validator type="requiredstring">
+		<field-validator type="required" short-circuit="true">
 			<message key="pages.reportes.repFreInc.errors.anio.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">1980</param>
+			<param name="max">9999</param>
+			<message key="pages.reportes.repFreInc.errors.anio.int"/>
 		</field-validator>
 	</field>
 	

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="343"/>
 	<field name="codCliente" class="java.lang.String"/>
 	<field name="razonSocialCliente" class="java.lang.String"/>
 	<field name="annio" class="java.lang.String"/>
@@ -15,20 +15,20 @@
 	<field name="cantidadOtros" class="java.lang.Long"/>
 	<field name="cantidadTotal" class="java.lang.Long"/>
 	<background>
-		<band splitType="Stretch"/>
+		<band height="802" splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="93" splitType="Stretch">
 			<staticText>
-				<reportElement x="171" y="42" width="230" height="51"/>
+				<reportElement x="95" y="58" width="379" height="28"/>
 				<textElement textAlignment="Center">
-					<font size="15" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+					<font size="15" isBold="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[REPORTE FRECUENCIA ANUAL DE INCIDENTES]]></text>
 			</staticText>
-			<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="false">
-				<reportElement x="432" y="0" width="123" height="20"/>
-				<textElement/>
+			<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="false">
+				<reportElement x="401" y="0" width="154" height="20"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>

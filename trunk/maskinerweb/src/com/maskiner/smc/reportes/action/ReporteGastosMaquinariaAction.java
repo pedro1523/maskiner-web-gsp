@@ -20,14 +20,14 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 	private Map<String, String[]> parameters;
 	
 	private String codCliente;
-	private String      anio;
+	private Integer      anio;
 	private List<ReporteFrecuenciaIncidentesBean> arrRepFrecIncBean;
 	
-	public String getAnio() {
+	public Integer getAnio() {
 		return anio;
 	}
 
-	public void setAnio(String anio) {
+	public void setAnio(Integer anio) {
 		this.anio = anio;
 	}
 
@@ -119,7 +119,7 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 
 		ReportesServiceI servicio = ReportesBusinessDelegate.getReporteService();
 		arrRepFrecIncBean = 
-			servicio.obtenerDatosReporteFrecuenciaIncidentes(codCliente, anio);
+			servicio.obtenerDatosReporteFrecuenciaIncidentes(codCliente, anio.toString());
 		
 		return vista;
 
