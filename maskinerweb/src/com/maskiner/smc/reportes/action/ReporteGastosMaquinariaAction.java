@@ -23,9 +23,7 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 	
 	private String codCliente;
 	private String numOrdenTrabajo;
-	private Date fechaInicio;
-	private Date fechaFin;
-	private Integer      anio;
+	private Integer anio;
 	private List<ReporteFrecuenciaIncidentesBean> arrRepFrecIncBean;
 	private List<ReporteTecnicosOTBean> arrRepTecOTBean;
 	
@@ -36,22 +34,6 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 
 	public void setNumOrdenTrabajo(String numOrdenTrabajo) {
 		this.numOrdenTrabajo = numOrdenTrabajo;
-	}
-
-	public Date getFechaInicio() {
-		return fechaInicio;
-	}
-
-	public void setFechaInicio(Date fechaInicio) {
-		this.fechaInicio = fechaInicio;
-	}
-
-	public Date getFechaFin() {
-		return fechaFin;
-	}
-
-	public void setFechaFin(Date fechaFin) {
-		this.fechaFin = fechaFin;
 	}
 
 	public List<ReporteTecnicosOTBean> getArrRepTecOTBean() {
@@ -195,7 +177,7 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 		String vista = "exito";
 		
 		ReportesServiceI servicio = ReportesBusinessDelegate.getReporteService();
-		arrRepTecOTBean = servicio.obtenerDatosReporteTecnicosOT(numOrdenTrabajo, fechaInicio, fechaFin);
+		arrRepTecOTBean = servicio.obtenerDatosReporteTecnicosOT(numOrdenTrabajo);
  		
 		return vista;	
 	}

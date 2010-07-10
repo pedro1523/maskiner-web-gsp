@@ -1747,8 +1747,8 @@ SELECT  distinct
   DATE_FORMAT(ot.fec_ord_trab, '%d/%m/%Y') fec_ord_trab,
   tec.cod_tco,
   CONCAT(tec.ape_pat_tco,' ',tec.ape_pat_tco,', ',tec.nom_tco) nom_tec,
-  concat(convert(pot.hor_ini,char(8)),' hrs') hor_ini ,
-	concat(convert(pot.hor_fin,char(8)),' hrs') hor_fin
+  pot.hor_ini,
+	pot.hor_fin
 FROM ordentrabajo ot
 inner join paquete_x_ot pot on ot.num_ord_trab=pot.num_ord_trab
 inner join tecnico_x_paquete_x_ot tpot on pot.cod_paq=tpot.cod_paq

@@ -22,28 +22,7 @@
 	<div class="separadovertical">
 		<s:label key="pages.reportes.repTecOT.lblOrdenTrabajo" />
 		<s:textfield name="numOrdenTrabajo" />
-		<s:label key="pages.reportes.repTecOT.lblFechaInicio" />
-		<sj:datepicker name="fechaInicio"
-					   buttonImageOnly="true"
-					   id="txtFechaInicio"
-					   size="10" 
-					   displayFormat="dd/mm/yy"
-					   changeYear="true"
-					   changeMonth="true"
-					   cssStyle="margin-right:5px"
-					   readonly="true" />
-		<s:label key="pages.reportes.repTecOT.lblFechaFin" />
-		<sj:datepicker name="fechaFin"
-					   buttonImageOnly="true"
-					   id="txtFechaFin"
-					   size="10" 
-					   displayFormat="dd/mm/yy"
-					   changeYear="true"
-					   changeMonth="true"
-					   cssStyle="margin-right:5px"
-					   readonly="true" />
 	    <s:submit cssStyle="margin-left:20px" value="Generar Reporte" />
-				
 	</div>		  	
 </s:form>
 

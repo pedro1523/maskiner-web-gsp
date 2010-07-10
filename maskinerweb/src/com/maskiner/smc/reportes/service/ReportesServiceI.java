@@ -9,5 +9,5 @@ import com.maskiner.smc.reportes.bean.ReporteTecnicosOTBean;
 public interface ReportesServiceI {
 	public List<ReporteFrecuenciaIncidentesBean> obtenerDatosReporteFrecuenciaIncidentes(String codCliente, String annio) throws Exception;
 
-	public List<ReporteTecnicosOTBean> obtenerDatosReporteTecnicosOT(String codOrdenTrabajo, Date fechaInicio, Date fechaFin) throws Exception;
+	public List<ReporteTecnicosOTBean> obtenerDatosReporteTecnicosOT(String codOrdenTrabajo) throws Exception;
 }
