@@ -24,10 +24,9 @@ public class ReportesServiceImpl implements ReportesServiceI {
 	}
 
 	@Override
-	public List<ReporteTecnicosOTBean> obtenerDatosReporteTecnicosOT(
-			String codOrdenTrabajo, Date fechaInicio, Date fechaFin)
+	public List<ReporteTecnicosOTBean> obtenerDatosReporteTecnicosOT(String codOrdenTrabajo)
 			throws Exception {
-		return reportesDAO.obtenerDatosReporteTecnicosOT(codOrdenTrabajo, fechaInicio, fechaFin);
+		return reportesDAO.obtenerDatosReporteTecnicosOT(codOrdenTrabajo);
 	}
 
 }

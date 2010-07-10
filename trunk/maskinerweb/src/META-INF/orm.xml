@@ -5,4 +5,8 @@
 		<orm:query>call pr_reporteFrecuenciaIncidentes(?1,?2)</orm:query>
 	</orm:named-native-query>
 
+	<orm:named-native-query name="pr_reporteTecnicosOT">
+		<orm:query>call pr_reporteTecnicosOT(?1)</orm:query>
+	</orm:named-native-query>
+
 </orm:entity-mappings>

@@ -1,5 +1,6 @@
 package com.maskiner.smc.reportes.dao;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -50,11 +51,33 @@ public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 	}
 
 	@Override
-	public List<ReporteTecnicosOTBean> obtenerDatosReporteTecnicosOT(
-			String codOrdenTrabajo, Date fechaInicio, Date fechaFin)
+	public List<ReporteTecnicosOTBean> obtenerDatosReporteTecnicosOT(String codOrdenTrabajo)
 			throws Exception {
 		
-		return null;
+		EntityManager manager = getEntityManager();
+		
+		Query q = manager.createNamedQuery("pr_reporteTecnicosOT");
+		q.setParameter(1, codOrdenTrabajo);
+		Vector<Object[]> datos = (Vector<Object[]>) q.getResultList();
+		
+		ArrayList<ReporteTecnicosOTBean> resultado = new ArrayList<ReporteTecnicosOTBean>();
+		
+		for(Object[] d: datos){
+			
+			ReporteTecnicosOTBean r = new ReporteTecnicosOTBean();
+			r.setNumOrdenTrabajo((String) d[0]);
+			r.setDireccionCliente((String) d[1]);
+			r.setRazonSocialCliente((String) d[2]);
+			Date fecha = new Date(((java.sql.Date)d[3]).getTime());
+			r.setFechaOrdenTrabajo(fecha);
+			r.setCodTecnico((String) d[4]);
+			r.setNombreTecnico((String) d[5]);
+			r.setHoraInicio((Time) d[6]);
+			r.setHoraFin((Time) d[7]);
+			
+			resultado.add(r);
+		}
+		return resultado;
 	}
 
 
