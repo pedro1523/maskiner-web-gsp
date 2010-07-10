@@ -2162,31 +2162,30 @@ END $$
 
 DROP PROCEDURE IF EXISTS `pr_reporteTecnicosOT` $$
 CREATE PROCEDURE `pr_reporteTecnicosOT`(
- IN vnum_ord_trab char(6),
- IN vfec_ini      date,
- IN vfec_fin      date
+ IN vnum_ord_trab char(6)
  )
 BEGIN
 
-SELECT  distinct ot.num_ord_trab,
+SELECT  distinct
+  ot.num_ord_trab,
 	cli.direc_cli,
   cli.raz_soc_cli,
   DATE_FORMAT(ot.fec_ord_trab, '%d/%m/%Y') fec_ord_trab,
   tec.cod_tco,
-  CONCAT(ape_pat_tco,' ',ape_pat_tco,', ',nom_tco) nom_tec,
-  concat(convert(tli.hor_ini,char(5)),' hrs') hor_ini ,
-	concat(convert(tli.hor_fin,char(5)),' hrs') hor_fin
-FROM cliente cli
-INNER JOIN incidente inc ON cli.cod_cli = inc.cod_cli
-INNER JOIN ordentrabajo ot ON inc.num_inc = ot.num_inc
-INNER JOIN liquidacion liq ON liq.num_ord_trab = ot.num_ord_trab
-INNER JOIN tecnicos_x_liquidacion tli ON tli. num_inf_liq = liq.num_inf_liq
-INNER JOIN tecnico_x_paquete_x_ot tot ON ot.num_ord_trab = tot.num_ord_trab
-INNER JOIN tecnico tec ON tec.cod_tco = tot.cod_tco
-WHERE ot.fec_ord_trab BETWEEN vfec_ini AND vfec_fin
-AND ot.num_ord_trab = vnum_ord_trab;
+  CONCAT(tec.ape_pat_tco,' ',tec.ape_pat_tco,', ',tec.nom_tco) nom_tec,
+  concat(convert(pot.hor_ini,char(8)),' hrs') hor_ini ,
+	concat(convert(pot.hor_fin,char(8)),' hrs') hor_fin
+FROM ordentrabajo ot
+inner join paquete_x_ot pot on ot.num_ord_trab=pot.num_ord_trab
+inner join tecnico_x_paquete_x_ot tpot on pot.cod_paq=tpot.cod_paq
+and pot.num_ord_trab=tpot.num_ord_trab
+inner join tecnico tec on tpot.cod_tco=tec.cod_tco
+inner join incidente inc on ot.num_inc=inc.num_inc
+inner join cliente cli on inc.cod_cli=cli.cod_cli
+WHERE ot.num_ord_trab = vnum_ord_trab;
 
 END $$
+
 
 DELIMITER ;
 
