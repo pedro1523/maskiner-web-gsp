@@ -1,6 +1,7 @@
 package com.maskiner.smc.reportes.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -9,6 +10,7 @@ import javax.persistence.Query;
 
 import com.maskiner.smc.factory.GenericDAOJpa;
 import com.maskiner.smc.reportes.bean.ReporteFrecuenciaIncidentesBean;
+import com.maskiner.smc.reportes.bean.ReporteTecnicosOTBean;
 
 public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 
@@ -46,6 +48,15 @@ public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 		}
 		return resultado;
 	}
+
+	@Override
+	public List<ReporteTecnicosOTBean> obtenerDatosReporteTecnicosOT(
+			String codOrdenTrabajo, Date fechaInicio, Date fechaFin)
+			throws Exception {
+		
+		return null;
+	}
+
 
 
 }
