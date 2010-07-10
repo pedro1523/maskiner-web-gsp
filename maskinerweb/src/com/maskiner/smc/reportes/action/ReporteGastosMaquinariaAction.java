@@ -1,5 +1,6 @@
 package com.maskiner.smc.reportes.action;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.maskiner.smc.maestroclientes.bean.ClienteBean;
 import com.maskiner.smc.reportes.bean.ReporteFrecuenciaIncidentesBean;
+import com.maskiner.smc.reportes.bean.ReporteTecnicosOTBean;
 import com.maskiner.smc.reportes.service.ReportesBusinessDelegate;
 import com.maskiner.smc.reportes.service.ReportesServiceI;
 import com.opensymphony.xwork2.ActionSupport;
@@ -20,9 +22,46 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 	private Map<String, String[]> parameters;
 	
 	private String codCliente;
+	private String numOrdenTrabajo;
+	private Date fechaInicio;
+	private Date fechaFin;
 	private Integer      anio;
 	private List<ReporteFrecuenciaIncidentesBean> arrRepFrecIncBean;
+	private List<ReporteTecnicosOTBean> arrRepTecOTBean;
 	
+	
+	public String getNumOrdenTrabajo() {
+		return numOrdenTrabajo;
+	}
+
+	public void setNumOrdenTrabajo(String numOrdenTrabajo) {
+		this.numOrdenTrabajo = numOrdenTrabajo;
+	}
+
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
+	public List<ReporteTecnicosOTBean> getArrRepTecOTBean() {
+		return arrRepTecOTBean;
+	}
+
+	public void setArrRepTecOTBean(List<ReporteTecnicosOTBean> arrRepTecOTBean) {
+		this.arrRepTecOTBean = arrRepTecOTBean;
+	}
+
 	public Integer getAnio() {
 		return anio;
 	}
@@ -154,36 +193,9 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 	public String listarTecnicosOT() throws Exception {
  
 		String vista = "exito";
- 		
-//		String strOt=request.getParameter("ot");
-//		String strfec_ini = request.getParameter("fechainicio");
-//		String strfec_fin = request.getParameter("fechafin");
-//		
-//		String fi=""; 
-//		String ff=""; 
-//		
-//		fi+= strfec_ini.substring(6,10)+"/"+strfec_ini.substring(3,5)+"/"+strfec_ini.substring(0,2);
-//		ff+=strfec_fin.substring(6,10)+"/"+strfec_fin.substring(3,5)+"/"+strfec_fin.substring(0,2);
-//		
-//		
-//
-//		InputStream entrada = getServlet()
-//				.getServletContext()
-//				.getResourceAsStream("/pages/reportes/RTecnicosOT.jasper");
-//
-//		HashMap<String, Object> parametros = new HashMap<String, Object>();
-//		parametros.put("ot", strOt);
-//		parametros.put("fec_ini", fi);  
-//		parametros.put("fec_fin", ff);
-//		parametros.put("img_cen",getServlet().getServletContext().getResourceAsStream("/pages/reportes/logomaskiner.png"));
-//		parametros.put("img_cab",getServlet().getServletContext().getResourceAsStream("/pages/reportes/logomaskinerletras.png"));
-//		
-//
-//		ServletOutputStream salida = response.getOutputStream();
-//
-//		response.setContentType("application/pdf");
-//		JasperRunManager.runReportToPdfStream(entrada, salida, parametros,
-//				MySqlDbConn.obtenerConexion());
+		
+		ReportesServiceI servicio = ReportesBusinessDelegate.getReporteService();
+		arrRepTecOTBean = servicio.obtenerDatosReporteTecnicosOT(numOrdenTrabajo, fechaInicio, fechaFin);
  		
 		return vista;	
 	}

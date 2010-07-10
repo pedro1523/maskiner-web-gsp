@@ -100,7 +100,7 @@
     	<action name="a_cnm_repFreInc">
     		<result type="tiles">d_repFreInc</result>
     	</action>
-   	
+    	
         <action name="a_cnm_generarRepFrecIncid"   
 				class="com.maskiner.smc.reportes.action.ReporteGastosMaquinariaAction" 
 				method="listarFrecuenciaIncidentes" >
@@ -115,6 +115,27 @@
 				d_repFreInc
 			</result>
 			<result name="input" type="tiles">d_repFreInc</result>       	    			
+             			
+     </action>
+     
+   	 <action name="a_cnm_repTecOT">
+   		<result type="tiles">d_repTecOT</result>
+   	 </action>
+    	
+     <action name="a_cnm_generarRepTecnicosOT"   
+				class="com.maskiner.smc.reportes.action.ReporteGastosMaquinariaAction" 
+				method="listarTecnicosOT" >
+					
+			<result name="exito" type="jasper">
+				<param name="location">/pages/reportes/RTecnicosOT.jasper</param>
+				<param name="dataSource">arrRepTecOTBean</param>
+				<param name="contentDisposition">
+					attachment;filename="incidentes.pdf"
+				</param>
+				<param name="format">PDF</param>
+				d_repFreInc
+			</result>
+			<result name="input" type="tiles">d_repTecOT</result>       	    			
              			
      </action>   
 
