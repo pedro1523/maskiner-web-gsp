@@ -1749,9 +1749,9 @@ BEGIN
 
 SELECT  distinct
   ot.num_ord_trab,
-	cli.direc_cli,
+  cli.direc_cli,
   cli.raz_soc_cli,
-  DATE_FORMAT(ot.fec_ord_trab, '%d/%m/%Y') fec_ord_trab,
+  ot.fec_ord_trab,
   tec.cod_tco,
   CONCAT(tec.ape_pat_tco,' ',tec.ape_pat_tco,', ',tec.nom_tco) nom_tec,
   pot.hor_ini,

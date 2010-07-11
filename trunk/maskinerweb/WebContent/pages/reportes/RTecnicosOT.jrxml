@@ -1,208 +1,173 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<parameter name="fec_ini" class="java.lang.String"/>
-	<parameter name="fec_fin" class="java.lang.String"/>
-	<parameter name="img_cab" class="java.io.InputStream"/>
-	<parameter name="img_cen" class="java.io.InputStream"/>
-	<parameter name="ot" class="java.lang.String"/>
-	<queryString>
-		<![CDATA[SELECT  distinct ot.num_ord_trab,
-	cli.direc_cli,
-        cli.raz_soc_cli,
-        DATE_FORMAT(ot.fec_ord_trab, '%d/%m/%Y') fec_ord_trab,
-        tec.cod_tco,
-        CONCAT(ape_pat_tco,' ',ape_pat_tco,', ',nom_tco) nom_tec,
-        concat(convert(tli.hor_ini,char(5)),' hrs') hor_ini ,
-	      concat(convert(tli.hor_fin,char(5)),' hrs') hor_fin
-FROM cliente cli
-INNER JOIN incidente inc ON cli.cod_cli = inc.cod_cli
-INNER JOIN ordentrabajo ot ON inc.num_inc = ot.num_inc
-INNER JOIN liquidacion liq ON liq.num_ord_trab = ot.num_ord_trab
-INNER JOIN tecnicos_x_liquidacion tli ON tli. num_inf_liq = liq.num_inf_liq
-INNER JOIN tecnico_x_paquete_x_ot tot ON ot.num_ord_trab = tot.num_ord_trab
-INNER JOIN tecnico tec ON tec.cod_tco = tot.cod_tco
-WHERE ot.fec_ord_trab BETWEEN $P{fec_ini} AND $P{fec_fin}
-AND ot.num_ord_trab LIKE CONCAt($P{ot},'%');]]>
-	</queryString>
-	<field name="num_ord_trab" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="direc_cli" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="raz_soc_cli" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="fec_ord_trab" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="cod_tco" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="nom_tec" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="hor_ini" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="hor_fin" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<group name="Maquinaria">
-		<groupHeader>
-			<band>
-				<elementGroup>
-					<elementGroup/>
-				</elementGroup>
-			</band>
-		</groupHeader>
-		<groupFooter>
-			<band height="130"/>
-		</groupFooter>
-	</group>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="8"/>
+	<style name="table" isDefault="false">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" isDefault="false" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" isDefault="false" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" isDefault="false" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1"/>
+	<field name="numOrdenTrabajo" class="java.lang.String"/>
+	<field name="direccionCliente" class="java.lang.String"/>
+	<field name="razonSocialCliente" class="java.lang.String"/>
+	<field name="fechaOrdenTrabajo" class="java.util.Date"/>
+	<field name="codTecnico" class="java.lang.String"/>
+	<field name="nombreTecnico" class="java.lang.String"/>
+	<field name="horaInicio" class="java.sql.Time"/>
+	<field name="horaFin" class="java.sql.Time"/>
 	<background>
-		<band height="802" splitType="Stretch">
-			<image>
-				<reportElement x="40" y="250" width="464" height="432"/>
-				<imageExpression class="java.io.InputStream"><![CDATA[$P{img_cen}]]></imageExpression>
-			</image>
-			<image>
-				<reportElement x="0" y="0" width="166" height="33"/>
-				<imageExpression class="java.io.InputStream"><![CDATA[$P{img_cab}]]></imageExpression>
-			</image>
-		</band>
+		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="92" splitType="Stretch">
+		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="40" y="52" width="467" height="20"/>
+				<reportElement x="29" y="47" width="467" height="20"/>
 				<textElement textAlignment="Center">
-					<font size="15" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+					<font size="15" isBold="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[REPORTE TECNICOS ASIGNADOS POR ORDEN DE TRABAJO]]></text>
 			</staticText>
-			<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="false">
-				<reportElement x="432" y="14" width="123" height="20"/>
-				<textElement/>
+			<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="false">
+				<reportElement x="373" y="11" width="138" height="20"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="307" y="83" width="100" height="0"/>
-				<textElement/>
-				<text><![CDATA[Static text]]></text>
-			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="86" splitType="Stretch">
+		<band height="62" splitType="Stretch">
 			<staticText>
-				<reportElement x="278" y="10" width="100" height="20"/>
+				<reportElement x="22" y="10" width="100" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Fecha Atención:]]></text>
+				<text><![CDATA[Número O/T:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="12" y="30" width="100" height="20"/>
+				<reportElement x="22" y="30" width="100" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cliente:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="12" y="10" width="100" height="20"/>
+				<reportElement x="288" y="30" width="100" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Número O/T:]]></text>
+				<text><![CDATA[Dirección:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="112" y="10" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{num_ord_trab}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="112" y="30" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{raz_soc_cli}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="378" y="10" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{fec_ord_trab}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="35" y="50" width="77" height="20"/>
-				<textElement textAlignment="Center">
+				<reportElement x="288" y="10" width="100" height="20"/>
+				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Código Técnico]]></text>
+				<text><![CDATA[Fecha Atención:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="122" y="10" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numOrdenTrabajo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="30" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{razonSocialCliente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="388" y="10" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fechaOrdenTrabajo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="388" y="30" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{direccionCliente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="22" y="0" width="466" height="21" backcolor="#F4F2F2"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="148" y="1" width="166" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos y Nombres]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="414" y="50" width="51" height="20"/>
-				<textElement textAlignment="Center">
+				<reportElement x="354" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="0" width="51" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Hora Fin]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="138" y="50" width="166" height="20"/>
-				<textElement textAlignment="Center">
+				<reportElement x="45" y="0" width="77" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nombre]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="344" y="50" width="60" height="20"/>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Hora Inicio]]></text>
-			</staticText>
-			<line>
-				<reportElement x="0" y="70" width="518" height="1"/>
-			</line>
-			<line>
-				<reportElement x="0" y="85" width="518" height="1"/>
-			</line>
-			<textField>
-				<reportElement x="378" y="30" width="157" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{direc_cli}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="278" y="30" width="100" height="20"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Dirección]]></text>
+				<text><![CDATA[Cód. Técnico]]></text>
 			</staticText>
 		</band>
-	</pageHeader>
-	<columnHeader>
-		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="35">
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="22" y="0" width="466" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
 			<textField>
-				<reportElement x="56" y="0" width="77" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{cod_tco}]]></textFieldExpression>
+				<reportElement x="148" y="0" width="192" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreTecnico}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="354" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.sql.Time"><![CDATA[$F{horaInicio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="425" y="0" width="51" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.sql.Time"><![CDATA[$F{horaFin}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="165" y="0" width="168" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{nom_tec}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="359" y="1" width="45" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{hor_ini}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="424" y="1" width="47" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{hor_fin}]]></textFieldExpression>
+				<reportElement x="45" y="0" width="77" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codTecnico}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -210,20 +175,20 @@ AND ot.num_ord_trab LIKE CONCAt($P{ot},'%');]]>
 		<band height="20" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="47" splitType="Stretch">
-			<textField>
-				<reportElement x="213" y="19" width="80" height="20"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
-			</textField>
+		<band height="54" splitType="Stretch">
 			<textField evaluationTime="Report">
-				<reportElement x="293" y="19" width="40" height="20"/>
+				<reportElement x="314" y="15" width="40" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="234" y="15" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="13" splitType="Stretch"/>
+		<band height="42" splitType="Stretch"/>
 	</summary>
 </jasperReport>
