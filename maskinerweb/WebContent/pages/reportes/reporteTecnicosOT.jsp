@@ -18,7 +18,7 @@
 
 <h2 class="titulo">Reporte de Técnicos por Orden de Trabajo</h2>
 	
-<s:form method="post" action="a_reporteTecnicosOT">
+<s:form method="post" action="a_cnm_generarRepTecnicosOT">
 	<div class="separadovertical">
 		<s:label key="pages.reportes.repTecOT.lblOrdenTrabajo" />
 		<s:textfield name="numOrdenTrabajo" />

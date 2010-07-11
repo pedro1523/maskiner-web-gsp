@@ -130,7 +130,7 @@
 				<param name="location">/pages/reportes/RTecnicosOT.jasper</param>
 				<param name="dataSource">arrRepTecOTBean</param>
 				<param name="contentDisposition">
-					attachment;filename="incidentes.pdf"
+					attachment;filename="tecnicosot.pdf"
 				</param>
 				<param name="format">PDF</param>
 				d_repFreInc
