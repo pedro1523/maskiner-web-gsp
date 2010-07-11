@@ -496,25 +496,32 @@ select id;
 END $$
 
 DROP PROCEDURE IF EXISTS `pr_agregarMaquinariaXIncidente` $$
-CREATE PROCEDURE `pr_agregarMaquinariaXIncidente`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_agregarMaquinariaXIncidente`(
  IN codIncidente char (6),
  IN tarjeta char (6),
  IN decripAveria varchar(300),
- IN naturaleza int(11)
+ IN naturaleza int(11),
+ IN item int(11)
 )
 BEGIN
 
 /* Insertamos nuevo detalle del Registro de Incidentes */
-INSERT INTO maquinaria_x_incidente(
+INSERT INTO maquinariasucursal_x_incidente(
                       num_inc,
                       num_tar,
+                      itm_aver,
                       desc_aver,
-                      natur_aver)
+                      natur_aver,
+                      est_aver)
 
 VALUES                (codIncidente,
                       tarjeta,
+                      item,
                       decripAveria,
-                      naturaleza);
+                      naturaleza,
+                      1);
+
+update maquinariasucursal set est_maq=2 where num_tar=tarjeta;
 
 END $$
 
