@@ -1,6 +1,5 @@
 package com.maskiner.smc.reportes.action;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +7,6 @@ import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.maskiner.smc.maestroclientes.bean.ClienteBean;
 import com.maskiner.smc.reportes.bean.ReporteFrecuenciaIncidentesBean;
 import com.maskiner.smc.reportes.bean.ReporteTecnicosOTBean;
 import com.maskiner.smc.reportes.service.ReportesBusinessDelegate;

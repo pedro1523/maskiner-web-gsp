@@ -137,7 +137,13 @@
 			</result>
 			<result name="input" type="tiles">d_repTecOT</result>       	    			
              			
-     </action>   
+     </action>
+     
+     <action name="a_cnm_repGastMaq">
+   		<result type="tiles">d_repGastMaq</result>
+   	 </action>
+     
+     
 
 
 	</package>
