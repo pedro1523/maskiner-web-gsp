@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE validators PUBLIC
+  		"-//OpenSymphony Group//XWork Validator 1.0.2//EN"
+  		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+  		
+<validators>
+	<field  name="numOrdenTrabajo">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message key="pages.reportes.repTecOT.errors.numOrdenTrabajo.required" />
+		</field-validator>
+		<field-validator type="regex">
+			<param name="expression">OT[0-9]{4}</param>
+			<message key="pages.reportes.repTecOT.errors.numOrdenTrabajo.regex" />
+		</field-validator>
+	</field>
+</validators>
+

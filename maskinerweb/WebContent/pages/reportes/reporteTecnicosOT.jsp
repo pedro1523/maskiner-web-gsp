@@ -21,9 +21,10 @@
 <s:form method="post" action="a_cnm_generarRepTecnicosOT">
 	<div class="separadovertical">
 		<s:label key="pages.reportes.repTecOT.lblOrdenTrabajo" />
-		<s:textfield name="numOrdenTrabajo" />
+		<s:textfield name="numOrdenTrabajo" maxlength="6"/>
 	    <s:submit cssStyle="margin-left:20px" value="Generar Reporte" />
-	</div>		  	
+	</div>
+	<s:fielderror cssClass="mensajeerror" />
 </s:form>
 
 
