@@ -49,3 +49,24 @@ select cli.raz_soc_cli,
       on ma.cod_maq = ms.cod_maq inner join liquidacion li
       on li.num_ord_trab = ot.num_ord_trab inner join tecnicos_x_liquidacion tl
       on tl.num_inf_liq = li.num_inf_liq;
+      
+CREATE or replace VIEW `mskbd`.`vw_distritos` AS
+  SELECT
+  tt.cod_item_tab cod_dist,
+  tt.desc_tab     dist
+  FROM tabladetablas tt
+  WHERE tt.cod_tab=14 and cod_item_tab<>0;      
+  
+CREATE OR REPLACE VIEW `mskbd`.`vw_tipo_maquinaria` AS
+  SELECT
+  tt.cod_item_tab tip_maq,
+  tt.desc_tab     desc_tip_maq
+  FROM tabladetablas tt
+  WHERE tt.cod_tab=17 and cod_item_tab<>0;  
+
+CREATE OR REPLACE VIEW `mskbd`.`vw_marcas` AS
+  SELECT
+  tt.cod_item_tab mar_maq,
+  tt.desc_tab     desc_mar_maq
+  FROM tabladetablas tt
+  WHERE tt.cod_tab=18 and cod_item_tab<>0;      

@@ -199,15 +199,17 @@
     
     <!-- fin CHRISTIAN -->
 
-    
+	 	<definition name="d_buscarMateriales" extends="d_inicio" >
+	    	<description></description>
+	    	<put-attribute name="titulo_pagina" value="pages.logistica.buscarMateriales.titulopagina" /> <!-- key del archivo de recursos -->
+	     	<put-attribute name="contenido" value="/pages/logistica/buscarMateriales.jsp" />
+	    </definition>
 
-	
-
-		 	<definition name="d_buscarMateriales" extends="d_inicio" >
-		    	<description></description>
-		    	<put-attribute name="titulo_pagina" value="pages.logistica.buscarMateriales.titulopagina" /> <!-- key del archivo de recursos -->
-		     	<put-attribute name="contenido" value="/pages/logistica/buscarMateriales.jsp" />
-		    </definition>
+	 	<definition name="d_buscarMaquinaria" extends="d_inicio" >
+	    	<description></description>
+	    	<put-attribute name="titulo_pagina" value="pages.maestroequipos.buscarmaquinaria.titulopagina" /> <!-- key del archivo de recursos -->
+	     	<put-attribute name="contenido" value="/pages/maestroequipos/buscarMaquinaria.jsp" />
+	    </definition>
     
     
     <!-- DANIEL REPORTES -->

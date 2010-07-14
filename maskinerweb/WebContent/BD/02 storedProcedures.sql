@@ -1486,6 +1486,28 @@ BEGIN
 
 END $$
 
+
+DROP PROCEDURE IF EXISTS `mskbd`.`pr_buscarMaquinarias` $$
+CREATE PROCEDURE `pr_buscarMaquinarias`(
+ IN razSocCliente char(6),
+ IN codSucursal char(6)
+)
+BEGIN
+  	SELECT distinct ms.num_tar,m.desc_maq,tt.desc_tab
+  	FROM maquinariasucursal ms
+    inner join sucursal s on s.num_suc = ms.num_suc
+    inner join cliente c on c.cod_cli = s.cod_cli
+    inner join maquinaria m on m.cod_maq = ms.cod_maq
+    inner join tabladetablas tt on ms.est_maq = tt.cod_item_tab
+	  WHERE ms.cod_cli = codCliente and ms.num_suc = codSucursal
+	  and tt.cod_tab = 16 and cod_item_tab =1;
+
+END $$
+
+
+
+
+
 DROP PROCEDURE IF EXISTS `mskbd`.`pr_buscarIncidentesParaLiquidacion` $$
 CREATE PROCEDURE `pr_buscarIncidentesParaLiquidacion`(
  IN vnom_empr varchar(150),
@@ -1766,5 +1788,41 @@ inner join cliente cli on inc.cod_cli=cli.cod_cli
 WHERE ot.num_ord_trab = vnum_ord_trab;
 
 END $$
+
+DROP PROCEDURE IF EXISTS `mskbd`.`pr_buscarMaquinarias` $$
+CREATE PROCEDURE `pr_buscarMaquinarias`(
+ IN vRazSocCliente varchar(150),
+ IN vMarca varchar(200),
+ IN vModelo varchar(50)
+)
+BEGIN
+
+SELECT
+       ms.num_tar,
+       ms.num_serie_maq,
+       ms.num_suc,
+       m.cod_maq,
+       m.desc_maq,
+       mc.desc_mar_maq,
+       m.mod_maq,
+       t.desc_tip_maq,
+       c.raz_soc_cli,
+       d.dist sucursal
+FROM maquinariasucursal ms inner join maquinaria m
+on ms.cod_maq=m.cod_maq
+inner join cliente c on ms.cod_cli=c.cod_cli
+inner join sucursal s on ms.cod_cli=s.cod_cli and
+ms.num_suc=s.num_suc inner join vw_distritos d
+on s.dist_suc=d.cod_dist
+inner join vw_tipo_maquinaria t on m.tip_maq=t.tip_maq
+inner join vw_marcas mc on m.mar_maq=mc.mar_maq
+WHERE c.raz_soc_cli like concat(vRazSocCliente,'%') and
+mc.desc_mar_maq like concat(vMarca,'%') and
+m.mod_maq like concat(vModelo,'%');
+
+
+END $$
+
+
 
 DELIMITER ;

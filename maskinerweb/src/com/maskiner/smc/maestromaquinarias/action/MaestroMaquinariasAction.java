@@ -1,26 +1,59 @@
 package com.maskiner.smc.maestromaquinarias.action;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
+import org.apache.struts2.interceptor.ParameterAware;
+import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.maskiner.smc.maestromaquinarias.bean.MaquinariaSucursalBean;
 import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasBusinessDelegate;
 import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasI;
+import com.opensymphony.xwork2.ActionSupport;
 
-public class MaestroMaquinariasAction {
+public class MaestroMaquinariasAction extends ActionSupport implements SessionAware, RequestAware, ParameterAware {
 
-	public ActionForward cargar(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 430803354962918354L;
+	
+	private Map<String, Object> session;
+	private Map<String, Object> request;
+	private Map<String, String[]> parameters;
+	
+	private String razSocCliente;
+	private String marca;
+	private String modelo;
+	
+	public String getRazSocCliente() {
+		return razSocCliente;
+	}
 
-		
+	public void setRazSocCliente(String razSocCliente) {
+		this.razSocCliente = razSocCliente;
+	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+
+	public String cargar() throws Exception {
+
+/*		
 		String codSucursal = request.getParameter("cboSucursal");
 		String codCliente = request.getParameter("codCliente");
 		
@@ -31,7 +64,34 @@ public class MaestroMaquinariasAction {
 		
 		
 			request.setAttribute("maquinarias", arr);
-			return mapping.findForward("exito");
+			return mapping.findForward("exito");*/
+		return null;
 		
+	}
+	
+	public String buscarMaquinarias() throws Exception{
+		
+		MaestroMaquinariasI servicio = MaestroMaquinariasBusinessDelegate.getMaestroMaquinariasService();
+		
+		List<MaquinariaSucursalBean> maquinarias = servicio.buscarMaquinarias(razSocCliente, marca, modelo);
+		
+		request.put("arrMaquinarias!", maquinarias);
+		
+		return "exito";
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session=session;
+	}
+
+	@Override
+	public void setRequest(Map<String, Object> request) {
+		this.request=request;
+	}
+
+	@Override
+	public void setParameters(Map<String, String[]> parameters) {
+		this.parameters=parameters;
 	}
 }
