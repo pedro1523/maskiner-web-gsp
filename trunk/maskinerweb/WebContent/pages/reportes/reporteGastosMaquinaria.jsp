@@ -16,86 +16,36 @@
 </head>
 <body>
 
-<h2 class="titulo">Reporte de Gastos por Maquinaria</h2>
-	
-<table>
+<h2 class="titulo"><s:text name="pages.reportes.repGasMaq.titulo"/></h2>
 
-	<tr>
-
-		<!--  aqui va el cuerpo -->
-		<td class="separadovertical">
-			<html:form method="post" action="a_reporteMaquinariaGas">
-			<table class="control" >
-				<tr>
-					
-			        <br/><br/>
-				   
-					<td>Maquinaria: </td>
-					<td>
-						<html:text property="maquinaria" />  
-						<html:img src="images/buscar_azul.gif" style="margin-right:5px;vertical-align:middle"/>  
-					</td>
-					
-					<td><label for="txtFechIni" class="margenizquierdo">Fecha inicio</label>  </td> 
-					<td><html:text	property="fechainicio" styleId="txtFechIni" size="10"></html:text>
-					<script language="JavaScript">
-					// whole calendar template can be redefined per individual calendar
-					var A_CALTPL = {
-						'months' : ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-						'weekdays' : ['do', 'lu', 'ma', 'mi', 'ju', 'vi', 'sa'],
-						'yearscroll': true,
-						'weekstart': 0,
-						'centyear'  : 70,
-						'imgpath' : '${jsCalendarImagePath}'
-					};
-					
-					new tcal ({
-						// if referenced by ID then form name is not required
-						'controlname': 'txtFechIni'    
-					}, A_CALTPL);
-					</script> 
-						
-					</td>
-					
-					<td><label for="txtFechFin" class="margenizquierdo">Fecha fin</label>  </td>
-					<td><html:text	property="fechafin" styleId="txtFechFin" size="10"></html:text>
-					<script language="JavaScript">
-					// whole calendar template can be redefined per individual calendar
-					var A_CALTPL = {
-						'months' : ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-						'weekdays' : ['do', 'lu', 'ma', 'mi', 'ju', 'vi', 'sa'],
-						'yearscroll': true,
-						'weekstart': 0,
-						'centyear'  : 70,
-						'imgpath' : '${jsCalendarImagePath}'
-					};
-					
-					new tcal ({
-						// if referenced by ID then form name is not required
-						'controlname': 'txtFechFin'   
-					}, A_CALTPL);
-					</script> 
-						
-					</td>
-					
-					<td>
-						<html:submit styleClass="margenizquierdo">Generar Reporte</html:submit>
-					</td>
-				</tr>
-			</table>
-
-			</html:form>
+<div class="separadovertical">
+	<s:form method="post" action="a_generarReporteMaquinariaGasto">
+		<s:label key="pages.reportes.repGasMaq.lblnumtarjeta"/>
+		<s:textfield name="numTarjeta" maxlength="6"/>
+		<s:a action="a_cnm_cargarBuscarMaquinaria">
+			<img src="images/buscar_azul.gif" style="vertical-align:middle"/>
+		</s:a>
+		<sj:datepicker name="fechaInicio"
+					   buttonImageOnly="true"
+					   id="txtFechaInicio"
+					   size="10" 
+					   readonly="true"
+					   displayFormat="dd/mm/yy"
+					   changeYear="true"
+					   changeMonth="true" cssStyle="margin-left:10px" />
+		<sj:datepicker name="fechaFin"
+					   buttonImageOnly="true"
+					   id="txtFechaFin"
+					   size="10" 
+					   readonly="true"
+					   displayFormat="dd/mm/yy"
+					   changeYear="true"
+					   changeMonth="true" cssStyle="margin-left:10px" />
 		
+	   <s:submit cssStyle="margin-left:20px" value="Generar Reporte" />
 		
-		</td>
-
-
-	</tr>
-
-
-
-</table>
-
+	</s:form>
+</div>
 
 </body>
 </html>

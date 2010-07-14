@@ -18,7 +18,21 @@ public class MaquinariaSucursalBean {
 	private String strDescTipMaq;
 	private String strDirSucursal;
 	private String strModMaquinaria;
+	private String strRazonSocialCliente;
+	private String strMarca;
 	
+	public String getStrMarca() {
+		return strMarca;
+	}
+	public void setStrMarca(String strMarca) {
+		this.strMarca = strMarca;
+	}
+	public String getStrRazonSocialCliente() {
+		return strRazonSocialCliente;
+	}
+	public void setStrRazonSocialCliente(String strRazonSocialCliente) {
+		this.strRazonSocialCliente = strRazonSocialCliente;
+	}
 	public String getStrDesEstMaquinaria() {
 		return strDesEstMaquinaria;
 	}

@@ -1,6 +1,7 @@
 package com.maskiner.smc.maestromaquinarias.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.maskiner.smc.factory.DAOFactory;
 import com.maskiner.smc.maestromaquinarias.bean.MaquinariaSucursalBean;
@@ -17,5 +18,11 @@ public class MaestroMaquinariasServiceImpl implements MaestroMaquinariasI {
 	
 	public ArrayList<MaquinariaSucursalBean> buscarMaquinariaXSucursal(String codCliente, String codSucursal)throws Exception {
 		return maestroMaquinariasDAO.buscarMaquinariaXSucursal(codCliente, codSucursal);
+	}
+
+	@Override
+	public List<MaquinariaSucursalBean> buscarMaquinarias(String razSocCliente,
+			String marca, String modelo) throws Exception {
+		return maestroMaquinariasDAO.buscarMaquinarias(razSocCliente, marca, modelo);
 	}
 }

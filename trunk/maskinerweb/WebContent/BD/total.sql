@@ -2186,6 +2186,39 @@ WHERE ot.num_ord_trab = vnum_ord_trab;
 
 END $$
 
+DROP PROCEDURE IF EXISTS `mskbd`.`pr_buscarMaquinarias` $$
+CREATE PROCEDURE `pr_buscarMaquinarias`(
+ IN vRazSocCliente varchar(150),
+ IN vMarca varchar(200),
+ IN vModelo varchar(50)
+)
+BEGIN
+
+SELECT
+       ms.num_tar,
+       ms.num_serie_maq,
+       ms.num_suc,
+       m.cod_maq,
+       m.desc_maq,
+       mc.desc_mar_maq,
+       m.mod_maq,
+       t.desc_tip_maq,
+       c.raz_soc_cli,
+       d.dist sucursal
+FROM maquinariasucursal ms inner join maquinaria m
+on ms.cod_maq=m.cod_maq
+inner join cliente c on ms.cod_cli=c.cod_cli
+inner join sucursal s on ms.cod_cli=s.cod_cli and
+ms.num_suc=s.num_suc inner join vw_distritos d
+on s.dist_suc=d.cod_dist
+inner join vw_tipo_maquinaria t on m.tip_maq=t.tip_maq
+inner join vw_marcas mc on m.mar_maq=mc.mar_maq
+WHERE c.raz_soc_cli like concat(vRazSocCliente,'%') and
+mc.desc_mar_maq like concat(vMarca,'%') and
+m.mod_maq like concat(vModelo,'%');
+
+
+END $$
 
 DELIMITER ;
 
@@ -2881,3 +2914,23 @@ select cli.raz_soc_cli,
       on li.num_ord_trab = ot.num_ord_trab inner join tecnicos_x_liquidacion tl
       on tl.num_inf_liq = li.num_inf_liq;
       
+CREATE or replace VIEW `mskbd`.`vw_distritos` AS
+  SELECT
+  tt.cod_item_tab cod_dist,
+  tt.desc_tab     dist
+  FROM tabladetablas tt
+  WHERE tt.cod_tab=14 and cod_item_tab<>0;      
+  
+CREATE OR REPLACE VIEW `mskbd`.`vw_tipo_maquinaria` AS
+  SELECT
+  tt.cod_item_tab tip_maq,
+  tt.desc_tab     desc_tip_maq
+  FROM tabladetablas tt
+  WHERE tt.cod_tab=17 and cod_item_tab<>0;  
+
+CREATE OR REPLACE VIEW `mskbd`.`vw_marcas` AS
+  SELECT
+  tt.cod_item_tab mar_maq,
+  tt.desc_tab     desc_mar_maq
+  FROM tabladetablas tt
+  WHERE tt.cod_tab=18 and cod_item_tab<>0;      

@@ -97,6 +97,17 @@
      		<result name="exito" type="tiles">d_generarOT_p3</result>
     	</action>
     	
+    	<action name="a_cnm_cargarBuscarMaquinaria">
+    		<result type="tiles">d_buscarMaquinaria</result>
+    	</action>
+    	
+    	<action 
+    			name="a_cnm_buscarMaquinaria"
+    			class="com.maskiner.smc.maestromaquinarias.action.MaestroMaquinariasAction"
+    			method="buscarMaquinarias" >
+     		<result name="exito" type="tiles">d_buscarMaquinaria</result>
+    	</action>
+    	
     	<action name="a_cnm_repFreInc">
     		<result type="tiles">d_repFreInc</result>
     	</action>
