@@ -17,10 +17,18 @@ public class MaquinariaSucursalBean {
 	private String strDescMarMaq;
 	private String strDescTipMaq;
 	private String strDirSucursal;
+	private String strDistritoSucursal;
 	private String strModMaquinaria;
 	private String strRazonSocialCliente;
 	private String strMarca;
 	
+		
+	public String getStrDistritoSucursal() {
+		return strDistritoSucursal;
+	}
+	public void setStrDistritoSucursal(String strDistritoSucursal) {
+		this.strDistritoSucursal = strDistritoSucursal;
+	}
 	public String getStrMarca() {
 		return strMarca;
 	}

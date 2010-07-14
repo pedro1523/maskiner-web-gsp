@@ -12,6 +12,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <sj:head jqueryui="true"/>
 <title>Insert title here</title>
+<script type="text/javascript">
+	function abrirBuscarMaquinaria(){
+		document.forms["frmGenerarReporteMaquinariaGasto"].action="<%= request.getContextPath() %>/a_cnm_cargarBuscarMaquinaria.do";
+		document.forms["frmGenerarReporteMaquinariaGasto"].submit();
+	}
+	
+</script>
     
 </head>
 <body>
@@ -19,11 +26,13 @@
 <h2 class="titulo"><s:text name="pages.reportes.repGasMaq.titulo"/></h2>
 
 <div class="separadovertical">
-	<s:form method="post" action="a_generarReporteMaquinariaGasto">
+	<s:form method="post" action="a_generarReporteMaquinariaGasto" id="frmGenerarReporteMaquinariaGasto">
 		<s:label key="pages.reportes.repGasMaq.lblnumtarjeta"/>
-		<s:textfield name="numTarjeta" maxlength="6"/>
-		<s:a action="a_cnm_cargarBuscarMaquinaria">
-			<img src="images/buscar_azul.gif" style="vertical-align:middle"/>
+		<s:textfield name="numTarjeta" maxlength="6"  id="txtNumTarjeta"/>
+		<s:hidden name="formOrigen" value="d_repGastMaq"/>
+		<s:a value="javascript:abrirBuscarMaquinaria()">
+			<s:url var="buscarImgUrl" value="/images/buscar_azul.gif"/>
+			<img src="${buscarImgUrl}"/>
 		</s:a>
 		<sj:datepicker name="fechaInicio"
 					   buttonImageOnly="true"

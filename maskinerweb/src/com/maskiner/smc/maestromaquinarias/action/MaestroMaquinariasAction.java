@@ -26,7 +26,43 @@ public class MaestroMaquinariasAction extends ActionSupport implements SessionAw
 	private String razSocCliente;
 	private String marca;
 	private String modelo;
+	private String formOrigen;
+	private String numTarjeta;
+	private String fechaInicio;
+	private String fechaFin;
 	
+	public String getFormOrigen() {
+		return formOrigen;
+	}
+
+	public void setFormOrigen(String formOrigen) {
+		this.formOrigen = formOrigen;
+	}
+
+	public String getNumTarjeta() {
+		return numTarjeta;
+	}
+
+	public void setNumTarjeta(String numTarjeta) {
+		this.numTarjeta = numTarjeta;
+	}
+
+	public String getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(String fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public String getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(String fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
 	public String getRazSocCliente() {
 		return razSocCliente;
 	}
@@ -75,7 +111,7 @@ public class MaestroMaquinariasAction extends ActionSupport implements SessionAw
 		
 		List<MaquinariaSucursalBean> maquinarias = servicio.buscarMaquinarias(razSocCliente, marca, modelo);
 		
-		request.put("arrMaquinarias!", maquinarias);
+		request.put("arrMaquinarias", maquinarias);
 		
 		return "exito";
 	}
