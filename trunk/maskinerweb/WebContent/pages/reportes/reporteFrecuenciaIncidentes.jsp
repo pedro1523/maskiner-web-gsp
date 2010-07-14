@@ -11,16 +11,28 @@
 
 <title>Insert title here</title>
 
+<script type="text/javascript">
+	function abrirBuscarCliente(){
+		document.forms["frmGenerarRepFrecIncid"].action="<%= request.getContextPath() %>/a_cargarBuscarCliente.do";
+		document.forms["frmGenerarRepFrecIncid"].submit();
+	}
+	
+</script>
+
+
 </head>
 <body>
 	<h2 class="titulo"><s:text name="pages.reportes.repFreInc.titulo" /></h2>
     <fieldset>
       <legend><s:text name="pages.reportes.repFreInc.fieldsetCriterios" /></legend>
-	  <s:form name="frmReporteIncidentes" method="post" action="a_cnm_generarRepFrecIncid">
+	  <s:form name="frmReporteIncidentes" method="post" action="a_cnm_generarRepFrecIncid" id="frmGenerarRepFrecIncid">
 	      <div class="separadoverticalinferior">
 	        <s:text name="pages.reportes.repFreInc.lblcliente" />
 	        <s:textfield name="codCliente"/>
-	        <s:submit action="a_cargarBuscarCliente" type="image" src="images/buscar_azul.gif"/>
+			<s:a value="javascript:abrirBuscarCliente()">
+				<s:url var="buscarImgUrl" value="/images/buscar_azul.gif"/>
+				<img src="${buscarImgUrl}"/>
+			</s:a>
 	        <s:text name="pages.reportes.repFreInc.lblannio" />
 	        <s:textfield name="anio" />
 	        <s:hidden name="formOrigen" value="repFrecInc"/>

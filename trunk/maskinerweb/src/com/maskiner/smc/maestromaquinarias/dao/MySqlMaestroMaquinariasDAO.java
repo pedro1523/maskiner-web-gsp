@@ -37,6 +37,7 @@ public class MySqlMaestroMaquinariasDAO implements MaestroMaquinariasDAO{
 	public List<MaquinariaSucursalBean> buscarMaquinarias(String razSocCliente,
 			String marca, String modelo) throws Exception {
 		Connection cn = MySqlDbConn.obtenerConexion();
+		
 		CallableStatement st = cn.prepareCall("{call pr_buscarMaquinarias(?,?,?)}");
 		st.setString(1, razSocCliente);
 		st.setString(2, marca);
@@ -53,8 +54,9 @@ public class MySqlMaestroMaquinariasDAO implements MaestroMaquinariasDAO{
 			r.setStrDescMaq(rs.getString("desc_maq"));
 			r.setStrMarca(rs.getString("desc_mar_maq"));
 			r.setStrModMaquinaria(rs.getString("mod_maq"));
-			//r.set
-			
+			r.setStrDescTipMaq(rs.getString("desc_tip_maq"));
+			r.setStrRazonSocialCliente(rs.getString("raz_soc_cli"));
+			r.setStrDistritoSucursal(rs.getString("sucursal"));
 			arr.add(r);
 		}
 		cn.close();

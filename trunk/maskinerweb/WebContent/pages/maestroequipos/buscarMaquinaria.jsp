@@ -11,9 +11,16 @@
 	
 </head>
 <body>
-    <h2 class="titulo"><s:text name="pages.maestroequipos.buscarmaquinaria.titulopagina"/></h2>
-    <s:form  method="post" action="a_cnm_buscarMaquinaria">
-      	<s:hidden name="formOrigen"/>
+    <h2 class="titulo"><s:text name="pages.maestroequipos.buscarmaquinaria.titulo"/></h2>
+    
+    <s:url var="buscarMaquinariaUrl" action="a_cnm_buscarMaquinaria">
+    	<s:param name="formOrigen">${param.formOrigen}</s:param>
+    	<s:param name="numTarjeta"><s:property value="numTarjeta" default="%{numTarjeta}"/> </s:param>
+    	<s:param name="fechaInicio">${param.fechaInicio}</s:param>
+    	<s:param name="fechaFin">${param.fechaFin}</s:param>
+    </s:url>
+    
+    <s:form  method="post" action="%{buscarMaquinariaUrl}" >
       	<fieldset>
       		<legend><s:text name="pages.maestroequipos.buscarmaquinaria.fieldset.legend"/></legend>
       		<s:label key="pages.maestroequipos.buscarmaquinaria.lblEmpresa"/>
@@ -27,10 +34,10 @@
 			<s:submit type="image" src="%{buscarImgUrl}" cssStyle="position:relative;top:8px" />
       	</fieldset>
     </s:form>
-    <div>
+    <div class="separadovertical">
         <table style="width: 100%;" class="gridview">
    			<tr>
-	   			<th><s:text name="pages.maestroequipos.buscarmaquinaria.listamaquinarias.cabecera.seleccionar" /></th>
+	   			<th width="30px"><s:text name="pages.maestroequipos.buscarmaquinaria.listamaquinarias.cabecera.seleccionar" /></th>
 	   			<th><s:text name="pages.maestroequipos.buscarmaquinaria.listamaquinarias.cabecera.numtarjeta" /></th>
 	   			<th><s:text name="pages.maestroequipos.buscarmaquinaria.listamaquinarias.cabecera.empresa" /></th>
 	   			<th><s:text name="pages.maestroequipos.buscarmaquinaria.listamaquinarias.cabecera.sucursal" /></th>
@@ -52,6 +59,8 @@
 								<s:url var="linkDevolResult" action="a_cnm_devolverMaquinaria">
 									<s:param name="numTarjeta">${maquinaria.strNumTarjeta}</s:param>
 									<s:param name="formOrigen"><s:property value="formOrigen"/></s:param>
+							    	<s:param name="fechaInicio"><s:property value="fechaInicio"/></s:param>
+							    	<s:param name="fechaFin"><s:property value="fechaFin"/></s:param>
 								</s:url>
 								<s:url var="imgSeleccionarUrl" value="/images/aprob_azul.gif"/>
 								<a href="${linkDevolResult}">
@@ -59,12 +68,12 @@
 								</a>
 							</td>
 							<td><s:property value="#maquinaria.strNumTarjeta"/></td>
-							<td><s:property value="#maquinaria.strRazSocCliente"/></td>
-							<td><s:property value="#maquinaria.strRucCliente"/></td>
-							<td><s:property value="#maquinaria.strEmailCliente"/></td>
-							<td><s:property value="#maquinaria.strRazSocCliente"/></td>
-							<td><s:property value="#maquinaria.strRucCliente"/></td>
-							<td><s:property value="#maquinaria.strEmailCliente"/></td>
+							<td><s:property value="#maquinaria.strRazonSocialCliente"/></td>
+							<td><s:property value="#maquinaria.strDistritoSucursal"/></td>
+							<td><s:property value="#maquinaria.strDescTipMaq"/></td>
+							<td><s:property value="#maquinaria.strNumSerieMaquinaria"/></td>
+							<td><s:property value="#maquinaria.strMarca"/></td>
+							<td><s:property value="#maquinaria.strModMaquinaria"/></td>
 						</tr>
 					</s:iterator>
 				</s:else>	
