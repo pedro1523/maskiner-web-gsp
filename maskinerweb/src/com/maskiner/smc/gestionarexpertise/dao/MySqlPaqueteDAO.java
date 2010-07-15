@@ -7,11 +7,17 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+import com.maskiner.smc.ibatis.*;
 import com.maskiner.smc.gestionarexpertise.bean.ActividadesBean;
 import com.maskiner.smc.gestionarexpertise.bean.HerramientaBean;
 import com.maskiner.smc.gestionarexpertise.bean.MaterialesBean;
 import com.maskiner.smc.gestionarexpertise.bean.PaqueteBean;
+import com.maskiner.smc.gestionarexpertise.bean.PaqueteIbatis;
 import com.maskiner.smc.mylib.MySqlDbConn;
+import com.maskiner.smc.mylib.UtilSqlConfig;
 
 public class MySqlPaqueteDAO implements PaqueteDAO {
 	
@@ -68,6 +74,7 @@ public class MySqlPaqueteDAO implements PaqueteDAO {
 		}		
 		return lista;
 	}
+	
 	public List<PaqueteBean> listadoPaquetes(String codigoPaquete,String nombrePaquete 
 	) throws Exception {
 ArrayList<PaqueteBean> lista=new ArrayList<PaqueteBean>();
@@ -95,6 +102,22 @@ while(rs.next()){
 }		
 return lista;
 }
+
+/*
+	  public List<PaqueteBean> listadoPaquetes(String codigoPaquete,String nombrePaquete) throws Exception{
+		
+		System.out.println("listamos por nombre con ibatis");
+		 ArrayList<PaqueteBean> objPaqueteBean =new ArrayList<PaqueteBean>();
+		 		
+		SqlMapClient sqlmap = UtilSqlConfig.getSqlMapInstance();
+		
+		objPaqueteBean=
+					(ArrayList<PaqueteBean>)sqlmap.queryForList("ibatis_listaPorPaquete","%"+ nombrePaquete+"%");
+		
+		return objPaqueteBean;
+		
+	}*/
+	
 //
 public ArrayList<PaqueteBean> buscarPorPaquete(String strCodigo,String strNombre) throws Exception {
 
@@ -272,5 +295,7 @@ public List<MaterialesBean> listarMateriales(String nomMat) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
 }
+
+
 	
 }
