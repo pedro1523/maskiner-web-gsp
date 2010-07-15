@@ -87,23 +87,46 @@ public class MaestroMaquinariasAction extends ActionSupport implements SessionAw
 		this.modelo = modelo;
 	}
 
-	public String cargar() throws Exception {
-
-/*		
-		String codSucursal = request.getParameter("cboSucursal");
-		String codCliente = request.getParameter("codCliente");
+	public String cargarBuscarMaquinaria() throws Exception {
 		
-
-		MaestroMaquinariasI servicio = MaestroMaquinariasBusinessDelegate.getMaestroMaquinariasService();
-		
-		ArrayList<MaquinariaSucursalBean> arr =  servicio.buscarMaquinariaXSucursal(codCliente, codSucursal);
-		
-		
-			request.setAttribute("maquinarias", arr);
-			return mapping.findForward("exito");*/
-		return null;
+		formOrigen = parameters.get("formOrigen")[0];
+		numTarjeta = parameters.get("numTarjeta")[0];
+		fechaInicio= parameters.get("fechaInicio")[0];
+		fechaFin   = parameters.get("fechaFin")[0];
+		return "exito";
 		
 	}
+	
+	public String irPaginaOrigen() throws Exception {
+		formOrigen = parameters.get("formOrigen")[0];
+		
+		if(formOrigen.equals("d_repGastMaq")){
+			numTarjeta = parameters.get("numTarjeta")[0];
+			fechaInicio= parameters.get("fechaInicio")[0];
+			fechaFin   = parameters.get("fechaFin")[0];
+			
+		}else{
+			//otras acciones para otros formularios de origen
+		}
+		return SUCCESS;
+	}
+	
+	
+	public String devolverMaquinaria() throws Exception {
+		formOrigen = parameters.get("formOrigen")[0];
+		
+		if(formOrigen.equals("d_repGastMaq")){
+			numTarjeta = parameters.get("numTarjeta")[0];
+			fechaInicio= parameters.get("fechaInicio")[0];
+			fechaFin   = parameters.get("fechaFin")[0];
+			
+		}else{
+			//otras acciones para otros formularios de origen
+		}
+		return SUCCESS;
+	}
+	
+	
 	
 	public String buscarMaquinarias() throws Exception{
 		
