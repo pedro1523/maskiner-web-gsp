@@ -13,16 +13,14 @@
 <body>
     <h2 class="titulo"><s:text name="pages.maestroequipos.buscarmaquinaria.titulo"/></h2>
     
-    <s:url var="buscarMaquinariaUrl" action="a_cnm_buscarMaquinaria">
-    	<s:param name="formOrigen">${param.formOrigen}</s:param>
-    	<s:param name="numTarjeta"><s:property value="numTarjeta" default="%{numTarjeta}"/> </s:param>
-    	<s:param name="fechaInicio">${param.fechaInicio}</s:param>
-    	<s:param name="fechaFin">${param.fechaFin}</s:param>
-    </s:url>
-    
-    <s:form  method="post" action="%{buscarMaquinariaUrl}" >
+    <s:form  method="post" action="a_cnm_buscarMaquinaria" >
       	<fieldset>
       		<legend><s:text name="pages.maestroequipos.buscarmaquinaria.fieldset.legend"/></legend>
+      		<s:hidden name="formOrigen"/>
+      		<s:hidden name="numTarjeta"/>
+      		<s:hidden name="fechaInicio"/>
+      		<s:hidden name="fechaFin"/>
+      		      		
       		<s:label key="pages.maestroequipos.buscarmaquinaria.lblEmpresa"/>
       		<s:textfield name="razSocCliente" cssClass="margenderecho"/>
       		<s:label key="pages.maestroequipos.buscarmaquinaria.lblMarca"/>
@@ -82,13 +80,15 @@
     </div>
     
 	<div class="separadovertical" align="right">
-		<s:url var="linkIrPagOrigen" action="a_buscarClienteIrPaginaOrigen">
+		<s:url var="linkIrPagOrigen" action="a_cnm_buscarMaquinariaIrPaginaOrigen">
 			<s:param name="formOrigen"><s:property value="formOrigen"/></s:param>
-			<s:param name="codCliente"><s:property value="codCliente"/></s:param>
-			<s:param name="anio"><s:property value="anio"/></s:param>
+			<s:param name="numTarjeta"><s:property value="numTarjeta"/></s:param>
+	    	<s:param name="fechaInicio"><s:property value="fechaInicio"/></s:param>
+	    	<s:param name="fechaFin"><s:property value="fechaFin"/></s:param>
 		</s:url>
 		<a href="${linkIrPagOrigen}">
-			<s:url var="imgCancelarUrl" value="/images/cancelar.png"/>
+			<s:text var="imgCancelarI18n" name="pages.botones.cancelar"/>
+			<s:url var="imgCancelarUrl" value="%{imgCancelarI18n}"/>
 			<img src="${imgCancelarUrl}" alt="Cancelar" width="71" height="25" border="0" />
 		</a>
 	</div>

@@ -97,8 +97,10 @@
      		<result name="exito" type="tiles">d_generarOT_p3</result>
     	</action>
     	
-    	<action name="a_cnm_cargarBuscarMaquinaria">
-    		<result type="tiles">d_buscarMaquinaria</result>
+    	<action name="a_cnm_cargarBuscarMaquinaria"
+    	        class="com.maskiner.smc.maestromaquinarias.action.MaestroMaquinariasAction"
+    	        method="cargarBuscarMaquinaria">
+    		<result name="exito" type="tiles">d_buscarMaquinaria</result>
     	</action>
     	
     	<action 
@@ -107,6 +109,23 @@
     			method="buscarMaquinarias" >
      		<result name="exito" type="tiles">d_buscarMaquinaria</result>
     	</action>
+    	
+    	
+    	<action name="a_cnm_buscarMaquinariaIrPaginaOrigen"
+    	        class="com.maskiner.smc.maestromaquinarias.action.MaestroMaquinariasAction"
+    	        method="irPaginaOrigen">
+    	    <!-- getFormOrigen() es un metodo dentro de la clase MaestroMaquinariasAction -->
+    		<result type="tiles">%{getFormOrigen()}</result>
+    	</action>
+    	
+    	<action name="a_cnm_devolverMaquinaria"
+    	        class="com.maskiner.smc.maestromaquinarias.action.MaestroMaquinariasAction"
+    	        method="devolverMaquinaria">
+    	    <!-- getFormOrigen() es un metodo dentro de la clase MaestroMaquinariasAction -->
+    		<result type="tiles">%{getFormOrigen()}</result>
+    	</action>
+    	
+    	
     	
     	<action name="a_cnm_repFreInc">
     		<result type="tiles">d_repFreInc</result>
