@@ -80,6 +80,17 @@
     		<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
     		</action>	
     	
+    	
+    	<!--MANTENIMIENTO PAQUETES -->
+    	
+
+
+    		<action 	name="a_cargarMantenerPaquete"
+				class="com.maskiner.smc.gestionarexpertise.action.PaqueteAction"
+    			method="listaPaquetes">
+    			<result name="exito" type="tiles">d_mantener_paquete</result>
+    </action>
+    	
    		</package>
     
     

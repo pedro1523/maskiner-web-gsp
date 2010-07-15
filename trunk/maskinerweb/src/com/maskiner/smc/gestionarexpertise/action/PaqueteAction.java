@@ -91,21 +91,24 @@ public class PaqueteAction implements SessionAware, RequestAware, ParameterAware
 	
 	public String listaPaquetes() throws Exception {
 		
-/*		
-		// 1. Recuperamos parametros del request
-		String strCodigo=request.getParameter("codigoPaquete");
-		String strNombre=request.getParameter("nombrePaquete");
-		if(strCodigo==null) strCodigo="";
-		if(strNombre==null) strNombre="";
+		System.out.println("avla");
+		String strCodigo="";
+		String strNombre="";
+	try{
+		strCodigo = parameters.get("codigoPaquete")[0];
+		strNombre = parameters.get("nombrePaquete")[0];
+	}catch (Exception e) {
 		
-		// 2. Invocamos a un servicio
-		PaquetesServiceI servicio= PaqueteBusinessDelegate.getPaqueteService();
-		List<PaqueteBean> lista=servicio.listadoPaquetes(strCodigo+"%",strNombre+"%");
-		
-		request.setAttribute("listPaq", lista);		
-		return mapping.findForward("exito");
-*/	
-		return null;
+	}
+	
+	if(strCodigo==null) strCodigo="";
+	if(strNombre==null) strNombre="";
+	PaquetesServiceI servicio= PaqueteBusinessDelegate.getPaqueteService();
+	List<PaqueteBean> lista=servicio.listadoPaquetes(strCodigo+"%",strNombre+"%");
+	request.put("nombrePaquete", strNombre);
+	request.put("listPaq", lista);
+	return "exito";
+	
 	}
 	
 	

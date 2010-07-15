@@ -1,9 +1,10 @@
 package com.maskiner.smc.gestionarexpertise.bean;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 
-public class PaqueteBean {
+public class PaqueteIbatis implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
