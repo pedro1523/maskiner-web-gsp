@@ -10,7 +10,7 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 
 		<!-- El listado completo de entidades que estaran bajo la persitencia de JPA -->
-
+		<class>com.maskiner.smc.reportes.bean.ReporteGastosXMaquinariaBean</class>
 		<properties>
 			<property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/mskbd" />

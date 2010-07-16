@@ -132,7 +132,7 @@
     	</action>
     	
         <action name="a_cnm_generarRepFrecIncid"   
-				class="com.maskiner.smc.reportes.action.ReporteGastosMaquinariaAction" 
+				class="com.maskiner.smc.reportes.action.ReportesAction" 
 				method="listarFrecuenciaIncidentes" >
 					
 			<result name="exito" type="jasper">
@@ -153,7 +153,7 @@
    	 </action>
     	
      <action name="a_cnm_generarRepTecnicosOT"   
-				class="com.maskiner.smc.reportes.action.ReporteGastosMaquinariaAction" 
+				class="com.maskiner.smc.reportes.action.ReportesAction" 
 				method="listarTecnicosOT" >
 					
 			<result name="exito" type="jasper">
@@ -163,7 +163,7 @@
 					attachment;filename="tecnicosot.pdf"
 				</param>
 				<param name="format">PDF</param>
-				d_repFreInc
+				d_repTecOT
 			</result>
 			<result name="input" type="tiles">d_repTecOT</result>       	    			
              			
@@ -172,6 +172,24 @@
      <action name="a_cnm_repGastMaq">
    		<result type="tiles">d_repGastMaq</result>
    	 </action>
+     
+     
+     <action name="a_cnm_generarReporteMaquinariaGasto"   
+				class="com.maskiner.smc.reportes.action.ReportesAction" 
+				method="listarGastosXMaquinaria" >
+					
+			<result name="exito" type="jasper">
+				<param name="location">/pages/reportes/RGastosMaquinaria.jasper</param>
+				<param name="dataSource">arrRepGastosMaquinaria</param>
+				<param name="contentDisposition">
+					attachment;filename="gastosxmaquinaria.pdf"
+				</param>
+				<param name="format">PDF</param>
+				d_repGastMaq
+			</result>
+			<result name="input" type="tiles">d_repGastMaq</result>       	    			
+             			
+     </action>
      
      
 

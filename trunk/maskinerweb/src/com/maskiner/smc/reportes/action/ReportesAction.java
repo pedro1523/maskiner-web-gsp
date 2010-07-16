@@ -1,5 +1,6 @@
 package com.maskiner.smc.reportes.action;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -8,12 +9,13 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.maskiner.smc.reportes.bean.ReporteFrecuenciaIncidentesBean;
+import com.maskiner.smc.reportes.bean.ReporteGastosXMaquinariaBean;
 import com.maskiner.smc.reportes.bean.ReporteTecnicosOTBean;
 import com.maskiner.smc.reportes.service.ReportesBusinessDelegate;
 import com.maskiner.smc.reportes.service.ReportesServiceI;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ReporteGastosMaquinariaAction extends ActionSupport implements ParameterAware, RequestAware, SessionAware {
+public class ReportesAction extends ActionSupport implements ParameterAware, RequestAware, SessionAware {
 
 	private Map<String, Object> request;
 	private Map<String, Object> session;
@@ -21,11 +23,39 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 	
 	private String codCliente;
 	private String numOrdenTrabajo;
+	private String numTarjeta;
+	private Date fechaInicio;
+	private Date fechaFin;
 	private Integer anio;
 	private List<ReporteFrecuenciaIncidentesBean> arrRepFrecIncBean;
 	private List<ReporteTecnicosOTBean> arrRepTecOTBean;
+	private List<ReporteGastosXMaquinariaBean> arrRepGastosMaquinaria;
 	
 	
+	public String getNumTarjeta() {
+		return numTarjeta;
+	}
+
+	public void setNumTarjeta(String numTarjeta) {
+		this.numTarjeta = numTarjeta;
+	}
+
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
 	public String getNumOrdenTrabajo() {
 		return numOrdenTrabajo;
 	}
@@ -67,41 +97,22 @@ public class ReporteGastosMaquinariaAction extends ActionSupport implements Para
 		this.arrRepFrecIncBean = arrRepFrecIncBean;
 	}
 
-	public String listarGastosMaquinarias() throws Exception {
+	public List<ReporteGastosXMaquinariaBean> getArrRepGastosMaquinaria() {
+		return arrRepGastosMaquinaria;
+	}
+
+	public void setArrRepGastosMaquinaria(
+			List<ReporteGastosXMaquinariaBean> arrRepGastosMaquinaria) {
+		this.arrRepGastosMaquinaria = arrRepGastosMaquinaria;
+	}
+
+	public String listarGastosXMaquinaria() throws Exception {
  
 		String vista = "exito";
  
-		String strmaquinaria = parameters.get("maquinaria")[0];
-		String strfec_ini = parameters.get("fechainicio")[0];
-		String strfec_fin = parameters.get("fechafin")[0];
+		ReportesServiceI servicio = ReportesBusinessDelegate.getReporteService();
 		
-		String fi=""; 
-		String ff=""; 
-		
-		fi+= strfec_ini.substring(6,10)+"/"+strfec_ini.substring(3,5)+"/"+strfec_ini.substring(0,2);
-		ff+=strfec_fin.substring(6,10)+"/"+strfec_fin.substring(3,5)+"/"+strfec_fin.substring(0,2);
-		
-		
-
-//		InputStream entrada = getServlet()
-//				.getServletContext()
-//				.getResourceAsStream("/pages/reportes/RGastosMaquinaria.jasper");
-//
-//		HashMap<String, Object> parametros = new HashMap<String, Object>();
-//		parametros.put("num_tar", strmaquinaria);
-//		parametros.put("fec_ini", fi);  
-//		parametros.put("fec_fin", ff);
-//		parametros.put("img_cen",getServlet().getServletContext().getResourceAsStream("/pages/reportes/logomaskiner.png"));
-//		parametros.put("img_cab",getServlet().getServletContext().getResourceAsStream("/pages/reportes/logomaskinerletras.png"));
-//		
-//
-//		ServletOutputStream salida = response.getOutputStream();
-//
-//		response.setContentType("application/pdf");
-//		JasperRunManager.runReportToPdfStream(entrada, salida, parametros,
-//				MySqlDbConn.obtenerConexion());
- 
-		
+		arrRepGastosMaquinaria = servicio.obtenerDatosReporteGastosXMaquinaria(numTarjeta, fechaInicio, fechaFin);
 		
 		return vista;	
 	}
