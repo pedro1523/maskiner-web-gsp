@@ -11,6 +11,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.maskiner.smc.reportes.bean.ReporteFrecuenciaIncidentesBean;
 import com.maskiner.smc.reportes.bean.ReporteGastosXMaquinariaBean;
 import com.maskiner.smc.reportes.bean.ReporteTecnicosOTBean;
+import com.maskiner.smc.reportes.bean.ReporteUtilizacionMaquinaria;
 import com.maskiner.smc.reportes.service.ReportesBusinessDelegate;
 import com.maskiner.smc.reportes.service.ReportesServiceI;
 import com.opensymphony.xwork2.ActionSupport;
@@ -30,7 +31,7 @@ public class ReportesAction extends ActionSupport implements ParameterAware, Req
 	private List<ReporteFrecuenciaIncidentesBean> arrRepFrecIncBean;
 	private List<ReporteTecnicosOTBean> arrRepTecOTBean;
 	private List<ReporteGastosXMaquinariaBean> arrRepGastosMaquinaria;
-	
+	private List<ReporteUtilizacionMaquinaria> arrUtilizacionMaquinaria;
 	
 	public String getNumTarjeta() {
 		return numTarjeta;
@@ -105,6 +106,15 @@ public class ReportesAction extends ActionSupport implements ParameterAware, Req
 			List<ReporteGastosXMaquinariaBean> arrRepGastosMaquinaria) {
 		this.arrRepGastosMaquinaria = arrRepGastosMaquinaria;
 	}
+	
+	public List<ReporteUtilizacionMaquinaria> getArrUtilizacionMaquinaria() {
+		return arrUtilizacionMaquinaria;
+	}
+
+	public void setArrUtilizacionMaquinaria(
+			List<ReporteUtilizacionMaquinaria> arrUtilizacionMaquinaria) {
+		this.arrUtilizacionMaquinaria = arrUtilizacionMaquinaria;
+	}
 
 	public String listarGastosXMaquinaria() throws Exception {
  
@@ -117,27 +127,13 @@ public class ReportesAction extends ActionSupport implements ParameterAware, Req
 		return vista;	
 	}
 
-	public String listarUtilizacionMaquinarias() throws Exception {
+	public String listarUtilizacionMaquinaria() throws Exception {
 
 		String vista = "exito";
 
-//		String strmaquinaria = request.getParameter("maquinaria");
-//
-//		InputStream entrada = getServlet().getServletContext()
-//				.getResourceAsStream(
-//						"/pages/reportes/RUtilizacionMaquinaria.jasper");
-//
-//		HashMap<String, Object> parametros = new HashMap<String, Object>();
-//		parametros.put("num_tar", strmaquinaria);
-//		parametros.put("img_cen",getServlet().getServletContext().getResourceAsStream("/pages/reportes/logomaskiner.png"));
-//		parametros.put("img_cab",getServlet().getServletContext().getResourceAsStream("/pages/reportes/logomaskinerletras.png"));
-//		
-//
-//		ServletOutputStream salida = response.getOutputStream();
-//
-//		response.setContentType("application/pdf");
-//		JasperRunManager.runReportToPdfStream(entrada, salida, parametros,
-//				MySqlDbConn.obtenerConexion());
+		ReportesServiceI servicio = ReportesBusinessDelegate.getReporteService();
+		
+		arrUtilizacionMaquinaria = servicio.obtenerDatosReporteUtilizacionMaquinaria(numTarjeta);
 
 		return vista;
 

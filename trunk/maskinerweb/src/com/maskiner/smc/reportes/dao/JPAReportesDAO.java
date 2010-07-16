@@ -14,6 +14,7 @@ import com.maskiner.smc.factory.GenericDAOJpa;
 import com.maskiner.smc.reportes.bean.ReporteFrecuenciaIncidentesBean;
 import com.maskiner.smc.reportes.bean.ReporteGastosXMaquinariaBean;
 import com.maskiner.smc.reportes.bean.ReporteTecnicosOTBean;
+import com.maskiner.smc.reportes.bean.ReporteUtilizacionMaquinaria;
 
 public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 
@@ -105,6 +106,35 @@ public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 		}
 		
 		return datos;
+	}
+
+	@Override
+	public List<ReporteUtilizacionMaquinaria> obtenerDatosReporteUtilizacionMaquinaria(
+			String numTarjeta) throws Exception {
+		EntityManager manager = getEntityManager();
+		
+		Query q = manager.createNamedQuery("pr_reporteUtilizacionMaquinarias");
+		q.setParameter(1, numTarjeta);
+		Vector<Object[]> datos = (Vector<Object[]>) q.getResultList();
+		
+		ArrayList<ReporteUtilizacionMaquinaria> resultado = new ArrayList<ReporteUtilizacionMaquinaria>();
+		
+		for(Object[] d: datos){
+			
+			ReporteUtilizacionMaquinaria r = new ReporteUtilizacionMaquinaria();
+			r.setNumOrdenTrabajo((String) d[0]);
+			r.setDireccionCliente((String) d[1]);
+			r.setRazonSocialCliente((String) d[2]);
+			Date fecha = new Date(((java.sql.Date)d[3]).getTime());
+			r.setFechaOrdenTrabajo(fecha);
+			r.setCodTecnico((String) d[4]);
+			r.setNombreTecnico((String) d[5]);
+			r.setHoraInicio((Time) d[6]);
+			r.setHoraFin((Time) d[7]);
+			
+			resultado.add(r);
+		}
+		return resultado;
 	}
 
 

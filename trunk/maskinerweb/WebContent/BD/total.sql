@@ -2217,6 +2217,29 @@ WHERE c.raz_soc_cli like concat(vRazSocCliente,'%') and
 mc.desc_mar_maq like concat(vMarca,'%') and
 m.mod_maq like concat(vModelo,'%');
 
+END $$
+
+DROP PROCEDURE IF EXISTS `pr_reporteUtilizacionMaquinarias` $$
+CREATE PROCEDURE `pr_reporteUtilizacionMaquinarias`(
+ IN vnum_tar char(6)
+ )
+BEGIN
+
+SELECT  cli.cod_cli,
+        cli.raz_soc_cli,
+        ms.num_tar,
+        mq.desc_maq,
+        ms.med_horom,
+        ms.fech_ult_med_hor,
+        ROUND(((med_horom/(datediff(fech_ult_med_hor,fec_adquisicion)))*100)/24,1) as porcentaje
+FROM cliente cli inner join sucursal suc
+on cli.cod_cli = suc.cod_cli
+inner join maquinariasucursal ms
+on ms.num_suc = suc.num_suc
+and ms.cod_cli = suc.cod_cli
+inner join maquinaria mq
+on ms.cod_maq = mq.cod_maq
+where ms.num_tar = vnum_tar;
 
 END $$
 

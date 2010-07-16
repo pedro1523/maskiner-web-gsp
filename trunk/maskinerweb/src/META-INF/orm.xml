@@ -9,4 +9,9 @@
 		<orm:query>call pr_reporteTecnicosOT(?1)</orm:query>
 	</orm:named-native-query>
 
+	<orm:named-native-query name="pr_reporteUtilizacionMaquinarias">
+		<orm:query>call pr_reporteUtilizacionMaquinarias(?1)</orm:query>
+	</orm:named-native-query>
+
+
 </orm:entity-mappings>
