@@ -26,7 +26,7 @@
     <fieldset>
       <legend><s:text name="pages.reportes.repFreInc.fieldsetCriterios" /></legend>
 	  <s:form name="frmReporteIncidentes" method="post" action="a_cnm_generarRepFrecIncid" id="frmGenerarRepFrecIncid">
-	      <div class="separadoverticalinferior">
+<!--	      <div class="separadoverticalinferior">-->
 	        <s:text name="pages.reportes.repFreInc.lblcliente" />
 	        <s:textfield name="codCliente"/>
 			<s:a value="javascript:abrirBuscarCliente()">
@@ -36,11 +36,13 @@
 	        <s:text name="pages.reportes.repFreInc.lblannio" />
 	        <s:textfield name="anio" />
 	        <s:hidden name="formOrigen" value="repFrecInc"/>
-	        <s:submit cssStyle="margin-left:20px" value="Generar Reporte" />
-	      </div>
-	      <s:fielderror cssClass="mensajeerror lista" />
+			<s:text var="generarImgi18n" name="pages.botones.generarreporte" />
+			<s:url var="generarImgUrl" value="%{generarImgi18n}" />
+			<s:submit type="image" src="%{generarImgUrl}" cssStyle="position:relative; top:5px; margin-left:20px"/>
+<!--	      </div>-->
 	  </s:form>      
     </fieldset>
+	<s:fielderror cssClass="mensajeerror lista separadoverticalsuperior" />
 
 </body>
 </html>

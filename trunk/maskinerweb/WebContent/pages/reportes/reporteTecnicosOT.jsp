@@ -16,17 +16,19 @@
 </head>
 <body>
 
-<h2 class="titulo">Reporte de Técnicos por Orden de Trabajo</h2>
-	
-<s:form method="post" action="a_cnm_generarRepTecnicosOT">
-	<div class="separadovertical">
-		<s:label key="pages.reportes.repTecOT.lblOrdenTrabajo" />
-		<s:textfield name="numOrdenTrabajo" maxlength="6"/>
-	    <s:submit cssStyle="margin-left:20px" value="Generar Reporte" />
-	</div>
-	<s:fielderror cssClass="mensajeerror lista" />
-</s:form>
-
-
+<h2 class="titulo"><s:text name="pages.reportes.repTecOT.titulo"/></h2>
+    <fieldset>
+     	<legend><s:text name="pages.reportes.repTecOT.fielset.legend" /></legend>
+		<s:form method="post" action="a_cnm_generarRepTecnicosOT">
+<!--			<div class="separadovertical">-->
+				<s:label key="pages.reportes.repTecOT.lblOrdenTrabajo" />
+				<s:textfield name="numOrdenTrabajo" maxlength="6"/>
+				<s:text var="generarImgi18n" name="pages.botones.generarreporte" />
+				<s:url var="generarImgUrl" value="%{generarImgi18n}" />
+				<s:submit type="image" src="%{generarImgUrl}" cssStyle="position:relative; top:5px; margin-left:20px"/>
+<!--			</div>-->
+		</s:form>
+ 	</fieldset>
+	<s:fielderror cssClass="mensajeerror lista separadoverticalsuperior" />
 </body>
 </html>
