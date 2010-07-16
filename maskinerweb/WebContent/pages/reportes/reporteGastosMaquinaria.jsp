@@ -28,33 +28,38 @@
 <div class="separadovertical">
 	<s:form method="post" action="a_cnm_generarReporteMaquinariaGasto" id="frmGenerarReporteMaquinariaGasto">
 		<s:label key="pages.reportes.repGasMaq.lblnumtarjeta"/>
-		<s:textfield name="numTarjeta" maxlength="6"  id="txtNumTarjeta" value="NT0001"/>
+		<s:textfield name="numTarjeta" maxlength="6"  id="txtNumTarjeta"/>
 		<s:hidden name="formOrigen" value="d_repGastMaq"/>
 		<s:a value="javascript:abrirBuscarMaquinaria()">
 			<s:url var="buscarImgUrl" value="/images/buscar_azul.gif"/>
 			<img src="${buscarImgUrl}"/>
 		</s:a>
-		<sj:datepicker name="fechaInicio" value="12/05/2009"
+		<s:label key="pages.reportes.repGasMaq.lblfechaInicio" cssStyle="margin-left:10px" />
+		<sj:datepicker name="fechaInicio"
 					   buttonImageOnly="true"
 					   id="txtFechaInicio"
 					   size="10" 
 					   readonly="true"
 					   displayFormat="dd/mm/yy"
 					   changeYear="true"
-					   changeMonth="true" cssStyle="margin-left:10px" />
-		<sj:datepicker name="fechaFin" value="15/07/2010"
+					   changeMonth="true"/>
+        <s:label key="pages.reportes.repGasMaq.lblfechaFin" cssStyle="margin-left:10px" />					   
+		<sj:datepicker name="fechaFin"
 					   buttonImageOnly="true"
 					   id="txtFechaFin"
 					   size="10" 
 					   readonly="true"
 					   displayFormat="dd/mm/yy"
 					   changeYear="true"
-					   changeMonth="true" cssStyle="margin-left:10px" />
+					   changeMonth="true"/>
 		
-	   <s:submit cssStyle="margin-left:20px" value="Generar Reporte" />
-		
+<!--	   <s:submit cssStyle="margin-left:20px" value="Generar Reporte" />-->
+		<s:text var="generarImgi18n" name="pages.botones.generarreporte" />
+		<s:url var="generarImgUrl" value="%{generarImgi18n}" />
+		<s:submit type="image" src="%{generarImgUrl}" cssStyle="position:relative; top:5px; margin-left:10px"/>
 	</s:form>
 </div>
-
+<s:fielderror cssClass="mensajeerror lista" />	
+<s:actionerror cssClass="mensajeerror lista" />
 </body>
 </html>

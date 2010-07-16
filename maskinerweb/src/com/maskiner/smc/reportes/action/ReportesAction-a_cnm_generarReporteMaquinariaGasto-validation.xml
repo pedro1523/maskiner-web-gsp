@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE validators PUBLIC
+  		"-//OpenSymphony Group//XWork Validator 1.0.2//EN"
+  		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+  		
+<validators>
+	<field  name="numTarjeta">
+		<field-validator type="requiredstring">
+			<message key="pages.reportes.repGasMaq.errors.numTarjeta.required" />
+		</field-validator>
+		<field-validator type="regex">
+			<param name="expression">NT[0-9]{4}</param>
+			<message key="pages.reportes.repGasMaq.errors.numTarjeta.regex" />
+		</field-validator>
+	</field>
+	
+	<field name="fechaInicio">
+		<field-validator type="required">
+			<message key="pages.reportes.repGasMaq.errors.fechaInicio.required" />
+		</field-validator>
+		<field-validator type="date">
+			<param name="mix">01/01/1980</param>
+			<param name="max">31/12/9999</param>
+			<message key="pages.reportes.repGasMaq.errors.fechaInicio.date"/>
+		</field-validator>
+	</field>
+	
+	<field name="fechaFin">
+		<field-validator type="required">
+			<message key="pages.reportes.repGasMaq.errors.fechaFin.required" />
+		</field-validator>
+		<field-validator type="date">
+			<param name="mix">01/01/1980</param>
+			<param name="max">31/12/9999</param>
+			<message key="pages.reportes.repGasMaq.errors.fechaFin.date"/>
+		</field-validator>
+	</field>
+	
+	<validator type="expression">
+		<param name="expression"><![CDATA[fechaInicio < fechaFin]]></param>
+		<message key="pages.reportes.repGasMaq.errors.expression"/>
+	</validator>
+	
+	
+	<!--
+	
+	<field  name="cliente.clave">
+		<field-validator type="requiredstring">
+			<message key="errors.required" />
+		</field-validator>
+	</field>
+
+	<field  name="cliente.fecnac">
+		<field-validator type="required" short-circuit="true">  
+			<message key="errors.required" /> 
+		</field-validator> 
+		
+		<field-validator type="regex">  
+			<param name="expression">   [0-9][0-9]/[0-9][0-9]/[1-9][0-9][0-9][0-9]  </param>  
+			<message key="errors.invalid" /> 
+		</field-validator>
+	</field>
+
+	<field name="cliente.sueldo">
+		<field-validator type="double">
+			<param name="min">560</param>
+			<param name="max">10000</param>
+			<message key="errors.range"/>
+		</field-validator>
+	</field>
+	
+-->
+
+</validators>
+
