@@ -7,6 +7,7 @@ import com.maskiner.smc.factory.DAOFactory;
 import com.maskiner.smc.reportes.bean.ReporteFrecuenciaIncidentesBean;
 import com.maskiner.smc.reportes.bean.ReporteGastosXMaquinariaBean;
 import com.maskiner.smc.reportes.bean.ReporteTecnicosOTBean;
+import com.maskiner.smc.reportes.bean.ReporteUtilizacionMaquinaria;
 import com.maskiner.smc.reportes.dao.ReportesDAO;
 
 public class ReportesServiceImpl implements ReportesServiceI {
@@ -35,6 +36,13 @@ public class ReportesServiceImpl implements ReportesServiceI {
 			String numTarjeta, Date fechaInicio, Date fechaFin)
 			throws Exception {
 		return reportesDAO.obtenerDatosReporteGastosXMaquinaria(numTarjeta, fechaInicio, fechaFin);
+	}
+
+	@Override
+	public List<ReporteUtilizacionMaquinaria> obtenerDatosReporteUtilizacionMaquinaria(
+			String numTarjeta) throws Exception {
+		// TODO Auto-generated method stub
+		return reportesDAO.obtenerDatosReporteUtilizacionMaquinaria(numTarjeta);
 	}
 
 }

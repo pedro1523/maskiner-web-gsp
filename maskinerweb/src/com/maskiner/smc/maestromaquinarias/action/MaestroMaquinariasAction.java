@@ -90,10 +90,16 @@ public class MaestroMaquinariasAction extends ActionSupport implements SessionAw
 	public String cargarBuscarMaquinaria() throws Exception {
 		
 		formOrigen = parameters.get("formOrigen")[0];
-		numTarjeta = parameters.get("numTarjeta")[0];
-		fechaInicio= parameters.get("fechaInicio")[0];
-		fechaFin   = parameters.get("fechaFin")[0];
-		return "exito";
+		
+		if(formOrigen.equals("d_repGastMaq")){
+			numTarjeta = parameters.get("numTarjeta")[0];
+			fechaInicio= parameters.get("fechaInicio")[0];
+			fechaFin   = parameters.get("fechaFin")[0];
+			
+		}else{
+			//otras acciones para otros formularios de origen
+		}
+		return SUCCESS;
 		
 	}
 	

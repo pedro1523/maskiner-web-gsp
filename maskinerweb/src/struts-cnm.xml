@@ -100,7 +100,7 @@
     	<action name="a_cnm_cargarBuscarMaquinaria"
     	        class="com.maskiner.smc.maestromaquinarias.action.MaestroMaquinariasAction"
     	        method="cargarBuscarMaquinaria">
-    		<result name="exito" type="tiles">d_buscarMaquinaria</result>
+    		<result type="tiles">d_buscarMaquinaria</result>
     	</action>
     	
     	<action 
@@ -124,8 +124,6 @@
     	    <!-- getFormOrigen() es un metodo dentro de la clase MaestroMaquinariasAction -->
     		<result type="tiles">%{getFormOrigen()}</result>
     	</action>
-    	
-    	
     	
     	<action name="a_cnm_repFreInc">
     		<result type="tiles">d_repFreInc</result>
@@ -188,6 +186,28 @@
 				d_repGastMaq
 			</result>
 			<result name="input" type="tiles">d_repGastMaq</result>       	    			
+             			
+     </action>
+     
+     
+     <action name="a_cnm_repUtiMaq">
+   		<result type="tiles">d_repUtiMaq</result>
+   	 </action>
+     
+     <action name="a_cnm_reporteUtilizMaquinaria"   
+				class="com.maskiner.smc.reportes.action.ReportesAction" 
+				method="listarUtilizacionMaquinaria" >
+					
+			<result name="exito" type="jasper">
+				<param name="location">/pages/reportes/RUtilizacionMaquinaria.jasper</param>
+				<param name="dataSource">arrUtilizacionMaquinaria</param>
+				<param name="contentDisposition">
+					attachment;filename="utilizacionMaquinaria.pdf"
+				</param>
+				<param name="format">PDF</param>
+				d_repUtiMaq
+			</result>
+			<result name="input" type="tiles">d_repUtiMaq</result>       	    			
              			
      </action>
      
