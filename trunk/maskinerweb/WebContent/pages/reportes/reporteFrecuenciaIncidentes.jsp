@@ -38,7 +38,7 @@
 	        <s:hidden name="formOrigen" value="repFrecInc"/>
 	        <s:submit cssStyle="margin-left:20px" value="Generar Reporte" />
 	      </div>
-	      <s:fielderror cssClass="mensajeerror" />
+	      <s:fielderror cssClass="mensajeerror lista" />
 	  </s:form>      
     </fieldset>
 

@@ -24,7 +24,7 @@
 		<s:textfield name="numOrdenTrabajo" maxlength="6"/>
 	    <s:submit cssStyle="margin-left:20px" value="Generar Reporte" />
 	</div>
-	<s:fielderror cssClass="mensajeerror" />
+	<s:fielderror cssClass="mensajeerror lista" />
 </s:form>
 
 

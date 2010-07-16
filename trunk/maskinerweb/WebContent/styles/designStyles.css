@@ -252,4 +252,7 @@ fieldset legend{
 .negrita{
 	font-weight: bold;	
 }
+.lista{
+	list-style-type: disc;
+}
 	
