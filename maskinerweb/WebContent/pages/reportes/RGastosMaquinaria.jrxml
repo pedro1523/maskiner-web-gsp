@@ -1,53 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<parameter name="num_tar" class="java.lang.String"/>
-	<parameter name="fec_ini" class="java.lang.String"/>
-	<parameter name="fec_fin" class="java.lang.String"/>
-	<parameter name="img_cab" class="java.io.InputStream"/>
-	<parameter name="img_cen" class="java.io.InputStream"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="16"/>
 	<queryString>
-		<![CDATA[select * from vw_rptgastosxmaquinaria
-where num_tar=$P{num_tar}
-and fec_inf_liq between $P{fec_ini} and $P{fec_fin}]]>
+		<![CDATA[]]>
 	</queryString>
-	<field name="raz_soc_cli" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="num_inc" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="fec_inc" class="java.sql.Date">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="num_tar" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="desc_maq" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="tipo_prod" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="fec_inf_liq" class="java.sql.Date">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="cod_mat" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="desc_mat" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="cantidad" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="pre_uni" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="mon_tot" class="java.lang.Double">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
+	<field name="razonSocialCliente" class="java.lang.String"/>
+	<field name="numIncidente" class="java.lang.String"/>
+	<field name="fechaIncidente" class="java.util.Date"/>
+	<field name="numTarjeta" class="java.lang.String"/>
+	<field name="descripcionMaquinaria" class="java.lang.String"/>
+	<field name="tipoProducto" class="java.lang.String"/>
+	<field name="fechaInformeLiquidacion" class="java.util.Date"/>
+	<field name="codigoMaterial" class="java.lang.String"/>
+	<field name="descripcionMaterial" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.String"/>
+	<field name="precioUnitario" class="java.math.BigDecimal"/>
+	<field name="montoTotal" class="java.math.BigDecimal"/>
+	<field name="fechaInicio" class="java.util.Date"/>
+	<field name="fechaFin" class="java.util.Date"/>
 	<variable name="suma" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{mon_tot}]]></variableExpression>
+		<variableExpression><![CDATA[$F{montoTotal}]]></variableExpression>
 	</variable>
 	<group name="Maquinaria">
 		<groupHeader>
@@ -98,7 +72,7 @@ and fec_inf_liq between $P{fec_ini} and $P{fec_fin}]]>
 					<textElement>
 						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipo_prod}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoProducto}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="70" y="30" width="60" height="20"/>
@@ -137,16 +111,7 @@ and fec_inf_liq between $P{fec_ini} and $P{fec_fin}]]>
 		</groupFooter>
 	</group>
 	<background>
-		<band height="802" splitType="Stretch">
-			<image>
-				<reportElement x="40" y="250" width="464" height="432"/>
-				<imageExpression class="java.io.InputStream"><![CDATA[$P{img_cen}]]></imageExpression>
-			</image>
-			<image>
-				<reportElement x="0" y="0" width="166" height="33"/>
-				<imageExpression class="java.io.InputStream"><![CDATA[$P{img_cab}]]></imageExpression>
-			</image>
-		</band>
+		<band height="802" splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="144" splitType="Stretch">
@@ -189,17 +154,17 @@ and fec_inf_liq between $P{fec_ini} and $P{fec_fin}]]>
 			<textField>
 				<reportElement x="113" y="83" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{raz_soc_cli}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{razonSocialCliente}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="113" y="103" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{num_tar}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numTarjeta}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="113" y="124" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{desc_maq}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionMaquinaria}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="307" y="83" width="100" height="0"/>
@@ -223,12 +188,12 @@ and fec_inf_liq between $P{fec_ini} and $P{fec_fin}]]>
 			<textField>
 				<reportElement x="407" y="83" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{fec_ini}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fechaInicio}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="407" y="104" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{fec_fin}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fechaFin}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -248,32 +213,32 @@ and fec_inf_liq between $P{fec_ini} and $P{fec_fin}]]>
 			<textField>
 				<reportElement x="181" y="4" width="142" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{desc_mat}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionMaterial}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="2" y="5" width="66" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{cod_mat}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigoMaterial}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="381" y="4" width="81" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{pre_uni}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{precioUnitario}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="462" y="4" width="90" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{mon_tot}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{montoTotal}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="133" y="4" width="47" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{fec_inc}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fechaIncidente}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="70" y="5" width="60" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{num_inc}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numIncidente}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

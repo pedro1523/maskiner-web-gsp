@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.maskiner.smc.factory.DAOFactory;
 import com.maskiner.smc.reportes.bean.ReporteFrecuenciaIncidentesBean;
+import com.maskiner.smc.reportes.bean.ReporteGastosXMaquinariaBean;
 import com.maskiner.smc.reportes.bean.ReporteTecnicosOTBean;
 import com.maskiner.smc.reportes.dao.ReportesDAO;
 
@@ -27,6 +28,13 @@ public class ReportesServiceImpl implements ReportesServiceI {
 	public List<ReporteTecnicosOTBean> obtenerDatosReporteTecnicosOT(String codOrdenTrabajo)
 			throws Exception {
 		return reportesDAO.obtenerDatosReporteTecnicosOT(codOrdenTrabajo);
+	}
+
+	@Override
+	public List<ReporteGastosXMaquinariaBean> obtenerDatosReporteGastosXMaquinaria(
+			String numTarjeta, Date fechaInicio, Date fechaFin)
+			throws Exception {
+		return reportesDAO.obtenerDatosReporteGastosXMaquinaria(numTarjeta, fechaInicio, fechaFin);
 	}
 
 }

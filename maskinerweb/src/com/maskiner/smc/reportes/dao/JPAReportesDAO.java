@@ -8,9 +8,11 @@ import java.util.Vector;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 import com.maskiner.smc.factory.GenericDAOJpa;
 import com.maskiner.smc.reportes.bean.ReporteFrecuenciaIncidentesBean;
+import com.maskiner.smc.reportes.bean.ReporteGastosXMaquinariaBean;
 import com.maskiner.smc.reportes.bean.ReporteTecnicosOTBean;
 
 public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
@@ -78,6 +80,31 @@ public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 			resultado.add(r);
 		}
 		return resultado;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ReporteGastosXMaquinariaBean> obtenerDatosReporteGastosXMaquinaria(
+			String numTarjeta, Date fechaInicio, Date fechaFin)
+			throws Exception {
+		
+		EntityManager manager = getEntityManager();
+
+		Query q = manager.createQuery("SELECT r FROM ReporteGastosXMaquinariaBean r WHERE " + 
+				"r.numTarjeta = ?1 AND (r.fechaInformeLiquidacion " + 
+				"BETWEEN ?2 AND ?3)");
+		q.setParameter(1, numTarjeta);
+		q.setParameter(2, fechaInicio, TemporalType.DATE);
+		q.setParameter(3, fechaFin, TemporalType.DATE);
+		
+		List<ReporteGastosXMaquinariaBean> datos = q.getResultList();
+		
+		for(ReporteGastosXMaquinariaBean b: datos){
+			b.setFechaInicio(fechaInicio);
+			b.setFechaFin(fechaFin);
+		}
+		
+		return datos;
 	}
 
 
