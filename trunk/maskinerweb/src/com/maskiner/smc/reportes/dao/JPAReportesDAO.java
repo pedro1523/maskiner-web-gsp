@@ -1,5 +1,6 @@
 package com.maskiner.smc.reportes.dao;
 
+import java.math.BigDecimal;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -108,6 +109,7 @@ public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 		return datos;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<ReporteUtilizacionMaquinaria> obtenerDatosReporteUtilizacionMaquinaria(
 			String numTarjeta) throws Exception {
@@ -122,15 +124,14 @@ public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 		for(Object[] d: datos){
 			
 			ReporteUtilizacionMaquinaria r = new ReporteUtilizacionMaquinaria();
-			r.setNumOrdenTrabajo((String) d[0]);
-			r.setDireccionCliente((String) d[1]);
-			r.setRazonSocialCliente((String) d[2]);
-			Date fecha = new Date(((java.sql.Date)d[3]).getTime());
-			r.setFechaOrdenTrabajo(fecha);
-			r.setCodTecnico((String) d[4]);
-			r.setNombreTecnico((String) d[5]);
-			r.setHoraInicio((Time) d[6]);
-			r.setHoraFin((Time) d[7]);
+			r.setCodCliente((String) d[0]);
+			r.setRazonSocialCliente((String) d[1]);
+			r.setNumTarjeta((String) d[2]);
+			r.setDescripcionMaquinaria((String) d[3]);
+			r.setMedicionHorometro((Integer) d[4]);
+			Date fecha = new Date(((java.sql.Date)d[5]).getTime());
+			r.setFechaUltimaMedicionHorometro(fecha);
+			r.setPorcentaje((BigDecimal) d[6]);
 			
 			resultado.add(r);
 		}

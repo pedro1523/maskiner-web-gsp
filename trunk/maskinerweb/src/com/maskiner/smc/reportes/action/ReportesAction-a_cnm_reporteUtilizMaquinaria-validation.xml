@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE validators PUBLIC
+  		"-//OpenSymphony Group//XWork Validator 1.0.2//EN"
+  		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+  		
+<validators>
+	<field  name="numTarjeta">
+		<field-validator type="requiredstring">
+			<message key="pages.reportes.repUtiMaq.errors.numTarjeta.required" />
+		</field-validator>
+		<field-validator type="regex">
+			<param name="expression">NT[0-9]{4}</param>
+			<message key="pages.reportes.repUtiMaq.errors.numTarjeta.regex" />
+		</field-validator>
+	</field>
+</validators>
+
