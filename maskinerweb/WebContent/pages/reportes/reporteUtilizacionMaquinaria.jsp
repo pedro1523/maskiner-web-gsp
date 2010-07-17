@@ -25,7 +25,7 @@
 		<legend><s:text name="pages.reportes.repUtiMaq.fielset.legend"/></legend>
 		<s:form method="post" action="a_cnm_reporteUtilizMaquinaria" id="frmReporteUtilizMaquinaria">
 			<s:label key="pages.reportes.repUtiMaq.lblNumTarjeta"/>
-			<s:textfield name="numTarjeta"/>
+			<s:textfield name="numTarjeta" maxlength="6"/>
 			<s:hidden name="formOrigen" value="d_repUtiMaq"/>
 			<s:a value="javascript:abrirBuscarMaquinaria()">
 				<s:url var="buscarImgUrl" value="/images/buscar_azul.gif"/>
