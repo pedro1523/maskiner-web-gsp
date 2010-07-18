@@ -2243,6 +2243,75 @@ where ms.num_tar = vnum_tar;
 
 END $$
 
+
+
+DROP PROCEDURE IF EXISTS `mskbd`.`pr_insertarPaquete` $$
+CREATE PROCEDURE `pr_insertarPaquete`(
+  IN v_cod_pac      char(6),
+  IN v_fec_reg_paq  date,
+  IN v_cod_reg      char(6),
+  IN v_nom_paq      varchar(150),
+  IN v_cod_maq      char(6),
+  IN v_cant_tec_paq int,
+  IN v_cant_hor_paq int,
+  IN v_interv_horom int
+)
+BEGIN
+
+  insert into paquete (cod_paq, fec_reg_paq, cod_reg, nom_paq, cod_maq, cant_tec_paq, cant_hor_paq, interv_horom)
+  values (v_cod_pac, v_fec_reg_paq, v_cod_reg, v_nom_paq, v_cod_maq, v_cant_tec_paq, v_cant_hor_paq, v_interv_horom);
+
+END $$
+
+
+DROP PROCEDURE IF EXISTS `mskbd`.`pr_insertarHerramientas_Paquete` $$
+CREATE PROCEDURE `pr_insertarHerramientas_Paquete`(
+  IN v_cod_pac      char(6),
+  IN v_cod_herr     char(5),
+  IN v_cantidad     int
+
+)
+BEGIN
+
+  insert into herramientas_x_paquete (cod_paq, cod_herr, cantidad)
+  values (v_cod_pac, v_cod_herr, v_cantidad);
+
+END $$
+
+
+
+DROP PROCEDURE IF EXISTS `mskbd`.`pr_insertarMateriales_Paquete` $$
+CREATE PROCEDURE `pr_insertarMateriales_Paquete`(
+  IN v_cod_mat      char(6),
+  IN v_cod_pac     char(6),
+  IN v_cantidad     int
+
+)
+BEGIN
+
+  insert into materiales_x_paquete (cod_mat, cod_paq, cantidad)
+  values (v_cod_mat, v_cod_pac, v_cantidad);
+
+END $$
+
+
+
+DROP PROCEDURE IF EXISTS `mskbd`.`pr_insertarActividad_Paquete` $$
+CREATE PROCEDURE `pr_insertarActividad_Paquete`(
+  IN v_cod_pac      char(6),
+  IN v_num_item  int,
+  IN v_desc_act     varchar(150)
+
+)
+BEGIN
+
+  insert into actividades (cod_paq, num_item, desc_act)
+  values (v_cod_pac, v_num_item, v_desc_act);
+
+END $$
+
+
+
 DELIMITER ;
 
 USE mskbd;
@@ -2429,7 +2498,7 @@ VALUES ('NT0001', 'LQW542SDD1AAS', 1221, '2009-09-12', 'CL0001','001', 'MQ001', 
 	   ('NT0007', '877JJJ8888HJJ7', 99976, '2008-03-02', 'CL0002','001', 'MQ002', 1, '2006-10-15'),
 	   ('NT0008', '7UUUY88RT3I5T', 44555, '2009-11-15', 'CL0002','001', 'MQ002', 1, '2007-10-15');
 
-	   
+
 INSERT incidente
 VALUES ('IN0001', '2007-05-23', 'RG003', 'CL0001', '001', null, 1),
        ('IN0002', '2007-06-01', 'RG003', 'CL0002', '001', null, 1),
@@ -2949,7 +3018,7 @@ CREATE OR REPLACE VIEW `mskbd`.`vw_tipo_maquinaria` AS
   tt.cod_item_tab tip_maq,
   tt.desc_tab     desc_tip_maq
   FROM tabladetablas tt
-  WHERE tt.cod_tab=17 and cod_item_tab<>0;  
+  WHERE tt.cod_tab=17 and cod_item_tab<>0;
 
 CREATE OR REPLACE VIEW `mskbd`.`vw_marcas` AS
   SELECT
