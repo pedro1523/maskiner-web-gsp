@@ -10,6 +10,9 @@
     			name="a_cargarRegistroIncidente"
     			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
     			method="cargarNuevoIncidente" >
+				<interceptor-ref name="securityRolesStack">
+					<param name="MSKRolesInterceptor.allowedRoles">01,04</param>
+				</interceptor-ref>
      			<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
     		</action>
     		
@@ -17,28 +20,38 @@
     			name="a_buscarClienteIrPaginaOrigen"
     			class="com.maskiner.smc.maestroclientes.action.MaestroClientesAction"
     			method="buscarClienteIrPaginaOrigen" >
+				<interceptor-ref name="securityRolesStack">
+					<param name="MSKRolesInterceptor.allowedRoles">01,02,04</param>
+				</interceptor-ref>
      			<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
      			<result name="exito1" type="tiles">d_repFreInc</result>
     		</action>
     		
-    		
-    		
     		<action name="a_cargarBuscarCliente"
     			class="com.maskiner.smc.maestroclientes.action.MaestroClientesAction"
     			method="cargar" >
-    		<result name="exito" type="tiles">d_buscarCliente</result>
+				<interceptor-ref name="securityRolesStack">
+					<param name="MSKRolesInterceptor.allowedRoles">01,04</param>
+				</interceptor-ref>
+	    		<result name="exito" type="tiles">d_buscarCliente</result>
     		</action>
     		
     		
     		<action name="a_buscarCliente"
     			class="com.maskiner.smc.maestroclientes.action.MaestroClientesAction"
     			method="buscar" >
-    		<result name="exito" type="tiles">d_buscarCliente</result>
+				<interceptor-ref name="securityRolesStack">
+					<param name="MSKRolesInterceptor.allowedRoles">01,04</param>
+				</interceptor-ref>
+	    		<result name="exito" type="tiles">d_buscarCliente</result>
     		</action>
     	
     		<action name="a_devolverCliente"
     			class="com.maskiner.smc.maestroclientes.action.MaestroClientesAction"
     			method="devolver" >
+				<interceptor-ref name="securityRolesStack">
+					<param name="MSKRolesInterceptor.allowedRoles">01,02,04</param>
+				</interceptor-ref>
     			<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
     			<result name="exito1" type="tiles">d_repFreInc</result>
     		</action>
@@ -46,29 +59,40 @@
     		<action name="a_buscarMaquinaria"
     			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
     			method="buscarMaquinarias" >
-    		<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
-    	 	
+				<interceptor-ref name="securityRolesStack">
+					<param name="MSKRolesInterceptor.allowedRoles">01,04</param>
+				</interceptor-ref>
+	    		<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
     		</action>
     		
     		<action name="a_AgregarIncidenteALista"
     			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
     			method="AgregarALista" >
-    		<result name="fracaso" type="tiles">d_registrarIncidente_Nuevo</result>
-    		<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
+				<interceptor-ref name="securityRolesStack">
+					<param name="MSKRolesInterceptor.allowedRoles">01,04</param>
+				</interceptor-ref>
+	    		<result name="fracaso" type="tiles">d_registrarIncidente_Nuevo</result>
+	    		<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
     		</action>
     		
     		<action 
     			name="a_registrarIncidente"
     			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
     			method="registrarIncidente"	>
-    		<result name="fracaso" type="tiles">d_registrarIncidente_Nuevo</result>
-     		<result name="exito" type="tiles">d_registrarIncidente_Confirmacion</result>
+				<interceptor-ref name="securityRolesStack">
+					<param name="MSKRolesInterceptor.allowedRoles">01,04</param>
+				</interceptor-ref>
+	    		<result name="fracaso" type="tiles">d_registrarIncidente_Nuevo</result>
+	     		<result name="exito" type="tiles">d_registrarIncidente_Confirmacion</result>
     		</action>
     		
     		<action name="a_QuitarIncidenteDeLista"
     			class="com.maskiner.smc.gestionarincidentes.action.IncidenteAction"
     			method="quitarIncidenteDeLista">
-    		<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
+				<interceptor-ref name="securityRolesStack">
+					<param name="MSKRolesInterceptor.allowedRoles">01,04</param>
+				</interceptor-ref>
+	    		<result name="exito" type="tiles">d_registrarIncidente_Nuevo</result>
     		</action>	
     	
     	

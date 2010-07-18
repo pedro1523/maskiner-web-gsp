@@ -6,53 +6,46 @@
 <struts>
 	<package name="cpm" extends="msk-default" namespace="/">
 
-		<!--
-			<action name="a_cpm_OTIAsignar"
-			class="com.maskiner.smc.programartrabajo.action.ProgramarOTInspeccionAction"
-			method="cargarOTIAsignar" > <result name="exito"
-			type="tiles">d_generarOT_inspeccion_asignar</result> </action>
-		-->
 		<action name="a_cpm_OTIAsignar">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result type="tiles">d_generarOT_inspeccion_asignar</result>
 		</action>
 
 		<action name="a_cpm_cargarBuscarIncidente1"
 			class="com.maskiner.smc.programartrabajo.action.ProgramarOTInspeccionAction"
 			method="cargarBuscarIncidente">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result name="exito" type="tiles">d_buscar_incidente</result>
 		</action>
 
 		<action name="a_cpm_cargarOTInspeccion"
 			class="com.maskiner.smc.programartrabajo.action.ProgramarOTInspeccionAction"
 			method="cargarGenerarOTInspeccion">
-			<result name="exito" type="tiles">d_generarOT_inspeccion_principal
-			</result>
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
+			<result name="exito" type="tiles">d_generarOT_inspeccion_principal</result>
 		</action>
 
-		<!-- Action - Programar OTInspeccion  FIN -->
-		<!--
-			<action name="/a_cpm_buscarTecnico"
-			class="programartrabajo.action.TecnicoAction" method="lista" >
-			<result name="exito"
-			type="tiles">/pages/programartrabajo/verTecnico.jsp</result>
-			</action> <action name="/a_cpm_mostrarTecnico"
-			class="programartrabajo.action.TecnicoAction" method="mostrar" >
-			<result name="exito" type="tiles"
-			>/pages/programartrabajo/ordenTrabajoInspeccionAsignar.jsp</result>
-			</action>
-		-->
 		<action name="a_cpm_buscarPaquete"
 			class="com.maskiner.smc.gestionarexpertise.action.PaqueteAction"
 			method="lista">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result name="exito" type="tiles">d_buscarPaquete</result>
 		</action>
-
-
 
 		<action name="a_cpm_cargarBuscarIncidente1"
 			class="com.maskiner.smc.programartrabajo.action.ProgramarOTInspeccionAction"
 			method="cargarBuscarIncidente">
-
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result name="exito" type="tiles">d_buscar_incidente</result>
 		</action>
 		<!-- Action - Programar OTInspeccion -->
@@ -60,25 +53,28 @@
 		<action name="a_cpm_ProgramarOTInspeccionAsignarAction"
 			class="com.maskiner.smc.programartrabajo.action.ProgramarOTInspeccionAction"
 			method="lista">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result name="exito" type="tiles">d_generarOT_inspeccion_asignar
 			</result>
 		</action>
-		<!--
-			<action path="/a_verTecnico"
-			type="com.maskiner.smc.programartrabajo.action.ProgramarOTInspeccionAction"
-			name="programarOTIAsignarForm" parameter="lista" scope="request">
-			<forward name="exito" path="d_generarOT_inspeccion_asignar"
-			></forward> </action>
-		-->
+
 		<action name="a_cpm_registraOrdenTrabajoInspeccion"
 			class="com.maskiner.smc.programartrabajo.action.ProgramarOTInspeccionAction"
 			method="registrar">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result name="exito" type="tiles">d_generarOT_inspeccion_principal
 			</result>
 			<result name="exito1" type="tiles">d_generarOT_inspeccion_asignar
 			</result>
 		</action>
 		<action name="a_cpm_cancelarOTIAsignar">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result type="tiles">d_generarOT_inspeccion_principal</result>
 		</action>
 
@@ -88,7 +84,7 @@
 		<!--
 			CHRISTIAN, VERIFICA SI EXISTE TecnicoAction, TUVE QUE COMENTARLO PARA
 			QUE FUNCIONE LA APLICACIÓN
-		-->
+		
 
 
 
@@ -97,7 +93,7 @@
 			method="lista">
 			<result name="exito" type="tiles">d_buscarPaquete</result>
 		</action>
-
+-->
 		<action name="a_cpm_mostrarPaquete"
 			class="com.maskiner.smc.gestionarexpertise.action.PaqueteAction"
 			method="mostrar">
@@ -116,28 +112,41 @@
 
 		<action name="a_cpm_buscarPrefacturas"
 			class="com.maskiner.smc.facturacion.action.FacturacionAction" method="buscar">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result name="exito" type="tiles">d_prefactura_buscar</result>
 		</action>
 
 		<action name="a_cpm_aprobarPrefactura"
 			class="com.maskiner.smc.facturacion.action.FacturacionAction" method="aprobar">
-			<result name="exito" type="tiles">d_prefactura_aprobada_confirmacion
-			</result>
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
+			<result name="exito" type="tiles">d_prefactura_aprobada_confirmacion</result>
 			<result name="exito1" type="tiles">d_mostrarPrefactura</result>
 		</action>
 
 
 		<action name="a_cpm_cargarFactura">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,04</param>
+			</interceptor-ref>
 			<result type="tiles">d_factura_buscar</result>
 		</action>
 
 		<action name="a_cpm_buscarPrefacturasAprobadas"
 			class="com.maskiner.smc.facturacion.action.FacturacionAction" method="buscarPrefacturasAprobadas">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,04</param>
+			</interceptor-ref>
 			<result name="exito" type="tiles">d_factura_buscar</result>
-
 		</action>
 		<action name="a_cpm_generarFactura"
 			class="com.maskiner.smc.facturacion.action.FacturacionAction" method="mostrarFactura">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,04</param>
+			</interceptor-ref>
 			<result name="exito" type="tiles">d_factura_generar</result>
 
 		</action>

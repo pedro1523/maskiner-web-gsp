@@ -29,6 +29,8 @@ public class MSKRolesInterceptor extends RolesInterceptor {
 		// return super.isAllowed(request, action);
 		UsuarioBean usuario = (UsuarioBean) request.getSession().getAttribute(
 				"usuariologueado");
+		
+		if(usuario==null) return false;
 
 		if (allowedRoles.size() > 0) {
 			boolean result = false;
