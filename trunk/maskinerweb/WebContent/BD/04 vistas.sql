@@ -85,7 +85,6 @@ SELECT
         i.cod_cli,
         cli.raz_soc_cli,
         msi.num_tar,
-        msi.itm_aver,
         mq.desc_maq,
         ot.fec_ord_trab,
         na.desc_natur_aver,

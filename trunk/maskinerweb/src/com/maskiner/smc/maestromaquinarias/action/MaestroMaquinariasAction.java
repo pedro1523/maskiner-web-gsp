@@ -89,6 +89,13 @@ public class MaestroMaquinariasAction extends ActionSupport implements SessionAw
 
 	public String cargarBuscarMaquinaria() throws Exception {
 		
+		//cargar todos los datos al iniciar el caso de uso
+		MaestroMaquinariasI servicio = MaestroMaquinariasBusinessDelegate.getMaestroMaquinariasService();
+		
+		List<MaquinariaSucursalBean> maquinarias = servicio.buscarMaquinarias("", "", "");
+		
+		request.put("arrMaquinarias", maquinarias);
+
 		formOrigen = parameters.get("formOrigen")[0];
 		
 		if(formOrigen.equals("d_repGastMaq")){

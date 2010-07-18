@@ -6,8 +6,9 @@ import java.util.List;
 import com.maskiner.smc.factory.DAOFactory;
 import com.maskiner.smc.reportes.bean.ReporteFrecuenciaIncidentesBean;
 import com.maskiner.smc.reportes.bean.ReporteGastosXMaquinariaBean;
+import com.maskiner.smc.reportes.bean.ReporteHistorialMaquinariaBean;
 import com.maskiner.smc.reportes.bean.ReporteTecnicosOTBean;
-import com.maskiner.smc.reportes.bean.ReporteUtilizacionMaquinaria;
+import com.maskiner.smc.reportes.bean.ReporteUtilizacionMaquinariaBean;
 import com.maskiner.smc.reportes.dao.ReportesDAO;
 
 public class ReportesServiceImpl implements ReportesServiceI {
@@ -39,10 +40,15 @@ public class ReportesServiceImpl implements ReportesServiceI {
 	}
 
 	@Override
-	public List<ReporteUtilizacionMaquinaria> obtenerDatosReporteUtilizacionMaquinaria(
+	public List<ReporteUtilizacionMaquinariaBean> obtenerDatosReporteUtilizacionMaquinaria(
 			String numTarjeta) throws Exception {
-		// TODO Auto-generated method stub
 		return reportesDAO.obtenerDatosReporteUtilizacionMaquinaria(numTarjeta);
+	}
+
+	@Override
+	public List<ReporteHistorialMaquinariaBean> obtenerDatosReporteHistorialMaquinaria(
+			String numTarjeta) throws Exception {
+		return reportesDAO.obtenerDatosReporteHistorialMaquinaria(numTarjeta);
 	}
 
 }

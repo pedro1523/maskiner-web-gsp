@@ -14,8 +14,9 @@ import javax.persistence.TemporalType;
 import com.maskiner.smc.factory.GenericDAOJpa;
 import com.maskiner.smc.reportes.bean.ReporteFrecuenciaIncidentesBean;
 import com.maskiner.smc.reportes.bean.ReporteGastosXMaquinariaBean;
+import com.maskiner.smc.reportes.bean.ReporteHistorialMaquinariaBean;
 import com.maskiner.smc.reportes.bean.ReporteTecnicosOTBean;
-import com.maskiner.smc.reportes.bean.ReporteUtilizacionMaquinaria;
+import com.maskiner.smc.reportes.bean.ReporteUtilizacionMaquinariaBean;
 
 public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 
@@ -111,7 +112,7 @@ public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ReporteUtilizacionMaquinaria> obtenerDatosReporteUtilizacionMaquinaria(
+	public List<ReporteUtilizacionMaquinariaBean> obtenerDatosReporteUtilizacionMaquinaria(
 			String numTarjeta) throws Exception {
 		EntityManager manager = getEntityManager();
 		
@@ -119,11 +120,11 @@ public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 		q.setParameter(1, numTarjeta);
 		Vector<Object[]> datos = (Vector<Object[]>) q.getResultList();
 		
-		ArrayList<ReporteUtilizacionMaquinaria> resultado = new ArrayList<ReporteUtilizacionMaquinaria>();
+		ArrayList<ReporteUtilizacionMaquinariaBean> resultado = new ArrayList<ReporteUtilizacionMaquinariaBean>();
 		
 		for(Object[] d: datos){
 			
-			ReporteUtilizacionMaquinaria r = new ReporteUtilizacionMaquinaria();
+			ReporteUtilizacionMaquinariaBean r = new ReporteUtilizacionMaquinariaBean();
 			r.setCodCliente((String) d[0]);
 			r.setRazonSocialCliente((String) d[1]);
 			r.setNumTarjeta((String) d[2]);
@@ -135,6 +136,20 @@ public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 			
 			resultado.add(r);
 		}
+		return resultado;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ReporteHistorialMaquinariaBean> obtenerDatosReporteHistorialMaquinaria(
+			String numTarjeta) throws Exception {
+
+		EntityManager manager = getEntityManager();
+		Query q = manager.createQuery("SELECT r FROM ReporteHistorialMaquinariaBean r " +
+				"WHERE r.numTarjeta = ?1");
+		q.setParameter(1, numTarjeta);
+		List<ReporteHistorialMaquinariaBean> resultado =  q.getResultList();
+		
 		return resultado;
 	}
 

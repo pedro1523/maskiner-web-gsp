@@ -3,7 +3,7 @@ package com.maskiner.smc.reportes.bean;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ReporteUtilizacionMaquinaria {
+public class ReporteUtilizacionMaquinariaBean {
 	private String codCliente;
 	private String razonSocialCliente;
 	private String numTarjeta;
