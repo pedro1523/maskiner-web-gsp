@@ -8,24 +8,14 @@
 	<!-- Actions de Claudio Neyra -->
 
 
-	<package name="cnm" extends="tiles-default" namespace="/">
+	<package name="cnm" extends="msk-default" namespace="/">
 
-    	<result-types>
-    		<result-type name="jasper" class="org.apache.struts2.views.jasperreports.JasperReportsResult"/>
-    	</result-types>
-    	
-	   	<global-results>
-    		<result name="customError">/errorPage.jsp</result>
-    	</global-results>
-    	    	
-    	<global-exception-mappings>
-    		<exception-mapping result="customError" exception="java.lang.Exception"/>
-    	</global-exception-mappings>
-	
-
-		<action name="a_cnm_cargarGenerarOT"
+ 		<action name="a_cnm_cargarGenerarOT"
 			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
 			method="cargarGenerarOT">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result name="exito" type="tiles">d_generarOT_p1</result>
 		</action>
 

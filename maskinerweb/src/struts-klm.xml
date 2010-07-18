@@ -4,16 +4,9 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
     <struts>
-    	<package name="klm" extends="tiles-default" namespace="/">	
+    	<package name="klm" extends="msk-default" namespace="/">	
     	
-	   	<global-results>
-    		<result name="customError">/errorPage.jsp</result>
-    	</global-results>
-    	
-    	<global-exception-mappings>
-    		<exception-mapping result="customError" exception="java.lang.Exception"/>
-    	</global-exception-mappings>
-    	
+ 	
     	
     	
     	

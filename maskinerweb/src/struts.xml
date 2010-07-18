@@ -8,14 +8,22 @@
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
     <constant name="struts.devMode" value="false" />
     
-    <include file="/struts-cnm.xml" />
-    <include file="/struts-jhc.xml" />
-    <include file="/struts-klm.xml" />
-    <include file="/struts-amm.xml" />
-	<include file="/struts-cepm.xml" />
-    
-    <package name="default" extends="tiles-default">
-    
+    <package name="msk-default" extends="tiles-default">
+
+    	<result-types>
+    		<result-type name="jasper" class="org.apache.struts2.views.jasperreports.JasperReportsResult"/>
+    	</result-types>
+    	
+    	<interceptors>
+    		<interceptor name="MSKRolesInterceptor"
+    					 class="com.maskiner.smc.seguridad.interceptor.MSKRolesInterceptor">
+    		</interceptor>
+    		<interceptor-stack name="securityRolesStack">
+    			<interceptor-ref name="MSKRolesInterceptor"/>
+    			<interceptor-ref name="defaultStack"/>
+    		</interceptor-stack>
+    	</interceptors>
+
     	<global-results>
     		<result   name="customError">/errorPage.jsp</result>
     	</global-results>
@@ -24,6 +32,17 @@
     		<exception-mapping result="customError" exception="java.lang.Exception"/>
     	</global-exception-mappings>
     	
+    </package>
+    
+    
+    <include file="/struts-cnm.xml" />
+    <include file="/struts-jhc.xml" />
+    <include file="/struts-klm.xml" />
+    <include file="/struts-amm.xml" />
+	<include file="/struts-cepm.xml" />
+    
+    <package name="default" extends="msk-default">
+    
      	<action 
     			name="a_logueo"
     			class="com.maskiner.smc.seguridad.action.LogueoAction"

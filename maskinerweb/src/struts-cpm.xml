@@ -4,15 +4,7 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<package name="cpm" extends="tiles-default" namespace="/">
-
-	   	<global-results>
-    		<result name="customError">/errorPage.jsp</result>
-    	</global-results>
-    	
-    	<global-exception-mappings>
-    		<exception-mapping result="customError" exception="java.lang.Exception"/>
-    	</global-exception-mappings>
+	<package name="cpm" extends="msk-default" namespace="/">
 
 		<action name="a_cpm_OTIAsignar">
 			<!--forward="d_generarOT_inspeccion_asignar" r/>  -->
