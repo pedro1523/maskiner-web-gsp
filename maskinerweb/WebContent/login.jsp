@@ -27,12 +27,12 @@
 				<s:form action="a_logueo" method="post">
 					<div id="controlessuperiores">
 						<label for="usuario" id="lblUsuario"><s:text name="login.lblusuario"/></label>
-						<s:textfield id="txtUsuario" name="usuario" value="juanca"/>
+						<s:textfield id="txtUsuario" maxlength="20" name="usuario" value="juanca"/>
 					</div>
 					<div id="controlescentrales">
 						<label for="password" id="lblPassword"><s:text name="login.lblpassword"/></label>
 						<!--<s:password id="txtPassword" name="password"/>-->
-						<s:textfield id="txtPassword" name="password" value="juanca"/>
+						<s:password id="txtPassword" maxlength="20"  name="password" />
 					</div>
 					<div align="right">
 						<s:text var="submittext" name="login.submit"/>
