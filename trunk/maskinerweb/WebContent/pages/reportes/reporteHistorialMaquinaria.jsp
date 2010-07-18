@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
-<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
-<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,10 +9,36 @@
 
 
 <title>Insert title here</title>
+<script type="text/javascript">
+	function abrirBuscarMaquinaria(){
+		document.forms["frmReporteHistorialMaquinaria"].action="<%= request.getContextPath() %>/a_cnm_cargarBuscarMaquinaria.do";
+		document.forms["frmReporteHistorialMaquinaria"].submit();
+	}
+	
+</script>
     
 </head>
 <body>
-	<h2 class="titulo">Historial de Maquinaria</h2>
+	<h2 class="titulo"><s:text name="pages.reportes.repHisMaq.titulo"/></h2>
+	<fieldset>
+		<legend><s:text name="pages.reportes.repUtiMaq.fielset.legend"/></legend>
+		<s:form method="post" action="a_cnm_reporteUtilizMaquinaria" id="frmReporteHistorialMaquinaria">
+			<s:label key="pages.reportes.repUtiMaq.lblNumTarjeta"/>
+			<s:textfield name="numTarjeta" maxlength="6"/>
+			<s:hidden name="formOrigen" value="d_repUtiMaq"/>
+			<s:a value="javascript:abrirBuscarMaquinaria()">
+				<s:url var="buscarImgUrl" value="/images/buscar_azul.gif"/>
+				<img src="${buscarImgUrl}"/>
+			</s:a>
+			<s:text var="generarImgi18n" name="pages.botones.generarreporte" />
+			<s:url var="generarImgUrl" value="%{generarImgi18n}" />
+			<s:submit type="image" src="%{generarImgUrl}" cssStyle="position:relative; top:5px; margin-left:20px"/>
+		</s:form>
+	</fieldset>
+	<s:fielderror cssClass="mensajeerror lista separadoverticalsuperior" />
+	
+	
+	
 <table>
 
 	<tr>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="num_tar" class="java.lang.String"/>
+	<parameter name="img_cen" class="java.io.InputStream"/>
+	<parameter name="img_cab" class="java.io.InputStream"/>
+	<queryString>
+		<![CDATA[SELECT  cli.cod_cli,
+        cli.raz_soc_cli,
+        ms.num_tar,
+        mq.desc_maq,
+        convert(ot.fec_ord_trab,char(10))as fec_ord_trab,
+        ot.num_inc,
+        tt.desc_tab,
+        msi.desc_aver
+FROM cliente cli inner join sucursal suc
+on cli.cod_cli = suc.cod_cli
+inner join maquinariasucursal ms
+on ms.num_suc = suc.num_suc
+and ms.cod_cli = suc.cod_cli
+inner join maquinaria mq
+on ms.cod_maq = mq.cod_maq
+inner join ordentrabajo ot
+on ms.num_tar = ot.num_tar
+inner join maquinariasucursal_x_incidente msi
+on msi.num_inc = ot.num_inc
+and msi.num_tar = ot.num_tar
+and msi.itm_aver = ot.itm_aver
+inner join tabladetablas tt
+on tt.cod_item_tab = msi.natur_aver
+and tt.cod_tab = 10
+and tt.cod_item_tab <> 0
+where ms.num_tar = $P{num_tar}]]>
+	</queryString>
+	<field name="cod_cli" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="raz_soc_cli" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="num_tar" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desc_maq" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fec_ord_trab" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="num_inc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desc_tab" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desc_aver" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band height="802" splitType="Stretch">
+			<image>
+				<reportElement x="40" y="250" width="464" height="432"/>
+				<imageExpression class="java.io.InputStream"><![CDATA[$P{img_cen}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="0" y="0" width="166" height="33"/>
+				<imageExpression class="java.io.InputStream"><![CDATA[$P{img_cab}]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="193" splitType="Stretch">
+			<staticText>
+				<reportElement x="156" y="45" width="230" height="39"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[HISTORIAL DE ATENCION POR MAQUINARIAS]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="false">
+				<reportElement x="432" y="14" width="123" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="92" width="120" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código Cliente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="112" width="120" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Razón Social:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="13" y="191" width="518" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="13" y="132" width="120" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Tarjeta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="152" width="120" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción Maquinaria:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="133" y="92" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cod_cli}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="112" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{raz_soc_cli}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="132" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{num_tar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="152" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{desc_maq}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="6" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="121" y="6" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Incidente]]></text>
+			</staticText>
+			<line>
+				<reportElement x="13" y="26" width="518" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="249" y="6" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Naturaleza Avería]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="386" y="6" width="102" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción Avería]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="50">
+			<textField>
+				<reportElement x="150" y="0" width="72" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{num_inc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="388" y="0" width="143" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{desc_aver}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{desc_tab}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="26" y="0" width="87" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fec_ord_trab}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="213" y="31" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="293" y="31" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
