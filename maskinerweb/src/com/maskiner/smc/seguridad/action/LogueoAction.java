@@ -79,7 +79,6 @@ public class LogueoAction extends ActionSupport implements SessionAware {
 	
 	public String signOut() {
 		
-		
 		session.remove("usuariologueado");
 		return "exito";
 	}
