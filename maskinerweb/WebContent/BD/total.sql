@@ -2957,3 +2957,37 @@ CREATE OR REPLACE VIEW `mskbd`.`vw_marcas` AS
   tt.desc_tab     desc_mar_maq
   FROM tabladetablas tt
   WHERE tt.cod_tab=18 and cod_item_tab<>0;      
+
+CREATE OR REPLACE VIEW `mskbd`.`vw_naturaleza_averia` AS
+  SELECT
+  tt.cod_item_tab natur_aver,
+  tt.desc_tab     desc_natur_aver
+  FROM tabladetablas tt
+  WHERE tt.cod_tab=10 and cod_item_tab<>0;
+
+CREATE OR REPLACE VIEW `mskbd`.`vw_rpthistorialmaquinaria` AS
+SELECT
+        i.num_inc,
+        i.fec_inc,
+        i.cod_cli,
+        cli.raz_soc_cli,
+        msi.num_tar,
+        msi.itm_aver,
+        mq.desc_maq,
+        ot.fec_ord_trab,
+        na.desc_natur_aver,
+        msi.desc_aver
+FROM incidente i inner join
+cliente cli on i.cod_cli=cli.cod_cli
+inner join maquinariasucursal_x_incidente msi
+on i.num_inc=msi.num_inc
+inner join maquinariasucursal ms
+on ms.num_tar = msi.num_tar
+inner join maquinaria mq
+on ms.cod_maq = mq.cod_maq
+inner join ordentrabajo ot
+on msi.num_inc = ot.num_inc
+and msi.num_tar = ot.num_tar
+and msi.itm_aver = ot.itm_aver
+inner join vw_naturaleza_averia na
+on na.natur_aver= msi.natur_aver;
