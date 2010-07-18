@@ -62,7 +62,6 @@ public class LogueoAction extends ActionSupport implements SessionAware {
 			//preguntamos el estado del usuario
 			if(beanUsuario.getEstadoUsuario()==1){
 				session.put("usuariologueado", beanUsuario);
-				session.put("logged-in", true);
 				return "exito";
 			}else {
 				this.setMensaje("El usuario está inactivo.");
@@ -77,7 +76,7 @@ public class LogueoAction extends ActionSupport implements SessionAware {
 	}
 	
 	public String signOut() {
-		session.remove("logged-in");
+		session.remove("usuariologueado");
 		return "exito";
 	}
 
