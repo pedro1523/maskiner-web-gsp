@@ -10,18 +10,15 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.maskiner.smc.reportes.bean.ReporteFrecuenciaIncidentesBean;
 import com.maskiner.smc.reportes.bean.ReporteGastosXMaquinariaBean;
+import com.maskiner.smc.reportes.bean.ReporteHistorialMaquinariaBean;
 import com.maskiner.smc.reportes.bean.ReporteTecnicosOTBean;
-import com.maskiner.smc.reportes.bean.ReporteUtilizacionMaquinaria;
+import com.maskiner.smc.reportes.bean.ReporteUtilizacionMaquinariaBean;
 import com.maskiner.smc.reportes.service.ReportesBusinessDelegate;
 import com.maskiner.smc.reportes.service.ReportesServiceI;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ReportesAction extends ActionSupport implements ParameterAware, RequestAware, SessionAware {
+public class ReportesAction extends ActionSupport {
 
-	private Map<String, Object> request;
-	private Map<String, Object> session;
-	private Map<String, String[]> parameters;
-	
 	private String codCliente;
 	private String numOrdenTrabajo;
 	private String numTarjeta;
@@ -31,7 +28,8 @@ public class ReportesAction extends ActionSupport implements ParameterAware, Req
 	private List<ReporteFrecuenciaIncidentesBean> arrRepFrecIncBean;
 	private List<ReporteTecnicosOTBean> arrRepTecOTBean;
 	private List<ReporteGastosXMaquinariaBean> arrRepGastosMaquinaria;
-	private List<ReporteUtilizacionMaquinaria> arrUtilizacionMaquinaria;
+	private List<ReporteUtilizacionMaquinariaBean> arrUtilizacionMaquinaria;
+	private List<ReporteHistorialMaquinariaBean> arrHistorialMaquinaria;
 	
 	public String getNumTarjeta() {
 		return numTarjeta;
@@ -107,13 +105,22 @@ public class ReportesAction extends ActionSupport implements ParameterAware, Req
 		this.arrRepGastosMaquinaria = arrRepGastosMaquinaria;
 	}
 	
-	public List<ReporteUtilizacionMaquinaria> getArrUtilizacionMaquinaria() {
+	public List<ReporteUtilizacionMaquinariaBean> getArrUtilizacionMaquinaria() {
 		return arrUtilizacionMaquinaria;
 	}
 
 	public void setArrUtilizacionMaquinaria(
-			List<ReporteUtilizacionMaquinaria> arrUtilizacionMaquinaria) {
+			List<ReporteUtilizacionMaquinariaBean> arrUtilizacionMaquinaria) {
 		this.arrUtilizacionMaquinaria = arrUtilizacionMaquinaria;
+	}
+
+	public List<ReporteHistorialMaquinariaBean> getArrHistorialMaquinaria() {
+		return arrHistorialMaquinaria;
+	}
+
+	public void setArrHistorialMaquinaria(
+			List<ReporteHistorialMaquinariaBean> arrHistorialMaquinaria) {
+		this.arrHistorialMaquinaria = arrHistorialMaquinaria;
 	}
 
 	public String listarGastosXMaquinaria() throws Exception {
@@ -155,23 +162,9 @@ public class ReportesAction extends ActionSupport implements ParameterAware, Req
 
 		String vista = "exito";
 
-//		String strmaquinaria = request.getParameter("maquinaria");
-//
-//		InputStream entrada = getServlet().getServletContext()
-//				.getResourceAsStream(
-//						"/pages/reportes/RHistorialAtencion.jasper");
-//
-//		HashMap<String, Object> parametros = new HashMap<String, Object>();
-//		parametros.put("num_tar", strmaquinaria);
-//		parametros.put("img_cen",getServlet().getServletContext().getResourceAsStream("/pages/reportes/logomaskiner.png"));
-//		parametros.put("img_cab",getServlet().getServletContext().getResourceAsStream("/pages/reportes/logomaskinerletras.png"));
-//		
-//
-//		ServletOutputStream salida = response.getOutputStream();
-//
-//		response.setContentType("application/pdf");
-//		JasperRunManager.runReportToPdfStream(entrada, salida, parametros,
-//				MySqlDbConn.obtenerConexion());
+		ReportesServiceI servicio = ReportesBusinessDelegate.getReporteService();
+		
+		arrHistorialMaquinaria = servicio.obtenerDatosReporteHistorialMaquinaria(numTarjeta);
 
 		return vista;
 
@@ -187,20 +180,5 @@ public class ReportesAction extends ActionSupport implements ParameterAware, Req
 		return vista;	
 	}
 
-	@Override
-	public void setParameters(Map<String, String[]> parameters) {
-		this.parameters = parameters;
-	}
-
-	@Override
-	public void setRequest(Map<String, Object> request) {
-		this.request = request;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
-	
 
 }

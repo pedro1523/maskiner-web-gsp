@@ -211,6 +211,26 @@
              			
      </action>
      
+     <action name="a_cnm_repHisMaq">
+   		<result type="tiles">d_repHisMaq</result>
+   	 </action>
+     
+     <action name="a_cnm_reporteHistorialMaquinaria"   
+				class="com.maskiner.smc.reportes.action.ReportesAction" 
+				method="listarHistorialMaquinaria" >
+					
+			<result name="exito" type="jasper">
+				<param name="location">/pages/reportes/RHistorialAtencion.jasper</param>
+				<param name="dataSource">arrHistorialMaquinaria</param>
+				<param name="contentDisposition">
+					attachment;filename="historialMaquinaria.pdf"
+				</param>
+				<param name="format">PDF</param>
+				d_repHisMaq
+			</result>
+			<result name="input" type="tiles">d_repHisMaq</result>       	    			
+             			
+     </action>
      
 
 
