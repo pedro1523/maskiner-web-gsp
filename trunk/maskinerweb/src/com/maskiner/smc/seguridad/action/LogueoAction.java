@@ -2,6 +2,9 @@ package com.maskiner.smc.seguridad.action;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
@@ -17,7 +20,6 @@ public class LogueoAction extends ActionSupport implements SessionAware {
 	private String password;
 	private String mensaje;
 	private Map<String, Object> session;
-
 
 	public String getUsuario() {
 		return usuario;
@@ -76,6 +78,8 @@ public class LogueoAction extends ActionSupport implements SessionAware {
 	}
 	
 	public String signOut() {
+		
+		
 		session.remove("usuariologueado");
 		return "exito";
 	}
@@ -85,6 +89,5 @@ public class LogueoAction extends ActionSupport implements SessionAware {
 		this.session = session;
 		
 	}
-	
-	
+
 }

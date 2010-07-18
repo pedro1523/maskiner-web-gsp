@@ -22,12 +22,18 @@
 		<action name="a_cnm_cargarGenerarOT_paso2"
 			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
 			method="cargarGenerarOTPaso2">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result name="exito" type="tiles">d_generarOT_p2</result>
 		</action>
 		
 		<action name="a_cnm_cargarGenerarOT_paso3"
 			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
 			method="cargarGenerarOTPaso3">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result name="exito" type="tiles">d_generarOT_p3</result>
 			<result name="fracaso" type="tiles">d_generarOT_p2</result>
 		</action>
@@ -36,16 +42,25 @@
 		<action name="a_cnm_quitarPaqueteDeOT"
 			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
 			method="quitarPaqueteDeOT">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result name="exito" type="tiles">d_generarOT_p2</result>
 		</action>
 
 		<action name="a_cnm_irAGenerarOT_paso1">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result type="tiles">d_generarOT_p1</result>
 		</action>
 		
 		<action name="a_cnm_irAGenerarOT_paso2"
     		class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
     		method="irAGenerarOT_paso2" >
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
     		<result name="exito" type="tiles">d_generarOT_p2</result>
     	</action>		
 
@@ -53,6 +68,9 @@
     			name="a_cnm_generarOT"
     			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
     			method="generarOT">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
      		<result name="exito" type="tiles">d_generarOT_p4</result>
      		<result name="fracaso" type="tiles">d_generarOT_p3</result>
     	</action>
@@ -61,6 +79,9 @@
     			name="a_cnm_obtenerDatosHorasNecesarias"
     			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
     			method="obtenerDatosHorasNecesarias" >
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
      		<result name="exito" type="tiles">d_generarOT_p3</result>
     	</action>
     	
@@ -68,6 +89,9 @@
     			name="a_cnm_buscarDisponibilidadTecnicos"
     			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
     			method="buscarDisponibilidadTecnicos" >
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
      		<result name="exito" type="tiles">d_generarOT_p3</result>
     	</action>
 
@@ -76,6 +100,9 @@
     			name="a_cnm_asignarTecnicosAPaquete"
     			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
     			method="asignarTecnicosAPaquete">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
      		<result name="exito" type="tiles">d_generarOT_p3</result>
     	</action>
     	
@@ -84,12 +111,18 @@
     			name="a_cnm_quitarAsignacionDeTecnicosDePaqueteXOT"
     			class="com.maskiner.smc.programartrabajo.action.ProgramarTrabajoAction"
     			method="quitarAsignacionDeTecnicosDePaqueteXOT" >
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
      		<result name="exito" type="tiles">d_generarOT_p3</result>
     	</action>
     	
     	<action name="a_cnm_cargarBuscarMaquinaria"
     	        class="com.maskiner.smc.maestromaquinarias.action.MaestroMaquinariasAction"
     	        method="cargarBuscarMaquinaria">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
     		<result type="tiles">d_buscarMaquinaria</result>
     	</action>
     	
@@ -97,6 +130,9 @@
     			name="a_cnm_buscarMaquinaria"
     			class="com.maskiner.smc.maestromaquinarias.action.MaestroMaquinariasAction"
     			method="buscarMaquinarias" >
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
      		<result name="exito" type="tiles">d_buscarMaquinaria</result>
     	</action>
     	
@@ -104,6 +140,9 @@
     	<action name="a_cnm_buscarMaquinariaIrPaginaOrigen"
     	        class="com.maskiner.smc.maestromaquinarias.action.MaestroMaquinariasAction"
     	        method="irPaginaOrigen">
+ 			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
     	    <!-- getFormOrigen() es un metodo dentro de la clase MaestroMaquinariasAction -->
     		<result type="tiles">%{getFormOrigen()}</result>
     	</action>
@@ -111,18 +150,26 @@
     	<action name="a_cnm_devolverMaquinaria"
     	        class="com.maskiner.smc.maestromaquinarias.action.MaestroMaquinariasAction"
     	        method="devolverMaquinaria">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
     	    <!-- getFormOrigen() es un metodo dentro de la clase MaestroMaquinariasAction -->
     		<result type="tiles">%{getFormOrigen()}</result>
     	</action>
     	
     	<action name="a_cnm_repFreInc">
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
     		<result type="tiles">d_repFreInc</result>
     	</action>
     	
         <action name="a_cnm_generarRepFrecIncid"   
 				class="com.maskiner.smc.reportes.action.ReportesAction" 
 				method="listarFrecuenciaIncidentes" >
-					
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result name="exito" type="jasper">
 				<param name="location">/pages/reportes/RFrecuenciaIncidentes.jasper</param>
 				<param name="dataSource">arrRepFrecIncBean</param>
@@ -137,6 +184,9 @@
      </action>
      
    	 <action name="a_cnm_repTecOT">
+		<interceptor-ref name="securityRolesStack">
+			<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+		</interceptor-ref>
    		<result type="tiles">d_repTecOT</result>
    	 </action>
     	
@@ -144,6 +194,9 @@
 				class="com.maskiner.smc.reportes.action.ReportesAction" 
 				method="listarTecnicosOT" >
 					
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result name="exito" type="jasper">
 				<param name="location">/pages/reportes/RTecnicosOT.jasper</param>
 				<param name="dataSource">arrRepTecOTBean</param>
@@ -158,6 +211,9 @@
      </action>
      
      <action name="a_cnm_repGastMaq">
+		<interceptor-ref name="securityRolesStack">
+			<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+		</interceptor-ref>
    		<result type="tiles">d_repGastMaq</result>
    	 </action>
      
@@ -166,6 +222,9 @@
 				class="com.maskiner.smc.reportes.action.ReportesAction" 
 				method="listarGastosXMaquinaria" >
 					
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result name="exito" type="jasper">
 				<param name="location">/pages/reportes/RGastosMaquinaria.jasper</param>
 				<param name="dataSource">arrRepGastosMaquinaria</param>
@@ -181,6 +240,9 @@
      
      
      <action name="a_cnm_repUtiMaq">
+		<interceptor-ref name="securityRolesStack">
+			<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+		</interceptor-ref>
    		<result type="tiles">d_repUtiMaq</result>
    	 </action>
      
@@ -188,6 +250,9 @@
 				class="com.maskiner.smc.reportes.action.ReportesAction" 
 				method="listarUtilizacionMaquinaria" >
 					
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result name="exito" type="jasper">
 				<param name="location">/pages/reportes/RUtilizacionMaquinaria.jasper</param>
 				<param name="dataSource">arrUtilizacionMaquinaria</param>
@@ -202,6 +267,9 @@
      </action>
      
      <action name="a_cnm_repHisMaq">
+		<interceptor-ref name="securityRolesStack">
+			<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+		</interceptor-ref>
    		<result type="tiles">d_repHisMaq</result>
    	 </action>
      
@@ -209,6 +277,9 @@
 				class="com.maskiner.smc.reportes.action.ReportesAction" 
 				method="listarHistorialMaquinaria" >
 					
+			<interceptor-ref name="securityRolesStack">
+				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
+			</interceptor-ref>
 			<result name="exito" type="jasper">
 				<param name="location">/pages/reportes/RHistorialAtencion.jasper</param>
 				<param name="dataSource">arrHistorialMaquinaria</param>
