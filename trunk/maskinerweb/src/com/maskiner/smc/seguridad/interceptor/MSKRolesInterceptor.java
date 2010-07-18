@@ -27,8 +27,14 @@ public class MSKRolesInterceptor extends RolesInterceptor {
 	protected boolean isAllowed(HttpServletRequest request, Object action) {
 		// TODO Auto-generated method stub
 		// return super.isAllowed(request, action);
-		UsuarioBean usuario = (UsuarioBean) request.getSession().getAttribute(
-				"usuariologueado");
+		
+		UsuarioBean usuario=null;
+		
+		try {
+			usuario = (UsuarioBean) request.getSession().getAttribute("usuariologueado");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		if(usuario==null) return false;
 
