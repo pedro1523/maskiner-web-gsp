@@ -9,6 +9,10 @@
 		<field-validator type="requiredstring">
 			<message key="pages.reportes.repFreInc.errors.codCliente.required" />
 		</field-validator>
+		<field-validator type="regex">
+			<param name="expression">CL[0-9]{4}</param>
+			<message key="pages.reportes.repFreInc.errors.codCliente.regex" />
+		</field-validator>
 	</field>
 	
 	<field  name="anio">
