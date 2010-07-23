@@ -106,7 +106,8 @@
 
 		<!-- FACTURACION -->
 
-		<action name="a_cpm_cargarPrefactura">
+		<action name="a_cpm_cargarPrefactura"
+		>
 			<result type="tiles">d_prefactura_buscar</result>
 		</action>
 

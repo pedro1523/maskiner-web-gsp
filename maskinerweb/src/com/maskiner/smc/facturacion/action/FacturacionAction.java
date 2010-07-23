@@ -90,7 +90,7 @@ public class FacturacionAction implements SessionAware,RequestAware,ParameterAwa
 		List<BeanLiquidacion> lista = servicio.buscarPrefactura(nombreEmpresa, dtFechaIncid, incidente);
 		System.out.println("total registros --> " + lista.size());
 		
-		session.put("listPrefactura", lista);
+		session.put("listPrefactura1", lista);
 		
 		}catch (Exception e) {
 			e.printStackTrace();	
@@ -308,6 +308,10 @@ public class FacturacionAction implements SessionAware,RequestAware,ParameterAwa
 		}
 		
 	}
+	private String mostrarPrefac(){
+		return "exito";
+	}
+	
 
 	@Override
 	public void setRequest(Map<String, Object> arg0) {

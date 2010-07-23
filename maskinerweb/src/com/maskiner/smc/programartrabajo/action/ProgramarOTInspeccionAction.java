@@ -233,12 +233,12 @@ public class ProgramarOTInspeccionAction implements RequestAware, SessionAware, 
 			return "exito1";
 		}
 		
-		try{
+		/*try{
 			strLugarAtencion=parameters.get("lugarAtencion")[0].trim();
 		}catch (Exception e) {
 			session.put("mensajeError", "Ingrese Lugar de Atención");
 			return "exito1";
-		}
+		}*/
 			
 		
 			session.remove("mensajeError");
@@ -258,7 +258,7 @@ public class ProgramarOTInspeccionAction implements RequestAware, SessionAware, 
 			//recuperamos el bean incidente de la session
 			RegistroIncidentesBean incidenteBean=(RegistroIncidentesBean)
 											session.get("b_incidente");
-			incidenteBean.setStrLugarAtencionCliente(strLugarAtencion);
+			//incidenteBean.setStrLugarAtencionCliente(strLugarAtencion);
 			String tarjetaEquipo=(String)session.get("tarjetaEquipo");
 			ArrayList<DetalleRegistroIncidenteBean> listaEquipos=incidenteBean.getArrMaquinariasXIncidente();
 							
