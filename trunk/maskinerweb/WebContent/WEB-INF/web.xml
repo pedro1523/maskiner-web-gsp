@@ -39,7 +39,7 @@
   	
   	<error-page>
   		<error-code>403</error-code>
-  		<location>/errorPaginaProhibida.jsp</location>
+  		<location>/errorPaginaProhibida.html</location>
    	</error-page>
   	
   	

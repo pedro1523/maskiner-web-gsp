@@ -124,7 +124,7 @@ public class ReportesAction extends ActionSupport {
 	}
 
 	public String listarGastosXMaquinaria() throws Exception {
- 
+		
 		String vista = "exito";
  
 		ReportesServiceI servicio = ReportesBusinessDelegate.getReporteService();
@@ -180,5 +180,15 @@ public class ReportesAction extends ActionSupport {
 		return vista;	
 	}
 
+	@Override
+	public void validate() {
+		// TODO Auto-generated method stub
+		//super.validate();
+		
+		if(fechaInicio!=null && fechaFin!=null && fechaInicio.after(fechaFin)){
+			addActionError(getText("pages.reportes.repGasMaq.errors.expression"));
+		}
+		
+	}
 
 }

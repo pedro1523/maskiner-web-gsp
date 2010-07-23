@@ -37,11 +37,15 @@
 		</field-validator>
 	</field>
 	
+	<!--
+	
 	<validator type="expression">
 		<param name="expression"><![CDATA[fechaInicio < fechaFin]]></param>
 		<message key="pages.reportes.repGasMaq.errors.expression"/>
 	</validator>
 	
+	
+	-->
 	
 	<!--
 	

@@ -47,7 +47,7 @@
           <th width="11%" align="center">Aprobar Prefactura</th>
         </tr>
 <%int i=0; %>
-			 <s:iterator var="lista" value="#session.listPrefactura">
+			 <s:iterator var="lista" value="#session.listPrefactura1">
 			 <%++i;%>
 			 	<tr>
 			 		<td align="center"><%=i%></td>
