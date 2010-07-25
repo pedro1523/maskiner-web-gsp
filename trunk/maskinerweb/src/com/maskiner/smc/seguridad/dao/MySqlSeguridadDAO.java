@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.maskiner.smc.mylib.MySqlDbConn;
+import com.maskiner.smc.mylib.SHA1;
 import com.maskiner.smc.seguridad.bean.RolUsuarioBean;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
 
@@ -23,7 +24,7 @@ public class MySqlSeguridadDAO implements SeguridadDAO {
 		Connection cn = MySqlDbConn.obtenerConexion();
 		CallableStatement st = cn.prepareCall("{ call pr_validarusuario(?, ?) }");
 		st.setString(1, username);
-		st.setString(2, password);
+		st.setString(2, SHA1.getHash(password));
 		
 		ResultSet rs = st.executeQuery();
 		
