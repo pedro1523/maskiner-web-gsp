@@ -5,7 +5,7 @@ DELIMITER $$
 CREATE PROCEDURE pr_validarusuario
 (
  IN vusername varchar(25),
- IN vpassword varchar(25)
+ IN vpassword varchar(40)
 )
 BEGIN
   	SELECT cod_usr, dni_usr, ape_pat_usr, ape_mat_usr, nom_usr, dom_usr, tel_usr, cargo_usr, username, password, est_usr

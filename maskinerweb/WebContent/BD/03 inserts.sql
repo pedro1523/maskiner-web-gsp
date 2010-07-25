@@ -125,15 +125,15 @@ VALUES (1, 0, 'Estado usuario'),
 	       (19,2,'Usado'),
 		   (19,3,'Anulado');
 	   
-
+/*NOTA: el password está encriptado mediante SHA1 y es igual al username*/
 INSERT usuario (cod_usr, dni_usr, ape_pat_usr, ape_mat_usr, nom_usr, dom_usr, tel_usr, cargo_usr, username, password, est_usr)
-VALUES ('RG001', '09751173', 'Neyra', 'Mercado', 'Claudio Jesús', 'Calle José Álvares Calderón 410 San Borja', '2248550', 'Jefe de Planificación', 'claudio', 'claudio', 1),
-	   ('RG002', '04551756', 'Lopez', 'Munar', 'Karla', 'Calle Los Ficus 410 La Victoria', '3457234', 'Liquidadora', 'karla', 'karla', 1),
-	   ('RG003', '98887750', 'Melendez', 'Castro', 'Daniel', 'Calle José Álvares Calderón 410 San Borja', '6098764', 'Encargado Area Comercial', 'daniel', 'daniel', 1),				
-	   ('RG004', '45457207', 'Pinco', 'Mendo', 'Christian', 'Av. Los Pinos 333 La Molina', '3456754', 'Liquidador', 'pinco', 'pinco', 1),
-	   ('RG005', '23666358', 'Muñoz', 'Marca', 'Romualdo', 'Calle Los Pobres Locos 111 Miraflores', '3456754', 'Encargado Area Comercial', 'aldo', 'aldo', 1),
-	   ('RG006', '86766888', 'Hipólito', 'Castañeda', 'Juan Carlos', 'Av La Esperanza 455 San Isidro', '3456754', 'Administrador del Sistema', 'juanca', 'juanca', 1),
-	   ('RG007', '56664467', 'Huaman', 'Reyes', 'Juan Ernesto', 'Av La Esperanza 455 San Isidro', '3456754', 'Liquidador', 'juan', 'juan', 2);	   
+VALUES ('RG001', '09751173', 'Neyra', 'Mercado', 'Claudio Jesús', 'Calle José Álvares Calderón 410 San Borja', '2248550', 'Jefe de Planificación', 'claudio', 'c3923186c4c9da9c766af46f22a325cd4677020a', 1),
+	   ('RG002', '04551756', 'Lopez', 'Munar', 'Karla', 'Calle Los Ficus 410 La Victoria', '3457234', 'Liquidadora', 'karla', '0a256b03b037ab5d3e559f13905b682edcc3ddaf', 1),
+	   ('RG003', '98887750', 'Melendez', 'Castro', 'Daniel', 'Calle José Álvares Calderón 410 San Borja', '6098764', 'Encargado Area Comercial', 'daniel', '3d0f3b9ddcacec30c4008c5e030e6c13a478cb4f', 1),				
+	   ('RG004', '45457207', 'Pinco', 'Mendo', 'Christian', 'Av. Los Pinos 333 La Molina', '3456754', 'Liquidador', 'pinco', '0dc8b5e57986cabb75f80a13e7e9ce06f68a0dac', 1),
+	   ('RG005', '23666358', 'Muñoz', 'Marca', 'Romualdo', 'Calle Los Pobres Locos 111 Miraflores', '3456754', 'Encargado Area Comercial', 'aldo', '1c89c0f71ac97754ffc597c567d01b2ade0c9324', 1),
+	   ('RG006', '86766888', 'Hipólito', 'Castañeda', 'Juan Carlos', 'Av La Esperanza 455 San Isidro', '3456754', 'Administrador del Sistema', 'juanca', '47732e97b4753c952ffa6f4eb51846c4e1308c79', 1),
+	   ('RG007', '56664467', 'Huaman', 'Reyes', 'Juan Ernesto', 'Av La Esperanza 455 San Isidro', '3456754', 'Liquidador', 'juan', 'b49a5780a99ea81284fc0746a78f84a30e4d5c73', 2);	   
 	   
 INSERT rol (cod_rol, desc_rol) 
 VALUES ('01','Administrador Sistema'),
