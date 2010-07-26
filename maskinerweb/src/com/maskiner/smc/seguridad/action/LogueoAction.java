@@ -2,20 +2,21 @@ package com.maskiner.smc.seguridad.action;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
 import com.maskiner.smc.seguridad.service.SeguridadBusinessDelegate;
 import com.maskiner.smc.seguridad.service.SeguridadServiceI;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 
 public class LogueoAction extends ActionSupport implements SessionAware {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2251773913525742196L;
 	private String usuario;
 	private String password;
 	private String mensaje;
@@ -52,7 +53,6 @@ public class LogueoAction extends ActionSupport implements SessionAware {
 		try {
 			beanUsuario = servicio.validar(getUsuario(), getPassword());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.setMensaje("Error de programa.");
 			return "fracaso";
@@ -79,7 +79,8 @@ public class LogueoAction extends ActionSupport implements SessionAware {
 	
 	public String signOut() {
 		
-		session.remove("usuariologueado");
+		//session.remove("usuariologueado");
+		((SessionMap<String, Object>)session).invalidate();
 		return "exito";
 	}
 
