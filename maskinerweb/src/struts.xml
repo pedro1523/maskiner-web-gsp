@@ -18,14 +18,20 @@
     		<interceptor name="MSKRolesInterceptor"
     					 class="com.maskiner.smc.seguridad.interceptor.MSKRolesInterceptor">
     		</interceptor>
+    		<interceptor name="MSKSessionExpiredInterceptor" 
+    					 class="com.maskiner.smc.seguridad.interceptor.MSKSessionExpiredInterceptor">
+    		</interceptor>
+    		
     		<interceptor-stack name="securityRolesStack">
+    			<interceptor-ref name="MSKSessionExpiredInterceptor"/>
     			<interceptor-ref name="MSKRolesInterceptor"/>
     			<interceptor-ref name="defaultStack"/>
     		</interceptor-stack>
     	</interceptors>
 
     	<global-results>
-    		<result   name="customError">/errorPage.jsp</result>
+    		<result name="customError">/errorPage.jsp</result>
+    		<result name="session-expired">/sessionExpired.jsp</result>
     	</global-results>
     	
     	<global-exception-mappings>
