@@ -11,12 +11,15 @@
 </head>
 <body>
 <s:form action="">
-<h2 class="titulo">Orden de trabajo de inspección</h2>
+<h2 class="titulo"><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.titulo" /></h2>
         <fieldset style="width:400px">
-          <legend>Orden de trabajo de inspección</legend>
+          <legend><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.titulo" /></legend>
           <table class="separadovertical" style="border-style: hidden; border-width: thin">
             <tr>
-              <td colspan="2"> Registro de Incidentes: </td>
+            
+              <td colspan="2">
+              	<s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.incidente" /> 
+			  </td>
               <td>
               <s:textfield name="b_incidente.strNumeroIncidente" /> 
               <!--<input id="txtIncidente" type="text" value="${sessionScope.b_incidente.strNumeroIncidente}" size="6" />--></td>
@@ -35,12 +38,14 @@
           </table>
         </fieldset>
         <div class="separadovertical">
-          <span class="titulotabla">Orden de Trabajo</span>
+          <span class="titulotabla">
+          	<s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.orden" />
+          </span>
           <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
             <tr align="center">
-              <th> ITEM</th>
-              <th> Registro de Incidente</th>
-              <th> Cliente</th>
+              <th> <s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.g1.columna1" /></th>
+              <th> <s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.g1.columna2" /></th>
+              <th> <s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.g1.columna3" /></th>
               
             </tr>
             <tr>
@@ -50,14 +55,16 @@
              
           </table>
         </div>
-        <div class="titulotabla">Atención por Orden de Trabajo de Inspección</div>       
+        <div class="titulotabla">
+        	<s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.atencion" />
+		</div>       
         <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
           <tr align="center">
-            <th>Item</th>
-            <th> Nº Tarjeta de Equipo</th>
-            <th> Avería por Categoria</th>
-            <th> Descripcion</th>
-            <th> Asignar Personal</th>
+            <th><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.g2.columna1" /></th>
+            <th><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.g2.columna2" /></th>
+            <th><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.g2.columna3" /></th>
+            <th><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.g2.columna4" /></th>
+            <th><s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.g2.columna5" /></th>
           </tr>
           
           
