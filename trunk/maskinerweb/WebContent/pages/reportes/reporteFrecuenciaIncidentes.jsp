@@ -18,29 +18,30 @@
 	}
 	
 </script>
-
+<script type="text/javascript" src="<%=request.getContextPath()%>/javascript/mskFunciones.js"/></script>
 
 </head>
 <body>
 	<h2 class="titulo"><s:text name="pages.reportes.repFreInc.titulo" /></h2>
     <fieldset>
       <legend><s:text name="pages.reportes.repFreInc.fieldsetCriterios" /></legend>
-	  <s:form name="frmReporteIncidentes" method="post" action="a_cnm_generarRepFrecIncid" id="frmGenerarRepFrecIncid">
+	  <s:form name="frmReporteIncidentes" method="post" action="a_cnm_generarRepFrecIncid" id="frmGenerarRepFrecIncid" onsubmit="borrarErrores('fieldError')">
         <s:text name="pages.reportes.repFreInc.lblcliente" />
-        <s:textfield name="codCliente"/>
+        <s:textfield name="codCliente" maxlength="6"/>
 		<s:a value="javascript:abrirBuscarCliente()">
 			<s:url var="buscarImgUrl" value="/images/buscar_azul.gif"/>
 			<img src="${buscarImgUrl}"/>
 		</s:a>
         <s:text name="pages.reportes.repFreInc.lblannio" />
-        <s:textfield name="anio" />
+        <s:textfield name="anio" maxlength="4" onkeypress="return isNumberKey(event)"/>
         <s:hidden name="formOrigen" value="repFrecInc"/>
 		<s:text var="generarImgi18n" name="pages.botones.generarreporte" />
 		<s:url var="generarImgUrl" value="%{generarImgi18n}" />
 		<s:submit type="image" src="%{generarImgUrl}" cssStyle="position:relative; top:5px; margin-left:20px"/>
 	  </s:form>      
     </fieldset>
-	<s:fielderror cssClass="mensajeerror lista separadoverticalsuperior" />
-
+    <div id="fieldError">
+		<s:fielderror cssClass="mensajeerror lista separadoverticalsuperior" />
+	</div>
 </body>
 </html>

@@ -6,6 +6,8 @@
 body  {
 	font: 10px Verdana, Arial, Helvetica, sans-serif;
 	background: #666666;
+	background-image: url("../images/fondo.png");
+	background-repeat: repeat-x repeat-y;
 	margin: 0; /* es recomendable ajustar a cero el margen y el relleno del elemento body para lograr la compatibilidad con la configuración predeterminada de los diversos navegadores */
 	padding: 0;
 	text-align: center; /* esto centra el contenedor en los navegadores IE 5*. El texto se ajusta posteriormente con el valor predeterminado de alineación a la izquierda en el selector #container */

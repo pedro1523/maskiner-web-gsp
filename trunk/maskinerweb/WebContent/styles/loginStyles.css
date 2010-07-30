@@ -6,6 +6,8 @@ body{
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	background-color: #666;
+	background-image: url("../images/fondo.png");
+	background-repeat: repeat-x repeat-y;
 }
 
 h1{
