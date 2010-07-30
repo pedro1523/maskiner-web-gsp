@@ -16,7 +16,7 @@
 	</field>
 	
 	<field  name="anio">
-		<field-validator type="required" short-circuit="true">
+		<field-validator type="required">
 			<message key="pages.reportes.repFreInc.errors.anio.required" />
 		</field-validator>
 		<field-validator type="int">

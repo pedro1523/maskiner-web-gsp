@@ -18,6 +18,7 @@
 	}
 	
 </script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/javascript/mskFunciones.js"/></script>
     
 </head>
 <body>
@@ -27,7 +28,7 @@
 <div class="separadovertical">
     <fieldset>
       	<legend><s:text name="pages.reportes.repGasMaq.fielset.legend" /></legend>
-		<s:form method="post" action="a_cnm_generarReporteMaquinariaGasto" id="frmGenerarReporteMaquinariaGasto">
+		<s:form method="post" action="a_cnm_generarReporteMaquinariaGasto" id="frmGenerarReporteMaquinariaGasto" onsubmit="borrarErrores('fieldError')">
 			<s:label key="pages.reportes.repGasMaq.lblnumtarjeta"/>
 			<s:textfield name="numTarjeta" maxlength="6"  id="txtNumTarjeta"/>
 			<s:hidden name="formOrigen" value="d_repGastMaq"/>
@@ -61,7 +62,7 @@
 	</fieldset>
 
 </div>
-<div class="separadoverticalsuperior">
+<div id="fieldError" class="separadoverticalsuperior" >
 	<s:fielderror cssClass="mensajeerror lista" />	
 	<s:actionerror cssClass="mensajeerror lista" />
 </div>

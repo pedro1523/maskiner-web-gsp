@@ -16,13 +16,15 @@
 	}
 	
 </script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/javascript/mskFunciones.js"/></script>
+
     
 </head>
 <body>
 	<h2 class="titulo"><s:text name="pages.reportes.repHisMaq.titulo"/></h2>
 	<fieldset>
 		<legend><s:text name="pages.reportes.repHisMaq.fielset.legend"/></legend>
-		<s:form method="post" action="a_cnm_reporteHistorialMaquinaria" id="frmReporteHistorialMaquinaria">
+		<s:form method="post" action="a_cnm_reporteHistorialMaquinaria" id="frmReporteHistorialMaquinaria" onsubmit="borrarErrores('fieldError')">
 			<s:label key="pages.reportes.repHisMaq.lblnumtarjeta"/>
 			<s:textfield name="numTarjeta" maxlength="6"/>
 			<s:hidden name="formOrigen" value="d_repHisMaq"/>
@@ -35,7 +37,8 @@
 			<s:submit type="image" src="%{generarImgUrl}" cssStyle="position:relative; top:5px; margin-left:20px"/>
 		</s:form>
 	</fieldset>
-	<s:fielderror cssClass="mensajeerror lista separadoverticalsuperior" />
-
+	<div id="fieldError">
+		<s:fielderror cssClass="mensajeerror lista separadoverticalsuperior" />
+	</div>
 </body>
 </html>

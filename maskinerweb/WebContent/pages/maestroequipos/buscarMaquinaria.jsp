@@ -22,11 +22,11 @@
       		<s:hidden name="fechaFin"/>
       		      		
       		<s:label key="pages.maestroequipos.buscarmaquinaria.lblEmpresa"/>
-      		<s:textfield name="razSocCliente" cssClass="margenderecho"/>
+      		<s:textfield name="razSocCliente" cssClass="margenderecho" maxlength="150"/>
       		<s:label key="pages.maestroequipos.buscarmaquinaria.lblMarca"/>
-      		<s:textfield name="marca" cssClass="margenderecho"/>
+      		<s:textfield name="marca" cssClass="margenderecho" maxlength="200"/>
       		<s:label key="pages.maestroequipos.buscarmaquinaria.lblModelo"/>
-      		<s:textfield name="modelo" cssClass="margenderecho"/>
+      		<s:textfield name="modelo" cssClass="margenderecho" maxlength="50"/>
       		<s:text var="buscarImgi18n" name="pages.botones.buscar" />
 			<s:url var="buscarImgUrl" value="%{buscarImgi18n}" />
 			<s:submit type="image" src="%{buscarImgUrl}" cssStyle="position:relative;top:8px" />

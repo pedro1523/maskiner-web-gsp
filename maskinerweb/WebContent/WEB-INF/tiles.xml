@@ -235,13 +235,13 @@
      
 		<definition name="d_repHisMaq" extends="d_inicio" >
     		<description></description>
-    		<put-attribute name="titulo_pagina" value="pages.guicomun.menulateral.reporteHistorialMaquinarias" /> <!-- key del archivo de recursos -->
+    		<put-attribute name="titulo_pagina" value="pages.reportes.repHisMaq.titulopagina" /> <!-- key del archivo de recursos -->
      		<put-attribute name="contenido" value="/pages/reportes/reporteHistorialMaquinaria.jsp" />
    		 </definition>      
    		 
    		 <definition name="d_repTecOT" extends="d_inicio" >
     		<description></description>
-    		<put-attribute name="titulo_pagina" value="pages.guicomun.menulateral.reporteTecnicosOT" /> <!-- key del archivo de recursos -->
+    		<put-attribute name="titulo_pagina" value="pages.reportes.repTecOT.titulopagina" /> <!-- key del archivo de recursos -->
      		<put-attribute name="contenido" value="/pages/reportes/reporteTecnicosOT.jsp" />
    		 </definition>  
      
