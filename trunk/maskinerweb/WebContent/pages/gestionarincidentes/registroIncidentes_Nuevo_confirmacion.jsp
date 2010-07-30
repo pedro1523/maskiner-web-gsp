@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,10 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-      <h2 class="titulo">Nuevo Registro de Incidentes</h2>
+      <h2 class="titulo"><s:text name="pages.gestionarincidentes.registrarIncidente_Nuevo.titulo"/></h2>
       <br />
       <br />
-      <p class="avisoconfirmacion">El incidente Nº ${id} ha sido registrado correctamente.</p>
+      <p class="avisoconfirmacion">
+       <s:text name="pages.gestionarincidentes.regincidentes.confirmacion1"/>
+      ${id} <s:text name="pages.gestionarincidentes.regincidentes.confirmacion2"/></p>
       <br />
       <br />
       <hr/>

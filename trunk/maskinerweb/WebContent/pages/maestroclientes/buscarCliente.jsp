@@ -15,9 +15,9 @@
 <div id="contenedor">
 
 <div>
-<h2 class="titulo">Buscar Cliente</h2>
+<h2 class="titulo"><s:text name="pages.gestionarincidentes.buscarCliente.titulopagina"/></h2>
 	<fieldset>
-		<legend>Criterios:</legend>
+		<legend><s:text name="pages.programartrabajo.buscarCliente.ListaClientes.cabecera.Criterios"/></legend>
 		<s:form method="post" action="a_buscarCliente">
 			<s:hidden name="formOrigen" />
 			<s:hidden name="codCliente" />
@@ -26,8 +26,9 @@
 				<tr>
 					<td height="24"><s:text name="pages.buscarCliente.lblCliente" /></td>
 					<td style="width: 353px"><s:textfield name="razSocCliente"
-						id="txtRazSocCliente" cssStyle="width:100px" /> 
-						<s:url var="imgBuscarUrl" value="/images/buscar.png" /> 
+						id="txtRazSocCliente" cssStyle="width:100px" maxlength="100"/> 
+						<s:text var="botonBuscar" name="pages.botones.buscar"/>
+						<s:url var="imgBuscarUrl" value="%{botonBuscar}" /> 
 						<s:submit type="image" src="%{imgBuscarUrl}" cssStyle="position:relative; top:5px" />
 					</td>
 				</tr>
@@ -40,6 +41,8 @@
 	<table style="width: 100%;" class="gridview">
 		<tr>
 			<th><s:text
+				name="pages.programartrabajo.buscarCliente.ListaClientes.cabecera.Seleccionar" /></th>
+			<th><s:text
 				name="pages.programartrabajo.buscarCliente.ListaClientes.cabecera.Codigo" /></th>
 			<th><s:text
 				name="pages.programartrabajo.buscarCliente.ListaClientes.cabecera.RazonSocial" /></th>
@@ -47,13 +50,12 @@
 				name="pages.programartrabajo.buscarCliente.ListaClientes.cabecera.Ruc" /></th>
 			<th><s:text
 				name="pages.programartrabajo.buscarCliente.ListaClientes.cabecera.Email" /></th>
-			<th><s:text
-				name="pages.programartrabajo.buscarCliente.ListaClientes.cabecera.Seleccionar" /></th>
+			
 		</tr>
 		<s:if test="%{#request.arr_clientes!=null}">
 			<s:if test="%{#request.arr_clientes.size()==0}">
 				<tr>
-					<td colspan="5">Sin coincidencias</td>
+					<td colspan="5"><s:text name="pages.programartrabajo.buscarCliente.ListaClientes.cabecera.SinCoincidencia"/></td>
 				</tr>
 			</s:if>
 			<s:else>
@@ -99,8 +101,10 @@
 	<s:param name="anio">
 		<s:property value="anio" />
 	</s:param>
-</s:url> <a href="${linkIrPagOrigen}"> <s:url var="imgCancelarUrl"
-	value="/images/cancelar.png" /> <img src="${imgCancelarUrl}"
+</s:url>
+<s:text var="botonCancelar" name="pages.botones.cancelar"/>
+ <a href="${linkIrPagOrigen}"> <s:url var="imgCancelarUrl"
+	value="%{botonCancelar}" /> <img src="${imgCancelarUrl}"
 	alt="Cancelar" width="71" height="25" border="0" /> </a></div>
 
 </div>

@@ -175,8 +175,8 @@ function ismaxlengthTxtDescripcion(){
             </fieldset>
           </div>
           <div align="right">
-          	
-          		<s:url var="imgAgregarUrl" value="images/bot_mas.gif"/>
+          		<s:text var="botonBuscame" name="pages.botones.buscame"/>
+          		<s:url var="imgAgregarUrl" value="%{botonBuscame}"/>
           		<s:a href="javascript:enviarSubmitAgregarALista()">
           		<img src="${imgAgregarUrl}" />
           		</s:a>
@@ -207,10 +207,12 @@ function ismaxlengthTxtDescripcion(){
           </table>
           <br>
           <div align="right">
+				<s:text var="botonSalir" name="pages.botones.salir"/>
 				<s:url action="a_homepage" var="homepageUrl"/>
-				<s:url value="images/salir.png" var="ImagenSalirUrl"/>
+				<s:url value="%{botonSalir}" var="ImagenSalirUrl"/>
+				<s:text var="botonGuardar" name="pages.botones.guardar"/>
 				<s:url action="a_registrarIncidente" var="registrarUrl"/>
-				<s:url value="images/guardar.png" var="ImagenRegistrarUrl"/>
+				<s:url value="%{botonGuardar}" var="ImagenRegistrarUrl"/>
 
 				   	<a href="${registrarUrl}">
 			    		<img alt="Registrar" src="${ImagenRegistrarUrl}">
