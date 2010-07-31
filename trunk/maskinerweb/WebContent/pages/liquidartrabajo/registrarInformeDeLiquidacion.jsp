@@ -28,6 +28,19 @@
 		document.forms["frmRegistrarLiquidacion"].action="<%=request.getContextPath()%>/a_quitarMaterialDeLista.do?posMaterial="+posMaterial;
 		document.forms["frmRegistrarLiquidacion"].submit();
 	}
+
+	function ismaxlengthTxtDescripcion(){
+		var mlength=1000;
+		var obj = document.forms["frmRegistrarLiquidacion"].descripcionAtencionRealizada;
+		if (obj.value.length>mlength)
+			obj.value=obj.value.substring(0,mlength);
+	}
+	function ismaxlengthTxtAporte(){
+		var mlength=1000;
+		var obj = document.forms["frmRegistrarLiquidacion"].aporteConocimiento;
+		if (obj.value.length>mlength)
+			obj.value=obj.value.substring(0,mlength);
+	}
 </script>
 
 </head>
@@ -72,7 +85,7 @@
 			<tr>
 				<td><s:text name="pages.liquidartrabajo.registrarILPaso2.lblValorHorometro" /></td>
 				<td style="padding: 0pt 0pt 0pt 5px;">
-				<s:textfield name="valorHorometro" readonly="false" value="%{#session.b_maquinaria.strMedHorometro}">
+				<s:textfield name="valorHorometro" readonly="false" value="%{#session.b_maquinaria.strMedHorometro}" maxlength="9">
 				</s:textfield>
 				</td>
 			</tr>
@@ -87,11 +100,7 @@
 				<td style="padding: 8px; background-color: rgb(238, 238, 238);">
 				<table>
 					<tbody>
-						<tr>
-							<td colspan="2"><s:text name="pages.liquidartrabajo.registrarILPaso2.lblMaterialesAdicionales" />
-								<input type="radio" checked="checked" name="Material"/> </td>
-							<td></td>
-						</tr>
+
 						<tr>
 							<td><s:text name="pages.liquidartrabajo.registrarILPaso2.lblMaterial" /></td>
 							<td><span class="negrita margenderecho">${b_material.strDescTipoMaterial}</span></td>
@@ -112,28 +121,6 @@
 					</tbody>
 				</table>
 				</td>
-				<td></td>
-				<td></td>
-				<td style="padding: 8px; background-color: rgb(238, 238, 238);">
-				<table>
-					<tbody>
-						<tr>
-							<td><s:text name="pages.liquidartrabajo.registrarILPaso2.lblMaterialExterno" /></td>
-							<td> <input type="radio" name="Material"/></td>
-						</tr>
-						<tr>
-							<td><s:text name="pages.liquidartrabajo.registrarILPaso2.lblDescripcion" /></td>
-							<td><s:textfield name="descripcionMaterialExterno"></s:textfield>
-							</td>
-						</tr>
-						<tr>
-							<td><s:text name="pages.liquidartrabajo.registrarILPaso2.lblMontoUnitario" /></td>
-							<td><s:textfield name="montoUnitarioMaterialExterno"></s:textfield>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				</td>
 			</tr>
 		</tbody>
 	</table>
@@ -143,7 +130,7 @@
 			<tr>
 				<td width="59"><s:text name="pages.liquidartrabajo.registrarILPaso2.lblCantidad" /></td>
 				<td width="111">
-					<s:textfield name="cantidadMaterial"></s:textfield>
+					<s:textfield name="cantidadMaterial" maxlength="4"></s:textfield>
 				</td>
 				<td width="124">
 					<s:url var="agregarMaterialUrl" value="javascript:agregarMaterial()"/>
@@ -201,8 +188,8 @@
 			<s:iterator var="tecnico" value="#session.tecnicos" >
    				<tr>
 	   				<td><s:property value="#tecnico.strNombreCompleto"/></td>
-					<td><s:textfield name="horaInicio"></s:textfield> </td>
-					<td><s:textfield name="horaFin"></s:textfield></td>
+					<td><s:textfield name="horaInicio" value="%{#tecnico.strHoraInicio}" maxlength="5"></s:textfield> </td>
+					<td><s:textfield name="horaFin" value="%{#tecnico.strHoraFin}" maxlength="5"></s:textfield></td>
    				</tr>
 			</s:iterator>
      	</tr>
@@ -210,12 +197,12 @@
 	<br />
 	<s:text name="pages.liquidartrabajo.registrarILPaso2.lblDescripcionAtencion" />
 	<br />
-	<s:textarea name="descripcionAtencionRealizada" cssStyle="width: 97%; height: 50px;"></s:textarea> 
+	<s:textarea name="descripcionAtencionRealizada" id="descripcionAtencionRealizada" cssStyle="width: 97%; height: 50px;" value="%{#session.strDesAtencion}" onkeyup="return ismaxlengthTxtDescripcion()"></s:textarea> 
 	<br />
 	<br />
 	<s:text name="pages.liquidartrabajo.registrarILPaso2.lblAporteConocimiento" />
 	<br />
-	<s:textarea name="aporteConocimiento" cssStyle="width: 97%; height: 50px;"></s:textarea>
+	<s:textarea name="aporteConocimiento" id="aporteConocimiento" cssStyle="width: 97%; height: 50px;" value="%{#session.strAporteConocimiento}" onkeyup="return ismaxlengthTxtAporte()"></s:textarea>
 	</fieldset>
     <s:if test="#request.mensajeerror1!=null">
 	  	<div class="mensajeerror separadoverticalsuperior"><s:property value="#request.mensajeerror1"/></div>

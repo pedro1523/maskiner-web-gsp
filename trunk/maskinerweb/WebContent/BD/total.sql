@@ -241,7 +241,7 @@ CREATE TABLE liquidacion (
 	num_prefac CHAR(6),
 	fec_inf_liq DATE NOT NULL,
 	cod_reg CHAR(5) NOT NULL,
-	des_aten_realiz VARCHAR(200) NOT NULL,
+	des_aten_realiz VARCHAR(1000) NOT NULL,
 	apor_conoc VARCHAR(1000),
 	est_liq INT NOT NULL,
 	PRIMARY KEY (num_inf_liq)
@@ -1211,7 +1211,7 @@ BEGIN
          m.desc_mat,
          m.und_med_mat,
          m.prec_uni_mat
-      from materiales m inner join tabladetablas tt on m.tip_mat = tt.cod_item_tab and tt.cod_tab=15
+      from materiales m inner join tabladetablas tt on m.tip_mat = tt.cod_item_tab and tt.cod_tab=15 and tt.cod_item_tab<>0
       where m.desc_mat like concat(vDescrip,'%');
     end;
   else
@@ -1222,14 +1222,13 @@ BEGIN
          m.desc_mat,
          m.und_med_mat,
          m.prec_uni_mat
-      from materiales m inner join tabladetablas tt on m.tip_mat = tt.cod_item_tab and tt.cod_tab=15
+      from materiales m inner join tabladetablas tt on m.tip_mat = tt.cod_item_tab and tt.cod_tab=15 and tt.cod_item_tab<>0
       where m.tip_mat=vCodTipMat and m.desc_mat like concat(vDescrip,'%');
 
     end;
   end if;
 
 END $$
-
 
 /*======================NUEVO PROCEDURE========================*/
 DROP PROCEDURE IF EXISTS `mskbd`.`pr_mostrarCabeceraPrefactura` $$
@@ -1458,7 +1457,7 @@ DROP PROCEDURE IF EXISTS `mskbd`.`pr_insertarLiquidacion` $$
 CREATE PROCEDURE `pr_insertarLiquidacion`(
  IN numOrdTrab char (6),
  IN codReg char (5),
- IN descripcion varchar(200),
+ IN descripcion varchar(1000),
  IN aporte varchar(1000),
  IN estado integer,
  IN numPreFac char(6)

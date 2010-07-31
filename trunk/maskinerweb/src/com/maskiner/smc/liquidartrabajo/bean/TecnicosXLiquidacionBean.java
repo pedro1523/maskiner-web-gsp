@@ -11,13 +11,27 @@ public class TecnicosXLiquidacionBean {
 	private String strNombres;
 	private String strNombreCompleto;
 	private Time tmHoraInicio;
+	private String strHoraInicio;
 	private Time tmHoraFin;
+	private String strHoraFin;
 	private double dblNumeroHorasTrabajadas;
 	private BigDecimal decTarifaHoraCobrada;
 	private String strCodPaquete;
 	private String strCodOrdenTrabajo;
 	
 	
+	public String getStrHoraInicio() {
+		return strHoraInicio;
+	}
+	public void setStrHoraInicio(String strHoraInicio) {
+		this.strHoraInicio = strHoraInicio;
+	}
+	public String getStrHoraFin() {
+		return strHoraFin;
+	}
+	public void setStrHoraFin(String strHoraFin) {
+		this.strHoraFin = strHoraFin;
+	}
 	public String getStrCodOrdenTrabajo() {
 		return strCodOrdenTrabajo;
 	}
