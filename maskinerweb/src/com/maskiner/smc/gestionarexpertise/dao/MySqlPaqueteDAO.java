@@ -10,7 +10,6 @@ import java.util.List;
 
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.maskiner.smc.ibatis.*;
 import com.maskiner.smc.gestionarexpertise.bean.ActividadesBean;
 import com.maskiner.smc.gestionarexpertise.bean.HerramientaBean;
 import com.maskiner.smc.gestionarexpertise.bean.MaterialesBean;
