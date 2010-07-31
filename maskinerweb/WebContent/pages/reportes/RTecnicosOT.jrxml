@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="8"/>
-	<style name="table" isDefault="false">
+	<property name="ireport.y" value="0"/>
+	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
 		</box>
 	</style>
-	<style name="table_TH" isDefault="false" mode="Opaque" backcolor="#FAEBD7">
+	<style name="table_TH" mode="Opaque" backcolor="#FAEBD7">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<style name="table_CH" isDefault="false" mode="Opaque" backcolor="#FFE4BF">
+	<style name="table_CH" mode="Opaque" backcolor="#FFE4BF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<style name="table_TD" isDefault="false" mode="Opaque" backcolor="#FFFFFF">
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
@@ -38,11 +38,11 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="29" y="47" width="467" height="20"/>
+				<reportElement x="40" y="46" width="467" height="20"/>
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
-				<text><![CDATA[REPORTE TECNICOS ASIGNADOS POR ORDEN DE TRABAJO]]></text>
+				<text><![CDATA[REPORTE TÉCNICOS ASIGNADOS POR ORDEN DE TRABAJO]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="false">
 				<reportElement x="373" y="11" width="138" height="20"/>

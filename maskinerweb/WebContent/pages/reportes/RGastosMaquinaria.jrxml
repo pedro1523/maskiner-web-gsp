@@ -116,11 +116,11 @@
 	<title>
 		<band height="144" splitType="Stretch">
 			<staticText>
-				<reportElement x="151" y="45" width="266" height="20"/>
+				<reportElement x="107" y="44" width="334" height="20"/>
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
-				<text><![CDATA[REPORTE GASTOS MAQUINARIAS]]></text>
+				<text><![CDATA[REPORTE DE GASTOS POR MAQUINARIAS]]></text>
 			</staticText>
 			<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="false">
 				<reportElement x="432" y="14" width="123" height="20"/>
