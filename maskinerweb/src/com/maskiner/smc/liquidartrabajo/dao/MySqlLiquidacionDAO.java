@@ -80,20 +80,20 @@ public class MySqlLiquidacionDAO implements LiquidacionDAO {
 		}
 				
 		
-
-		for(int i=0;i<mat.size();i++){
-			MaterialesXLiquidacionBean material = mat.get(i);
-			CallableStatement st2 = cn.prepareCall("{call pr_insertarMaterialXLiquidacion(?,?,?,?,?,?,?)}");
-			st2.setString(1, idLiq);
-			st2.setString(2, material.getStrCodMaterial());
-			st2.setInt(3, material.getIntItem());
-			st2.setString(4, material.getStrDescripMaterialExterno());
-			st2.setInt(5, material.getIntCantidad());
-			st2.setBigDecimal(6, material.getDecPrecioUnitario());
-			st2.setBigDecimal(7, material.getDecMontoTotal());
-			st2.executeUpdate();
+		if (mat!=null){
+				for(int i=0;i<mat.size();i++){
+					MaterialesXLiquidacionBean material = mat.get(i);
+					CallableStatement st2 = cn.prepareCall("{call pr_insertarMaterialXLiquidacion(?,?,?,?,?,?,?)}");
+					st2.setString(1, idLiq);
+					st2.setString(2, material.getStrCodMaterial());
+					st2.setInt(3, material.getIntItem());
+					st2.setString(4, material.getStrDescripMaterialExterno());
+					st2.setInt(5, material.getIntCantidad());
+					st2.setBigDecimal(6, material.getDecPrecioUnitario());
+					st2.setBigDecimal(7, material.getDecMontoTotal());
+					st2.executeUpdate();
+				}
 		}
-		
 		for(int n=0;n<tec.size();n++){
 			TecnicosXLiquidacionBean tecnico = tec.get(n);
 			CallableStatement st4 = cn.prepareCall("{call pr_insertarTecnicosXLiquidacion(?,?,?,?,?,?)}");

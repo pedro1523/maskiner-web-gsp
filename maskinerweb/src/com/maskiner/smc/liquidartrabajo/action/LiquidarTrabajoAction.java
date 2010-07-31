@@ -21,10 +21,6 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class LiquidarTrabajoAction extends ActionSupport implements RequestAware, SessionAware, ParameterAware{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3159726856325448881L;
 	private String formOrigen;
 	private Map<String, Object> request;
 	private Map<String, Object> session;
@@ -37,58 +33,77 @@ public class LiquidarTrabajoAction extends ActionSupport implements RequestAware
 	public void setFormOrigen(String formOrigen) {
 		this.formOrigen = formOrigen;
 	}
-	
-	
-	
-	@SuppressWarnings("unchecked")
+
 	public String registrarInformeLiquidacion()throws Exception {
+		
+		String[] arrStrHorasIni = parameters.get("horaInicio");
+		String[] arrStrHorasFin = parameters.get("horaFin");
+		
+		ArrayList<TecnicosXLiquidacionBean> tecnicos = (ArrayList<TecnicosXLiquidacionBean>)session.get("tecnicos");		
+		for(int i=0;i<arrStrHorasIni.length ;i++){
+			 TecnicosXLiquidacionBean tec = tecnicos.get(i);
+			 tec.setStrHoraInicio(arrStrHorasIni[i]);
+			 tec.setStrHoraFin(arrStrHorasFin[i]);
+		}
+
 		LiquidacionServiceI servicio = LiquidarTrabajoBusinessDelegate.getLiquidacionService();
 		UsuarioBean usuario = (UsuarioBean) session.get("usuariologueado");
 		RegistroIncidentesBean inc = (RegistroIncidentesBean) session.get("incidente");
-		
+			
 		LiquidacionBean liq = new LiquidacionBean();
 		liq.setStrNumOrdTrabajo((String)session.get("strNumeroOT"));
 		liq.setStrCodRegistrador(usuario.getCodigoUsuario());
 		liq.setStrDesAtenRealizada(parameters.get("descripcionAtencionRealizada")[0].toString());
 		liq.setStrAporConocimiento(parameters.get("aporteConocimiento")[0].toString());
+		
+		session.put("strDesAtencion", parameters.get("descripcionAtencionRealizada")[0].toString());
+		session.put("strAporteConocimiento", parameters.get("aporteConocimiento")[0].toString());
+		
 		liq.setStrNumIncidente(inc.getStrNumeroIncidente().toString());
 		liq.setIntEstLiquidacion(1);
 		
 		try{
 			liq.setIntValHorometro(Integer.parseInt(parameters.get("valorHorometro")[0]));
-			}catch (Exception e) {
-				request.put("mensajeerror1",getText("pages.liquidartrabajo.registrarILPaso2.mensajeError3") );
-				return "fracaso";
+			MaquinariaSucursalBean maq = (MaquinariaSucursalBean)session.get("b_maquinaria");
+			maq.setStrMedHorometro(String.valueOf(liq.getIntValHorometro()));
+			session.put("b_maquinaria", maq);				
+		}catch (Exception e) {
+			request.put("mensajeerror1",getText("pages.liquidartrabajo.registrarILPaso2.mensajeError3") );
+			return "fracaso";
 		}
-			
+	
 		ArrayList<MaterialesXLiquidacionBean> mat = (ArrayList<MaterialesXLiquidacionBean>)session.get("Materiales");
-		if(mat==null){
-				request.put("mensajeerror1", getText("pages.liquidartrabajo.registrarILPaso2.mensajeError4"));
-				return "fracaso";
-		}else{
-		
-		
-			String[] arrStrHorasIni = parameters.get("horaInicio");
-			String[] arrStrHorasFin = parameters.get("horaFin");
-			
-			ArrayList<TecnicosXLiquidacionBean> tecnicos = (ArrayList<TecnicosXLiquidacionBean>)session.get("tecnicos");
-			
+
 			for(int i=0;i<arrStrHorasIni.length ;i++){
 				 TecnicosXLiquidacionBean tec = tecnicos.get(i);
-				 tec.setTmHoraInicio(FormatoFecha.getHoraDe(arrStrHorasIni[i]));
-				 tec.setTmHoraFin(FormatoFecha.getHoraDe(arrStrHorasFin[i]));
+
+				  tec.setTmHoraInicio(FormatoFecha.getHoraDe(arrStrHorasIni[i]));
+				  tec.setTmHoraFin(FormatoFecha.getHoraDe(arrStrHorasFin[i]));
+					
 				 if(FormatoFecha.getHoraDe(arrStrHorasFin[i])==null || FormatoFecha.getHoraDe(arrStrHorasIni[i])==null){
 					request.put("mensajeerror1",getText("pages.liquidartrabajo.registrarILPaso2.mensajeError5"));
 					return "fracaso";
 				 }
+
+				 long mlls1 = FormatoFecha.getHoraDe(arrStrHorasIni[i]).getTime();
+				 long mlls2 = FormatoFecha.getHoraDe(arrStrHorasFin[i]).getTime();
+				  
+				 if(mlls2<=mlls1){
+					request.put("mensajeerror1",getText("pages.liquidartrabajo.registrarILPaso2.mensajeError7"));
+					return "fracaso";
+				 }
+				 
 				 tec.setStrCodOrdenTrabajo((String)session.get("strNumeroOT"));
 				 tecnicos.set(i, tec);
 			}
 			
+			if(parameters.get("descripcionAtencionRealizada")[0].toString().equals("")){
+				request.put("mensajeerror1",getText("pages.liquidartrabajo.registrarILPaso2.mensajeError6") );
+				return "fracaso";
+			}
 			session.put("idLiq", servicio.RegistrarLiquidacionYDetalle(liq, mat,tecnicos));
 			
 			return "exito";
-		}
 
 	}
 	
@@ -109,6 +124,8 @@ public class LiquidarTrabajoAction extends ActionSupport implements RequestAware
 		session.put("b_maquinaria", maq);
 		session.put("strNumeroOT", strCodOrdenTrabajo);
 		
+		session.remove("strDesAtencion");
+		session.remove("strAporteConocimiento");
 		session.remove("b_material");
 		session.remove("Materiales");
 		return "exito";
