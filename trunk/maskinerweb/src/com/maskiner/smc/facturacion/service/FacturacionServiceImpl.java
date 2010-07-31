@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.maskiner.smc.factory.DAOFactory;
 import com.maskiner.smc.facturacion.bean.BusquedaBean;
 import com.maskiner.smc.facturacion.bean.DetalleFacturaBean;
@@ -13,7 +12,6 @@ import com.maskiner.smc.facturacion.bean.FacturaBean;
 import com.maskiner.smc.facturacion.bean.PrefacturaAuxBean;
 import com.maskiner.smc.facturacion.bean.PrefacturaBean;
 import com.maskiner.smc.facturacion.dao.FacturacionDAO;
-import com.maskiner.smc.liquidartrabajo.bean.BeanLiquidacion;
 import com.maskiner.smc.maestroclientes.bean.ClienteBean;
 
 
@@ -27,6 +25,7 @@ public class FacturacionServiceImpl implements FacturacionServiceI {
 		facturacionDAO=factory.getFacturaDAO();		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList buscarPrefactura(String nombreEmpresa,
 			Date fechaIncidente, String descripcionIncidente) throws Exception {

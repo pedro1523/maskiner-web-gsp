@@ -3,7 +3,6 @@ package com.maskiner.smc.maestroclientes.action;
 import java.util.ArrayList;
 import java.util.Map;
 
-import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -15,14 +14,12 @@ import com.maskiner.smc.maestroclientes.bean.SucursalBean;
 import com.maskiner.smc.maestroclientes.service.MaestroClientesBusinessDelegate;
 import com.maskiner.smc.maestroclientes.service.MaestroClientesI;
 
-public class MaestroClientesAction implements RequestAware, SessionAware, ParameterAware {
+public class MaestroClientesAction implements RequestAware, SessionAware {
 	
 	// variables privadas
 	private String formOrigen;
 	private Map<String, Object> request;
 	private Map<String, Object> session;
-	private Map<String, String[]> parameters;
-	
 	private String codCliente;
 	private String anio;
 	private String razSocCliente;
@@ -161,8 +158,4 @@ public class MaestroClientesAction implements RequestAware, SessionAware, Parame
 		this.session=session;
 	}
 
-	@Override
-	public void setParameters(Map<String, String[]> parameters) {
-		this.parameters = parameters;
-	}
 }

@@ -26,6 +26,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ProgramarTrabajoAction extends ActionSupport implements RequestAware, SessionAware, ParameterAware {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8725312872780624731L;
 	private Map<String, Object> request;
 	private Map<String, Object> session;
 	private Map<String, String[]> parameters;

@@ -8,7 +8,6 @@ public class DetallePrefacturaBean {
 	private String 	   strDescripcion;
 	private int        intCantidad;
 	private BigDecimal decPrecio;
-	private BigDecimal decImporte;
 	private String 	   strNumLiquidacion;
 	private String 	   strDesMatExterno;
 	private String 		strFlag;
@@ -60,7 +59,6 @@ public class DetallePrefacturaBean {
 		return decPrecio.multiply(new BigDecimal(intCantidad));		
 	}
 	public void setDecImporte(BigDecimal decImporte) {
-		this.decImporte = decImporte;
 	}
 	
 	

@@ -2,11 +2,6 @@ package com.maskiner.smc.reportes.action;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
-import org.apache.struts2.interceptor.ParameterAware;
-import org.apache.struts2.interceptor.RequestAware;
-import org.apache.struts2.interceptor.SessionAware;
 
 import com.maskiner.smc.reportes.bean.ReporteFrecuenciaIncidentesBean;
 import com.maskiner.smc.reportes.bean.ReporteGastosXMaquinariaBean;
@@ -19,6 +14,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ReportesAction extends ActionSupport {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7339648992591636434L;
 	private String codCliente;
 	private String numOrdenTrabajo;
 	private String numTarjeta;
@@ -182,9 +181,6 @@ public class ReportesAction extends ActionSupport {
 
 	@Override
 	public void validate() {
-		// TODO Auto-generated method stub
-		//super.validate();
-		
 		if(fechaInicio!=null && fechaFin!=null && fechaInicio.after(fechaFin)){
 			addActionError(getText("pages.reportes.repGasMaq.errors.expression"));
 		}

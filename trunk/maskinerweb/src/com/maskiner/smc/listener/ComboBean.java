@@ -5,6 +5,10 @@ import java.io.Serializable;
 
 
 public class ComboBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1216846858496183336L;
 	private String codigo;
 	private String descripcion;
 	

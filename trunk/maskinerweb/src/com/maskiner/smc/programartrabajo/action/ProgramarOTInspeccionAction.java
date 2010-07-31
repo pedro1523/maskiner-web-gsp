@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.ParameterAware;
-import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.maskiner.smc.gestionarincidentes.bean.DetalleRegistroIncidenteBean;
@@ -21,23 +20,14 @@ import com.maskiner.smc.programartrabajo.service.ProgramarTrabajoBusinessDelegat
 import com.maskiner.smc.programartrabajo.service.TecnicoServiceI;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
 
-public class ProgramarOTInspeccionAction implements RequestAware, SessionAware, ParameterAware  {
+public class ProgramarOTInspeccionAction implements SessionAware, ParameterAware  {
 	
 	private Map<String, Object> session;
-	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
 	private String horaInicio;
 	private String horaFin;
-	/*private String fechaInspeccion;
-	
-	private String maq;
-	private String codTecnico;
-	private String chkTecnico;*/
-	//private OrdenTrabajoInspeccionBean OTIBean;
 	private String formOrigen;
-	/*private String numIncidente;
-	private String numTarjeta;*/
-	//private String tarjetaEquipo;
+
 	public String getHoraInicio() {
 		return horaInicio;
 	}
@@ -54,46 +44,6 @@ public class ProgramarOTInspeccionAction implements RequestAware, SessionAware, 
 		this.horaFin = horaFin;
 	}
 	
-	/*public String getNumTarjeta() {
-		return numTarjeta;
-	}
-
-	public void setNumTarjeta(String numTarjeta) {
-		this.numTarjeta = numTarjeta;
-	}
-
-	public String getCodTecnico() {
-		return codTecnico;
-	}
-
-	public void setCodTecnico(String codTecnico) {
-		this.codTecnico = codTecnico;
-	}
-
-	public String getChkTecnico() {
-		return chkTecnico;
-	}
-
-	public void setChkTecnico(String chkTecnico) {
-		this.chkTecnico = chkTecnico;
-	}
-
-	public OrdenTrabajoInspeccionBean getOTIBean() {
-		return OTIBean;
-	}
-
-	public void setOTIBean(OrdenTrabajoInspeccionBean oTIBean) {
-		OTIBean = oTIBean;
-	}
-
-	public String getNumIncidente() {
-		return numIncidente;
-	}
-
-	public void setNumIncidente(String numIncidente) {
-		this.numIncidente = numIncidente;
-	}*/
-
 	public String getFormOrigen() {
 		return formOrigen;
 	}
@@ -102,27 +52,6 @@ public class ProgramarOTInspeccionAction implements RequestAware, SessionAware, 
 		this.formOrigen = formOrigen;
 	}
 	
-
-	/*
-
-	public String getFechaInspeccion() {
-		return fechaInspeccion;
-	}
-
-	public void setFechaInspeccion(String fechaInspeccion) {
-		this.fechaInspeccion = fechaInspeccion;
-	}
-
-	
-
-	public String getMaq() {
-		return maq;
-	}
-
-	public void setMaq(String maq) {
-		this.maq = maq;
-	}*/
-
 	public String cargarGenerarOTInspeccion()
 			throws Exception {
 		//borramos el bean b_incidente de la sesión
@@ -212,6 +141,7 @@ public class ProgramarOTInspeccionAction implements RequestAware, SessionAware, 
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	public String registrar()
 			throws Exception  {
 		
@@ -220,7 +150,6 @@ public class ProgramarOTInspeccionAction implements RequestAware, SessionAware, 
 		//recuperamos al tecnico
 		
 		ArrayList<TecnicoBean> a_lista=(ArrayList<TecnicoBean>) session.get("listTecnicos");
-		String strLugarAtencion="";
 		if(a_lista==null){
 			session.put("mensajeError", "No existen técnicos disponibles");
 			return "exito1";
@@ -233,17 +162,8 @@ public class ProgramarOTInspeccionAction implements RequestAware, SessionAware, 
 			return "exito1";
 		}
 		
-		/*try{
-			strLugarAtencion=parameters.get("lugarAtencion")[0].trim();
-		}catch (Exception e) {
-			session.put("mensajeError", "Ingrese Lugar de Atención");
-			return "exito1";
-		}*/
+		session.remove("mensajeError");
 			
-		
-			session.remove("mensajeError");
-			
-		//System.out.println("codigo del tecnico---> "+ strCodTecnico);
 		//recuperamos la cabecera del formulario de la session
 		OrdenTrabajoInspeccionBean OTIBean=(OrdenTrabajoInspeccionBean)
 											session.get("b_OTIAsignar");
@@ -339,7 +259,6 @@ public class ProgramarOTInspeccionAction implements RequestAware, SessionAware, 
 	}
 	
 	public String validarCampos(){
-		String mensaje="";
 		String strFechaInspeccion=parameters.get("fechaInspeccion")[0].trim();
 		if(strFechaInspeccion.equals("")){
 			return "1Ingrese fecha de Inspección";
@@ -384,12 +303,6 @@ public class ProgramarOTInspeccionAction implements RequestAware, SessionAware, 
 
 		
 		return "exito";
-	}
-
-	@Override
-	public void setRequest(Map<String, Object> arg0) {
-		this.request=arg0;
-		
 	}
 
 	@Override

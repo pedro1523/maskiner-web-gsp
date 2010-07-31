@@ -4,17 +4,10 @@ import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.PreparedStatement;
-
-import javax.naming.NamingException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.catalina.connector.Request;
 
 import com.maskiner.smc.facturacion.bean.BusquedaBean;
 import com.maskiner.smc.facturacion.bean.DetalleFacturaBean;
@@ -93,7 +86,7 @@ public class MySqlFacturacionDAO implements FacturacionDAO {
 	
 	public PrefacturaBean obtenerCabeceraPrefactura(String strIncidente,String strNumPrefac) throws Exception {
 
-		PrefacturaBean prefactura=prefactura = new PrefacturaBean();
+		PrefacturaBean prefactura = new PrefacturaBean();
 		System.out.println("dentro del metodo obtenetcabeceraprefactura parametro - " + strNumPrefac);
 		//obtener una conexion
 		String consulta="Select * from prefactura where num_prefac=?";
@@ -295,9 +288,7 @@ public class MySqlFacturacionDAO implements FacturacionDAO {
 		CallableStatement st=cn.prepareCall("{ call  pr_obtenerSiguienteCDPDeTalonario() }");
 		String[]acodigo=new String[2];
 		ResultSet rs=st.executeQuery();
-		String strSerie="";
-		String strFactura="";
-			if(rs.next()){
+		if(rs.next()){
 				acodigo[0]=rs.getString(1);
 				acodigo[1]=rs.getString(2);
 			}
