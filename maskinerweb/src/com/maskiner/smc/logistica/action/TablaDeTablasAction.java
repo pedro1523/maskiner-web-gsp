@@ -1,4 +1,4 @@
-package com.maskiner.smc.logistica.action;
+/*package com.maskiner.smc.logistica.action;
 
 import java.util.ArrayList;
 
@@ -39,3 +39,4 @@ public class TablaDeTablasAction {
 	}
 	
 }
+*/

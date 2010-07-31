@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean" %>
-<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
-<%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
@@ -15,7 +12,7 @@
 
 <%@ page import="com.maskiner.smc.mylib.FormatoFecha" %>
 <%@ page import="com.maskiner.smc.seguridad.bean.UsuarioBean"%>
-<html>
+<html><!--
 
 
 
@@ -31,7 +28,7 @@ ArrayList<ActividadesBean> ActividadesIni = new ArrayList<ActividadesBean>();
 session.setAttribute("ActividadesIni",ActividadesIni);
 %>
 
-<script type="text/javascript">
+--><script type="text/javascript">
 	function enviarSubmitAgregarALista(){
 		document.forms["frmAgregaHerr"].action="<%= request.getContextPath() %>/a_AgregarHerramientaALista.do";
 		document.forms["frmAgregaHerr"].submit();
@@ -72,7 +69,8 @@ session.setAttribute("ActividadesIni",ActividadesIni);
 	
 %>
 </head>
-<body>
+
+<!--<body>
 <h2 class="titulo"><bean:message key="pages.gestionarexpertise.nuevoPaquete.titulo" /> </h2>
 	
 	<html:form  styleId="frmAgregaHerr" action="a_nuevoPaquete" method="post">
@@ -250,4 +248,4 @@ session.setAttribute("ActividadesIni",ActividadesIni);
 		
 	</html:form>
 </body>
-</html>
+--></html>
