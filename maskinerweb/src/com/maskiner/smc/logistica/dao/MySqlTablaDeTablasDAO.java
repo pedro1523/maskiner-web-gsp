@@ -2,12 +2,10 @@ package com.maskiner.smc.logistica.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.maskiner.smc.gestionarincidentes.bean.RegistroIncidentesBean;
 import com.maskiner.smc.logistica.bean.TablaDeTablasBean;
 import com.maskiner.smc.mylib.MySqlDbConn;
 

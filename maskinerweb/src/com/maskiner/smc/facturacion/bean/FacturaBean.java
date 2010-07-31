@@ -9,7 +9,6 @@ public class FacturaBean {
 	private String strNumPrefactura;
 	private String strCodRegistrador;
 	private BigDecimal bdecSubTotal;
-	private BigDecimal bdecIGV;
 	private BigDecimal bdecMontoDescuento;
 	private BigDecimal bdesTotal;
 	private String  strIgv;
@@ -54,7 +53,6 @@ public class FacturaBean {
 		return bdecSubTotal.multiply(new BigDecimal(0.19)) ;
 	}
 	public void setBdecIGV(BigDecimal bdecIGV) {
-		this.bdecIGV = bdecIGV;
 	}
 	public BigDecimal getBdecMontoDescuento() {
 		return bdecMontoDescuento;

@@ -2,7 +2,6 @@ package com.maskiner.smc.programartrabajo.bean;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.List;
 
 public class OrdenTrabajoBean {
 	private String strNumOrdenTrabajo;

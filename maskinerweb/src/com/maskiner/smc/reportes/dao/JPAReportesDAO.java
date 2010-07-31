@@ -55,6 +55,7 @@ public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 		return resultado;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<ReporteTecnicosOTBean> obtenerDatosReporteTecnicosOT(String codOrdenTrabajo)
 			throws Exception {

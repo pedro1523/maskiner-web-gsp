@@ -24,53 +24,11 @@ import com.maskiner.smc.mylib.NumberToLetterConverter;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
 
 public class FacturacionAction implements SessionAware,RequestAware,ParameterAware{
-//	private String nombreEmpresa;
-//	private String fechaIncidente;
-//	private String incidente;
-//	private String prefactura;
-	
 	private Map<String,Object> session;
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
-	
-	
-	
 
-	
-
-//	public String getPrefactura() {
-//		return prefactura;
-//	}
-//
-//	public void setPrefactura(String prefactura) {
-//		this.prefactura = prefactura;
-//	}
-//
-//
-//	public String getNombreEmpresa() {
-//		return nombreEmpresa;
-//	}
-//
-//	public void setNombreEmpresa(String nombreEmpresa) {
-//		this.nombreEmpresa = nombreEmpresa;
-//	}
-//
-//	public String getFechaIncidente() {
-//		return fechaIncidente;
-//	}
-//
-//	public void setFechaIncidente(String fechaIncidente) {
-//		this.fechaIncidente = fechaIncidente;
-//	}
-//
-//	public String getIncidente() {
-//		return incidente;
-//	}
-//
-//	public void setIncidente(String incidente) {
-//		this.incidente = incidente;
-//	}
-
+	@SuppressWarnings("unchecked")
 	public String buscar()throws Exception { 		
 		System.out.println("dentro del metodo buscar");
 		String fechaIncidente = parameters.get("fechaIncidente")[0].trim();
@@ -233,9 +191,10 @@ public class FacturacionAction implements SessionAware,RequestAware,ParameterAwa
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	private String[] obtenerServicio (){	
 		
-		ArrayList<PrefacturaAuxBean>lista=(ArrayList<PrefacturaAuxBean>											)session.get("a_lista");
+		ArrayList<PrefacturaAuxBean>lista=(ArrayList<PrefacturaAuxBean>)session.get("a_lista");
 		ArrayList<DetallePrefacturaBean> listaDetalle=(ArrayList<DetallePrefacturaBean>)
 														session.get("a_listaDetalle");
 		
@@ -277,6 +236,7 @@ public class FacturacionAction implements SessionAware,RequestAware,ParameterAwa
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	private double obtenerMontoDescuento(String strCodCliente) throws Exception{
 		FacturacionServiceI servicio=FacturacionBusinessDelegate.getFacturacionService();
 		double descuento=0;
@@ -308,6 +268,8 @@ public class FacturacionAction implements SessionAware,RequestAware,ParameterAwa
 		}
 		
 	}
+	
+	@SuppressWarnings("unused")
 	private String mostrarPrefac(){
 		return "exito";
 	}

@@ -8,10 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.RolesInterceptor;
 
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
-import com.opensymphony.xwork2.ActionInvocation;
 
 public class MSKRolesInterceptor extends RolesInterceptor {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2436766463617499972L;
 	private List<String> allowedRoles = new ArrayList<String>();
 	private List<String> disallowedRoles = new ArrayList<String>(); 
 	
@@ -25,15 +28,12 @@ public class MSKRolesInterceptor extends RolesInterceptor {
 
 	@Override
 	protected boolean isAllowed(HttpServletRequest request, Object action) {
-		// TODO Auto-generated method stub
-		// return super.isAllowed(request, action);
-		
 		UsuarioBean usuario=null;
 		
 		try {
 			usuario = (UsuarioBean) request.getSession().getAttribute("usuariologueado");
 		} catch (Exception e) {
-			// TODO: handle exception
+			// nada
 		}
 		
 		if(usuario==null) return false;

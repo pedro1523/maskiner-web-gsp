@@ -5,21 +5,19 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.RequestAware;
-import org.apache.struts2.interceptor.SessionAware;
 
 import com.maskiner.smc.maestromaquinarias.bean.MaquinariaSucursalBean;
 import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasBusinessDelegate;
 import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasI;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class MaestroMaquinariasAction extends ActionSupport implements SessionAware, RequestAware, ParameterAware {
+public class MaestroMaquinariasAction extends ActionSupport implements RequestAware, ParameterAware {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 430803354962918354L;
 	
-	private Map<String, Object> session;
 	private Map<String, Object> request;
 	private Map<String, String[]> parameters;
 	
@@ -150,11 +148,6 @@ public class MaestroMaquinariasAction extends ActionSupport implements SessionAw
 		request.put("arrMaquinarias", maquinarias);
 		
 		return "exito";
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session) {
-		this.session=session;
 	}
 
 	@Override

@@ -7,16 +7,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-import com.ibatis.sqlmap.client.SqlMapClient;
 import com.maskiner.smc.gestionarexpertise.bean.ActividadesBean;
 import com.maskiner.smc.gestionarexpertise.bean.HerramientaBean;
 import com.maskiner.smc.gestionarexpertise.bean.MaterialesBean;
 import com.maskiner.smc.gestionarexpertise.bean.PaqueteBean;
-import com.maskiner.smc.gestionarexpertise.bean.PaqueteIbatis;
 import com.maskiner.smc.mylib.MySqlDbConn;
-import com.maskiner.smc.mylib.UtilSqlConfig;
 
 public class MySqlPaqueteDAO implements PaqueteDAO {
 	

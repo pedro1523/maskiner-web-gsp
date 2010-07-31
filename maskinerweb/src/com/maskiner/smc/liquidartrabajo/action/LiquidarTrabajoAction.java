@@ -21,6 +21,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class LiquidarTrabajoAction extends ActionSupport implements RequestAware, SessionAware, ParameterAware{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3159726856325448881L;
 	private String formOrigen;
 	private Map<String, Object> request;
 	private Map<String, Object> session;
@@ -36,6 +40,7 @@ public class LiquidarTrabajoAction extends ActionSupport implements RequestAware
 	
 	
 	
+	@SuppressWarnings("unchecked")
 	public String registrarInformeLiquidacion()throws Exception {
 		LiquidacionServiceI servicio = LiquidarTrabajoBusinessDelegate.getLiquidacionService();
 		UsuarioBean usuario = (UsuarioBean) session.get("usuariologueado");

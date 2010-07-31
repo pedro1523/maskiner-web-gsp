@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.maskiner.smc.factory.DAOFactory;
 import com.maskiner.smc.logistica.bean.TablaDeTablasBean;
 import com.maskiner.smc.logistica.dao.TablaDeTablasDAO;
-import com.maskiner.smc.gestionarincidentes.dao.IncidenteDAO;
 
 public class TablaDeTablasServiceImpl implements TablaDeTablasServiceI {
 	

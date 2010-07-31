@@ -33,9 +33,6 @@ public class PrefacturaBean {
 	public void setStrDireccion(String strDireccion) {
 		this.strDireccion = strDireccion;
 	}
-	private ArrayList<DetallePrefacturaBean>listDetallePrefactura;
-	
-	
 	public String getStrCodCliente() {
 		return strCodCliente;
 	}
@@ -61,7 +58,7 @@ public class PrefacturaBean {
 	}
 
 	public PrefacturaBean(){
-		listDetallePrefactura=new ArrayList<DetallePrefacturaBean>();
+		new ArrayList<DetallePrefacturaBean>();
 	}
 	
 	public String getStrNumPrefactura() {

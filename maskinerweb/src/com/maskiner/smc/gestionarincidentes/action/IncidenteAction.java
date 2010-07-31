@@ -22,11 +22,14 @@ import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasBusinessDel
 import com.maskiner.smc.maestromaquinarias.service.MaestroMaquinariasI;
 import com.maskiner.smc.mylib.FormatoFecha;
 import com.maskiner.smc.seguridad.bean.UsuarioBean;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class IncidenteAction extends  ActionSupport  implements RequestAware, SessionAware, ParameterAware {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5946640651450187006L;
 	// variables privadas
 	private String formOrigen;
 	private Map<String, Object> request;
