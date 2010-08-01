@@ -121,7 +121,7 @@ END $$
 
 CREATE PROCEDURE pr_llenarDisponibilidadTecnicos
 (
- IN vaño int
+ IN vaÃ±o int
 )
 BEGIN
   DECLARE vdia DATE;
@@ -136,8 +136,8 @@ BEGIN
   OPEN curTecnicos;
   FETCH curTecnicos INTO vcod_tco;
   REPEAT
-    SET vdia = CONVERT(CONCAT(CONVERT(vaño,CHAR(4)),'-01-01'),DATE);
-    WHILE YEAR(vdia)=vaño DO
+    SET vdia = CONVERT(CONCAT(CONVERT(vaÃ±o,CHAR(4)),'-01-01'),DATE);
+    WHILE YEAR(vdia)=vaÃ±o DO
       SET vhora = '07:00';
       WHILE vhora <= CAST('17:30' AS TIME) DO
         IF NOT EXISTS (SELECT * FROM disponibilidadtecnicos WHERE cod_tco = vcod_tco AND fecha = vdia AND hor = vhora) THEN
@@ -178,11 +178,11 @@ BEGIN
   insert into ordentrabajo (num_ord_trab, fec_ord_trab, cod_reg, num_inc, num_tar, itm_aver, est_ord_trab)
   values (v_num_ord_trab, v_fec_ord_trab, v_cod_reg, v_num_inc, v_num_tar, v_itm_aver, 1);
 
-  -- actualizamos el estado de la avería en la tabla maquinariasucursal_x_incidente a Por reparar (3)
+  -- actualizamos el estado de la averÃ­a en la tabla maquinariasucursal_x_incidente a Por reparar (3)
   update maquinariasucursal_x_incidente set est_aver = 3 where num_inc = v_num_inc and num_tar = v_num_tar and itm_aver = v_itm_aver;
 
 
-  -- si es la última orden de trabajo generada del incidente, establecer el valor del incidente a atendido (4)
+  -- si es la Ãºltima orden de trabajo generada del incidente, establecer el valor del incidente a atendido (4)
 
   set v_cant_ord_trab = (select count(*) from ordentrabajo where num_inc = v_num_inc);
   set v_cant_averias  = (select count(*) FROM maquinariasucursal_x_incidente where num_inc = v_num_inc);
@@ -358,9 +358,9 @@ BEGIN
   set num_Id=0;
   set id='';
 
-/* Obtenermos el valor numérico del último código*/
+/* Obtenermos el valor numÃ©rico del Ãºltimo cÃ³digo*/
 SELECT CAST(RIGHT(IFNULL(MAX(num_ord_trab_insp),0),3) AS UNSIGNED) INTO @num_Id FROM ordentrabajoinspeccion;
-/* Autogeneramos el código del Registro de incidentes */
+/* Autogeneramos el cÃ³digo del Registro de incidentes */
 SELECT CONCAT('OI',RIGHT(CONCAT('000',CONVERT(IFNULL(@num_Id,0)+1,CHAR(6))),4)) INTO @Id;
     RETURN @Id;
 
@@ -1879,4 +1879,5 @@ END $$
 
 
 DELIMITER ;
+
 
