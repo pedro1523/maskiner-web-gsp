@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+
+@IMPORT url("reset.css");
+
+#sidebar1{
+	display: none;
+}
+
+#footer{
+	display: none;
+}
+#header{
+	display: none;
+}
+#botones_factura{
+	display: none;
+}
+#mainContent{
+	margin: 10px 10px 10px 10px !important;
+	border: 0px;
+}
+#container{
+border: 0px !important;
+}
