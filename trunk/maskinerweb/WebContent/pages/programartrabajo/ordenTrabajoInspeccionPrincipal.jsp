@@ -21,7 +21,7 @@
               	<s:text name="pages.programartrabajo.generarOT_inspeccion_asignar.incidente" /> 
 			  </td>
               <td>
-              <s:textfield name="b_incidente.strNumeroIncidente" /> 
+              <s:textfield name="b_incidente.strNumeroIncidente"  readonly="true"/> 
               <!--<input id="txtIncidente" type="text" value="${sessionScope.b_incidente.strNumeroIncidente}" size="6" />--></td>
               
               <td>
@@ -91,7 +91,9 @@
         </table>
         <div class="separadovertical margenderecho" align="right"> 
 	        <s:a action="a_homepage">
-	        <img src="images/salir.png" alt="Salir" width="71" height="25" border="0" />
+	        	<s:text var="salirImgi18n" name="pages.botones.salir" />
+	        	<s:url var="salirImgUrl" value="%{salirImgi18n}" />
+	        <img src="${salirImgUrl}" alt="Salir" width="71" height="25" border="0" />
 	        </s:a>        
         </div>
       
