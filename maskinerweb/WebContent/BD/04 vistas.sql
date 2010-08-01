@@ -103,4 +103,4 @@ and msi.num_tar = ot.num_tar
 and msi.itm_aver = ot.itm_aver
 inner join vw_naturaleza_averia na
 on na.natur_aver= msi.natur_aver;
- 
+

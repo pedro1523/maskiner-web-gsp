@@ -547,7 +547,7 @@ END $$
 
 CREATE PROCEDURE pr_llenarDisponibilidadTecnicos
 (
- IN vaño int
+ IN vaÃ±o int
 )
 BEGIN
   DECLARE vdia DATE;
@@ -562,8 +562,8 @@ BEGIN
   OPEN curTecnicos;
   FETCH curTecnicos INTO vcod_tco;
   REPEAT
-    SET vdia = CONVERT(CONCAT(CONVERT(vaño,CHAR(4)),'-01-01'),DATE);
-    WHILE YEAR(vdia)=vaño DO
+    SET vdia = CONVERT(CONCAT(CONVERT(vaÃ±o,CHAR(4)),'-01-01'),DATE);
+    WHILE YEAR(vdia)=vaÃ±o DO
       SET vhora = '07:00';
       WHILE vhora <= CAST('17:30' AS TIME) DO
         IF NOT EXISTS (SELECT * FROM disponibilidadtecnicos WHERE cod_tco = vcod_tco AND fecha = vdia AND hor = vhora) THEN
@@ -604,11 +604,11 @@ BEGIN
   insert into ordentrabajo (num_ord_trab, fec_ord_trab, cod_reg, num_inc, num_tar, itm_aver, est_ord_trab)
   values (v_num_ord_trab, v_fec_ord_trab, v_cod_reg, v_num_inc, v_num_tar, v_itm_aver, 1);
 
-  -- actualizamos el estado de la avería en la tabla maquinariasucursal_x_incidente a Por reparar (3)
+  -- actualizamos el estado de la averÃ­a en la tabla maquinariasucursal_x_incidente a Por reparar (3)
   update maquinariasucursal_x_incidente set est_aver = 3 where num_inc = v_num_inc and num_tar = v_num_tar and itm_aver = v_itm_aver;
 
 
-  -- si es la última orden de trabajo generada del incidente, establecer el valor del incidente a atendido (4)
+  -- si es la Ãºltima orden de trabajo generada del incidente, establecer el valor del incidente a atendido (4)
 
   set v_cant_ord_trab = (select count(*) from ordentrabajo where num_inc = v_num_inc);
   set v_cant_averias  = (select count(*) FROM maquinariasucursal_x_incidente where num_inc = v_num_inc);
@@ -784,9 +784,9 @@ BEGIN
   set num_Id=0;
   set id='';
 
-/* Obtenermos el valor numérico del último código*/
+/* Obtenermos el valor numÃ©rico del Ãºltimo cÃ³digo*/
 SELECT CAST(RIGHT(IFNULL(MAX(num_ord_trab_insp),0),3) AS UNSIGNED) INTO @num_Id FROM ordentrabajoinspeccion;
-/* Autogeneramos el código del Registro de incidentes */
+/* Autogeneramos el cÃ³digo del Registro de incidentes */
 SELECT CONCAT('OI',RIGHT(CONCAT('000',CONVERT(IFNULL(@num_Id,0)+1,CHAR(6))),4)) INTO @Id;
     RETURN @Id;
 
@@ -2356,7 +2356,7 @@ VALUES (1, 0, 'Estado usuario'),
        (3, 0, 'Estado incidente'),
 	       (3, 1, 'Pendiente'),
 	       (3, 2, 'Revisado'),
-	       (3, 3, 'En ejecución'),
+	       (3, 3, 'En ejecuciÃ³n'),
 	       (3, 4, 'Atendido'),
 		   (3, 5, 'Liquidado'),
        (4, 0, 'Estado liquidacion'),
@@ -2369,10 +2369,10 @@ VALUES (1, 0, 'Estado usuario'),
 	       (6, 1, 'Generada'),
 	       (6, 2, 'Aprobada'),
 	       (6, 3, 'Rechazada'),
-       (7, 0, 'Estado técnico'),
+       (7, 0, 'Estado tÃ©cnico'),
 	       (7, 1, 'Activo'),
 	       (7, 2, 'Inactivo'),
-       (8, 0, 'Estado disponib. técnico'),
+       (8, 0, 'Estado disponib. tÃ©cnico'),
 	       (8, 1, 'Disponible'),
 	       (8, 2, 'No disponible'),
        (9, 0, 'Estado averia'),
@@ -2380,20 +2380,20 @@ VALUES (1, 0, 'Estado usuario'),
 	       (9, 2, 'Por inspeccionar'),
 	       (9, 3, 'Por reparar'),
        (10, 0, 'Naturaleza averia'),
-       	   (10, 1, 'Hidráulica'),
-       	   (10, 2, 'Mecánica'),
-       	   (10, 3, 'Eléctrica'),
-       	   (10, 4, 'Neumática'),
+       	   (10, 1, 'HidrÃ¡ulica'),
+       	   (10, 2, 'MecÃ¡nica'),
+       	   (10, 3, 'ElÃ©ctrica'),
+       	   (10, 4, 'NeumÃ¡tica'),
        	   (10, 5, 'Otro'),
-       (11, 0, 'Nivel técnico'),
+       (11, 0, 'Nivel tÃ©cnico'),
 	       (11, 1, 'Junior'),
 	       (11, 2, 'Master'),
 	       (11, 3, 'Senior'),
-       (12, 0, 'Especialidad técnico'),
-	       (12, 1, 'Tco. Hidráulico'),
+       (12, 0, 'Especialidad tÃ©cnico'),
+	       (12, 1, 'Tco. HidrÃ¡ulico'),
 	       (12, 2, 'Tco. Mecanico'),
 	       (12, 3, 'Tco. Electrico'),
-	       (12, 4, 'Tco. Neumático'),
+	       (12, 4, 'Tco. NeumÃ¡tico'),
 	       (12, 5, 'Otro'),
        (13, 0, 'Servicios prestados'),
  	      (13, 1, 'Servicio Tecnico'),
@@ -2404,7 +2404,7 @@ VALUES (1, 0, 'Estado usuario'),
 		  (14, 2,'ancon'),
 		  (14, 3,'Ate'),
 		  (14, 4,'Barranco'),
-		  (14, 5,'Breña'),
+		  (14, 5,'BreÃ±a'),
 		  (14, 6,'Carabayllo'),
 		  (14, 7,'Comas'),
 		  (14, 8,'Chaclacayo'),
@@ -2445,7 +2445,7 @@ VALUES (1, 0, 'Estado usuario'),
 		  (14, 43,'Santa Anita'),
        (15, 0, 'Tipos de material'),
 	       (15, 1, 'Pegamento'),
-	       (15, 2, 'Tubería'),
+	       (15, 2, 'TuberÃ­a'),
 	       (15, 3, 'Soldadura'),
 	       (15, 4, 'Tuerca'),
 	       (15, 5, 'Insumo'),
@@ -2455,8 +2455,8 @@ VALUES (1, 0, 'Estado usuario'),
 	       (16, 3, 'Malo'),
 	       (16, 4, 'Inoperativo'),
        (17, 0, 'Tipo de maquinaria'),
-	       (17, 1, 'Construcción'),
-	       (17, 2, 'Logística'),
+	       (17, 1, 'ConstrucciÃ³n'),
+	       (17, 2, 'LogÃ­stica'),
 	       (17, 3, 'Portuario'),
        (18, 0, 'Marca de maquinaria'),
 	       (18, 1, 'Komatsu'),
@@ -2472,20 +2472,20 @@ VALUES (1, 0, 'Estado usuario'),
 		   (19,3,'Anulado');
 	   
 
-/*NOTA: el password está encriptado mediante SHA1 y es igual al username*/
+/*NOTA: el password estÃ¡ encriptado mediante SHA1 y es igual al username*/
 INSERT usuario (cod_usr, dni_usr, ape_pat_usr, ape_mat_usr, nom_usr, dom_usr, tel_usr, cargo_usr, username, password, est_usr)
-VALUES ('RG001', '09751173', 'Neyra', 'Mercado', 'Claudio Jesús', 'Calle José Álvares Calderón 410 San Borja', '2248550', 'Jefe de Planificación', 'claudio', 'c3923186c4c9da9c766af46f22a325cd4677020a', 1),
+VALUES ('RG001', '09751173', 'Neyra', 'Mercado', 'Claudio JesÃºs', 'Calle JosÃ© Ãlvares CalderÃ³n 410 San Borja', '2248550', 'Jefe de PlanificaciÃ³n', 'claudio', 'c3923186c4c9da9c766af46f22a325cd4677020a', 1),
 	   ('RG002', '04551756', 'Lopez', 'Munar', 'Karla', 'Calle Los Ficus 410 La Victoria', '3457234', 'Liquidadora', 'karla', '0a256b03b037ab5d3e559f13905b682edcc3ddaf', 1),
-	   ('RG003', '98887750', 'Melendez', 'Castro', 'Daniel', 'Calle José Álvares Calderón 410 San Borja', '6098764', 'Encargado Area Comercial', 'daniel', '3d0f3b9ddcacec30c4008c5e030e6c13a478cb4f', 1),				
+	   ('RG003', '98887750', 'Melendez', 'Castro', 'Daniel', 'Calle JosÃ© Ãlvares CalderÃ³n 410 San Borja', '6098764', 'Encargado Area Comercial', 'daniel', '3d0f3b9ddcacec30c4008c5e030e6c13a478cb4f', 1),				
 	   ('RG004', '45457207', 'Pinco', 'Mendo', 'Christian', 'Av. Los Pinos 333 La Molina', '3456754', 'Liquidador', 'pinco', '0dc8b5e57986cabb75f80a13e7e9ce06f68a0dac', 1),
-	   ('RG005', '23666358', 'Muñoz', 'Marca', 'Romualdo', 'Calle Los Pobres Locos 111 Miraflores', '3456754', 'Encargado Area Comercial', 'aldo', '1c89c0f71ac97754ffc597c567d01b2ade0c9324', 1),
-	   ('RG006', '86766888', 'Hipólito', 'Castañeda', 'Juan Carlos', 'Av La Esperanza 455 San Isidro', '3456754', 'Administrador del Sistema', 'juanca', '47732e97b4753c952ffa6f4eb51846c4e1308c79', 1),
+	   ('RG005', '23666358', 'MuÃ±oz', 'Marca', 'Romualdo', 'Calle Los Pobres Locos 111 Miraflores', '3456754', 'Encargado Area Comercial', 'aldo', '1c89c0f71ac97754ffc597c567d01b2ade0c9324', 1),
+	   ('RG006', '86766888', 'HipÃ³lito', 'CastaÃ±eda', 'Juan Carlos', 'Av La Esperanza 455 San Isidro', '3456754', 'Administrador del Sistema', 'juanca', '47732e97b4753c952ffa6f4eb51846c4e1308c79', 1),
 	   ('RG007', '56664467', 'Huaman', 'Reyes', 'Juan Ernesto', 'Av La Esperanza 455 San Isidro', '3456754', 'Liquidador', 'juan', 'b49a5780a99ea81284fc0746a78f84a30e4d5c73', 2);	   
 
 	   
 INSERT rol (cod_rol, desc_rol) 
 VALUES ('01','Administrador Sistema'),
-	   ('02','Jefe de Planificación'),
+	   ('02','Jefe de PlanificaciÃ³n'),
 	   ('03','Liquidador'),	
 	   ('04','Encargado Area Comercial');
 	   
@@ -2506,16 +2506,16 @@ VALUES ('CL0001','2006-01-15','RG001','10097511735','Barcos Modernos S.A.','barm
 	   
 INSERT sucursal
 VALUES ('CL0001','001',2,'Calle Las Flores 334','9765432','5432199','Ing. Flores Perez',0),
-	   ('CL0001','002',10,'Av Precursores 441','9870023','9733356','Sr. López',1),
+	   ('CL0001','002',10,'Av Precursores 441','9870023','9733356','Sr. LÃ³pez',1),
 	   ('CL0002','001',31,'Los Ficus 344','4332123',null,'Ing. Lopez Gutierrez',0),
 	   ('CL0003','001',22,'Las Artes 4566','3456789','9875554','Carlos Alvarez',1),
-	   ('CL0003','002',13,'Av República Canarias 556','3456789','9875554','Carlos Alvarez',1);
+	   ('CL0003','002',13,'Av RepÃºblica Canarias 556','3456789','9875554','Carlos Alvarez',1);
        
 INSERT maquinaria
 VALUES ('MQ001', 'Montacargas', 2, 'R9-TW5T', 1),
-	   ('MQ002', 'Pala mecánica', 2, 'RT-QWEE', 1),
-	   ('MQ003', 'Grúa Pórtico', 3, 'YU-DCSD', 3),
-	   ('MQ004', 'Grúa Aérea', 4, '55-09HH3', 2),	   
+	   ('MQ002', 'Pala mecÃ¡nica', 2, 'RT-QWEE', 1),
+	   ('MQ003', 'GrÃºa PÃ³rtico', 3, 'YU-DCSD', 3),
+	   ('MQ004', 'GrÃºa AÃ©rea', 4, '55-09HH3', 2),	   
 	   ('MQ005', 'Niveladora de Terreno', 6, '555GGG3', 1),
 	   ('MQ006', 'Excavadora de oruga', 1, 'UUUH-TTTT5', 1);	   
 	  
@@ -2538,9 +2538,9 @@ VALUES ('IN0001', '2007-05-23', 'RG003', 'CL0001', '001', null, 1),
 
 INSERT maquinariasucursal_x_incidente
 VALUES ('IN0001', 'NT0001', 1, 'Rotura de amortiguador', 2, null, 2),
-	   ('IN0001', 'NT0002', 2, 'Desgaste de eje de transmisión', 2, null, 2),
+	   ('IN0001', 'NT0002', 2, 'Desgaste de eje de transmisiÃ³n', 2, null, 2),
 	   ('IN0002', 'NT0005', 1, 'Cortocircuito tablero de mando', 3, null, 2),
-	   ('IN0002', 'NT0007', 2, 'Rotura de sistema hidráulico de transmisión', 1, null, 1),
+	   ('IN0002', 'NT0007', 2, 'Rotura de sistema hidrÃ¡ulico de transmisiÃ³n', 1, null, 1),
 	   ('IN0003', 'NT0003', 1, 'Rotura de cable elevador', 4, null, 2),
 	   ('IN0003', 'NT0006', 2, 'Rotura de pala excavadora', 2, null, 2);
 	   
@@ -2551,9 +2551,9 @@ values('TC001','Valencia','Valencia','Arthuro',1,1,1,12),
       ('TC002','Rodriguez','Asto','Carlos Emilio',2,1,1,15),
       ('TC003','Mendoza','Leon','Juan',1,2,1,10),
       ('TC004','Benavidez','Goyzueta','Pedro',3,1,1,12),
-      ('TC005','Castañeda','Lossio','Fernando',1,1,1,16);
+      ('TC005','CastaÃ±eda','Lossio','Fernando',1,1,1,16);
 
-/*--------------------  LLENAR DISPONIBILIDAD DE TECNICOS PARA EL AÑO 2010 --------------------  */
+/*--------------------  LLENAR DISPONIBILIDAD DE TECNICOS PARA EL AÃ‘O 2010 --------------------  */
 CALL pr_llenarDisponibilidadTecnicos(2010);      
 
                 
