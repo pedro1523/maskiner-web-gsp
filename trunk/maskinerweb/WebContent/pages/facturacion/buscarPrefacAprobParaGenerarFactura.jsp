@@ -55,7 +55,7 @@
           <th width="74" align="center">Generar Factura</th>
         </tr>
        <%int i=0; %>
-<s:iterator var="lista" value="#session.listPrefactura" > 
+<s:iterator var="lista" value="#session.listPrefacturaApro" > 
 <%i++;%>
 		<tr>
           <td align="center"><%=i%></td>
@@ -78,9 +78,9 @@
     
       </table>
               <div class="separadovertical margenderecho" align="right">
-	               <a href="index.html">
-	               	<img src="images/salir.png" alt="Salir" width="71" height="25" border="0" />
-	               </a>
+	               <s:a action="a_homepage">
+	        <img src="images/salir.png" alt="Salir" width="71" height="25" border="0" />
+	        </s:a>
                </div>
 
 

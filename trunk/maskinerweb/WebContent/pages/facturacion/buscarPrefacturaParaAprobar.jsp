@@ -9,17 +9,17 @@
 <sj:head jqueryui="true"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>Insert title here</title>
+<title><s:text name="pages.facturacion.prefactura_buscar.titulopagina" /></title>
 </head>
 <body>
-<h2 class="titulo">Buscar Prefactura</h2>
+<h2 class="titulo"><s:text name="pages.facturacion.prefactura_buscar.titulo" /></h2>
 <s:form action="a_cpm_buscarPrefacturas"> 
 		<fieldset>
-			<legend>Criterios:</legend>
+			<legend><s:text name="pages.facturacion.prefactura_buscar.legend" /></legend>
 			<div class="separadovertical"> 
-			<label for="txtNombreEmpresa">Nombre de la empresa</label> 
+			<label for="txtNombreEmpresa"><s:text name="pages.facturacion.prefactura_buscar.empresa" /></label> 
 			<s:textfield name="nombreEmpresa" id="txtNombreEmpresa" >  </s:textfield> 
-			<label for="txtFechIncidente" class="margenizquierdo">Fecha de incidente</label> 
+			<label for="txtFechIncidente" class="margenizquierdo"><s:text name="pages.facturacion.prefactura_buscar.fecha" /></label> 
 			<!--<s:textfield	name="fechaIncidente" id="txtFechIncidente" ></s:textfield>-->
 			<sj:datepicker name="fechaIncidente"
 							   buttonImageOnly="true"
@@ -29,7 +29,7 @@
 							   changeYear="true"
 							   changeMonth="true"
 							   cssStyle="margin-right:5px" />
-				<label for="txtIncidente" class="margenizquierdo">Incidente</label>
+				<label for="txtIncidente" class="margenizquierdo"><s:text name="pages.facturacion.prefactura_buscar.incidente" /></label>
 				<s:textfield name="incidente" id="txtIncidente" ></s:textfield>
 			</div>
 			<div class="separadoverticalsuperior" align="right">
@@ -40,11 +40,11 @@
 
       <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
         <tr>
-          <th width="7%" align="center">Item</th>
-          <th width="17%" align="center">Nª Prefacrura</th>
-          <th width="29%" align="center">Nª Incidente</th>
-          <th width="36%" align="center">Fecha Incidente</th>
-          <th width="11%" align="center">Aprobar Prefactura</th>
+          <th width="7%" align="center"><s:text name="pages.facturacion.prefactura_buscar.column1" /></th>
+          <th width="17%" align="center"><s:text name="pages.facturacion.prefactura_buscar.column2" /></th>
+          <th width="29%" align="center"><s:text name="pages.facturacion.prefactura_buscar.column3" /></th>
+          <th width="36%" align="center"><s:text name="pages.facturacion.prefactura_buscar.column4" /></th>
+          <th width="11%" align="center"><s:text name="pages.facturacion.prefactura_buscar.column5" /></th>
         </tr>
 <%int i=0; %>
 			 <s:iterator var="lista" value="#session.listPrefactura1">
@@ -67,9 +67,11 @@
 			 </s:iterator>
 </table>
       <div class="separadovertical margenderecho" align="right">
-			 <a href="index.html">
-				<img src="images/salir.png" alt="Salir" width="71" height="25" border="0" />
-			</a>
+			 <s:a action="a_homepage">
+	        	<s:text var="salirImgi18n" name="pages.botones.salir" />
+	        	<s:url var="salirImgUrl" value="%{salirImgi18n}" />
+	        <img src="${salirImgUrl}" alt="Salir" width="71" height="25" border="0" />
+	        </s:a>  
 	 </div>
 
 </body>

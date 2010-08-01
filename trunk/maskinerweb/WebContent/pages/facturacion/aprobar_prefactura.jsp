@@ -15,7 +15,7 @@
 </head>
 <body >
 <fmt:formatDate value="<%=new Date()%>" type="date" pattern="dd/MM/yyyy" var="fecha" /> 
-      <div> <!-- InstanceBeginEditable name="ContenidoApp" -->
+       <!--<div> InstanceBeginEditable name="ContenidoApp" -->
       <h2 class="titulo">Aprobar Prefactura</h2>
 <br>
       <table width="700" border="0">
@@ -156,11 +156,14 @@ observacion :<br>
 
       
        <div class="separadovertical margenderecho" align="right">
-       <s:submit type="image" src="images/guardar.png"></s:submit>	
- 
-		<a href="index.html">
-			<img src="images/salir.png" alt="Salir" width="71" height="25" border="0" />
-		</a>
+       
+       <s:submit type="image" src="/mskweb-st2/images/guardar.png"></s:submit>	
+        
+		 <s:a action="a_homepage">
+	        	<s:text var="salirImgi18n" name="pages.botones.salir" />
+	        	<s:url var="salirImgUrl" value="%{salirImgi18n}" />
+	        <img src="${salirImgUrl}" alt="Salir" width="71" height="25" border="0" />
+	      </s:a>
 	</div>
 
     

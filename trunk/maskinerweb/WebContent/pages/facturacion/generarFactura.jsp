@@ -8,6 +8,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head> 
+
+<c:url var="cssimpresion" value="/styles/designImpresion.css" />
+
+<link href="${cssimpresion}" media="print" rel="stylesheet" type="text/css" />
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -54,7 +59,7 @@
           </tr>
 <c:forEach var="df" items="${sessionScope.a_lista}">
  		<tr>
-            <td width="110" align="center">0${df.intCodServicio}</td>
+            <td width="110" align="center">${df.intCodServicio}</td>
             <td width="457" align="center">${df.strDescripcion}</td>
             <td width="151" align="right">${df.dblMonto}</td>
           </tr>
@@ -88,8 +93,11 @@
       </div>
       <span class="separadovertical"><b>SON: ${sessionScope.monto}</b> </span>
       <hr />
-      <div class="separadovertical margenderecho" align="right"> 
+      <div class="separadovertical margenderecho" align="right" id="botones_factura"> 
+      <s:a href="javascript:print()">
       	<img src="images/imprimir.png" alt="Aceptar" width="71" height="25" border="0" style="margin-right:10px" />
+      </s:a>
+      	
 		<s:a action="a_homepage">
 			<img src="images/salir.png" alt="Salir" width="71" height="25" border="0" />
 		 </s:a>

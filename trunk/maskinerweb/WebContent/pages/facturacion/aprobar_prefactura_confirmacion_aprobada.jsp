@@ -20,8 +20,10 @@
       <hr/>
        <div class="separadovertical margenderecho" align="right">
 		<s:a action="a_homepage">
-	    		<img src="images/salir.png" />
-	    </s:a>
+	        	<s:text var="salirImgi18n" name="pages.botones.salir" />
+	        	<s:url var="salirImgUrl" value="%{salirImgi18n}" />
+	        <img src="${salirImgUrl}" alt="Salir" width="71" height="25" border="0" />
+	      </s:a>
 	</div>
 </body>
 </html>
