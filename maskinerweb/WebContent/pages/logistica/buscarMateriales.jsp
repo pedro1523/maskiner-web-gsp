@@ -41,7 +41,7 @@
    			<s:if test="%{#request.b_materiales!=null}">
 				<s:if test="%{#request.b_materiales.size()==0}">
 					<tr>
-						<td colspan="5">No hay coincidencias</td>
+						<td colspan="6">No hay coincidencias</td>
 					</tr>
 				</s:if>
 				<s:else>
