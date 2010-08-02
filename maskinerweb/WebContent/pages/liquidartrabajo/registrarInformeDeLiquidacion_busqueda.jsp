@@ -54,7 +54,7 @@
 		  	</div>
 			<div class="separadovertical">			
                 <s:text name="pages.liquidartrabajo.registrarIL.lblRazSocCliente" />
-				<span class="negrita margenderecho"><s:property value="#session.incidente.strCodigoCliente"/></span>
+				<span class="negrita margenderecho"><s:property value="#session.incidente.strRazonSocialCliente"/></span>
 			</div>
 			<div class="separadovertical">
 				<s:text name="pages.liquidartrabajo.registrarIL.lblFechaAtencion" />
