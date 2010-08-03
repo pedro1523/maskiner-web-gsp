@@ -10,6 +10,7 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.maskiner.smc.liquidartrabajo.bean.MaterialesXLiquidacionBean;
+import com.maskiner.smc.liquidartrabajo.bean.TecnicosXLiquidacionBean;
 import com.maskiner.smc.logistica.bean.MaterialBean;
 import com.maskiner.smc.logistica.bean.TipoMaterialBean;
 import com.maskiner.smc.logistica.service.LogisticaBusinessDelegate;
@@ -93,6 +94,18 @@ public class MaterialesAction extends ActionSupport implements RequestAware, Ses
 	}
 	
 	public String AgregarALista() throws Exception {
+		
+		String[] arrStrHorasIni = parameters.get("horaInicio");
+		String[] arrStrHorasFin = parameters.get("horaFin");
+		
+		ArrayList<TecnicosXLiquidacionBean> tecnicos = (ArrayList<TecnicosXLiquidacionBean>)session.get("tecnicos");		
+		for(int i=0;i<arrStrHorasIni.length ;i++){
+			 TecnicosXLiquidacionBean tec = tecnicos.get(i);
+			 tec.setStrHoraInicio(arrStrHorasIni[i]);
+			 tec.setStrHoraFin(arrStrHorasFin[i]);
+		}
+		session.put("strDesAtencion", parameters.get("descripcionAtencionRealizada")[0].toString());
+		session.put("strAporteConocimiento", parameters.get("aporteConocimiento")[0].toString());
 		
 		ArrayList<MaterialesXLiquidacionBean> Materiales = new ArrayList<MaterialesXLiquidacionBean>();
 		
