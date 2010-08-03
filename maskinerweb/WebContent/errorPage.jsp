@@ -16,9 +16,10 @@
 	<div style="border: 1px inset silver; padding: 10px; background-color: #EEEEEE; -moz-box-shadow: 3px 3px 5px #333;-webkit-box-shadow: 3px 3px 5px #333; ">
 		<s:property value="exception"/>
 	</div>
-	<div style="font-weight:bold; margin: 15px 0 15px 0"><s:text name="error.lbldetalleerror"/></div>
-	<div style="border: 1px inset silver; padding: 10px; background-color: #EEEEEE; -moz-box-shadow: 3px 3px 5px #333;-webkit-box-shadow: 3px 3px 5px #333; ">
-		<s:property value="exceptionStack"/>
+<!--	<div style="font-weight:bold; margin: 15px 0 15px 0"><s:text name="error.lbldetalleerror"/></div>-->
+	<div style="margin-top:20px; border: 1px inset silver; padding: 10px; background-color: #EEEEEE; -moz-box-shadow: 3px 3px 5px #333;-webkit-box-shadow: 3px 3px 5px #333; ">
+<!--		<s:property value="exceptionStack"/>-->
+		<span style="font-weight:bold"><s:text name="error.mensajeerroralusuario"/></span>
 	</div>
 </body>
 </html>
