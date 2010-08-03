@@ -76,7 +76,7 @@
 	  		request.setAttribute("prueba",prueba);
 	  %>
 	  <s:if test="#request.prueba">
-		  <li><s:a action="a_cargarMantenerCliente"><s:text name="pages.guicomun.menulateral.mantenerclientes"/></s:a></li>
+		  <li><a href="#"><s:text name="pages.guicomun.menulateral.mantenerclientes"/></a></li>
 		  <li><a href="#"><s:text name="pages.guicomun.menulateral.mantenerequipos"/></a></li>
 		 
 	  </s:if>
@@ -86,7 +86,7 @@
 	        request.setAttribute("prueba",prueba);
 	  %>
 	 <s:if test="#request.prueba">
-  		<li><s:a action="a_cargarMantenerPaquete"><s:text name="pages.guicomun.menulateral.mantenerpaquetes"/></s:a></li>
+ 		<li><a href="#"><s:text name="pages.guicomun.menulateral.mantenerpaquetes"/></a></li>
   	 </s:if>
    	  <%
 	  		prueba = usr.tieneRol("02") || usr.tieneRol("01");
