@@ -11,20 +11,20 @@
 <html >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title><s:text name="pages.facturacion.prefactura_aprobada.titulopagina" /></title>
 </head>
 <body >
 <fmt:formatDate value="<%=new Date()%>" type="date" pattern="dd/MM/yyyy" var="fecha" /> 
        <!--<div> InstanceBeginEditable name="ContenidoApp" -->
-      <h2 class="titulo">Aprobar Prefactura</h2>
+      <h2 class="titulo"><s:text name="pages.facturacion.prefactura_aprobada.titulo" /></h2>
 <br>
       <table width="700" border="0">
 		<tr>
-                <td align="right" ><b>Registrador :</b> </td>
+                <td align="right" ><b><s:text name="pages.facturacion.prefactura_aprobada.registrador" /></b> </td>
 				<td>
                 ${sessionScope.usuariologueado.username}
 				</td>
-                <td align="right" ><b>Fecha :</b></td>
+                <td align="right" ><b><s:text name="pages.facturacion.prefactura_aprobada.fecha" /></b></td>
 				<td>
                   ${fecha}
                 </td>
@@ -34,33 +34,32 @@
 		</tr>
 
 		<tr>
-			<td align="right"><b>Cliente :</b>  </td>
+			<td align="right"><b><s:text name="pages.facturacion.prefactura_aprobada.cliente" /></b>  </td>
 			<td>${sessionScope.b_prefactura.strCodCliente} 			
 			</td>
-			<td align="right"><b>RUC :</b> </td>
+			<td align="right"><b><s:text name="pages.facturacion.prefactura_aprobada.ruc" /></b> </td>
 			<td>${sessionScope.b_prefactura.strRuc}
 			
 		</tr>
 		<tr>
-			<td align="right" ><b>Direccion :</b> </td>
+			<td align="right" ><b><s:text name="pages.facturacion.prefactura_aprobada.direccion" /></b> </td>
 			<td>${sessionScope.b_prefactura.strDireccion}
 		</tr>
-		<tr>
-			<td align="right"><b>N° Prefactura :</b> </td>
-			<td>${sessionScope.b_prefactura.strNumPrefactura}
-			
-			<td align="right"><b>Fecha Prefactura :</b> </td>
+		<tr> 
+			<td align="right"><b><s:text name="pages.facturacion.prefactura_aprobada.prefactura" /></b> </td>
+			<td>${sessionScope.b_prefactura.strNumPrefactura}			
+			<td align="right"><b><s:text name="pages.facturacion.prefactura_aprobada.fecha1" /></b> </td>
 			<td>03/02/2010</td>
 		</tr>
       </table>
       <hr />
 <table width="100%" cellpadding="5" cellspacing="0" class="gridview">
 		<tr>
-          <th width="139" align="center">Código</th>
-          <th width="172" align="center">Descripción</th>
-          <th width="149" align="center">Cantidad</th>
-          <th align="center">PrecioUnitario</th>
-          <th align="center">Importe</th>
+          <th width="139" align="center"><s:text name="pages.facturacion.prefactura_aprobada.codigo" /></th>
+          <th width="172" align="center"><s:text name="pages.facturacion.prefactura_aprobada.descripcion" /></th>
+          <th width="149" align="center"><s:text name="pages.facturacion.prefactura_aprobada.cantidad" /></th>
+          <th align="center"><s:text name="pages.facturacion.prefactura_aprobada.precio" /></th>
+          <th align="center"><s:text name="pages.facturacion.prefactura_aprobada.importe" /></th>
         </tr>
 						<s:set var="totalServicio" value="0" />
 						<s:set var="totalMateriales" value="0" />
@@ -69,7 +68,7 @@
 <s:iterator var="lista" value="#session.a_lista" >
 	<tr>
 		<td colspan="5">
-			<h3>Maquinaria: ${lista.strNumTarjeta}</h3>
+			<h3><s:text name="pages.facturacion.prefactura_aprobada.maquinaria" /> ${lista.strNumTarjeta}</h3>
 		</td>
 	</tr>
 
@@ -107,20 +106,20 @@
 			        </s:if>
 				<tr>
 			          <td colspan="3" rowspan="4" align="center" style="border-left:none; border-bottom:none;">&nbsp;</td>
-			          <td width="118" align="right" class="gridview1 subtotalheader">Total Materiales</td>
+			          <td width="118" align="right" class="gridview1 subtotalheader"><s:text name="pages.facturacion.prefactura_aprobada.totalmateriales" /></td>
 			          <td width="120" align="center" class="gridview1 subtotalcontent"><s:property value="#totalMateriales"/></td>
 			        </tr>
 			        <tr>
-			          <td align="right" class="gridview1 subtotalheader">Total Servicios</td>
+			          <td align="right" class="gridview1 subtotalheader"><s:text name="pages.facturacion.prefactura_aprobada.totalservicio" /></td>
 			          <td align="center" class="gridview1 subtotalcontent"> <s:property  value="#totalServicio"/></td>
 			        </tr>
 			        <tr>
-			          <td align="right" class="gridview1 subtotalheader">Total Adicionales</td>
+			          <td align="right" class="gridview1 subtotalheader"><s:text name="pages.facturacion.prefactura_aprobada.totaladicional" /></td>
 			          <td align="center" class="gridview1 subtotalcontent"><s:property value="#totalAdicionales"/> </td>
 			        </tr>
 			        <tr>
 			       <s:set var="subTotal" value="%{#totalMateriales + #totalAdicionales + #totalServicio}" />
-			          <td align="right" class="gridview1 subtotalheader">SubTotal</td>
+			          <td align="right" class="gridview1 subtotalheader"><s:text name="pages.facturacion.prefactura_aprobada.subtotal" /></td>
 			          <td align="center" class="gridview1 subtotalcontent"><s:property value="#subTotal"/></td>
 			   </tr>
 <br>
@@ -138,8 +137,8 @@
 </s:url>
 <s:form  action="%{#urlForm}" >
 
-Rechazar<input type="checkbox" value="1"  name="chkObservacion"/> <font color="Red">${requestScope.mensaje} </font><br>
-observacion :<br>
+<s:text name="pages.facturacion.prefactura_aprobada.rechazar" /><input type="checkbox" value="1"  name="chkObservacion"/> <font color="Red">${requestScope.mensaje} </font><br>
+<s:text name="pages.facturacion.prefactura_aprobada.observacion" /><br>
 <textArea  cols="30" rows="5" name="observacion"></textarea> 
 
 
@@ -147,7 +146,7 @@ observacion :<br>
       <table  cellpadding="5" cellspacing="0" class="gridview1 separadovertical">
         <tr>
 	  
-          <th width="118" align="right" bgcolor="#FFFFFF">Total</th>
+          <th width="118" align="right" bgcolor="#FFFFFF"><s:text name="pages.facturacion.prefactura_aprobada.total" /></th>
           <td width="120"><strong>
             <label>  <s:property value="%{#total}"/>  </label>
             </strong></td>
