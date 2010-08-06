@@ -169,7 +169,7 @@ function ismaxlengthTxtDescripcion(){
                 <tr >
                   <td><s:text name="pages.gestionarincidentes.regincidentes.lblDescripcion" /></td>
                   <td style="width: 439px">
-                  <s:textarea name="Descripcion" rows="10" cols="70" id="txtDescripcion" onkeyup="return ismaxlengthTxtDescripcion()"></s:textarea>
+                  <s:textarea name="Descripcion" rows="10" cols="60" id="txtDescripcion" onkeyup="return ismaxlengthTxtDescripcion()"></s:textarea>
                 </tr>
               </table>
             </fieldset>
