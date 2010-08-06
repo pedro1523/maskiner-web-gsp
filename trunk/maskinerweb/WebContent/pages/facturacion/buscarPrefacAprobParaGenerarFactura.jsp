@@ -55,7 +55,7 @@
           <th width="74" align="center">Generar Factura</th>
         </tr>
        <%int i=0; %>
-<s:iterator var="lista" value="#session.listPrefacturaApro" > 
+<s:iterator var="lista" value="#session.listPrefactura" > 
 <%i++;%>
 		<tr>
           <td align="center"><%=i%></td>
