@@ -52,14 +52,14 @@
 					<textElement textAlignment="Center">
 						<font isBold="true"/>
 					</textElement>
-					<text><![CDATA[Prec. Unitario]]></text>
+					<text><![CDATA[Pre. Unit. (S/.)]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="462" y="30" width="90" height="20"/>
 					<textElement textAlignment="Center">
 						<font isBold="true"/>
 					</textElement>
-					<text><![CDATA[Importe]]></text>
+					<text><![CDATA[Importe (S/.)]]></text>
 				</staticText>
 				<elementGroup>
 					<elementGroup/>
