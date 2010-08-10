@@ -39,6 +39,7 @@
 	</fieldset>
 	<div id="fieldError">
 		<s:fielderror cssClass="mensajeerror lista separadoverticalsuperior" />
+		<s:actionerror cssClass="mensajeerror lista separadoverticalsuperior"/>
 	</div>
 </body>
 </html>

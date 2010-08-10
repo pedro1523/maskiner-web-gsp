@@ -9,6 +9,7 @@ public class ReporteUtilizacionMaquinariaBean {
 	private String numTarjeta;
 	private String descripcionMaquinaria;
 	private Integer medicionHorometro;
+	private Date fechaCompraMaquinaria;
 	private Date fechaUltimaMedicionHorometro;
 	private BigDecimal porcentaje;
 	
@@ -54,5 +55,12 @@ public class ReporteUtilizacionMaquinariaBean {
 	public void setPorcentaje(BigDecimal porcentaje) {
 		this.porcentaje = porcentaje;
 	}
+	public Date getFechaCompraMaquinaria() {
+		return fechaCompraMaquinaria;
+	}
+	public void setFechaCompraMaquinaria(Date fechaCompraMaquinaria) {
+		this.fechaCompraMaquinaria = fechaCompraMaquinaria;
+	}
+	
 
 }

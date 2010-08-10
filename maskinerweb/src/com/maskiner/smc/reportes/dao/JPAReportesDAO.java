@@ -133,7 +133,9 @@ public class JPAReportesDAO extends GenericDAOJpa implements ReportesDAO {
 			r.setMedicionHorometro((Integer) d[4]);
 			Date fecha = new Date(((java.sql.Date)d[5]).getTime());
 			r.setFechaUltimaMedicionHorometro(fecha);
-			r.setPorcentaje((BigDecimal) d[6]);
+			fecha = new Date(((java.sql.Date)d[6]).getTime());
+			r.setFechaCompraMaquinaria(fecha);
+			r.setPorcentaje((BigDecimal) d[7]);
 			
 			resultado.add(r);
 		}

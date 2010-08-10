@@ -12,6 +12,7 @@
 	<field name="descripcionMaquinaria" class="java.lang.String"/>
 	<field name="medicionHorometro" class="java.lang.Integer"/>
 	<field name="fechaUltimaMedicionHorometro" class="java.util.Date"/>
+	<field name="fechaCompraMaquinaria" class="java.util.Date"/>
 	<field name="porcentaje" class="java.math.BigDecimal"/>
 	<background>
 		<band height="802" splitType="Stretch"/>
@@ -59,45 +60,52 @@
 	<pageHeader>
 		<band height="32" splitType="Stretch">
 			<rectangle>
-				<reportElement x="14" y="0" width="518" height="32"/>
+				<reportElement x="0" y="0" width="555" height="32"/>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="16" y="6" width="67" height="20"/>
+				<reportElement x="2" y="6" width="67" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nº Tarjeta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="83" y="6" width="180" height="20"/>
+				<reportElement x="69" y="6" width="173" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Descripción]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="263" y="6" width="98" height="20"/>
+				<reportElement x="241" y="1" width="67" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Medida Horómetro]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="432" y="6" width="100" height="20"/>
+				<reportElement x="456" y="7" width="99" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[% Utilización]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="361" y="1" width="73" height="30"/>
+				<reportElement x="310" y="1" width="73" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha Última Medición]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="2" width="73" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Adqui. Equipo]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -107,35 +115,40 @@
 	<detail>
 		<band height="34">
 			<rectangle>
-				<reportElement x="14" y="0" width="518" height="23"/>
+				<reportElement x="0" y="0" width="555" height="23"/>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="83" y="2" width="180" height="20"/>
+				<reportElement x="69" y="2" width="173" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcionMaquinaria}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="263" y="2" width="98" height="20"/>
+				<reportElement x="241" y="2" width="67" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{medicionHorometro}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="361" y="2" width="74" height="20"/>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="310" y="2" width="74" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{fechaUltimaMedicionHorometro}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="432" y="2" width="100" height="20"/>
+				<reportElement x="456" y="2" width="99" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{porcentaje}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="16" y="2" width="67" height="20"/>
+				<reportElement x="1" y="2" width="67" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{numTarjeta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="385" y="2" width="71" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fechaCompraMaquinaria}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
