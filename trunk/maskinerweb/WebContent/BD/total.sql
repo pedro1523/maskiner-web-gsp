@@ -1607,37 +1607,6 @@ END $$
 
 DELIMITER ;
 
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `mskbd`.`pr_insertarPrefactura` $$
-CREATE PROCEDURE `pr_insertarPrefactura`(
- IN codReg varchar(5),
- IN estado integer
-)
-BEGIN
-
-  declare idPre char(6);
-  set idPre= '';
-  SELECT fn_obtenerAutogeneradoPrefac()into idPre;
-
-INSERT INTO prefactura(num_prefac,
-                      fec_prefac,
-                      cod_reg,
-                      est_prefac
-                      )
-
-VALUES                (idPre,
-                      CURDATE(),
-                      codReg,
-                      estado
-                      );
-
-select idPre;
-
-END $$
-
-DELIMITER ;
-
 
 DELIMITER $$
 
