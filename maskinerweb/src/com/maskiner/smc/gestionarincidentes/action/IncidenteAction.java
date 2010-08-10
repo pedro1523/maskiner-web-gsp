@@ -263,8 +263,26 @@ public class IncidenteAction extends  ActionSupport  implements RequestAware, Se
 		
 		System.out.println("FORMULARIO DE ORIGEN---> " + formOrigen);
 		
-		if(formOrigen.equals("RegistrarLiquidacion")){
-						
+		
+		if(formOrigen.equals("generarOTInspec")){
+			Date dtFechaIncid = null;
+			
+			if(!strFechaIncid.equals("")){
+				if(FormatoFecha.isFecha(strFechaIncid)){
+					dtFechaIncid = FormatoFecha.getFechaDe(strFechaIncid);
+				}
+			}
+			
+			IncidenteServiceI isServicio = IncidenteBusinessDelegate.getIncidenteService();
+			
+			List<RegistroIncidentesBean> lstArr = isServicio.buscarIncidentesOTI(strEmpresa, 
+					dtFechaIncid == null ? null : new java.sql.Date(dtFechaIncid.getTime()), 
+					strIncidente);
+			request.put("arr_incidentes", lstArr);
+			return "exito";
+			
+		}
+		if(formOrigen.equals("RegistrarLiquidacion")){				
 			Date dtFechaIncid = null;
 			
 			if(!strFechaIncid.equals("")){

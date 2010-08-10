@@ -24,6 +24,16 @@ public class IncidenteServiceImpl implements IncidenteServiceI {
 		
 		return arr;
 	}
+	@Override
+	public List<RegistroIncidentesBean> buscarIncidentesOTI(String nombreEmpresa,
+			Date fechaIncidente, String descripcionIncidente) throws Exception {
+		DAOFactory factoria = DAOFactory.getDAOFactory();
+		IncidenteDAO incidenteDAO = factoria.getIncidenteDAO();
+		
+		List<RegistroIncidentesBean> arr = incidenteDAO.buscarIncidentesOTI(nombreEmpresa, fechaIncidente, descripcionIncidente);
+		
+		return arr;
+	}
 
 	@Override
 	public RegistroIncidentesBean obtenerIncidente(String numIncidente)

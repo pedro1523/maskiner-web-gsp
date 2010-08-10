@@ -493,12 +493,43 @@ BEGIN
   		on i.cod_cli=s.cod_cli and i.num_suc=s.num_suc
   		inner join tabladetablas tt on tt.cod_tab=14 and s.dist_suc=tt.cod_item_tab
   		inner join cliente c on i.cod_cli= c.cod_cli
+	where est_inc=2 and
+      c.raz_soc_cli like concat('%', vnom_empr,'%') and
+      DATE_FORMAT(i.fec_inc,GET_FORMAT(DATE,'ISO')) like concat('%', IFNULL(vfec_inc,''), '%') and
+      fn_obtenerDescripcionIncidente(i.num_inc) like concat('%', vdesc_aver,'%');
+
+END $$
+
+
+DROP PROCEDURE IF EXISTS `pr_buscarIncidentesOTI` $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_buscarIncidentesOTI`(
+ IN vnom_empr varchar(150),
+ IN vfec_inc  date,
+ IN vdesc_aver varchar(300)
+)
+BEGIN
+	select i.num_inc,
+         i.fec_inc,
+         i.cod_reg,
+         i.cod_cli,
+         i.num_suc,
+         tt.desc_tab distr,
+         s.dir_suc,
+         i.dat_cli_no_reg,
+         i.est_inc,
+         c.raz_soc_cli,
+         fn_obtenerDescripcionIncidente(i.num_inc) desc_inc
+	from incidente i inner join sucursal s
+  		on i.cod_cli=s.cod_cli and i.num_suc=s.num_suc
+  		inner join tabladetablas tt on tt.cod_tab=14 and s.dist_suc=tt.cod_item_tab
+  		inner join cliente c on i.cod_cli= c.cod_cli
 	where est_inc=1 and
       c.raz_soc_cli like concat('%', vnom_empr,'%') and
       DATE_FORMAT(i.fec_inc,GET_FORMAT(DATE,'ISO')) like concat('%', IFNULL(vfec_inc,''), '%') and
       fn_obtenerDescripcionIncidente(i.num_inc) like concat('%', vdesc_aver,'%');
 
 END $$
+
 
 CREATE PROCEDURE pr_obtenerIncidentePendiente
 (
@@ -793,7 +824,7 @@ SELECT CONCAT('OI',RIGHT(CONCAT('000',CONVERT(IFNULL(@num_Id,0)+1,CHAR(6))),4)) 
 END $$
 
 
-DROP PROCEDURE IF EXISTS `mskbd`.`pr_insertarOrdenTrabajoInspeccion` $$
+DROP PROCEDURE IF EXISTS `pr_insertarOrdenTrabajoInspeccion` $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_insertarOrdenTrabajoInspeccion`(
  IN vfec_insp varchar(20),
  IN vhor_ini char(20),
@@ -807,7 +838,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_insertarOrdenTrabajoInspeccion`(
 )
 BEGIN
 DECLARE vcodigo char(6);
-
+declare vcant_Inc int;
+declare vcant_oti int;
 	 SET vhor_fin= convert(SUBTIME(vhor_fin,'0:30'),char(20));
 
 	select  fn_obtenerAutogeneradoOTI() into vcodigo;
@@ -821,6 +853,22 @@ DECLARE vcodigo char(6);
   update maquinariasucursal_x_incidente
   set est_aver=2
   where num_inc=vnum_inc and num_tar=vnum_tar;
+
+ commit;
+  select count(*) into vcant_Inc from
+  maquinariasucursal_x_incidente
+  where num_inc=vnum_inc;
+
+  select count(*) into vcant_oti from
+  ordentrabajoinspeccion
+  where num_inc=vnum_inc;
+
+  if vcant_Inc = vcant_oti then
+  update incidente
+  set est_inc=2
+  where num_inc=vnum_inc ;
+  end if;
+
 
 END $$
 

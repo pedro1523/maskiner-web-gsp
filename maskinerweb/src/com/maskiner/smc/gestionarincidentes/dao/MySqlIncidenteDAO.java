@@ -52,6 +52,40 @@ public class MySqlIncidenteDAO implements IncidenteDAO {
 		
 		return arr;
 	}
+	@Override
+	public List<RegistroIncidentesBean> buscarIncidentesOTI(String nombreEmpresa,
+			Date fechaIncidente, String descripcionIncidente) throws Exception {
+
+		//obtener una conexion
+		Connection cn = MySqlDbConn.obtenerConexion();
+		CallableStatement st = cn.prepareCall("{ call pr_buscarIncidentesOTI(?, ?, ?) }");
+		st.setString(1, nombreEmpresa);
+		st.setDate(2, fechaIncidente);
+		st.setString(3, descripcionIncidente);
+		
+		ResultSet rs = st.executeQuery();
+		
+		ArrayList<RegistroIncidentesBean> arr = new ArrayList<RegistroIncidentesBean>();
+		
+		while (rs.next()) {
+			RegistroIncidentesBean reg = new RegistroIncidentesBean();
+			reg.setStrCodigoCliente(rs.getString("cod_cli"));
+			reg.setStrCodigoRegistrador(rs.getString("cod_reg"));
+			reg.setIntEstadoIncidente(rs.getInt("est_inc"));
+			reg.setDtFechaIncidente(rs.getDate("fec_inc"));
+			reg.setStrLugarAtencionCliente(rs.getString("dir_suc"));
+			reg.setStrDistritoAtencion(rs.getString("distr"));
+			reg.setStrNumeroIncidente(rs.getString("num_inc"));
+			reg.setStrRazonSocialCliente(rs.getString("raz_soc_cli"));
+			reg.setStrDescripcionIncidente(rs.getString("desc_inc"));
+			
+			arr.add(reg);
+		}
+		
+		cn.close();
+		
+		return arr;
+	}
 	
 	
 
