@@ -367,7 +367,7 @@ SELECT CONCAT('OI',RIGHT(CONCAT('000',CONVERT(IFNULL(@num_Id,0)+1,CHAR(6))),4)) 
 END $$
 
 
-DROP PROCEDURE IF EXISTS `mskbd`.`pr_insertarOrdenTrabajoInspeccion` $$
+DROP PROCEDURE IF EXISTS `pr_insertarOrdenTrabajoInspeccion` $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_insertarOrdenTrabajoInspeccion`(
  IN vfec_insp varchar(20),
  IN vhor_ini char(20),
@@ -381,7 +381,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_insertarOrdenTrabajoInspeccion`(
 )
 BEGIN
 DECLARE vcodigo char(6);
-
+declare vcant_Inc int;
+declare vcant_oti int;
 	 SET vhor_fin= convert(SUBTIME(vhor_fin,'0:30'),char(20));
 
 	select  fn_obtenerAutogeneradoOTI() into vcodigo;
@@ -395,6 +396,22 @@ DECLARE vcodigo char(6);
   update maquinariasucursal_x_incidente
   set est_aver=2
   where num_inc=vnum_inc and num_tar=vnum_tar;
+
+ commit;
+  select count(*) into vcant_Inc from
+  maquinariasucursal_x_incidente
+  where num_inc=vnum_inc;
+
+  select count(*) into vcant_oti from
+  ordentrabajoinspeccion
+  where num_inc=vnum_inc;
+
+  if vcant_Inc = vcant_oti then
+  update incidente
+  set est_inc=2
+  where num_inc=vnum_inc ;
+  end if;
+
 
 END $$
 

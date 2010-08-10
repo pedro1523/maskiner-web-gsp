@@ -13,6 +13,7 @@ import com.maskiner.smc.maestroclientes.bean.ClienteBean;
 public interface IncidenteServiceI {
 	
 	public List<RegistroIncidentesBean> buscarIncidentes(String nombreEmpresa, Date fechaIncidente, String descripcionIncidente) throws Exception; 
+	public List<RegistroIncidentesBean> buscarIncidentesOTI(String nombreEmpresa, Date fechaIncidente, String descripcionIncidente) throws Exception; 
 
 	public RegistroIncidentesBean obtenerIncidente(String numIncidente) throws Exception;
 	
