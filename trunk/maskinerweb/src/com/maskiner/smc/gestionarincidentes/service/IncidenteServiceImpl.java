@@ -109,6 +109,18 @@ public class IncidenteServiceImpl implements IncidenteServiceI {
 		return regIncid;
 		
 	}
+	
+	public RegistroIncidentesBean obtenerIncidenteInspeccionOTI(String numIncidente)
+	throws Exception{
+		
+		DAOFactory factoria = DAOFactory.getDAOFactory();
+		IncidenteDAO incidenteDAO = factoria.getIncidenteDAO();
+		
+		RegistroIncidentesBean regIncid = incidenteDAO.obtenerIncidenteInspeccionOTI(numIncidente);
+		
+		return regIncid;
+		
+	}
 	/*==========================FIN=====================*/
 
 }

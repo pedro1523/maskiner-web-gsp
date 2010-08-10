@@ -346,22 +346,28 @@ public class IncidenteAction extends  ActionSupport  implements RequestAware, Se
 		
 		if (formOrigen.equals("generarOTInspec")) {
 			// obtiene el bean BeanRegistroIncidentes seleccionado
+			try {
+				
+			
 			System.out.println("NUMERO DE INCIDENTE---> " + numIncidente);
 			IncidenteServiceI servicio = IncidenteBusinessDelegate
 					.getIncidenteService();
 
 			RegistroIncidentesBean reg = servicio
-					.obtenerIncidenteInspeccion(numIncidente);
+					.obtenerIncidenteInspeccionOTI(numIncidente);
 
 			ClienteBean cliente = servicio
 					.obtenerClientePorIncidente(numIncidente);
 			
-			System.out.println("tamaño del arreglo -- > " + reg.getArrMaquinariasXIncidente().size());
+			//System.out.println("tamaño del arreglo -- > " + reg.getArrMaquinariasXIncidente().size());
 			session.put("b_cliente", cliente);
 			session.put("b_incidente", reg);
-			
+			} catch (Exception e) {
+			e.printStackTrace();
+			}
 
 			return "exito1";
+			
 		}else if(formOrigen.equals("RegistrarLiquidacion")){
 			
 			IncidenteServiceI servicio = IncidenteBusinessDelegate.getIncidenteService();

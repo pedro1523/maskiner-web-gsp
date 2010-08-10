@@ -29,4 +29,6 @@ public interface IncidenteDAO {
 	public ClienteBean obtenerClientePorIncidente(String numIncidente)	throws Exception;
 	
 	public RegistroIncidentesBean obtenerIncidenteInspeccion(String numIncidente)throws Exception;
+	public RegistroIncidentesBean obtenerIncidenteInspeccionOTI(String numIncidente)throws Exception;
+	
 }

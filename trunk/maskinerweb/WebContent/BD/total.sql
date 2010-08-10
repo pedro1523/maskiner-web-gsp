@@ -531,8 +531,29 @@ BEGIN
 END $$
 
 
-CREATE PROCEDURE pr_obtenerIncidentePendiente
-(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_obtenerIncidentePendiente`(
+ IN vnum_inc char(6)
+)
+BEGIN
+	select i.num_inc,
+         i.fec_inc,
+         i.cod_reg,
+         i.cod_cli,
+         i.num_suc,
+         tt.desc_tab distr,
+         s.dir_suc,
+         i.dat_cli_no_reg,
+         i.est_inc,
+         c.raz_soc_cli,
+         fn_obtenerDescripcionIncidente(i.num_inc) desc_inc
+	from incidente i inner join sucursal s
+  		on i.cod_cli=s.cod_cli and i.num_suc=s.num_suc
+  		inner join tabladetablas tt on tt.cod_tab=14 and s.dist_suc=tt.cod_item_tab
+  		inner join cliente c on i.cod_cli= c.cod_cli
+	where i.est_inc=2 and i.num_inc = vnum_inc;
+END $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_obtenerIncidentePendienteOTI`(
  IN vnum_inc char(6)
 )
 BEGIN
@@ -553,6 +574,7 @@ BEGIN
   		inner join cliente c on i.cod_cli= c.cod_cli
 	where i.est_inc=1 and i.num_inc = vnum_inc;
 END $$
+
 
 CREATE PROCEDURE pr_obtenerMaquinariaSucursalXIncidentePendiente
 (
@@ -1318,11 +1340,12 @@ where i.num_inc=vnum_inc;
 END $$
 
 DROP PROCEDURE IF EXISTS `mskbd`.`pr_aprobarPrefactura` $$
-CREATE  PROCEDURE `pr_aprobarPrefactura`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_aprobarPrefactura`(
  IN vnum_prefac char(6),
  IN vobservacion  varchar(300),
  IN vmonto   decimal(11,2),
- IN flag       boolean
+ IN flag       boolean,
+ IN vincidente varchar(6)
  )
 BEGIN
 
@@ -1337,9 +1360,12 @@ BEGIN
               monto_prefac=vmonto,
               obs_prefac=vobservacion
     where num_prefac=vnum_prefac;
-
-
   end if;
+  
+  update incidente
+    set est_inc=6
+  where num_inc=  vincidente;
+
 
 END $$
 
@@ -1736,19 +1762,19 @@ BEGIN
 
 END $$
 
-CREATE  PROCEDURE `pr_buscarfacturas`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_buscarfacturas`(
  IN vnom_empr varchar(150),
  IN vfec_inc  date,
  IN vdesc_aver varchar(300)
 )
 BEGIN
 
-  select i.cod_cli,l.num_prefac,i.num_inc,i.fec_inc from incidente i inner join ordentrabajo ot
+  select distinct i.cod_cli,l.num_prefac,i.num_inc,i.fec_inc from incidente i inner join ordentrabajo ot
     on i.num_inc=ot.num_inc inner join liquidacion l
     on ot.num_ord_trab=l.num_ord_trab inner join cliente c
     on i.cod_cli=c.cod_cli inner join prefactura p
     on l.num_prefac=p.num_prefac
-	where i.est_inc=5 and (p.est_prefac=2 or p.est_prefac=3) and
+	where i.est_inc=6 and (p.est_prefac=2 or p.est_prefac=3) and
       c.raz_soc_cli like concat('%', vnom_empr,'%') and
       DATE_FORMAT(i.fec_inc,GET_FORMAT(DATE,'ISO')) like concat('%', IFNULL(vfec_inc,''), '%') and
       fn_obtenerDescripcionIncidente(i.num_inc) like concat('%', vdesc_aver,'%');

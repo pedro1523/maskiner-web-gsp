@@ -6,11 +6,13 @@
 <struts>
 	<package name="cpm" extends="msk-default" namespace="/">
 
-		<action name="a_cpm_OTIAsignar">
+		<action name="a_cpm_OTIAsignar"
+				class="com.maskiner.smc.programartrabajo.action.ProgramarOTInspeccionAction"
+				method="cargarOTIAsignar1">
 			<interceptor-ref name="securityRolesStack">
 				<param name="MSKRolesInterceptor.allowedRoles">01,02</param>
 			</interceptor-ref>
-			<result type="tiles">d_generarOT_inspeccion_asignar</result>
+			<result  name="exito" type="tiles">d_generarOT_inspeccion_asignar</result>
 		</action>
 
 		<action name="a_cpm_cargarBuscarIncidente1"
@@ -107,8 +109,8 @@
 		<!-- FACTURACION -->
 
 		<action name="a_cpm_cargarPrefactura"
-		>
-			<result type="tiles">d_prefactura_buscar</result>
+				class="com.maskiner.smc.facturacion.action.FacturacionAction" method="mostrarPrincipal">		
+			<result name="exito" type="tiles">d_prefactura_buscar</result>
 		</action>
 
 		<action name="a_cpm_buscarPrefacturas"

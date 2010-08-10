@@ -349,6 +349,53 @@ public class MySqlIncidenteDAO implements IncidenteDAO {
 		
 		return reg;
 	}
+	
+	@Override
+	public RegistroIncidentesBean obtenerIncidenteInspeccionOTI(String numIncidente)
+			throws Exception {
+		//obtener una conexion
+		Connection cn = MySqlDbConn.obtenerConexion();
+		CallableStatement st = cn.prepareCall("{ call pr_obtenerIncidentePendienteOTI(?) }");
+		st.setString(1, numIncidente);
+		
+		ResultSet rs = st.executeQuery();
+		RegistroIncidentesBean reg = null;
+		if (rs.next()) {
+			reg = new RegistroIncidentesBean();
+			reg.setStrCodigoCliente(rs.getString("cod_cli"));
+			reg.setStrCodigoRegistrador(rs.getString("cod_reg"));
+			reg.setIntEstadoIncidente(rs.getInt("est_inc"));
+			reg.setDtFechaIncidente(rs.getDate("fec_inc"));
+			reg.setStrLugarAtencionCliente(rs.getString("dir_suc"));
+			reg.setStrDistritoAtencion(rs.getString("distr"));
+			reg.setStrNumeroIncidente(rs.getString("num_inc"));
+			reg.setStrRazonSocialCliente(rs.getString("raz_soc_cli"));
+			reg.setStrDescripcionIncidente(rs.getString("desc_inc"));
+			
+			//recupera las maquinarias x incidente
+			st = cn.prepareCall("{ call pr_obtenerMaquinariaSucursalXIncidentePendienteInspeccion(?) }");
+			st.setString(1, numIncidente);
+			ResultSet rs1 = st.executeQuery();
+			while(rs1.next()){
+				DetalleRegistroIncidenteBean detReg = new DetalleRegistroIncidenteBean();
+				detReg.setIntNumeroItem(rs1.getInt("itm_aver"));
+				detReg.setStrDescripcionAveria(rs1.getString("desc_aver"));
+				detReg.setIntNaturalezaAveria(rs1.getInt("natur_aver"));
+				detReg.setStrNumeroIncidente(rs1.getString("num_inc"));
+				detReg.setStrNumeroTarjetaEquipo(rs1.getString("num_tar"));
+				detReg.setStrDescripcionNaturalezaAveria(rs1.getString("desc_natur_aver"));
+				detReg.setStrDescripcionMaquinaria(rs1.getString("desc_maq"));
+				detReg.setStrCodMaquinaria(rs1.getString("cod_maq"));
+				detReg.setStrMarcaMaquinaria(rs1.getString("mar_maq"));
+				detReg.setStrModeloMaquinaria(rs1.getString("mod_maq"));
+				reg.getArrMaquinariasXIncidente().add(detReg);
+			}
+		}
+		
+		cn.close();
+		
+		return reg;
+	}
 
 	/*============================================*/
 	
