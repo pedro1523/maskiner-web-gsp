@@ -31,6 +31,9 @@ public interface IncidenteServiceI {
 		
 		public RegistroIncidentesBean obtenerIncidenteInspeccion(String numIncidente)
 		throws Exception;
+		
+		public RegistroIncidentesBean obtenerIncidenteInspeccionOTI(String numIncidente)
+		throws Exception;
 		/*===================FIN=======================*/
 		
 }

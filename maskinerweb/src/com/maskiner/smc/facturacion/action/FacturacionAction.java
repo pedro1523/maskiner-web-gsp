@@ -91,11 +91,11 @@ public class FacturacionAction implements SessionAware,RequestAware,ParameterAwa
 		ArrayList<PrefacturaAuxBean>lista=(ArrayList<PrefacturaAuxBean>) servicio.obtenerMateriales_x_Liquidacion(strNumIncidente);
 		ArrayList<DetallePrefacturaBean> listaDetalle=(ArrayList<DetallePrefacturaBean>) 
 														servicio.obtenerMateriales_x_Liquidacion1(strNumIncidente);
-		System.out.println("LISTA--> " + lista.size() );
-		System.out.println("LISTA DETALLE--> " + listaDetalle.size());
+		
 		session.put("b_prefactura", prefactura);			
 		session.put("a_lista", lista);
 		session.put("a_listaDetalle", listaDetalle);
+		session.put("incidenteFac", strNumIncidente);
 		return "exito";
 	}
 	
@@ -121,7 +121,7 @@ public class FacturacionAction implements SessionAware,RequestAware,ParameterAwa
 	public String aprobar()	throws Exception { 	
 		
 		/*recuperacmos los montos de los servicio*/
-		
+		String strIncidente =(String) session.get("incidenteFac");
 		String[]aServicio=obtenerServicio();
 		String strValorCheck=null;
 		try{
@@ -150,7 +150,7 @@ public class FacturacionAction implements SessionAware,RequestAware,ParameterAwa
 		
 			
 			session.put("NumPrefac", prefactura.getStrNumPrefactura());
-			if(servicio.aprobarPrefactura(prefactura, true,aServicio)){
+			if(servicio.aprobarPrefactura(prefactura, true,aServicio,strIncidente )){
 						servicio.grabarFactura(prefactura);
 						String[] aCodigo=servicio.obtenerSerieFactura(prefactura.getStrNumPrefactura());
 						grabarDetalleFactura(aServicio, aCodigo);
@@ -176,7 +176,7 @@ public class FacturacionAction implements SessionAware,RequestAware,ParameterAwa
 				prefactura.setStrCodRegistrador(usuario.getCodigoUsuario());
 				FacturacionServiceI servicio=FacturacionBusinessDelegate.getFacturacionService();
 				session.put("NumPrefac", prefactura.getStrNumPrefactura());
-				servicio.aprobarPrefactura(prefactura, false,aServicio);
+				servicio.aprobarPrefactura(prefactura, false,aServicio,strIncidente );
 				/*recuperamos la serie y el numero de factura */
 				servicio.grabarFactura(prefactura);
 				String[] aCodigo=servicio.obtenerSerieFactura(prefactura.getStrNumPrefactura());
@@ -267,6 +267,11 @@ public class FacturacionAction implements SessionAware,RequestAware,ParameterAwa
 			}
 		}
 		
+	}
+	
+	public String mostrarPrincipal(){
+		session.remove("listPrefactura1");
+		return "exito";
 	}
 	
 	@SuppressWarnings("unused")

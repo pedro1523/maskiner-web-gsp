@@ -194,22 +194,24 @@ public class MySqlFacturacionDAO implements FacturacionDAO {
 	
 	
 	
-	public boolean aprobarPrefactura(PrefacturaBean prefactura , boolean flag,String[] servicio  )throws Exception{
+	public boolean aprobarPrefactura(PrefacturaBean prefactura , boolean flag,String[] servicio , String incidente )throws Exception{
 		//obtener una conexion
 		Connection cn =MySqlDbConn.obtenerConexion();
-		CallableStatement st = cn.prepareCall("{ call pr_aprobarPrefactura(?,?,?,?)}");
+		CallableStatement st = cn.prepareCall("{ call pr_aprobarPrefactura(?,?,?,?,?)}");
 		if(flag){
 			System.out.println("dentro del la implementacion opcion if");
 			st.setString(1,prefactura.getStrNumPrefactura());
 			st.setString(2,"");
 			st.setBigDecimal(3,prefactura.getDecMonPrefactura());
 			st.setBoolean(4,true);
+			st.setString(5,incidente);
 		}else{
 			System.out.println("dentro del la implementacion opcion else");
 			st.setString(1,prefactura.getStrNumPrefactura());
 			st.setString(2,prefactura.getStrObsPrefactura());
 			st.setBigDecimal(3,prefactura.getDecMonPrefactura());
 			st.setBoolean(4,false);
+			st.setString(5,incidente);
 		}
 		
 		st.execute();

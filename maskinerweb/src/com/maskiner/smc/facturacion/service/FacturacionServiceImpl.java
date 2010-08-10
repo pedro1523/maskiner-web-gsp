@@ -42,8 +42,8 @@ public class FacturacionServiceImpl implements FacturacionServiceI {
 	public List<DetallePrefacturaBean> obtenerMateriales_x_Liquidacion1(String strLiquidacion) throws Exception{
 		return facturacionDAO.obtenerMateriales_x_Liquidacion1(strLiquidacion);
 	}
-	public boolean aprobarPrefactura(PrefacturaBean prefactura , boolean flag,String[] servicio )throws Exception{
-		return facturacionDAO.aprobarPrefactura(prefactura, flag,servicio);		
+	public boolean aprobarPrefactura(PrefacturaBean prefactura , boolean flag,String[] servicio, String incidente )throws Exception{
+		return facturacionDAO.aprobarPrefactura(prefactura, flag,servicio, incidente);		
 	}
 	public double obtenerMontoDescuento(String strMaterial,String strCliente) throws Exception{
 		return facturacionDAO.obtenerMontoDescuento(strMaterial, strCliente);

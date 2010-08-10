@@ -289,6 +289,14 @@ public class ProgramarOTInspeccionAction implements SessionAware, ParameterAware
 		
 		return "0";
 	}
+	
+	public String cargarOTIAsignar1(){
+		
+		session.remove("listTecnicos");
+		session.remove("fechaInspeccion");
+		session.remove("mensajeError");
+		return "exito";
+	}
 			
 	/*================FIN===================*/
 	public String cargarBuscarIncidente(){
@@ -300,7 +308,7 @@ public class ProgramarOTInspeccionAction implements SessionAware, ParameterAware
 		
 			String numTarjeta=parameters.get("numTarjeta")[0].trim();
 			session.put("tarjetaEquipo", numTarjeta);
-
+			
 		
 		return "exito";
 	}

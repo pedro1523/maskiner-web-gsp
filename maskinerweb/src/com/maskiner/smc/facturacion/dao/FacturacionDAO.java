@@ -20,7 +20,7 @@ public interface FacturacionDAO {
 	public PrefacturaBean obtenerCabeceraPrefactura(String strIncidente,String strNumPrefac) throws Exception;
 	public List<PrefacturaAuxBean> obtenerMateriales_x_Liquidacion(String strIncidente) throws Exception ;
 	public List<DetallePrefacturaBean> obtenerMateriales_x_Liquidacion1(String strIncidente) throws Exception;
-	public boolean aprobarPrefactura(PrefacturaBean prefactura , boolean flag,String[] servicio )throws Exception;
+	public boolean aprobarPrefactura(PrefacturaBean prefactura , boolean flag,String[] servicio, String incidente )throws Exception;
 	public double obtenerMontoDescuento(String strMaterial,String strCliente) throws Exception;
 	public void grabarDetallefactura(String strSerie,String strFactura,int item,double dblMonto) throws Exception;
 	public String[] obtenerSerieFactura (String prefactura) throws Exception;
