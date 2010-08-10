@@ -130,6 +130,11 @@ public class ReportesAction extends ActionSupport {
 		
 		arrRepGastosMaquinaria = servicio.obtenerDatosReporteGastosXMaquinaria(numTarjeta, fechaInicio, fechaFin);
 		
+		if(arrRepGastosMaquinaria.size()==0){
+			addActionError(getText("pages.reportes.generic.nodata"));
+			vista = "input";
+		}
+		
 		return vista;	
 	}
 
@@ -140,6 +145,11 @@ public class ReportesAction extends ActionSupport {
 		ReportesServiceI servicio = ReportesBusinessDelegate.getReporteService();
 		
 		arrUtilizacionMaquinaria = servicio.obtenerDatosReporteUtilizacionMaquinaria(numTarjeta);
+		
+		if(arrUtilizacionMaquinaria.size()==0){
+			addActionError(getText("pages.reportes.generic.nodata"));
+			vista = "input";
+		}
 
 		return vista;
 
@@ -153,6 +163,12 @@ public class ReportesAction extends ActionSupport {
 		arrRepFrecIncBean = 
 			servicio.obtenerDatosReporteFrecuenciaIncidentes(codCliente, anio.toString());
 		
+/*		if(arrRepFrecIncBean.size()==0){
+			addActionError("No hay datos para mostrar.");
+			vista = "input";
+		}
+*/		
+		
 		return vista;
 
 	}
@@ -165,6 +181,11 @@ public class ReportesAction extends ActionSupport {
 		
 		arrHistorialMaquinaria = servicio.obtenerDatosReporteHistorialMaquinaria(numTarjeta);
 
+		if(arrHistorialMaquinaria.size()==0){
+			addActionError(getText("pages.reportes.generic.nodata"));
+			vista = "input";
+		}
+		
 		return vista;
 
 	}
@@ -176,6 +197,11 @@ public class ReportesAction extends ActionSupport {
 		ReportesServiceI servicio = ReportesBusinessDelegate.getReporteService();
 		arrRepTecOTBean = servicio.obtenerDatosReporteTecnicosOT(numOrdenTrabajo);
  		
+		if(arrRepTecOTBean.size()==0){
+			addActionError(getText("pages.reportes.generic.nodata"));
+			vista = "input";
+		}
+		
 		return vista;	
 	}
 

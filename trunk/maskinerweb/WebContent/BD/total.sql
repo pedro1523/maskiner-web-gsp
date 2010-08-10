@@ -2230,6 +2230,7 @@ SELECT  cli.cod_cli,
         mq.desc_maq,
         ms.med_horom,
         ms.fech_ult_med_hor,
+        ms.fec_adquisicion,
         ROUND(((med_horom/(datediff(fech_ult_med_hor,fec_adquisicion)))*100)/24,1) as porcentaje
 FROM cliente cli inner join sucursal suc
 on cli.cod_cli = suc.cod_cli
